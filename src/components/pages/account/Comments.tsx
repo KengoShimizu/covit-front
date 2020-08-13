@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 export const Comments: React.FC = () => {
     return (
-        <div>Comments</div>
+        <div>
+            <Link to='/'>Top</Link>
+            <br/>
+            <Link to='/accounts/:id/accounttop'>AccountTop</Link>
+        </div>
     );
 }

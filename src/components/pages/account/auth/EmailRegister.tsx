@@ -3,6 +3,6 @@ import { Link } from 'react-router-dom';
 
 export const EmailRegister: React.FC = () => {
     return (
-        <div>EmailRegister</div>
+        <Link to='/accounts/register'>Register</Link>
     );
 }

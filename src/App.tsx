@@ -26,12 +26,13 @@ function App() {
           <Route exact path='/history' component={History}/>
           <Route exact path='/shops/:id/reputations' component={Reputations}/>
           <Route exact path='/shops/:id/comment' component={Comment}/>
-          <Route exact path='/accounts/:id/' component={AccountTop}/>
+          <Route exact path='/accounts/:id/accounttop' component={AccountTop}/>
           <Route exact path='/accounts/:id/comments' component={Comments}/>
           <Route exact path='/accounts/:id/update' component={Update}/>
           <Route exact path='/accounts/:id/delete' component={Delete}/>
           <Route exact path='/accounts/:id/profileregister' component={ProfileRegister}/>
           <Route exact path='/accounts/privacy' component={Privacy}/>
+          <Route exact path='/accounts/logout' component={Logout}/>
           <Route exact path='/accounts/register' component={Register}/>
           <Route exact path='/accounts/emailregister' component={EmailRegister}/>
         </Switch>

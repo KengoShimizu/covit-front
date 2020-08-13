@@ -3,6 +3,6 @@ import { Link } from 'react-router-dom';
 
 export const Update: React.FC = () => {
     return (
-        <div>Update</div>
+        <Link to='/accounts/:id/accounttop'>AccountTop</Link>
     );
 }

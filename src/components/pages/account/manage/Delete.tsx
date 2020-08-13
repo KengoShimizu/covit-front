@@ -3,6 +3,6 @@ import { Link } from 'react-router-dom';
 
 export const Delete: React.FC = () => {
     return (
-        <div>Delete</div>
+        <Link to='/accounts/:id/accounttop'>AccountTop</Link>
     );
 }

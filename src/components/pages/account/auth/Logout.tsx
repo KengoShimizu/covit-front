@@ -3,6 +3,6 @@ import { Link } from 'react-router-dom';
 
 export const Logout: React.FC = () => {
     return (
-        <div>Logout</div>
+        <Link to='/'>Top</Link>
     );
 }
