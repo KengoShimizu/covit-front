@@ -3,16 +3,20 @@ import { Link } from 'react-router-dom';
 
 export const Top: React.FC = () => {
     return (
-        <div>
+        <div className='conrtainer'>
             <Link to='/accounts/:id/accounttop'>AccountTop</Link>
-            <br/>
+            <br />
             <Link to='/accounts/register'>Register</Link>
-            <br/>
+            <br />
             <Link to='/history'>History</Link>
-            <br/>
+            <br />
             <Link to='/shops/:id/comment'>Comment</Link>
-            <br/>
+            <br />
             <Link to='/shops/:id/reputations'>Reputations</Link>
+            <style jsx>{`
+                .container {
+                }
+            `}</style>
         </div>
     );
 }
