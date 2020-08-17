@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Switch>
+        <Switch>yarn
           <Route exact path='/' component={Top}/>
           <Route exact path='/history' component={History}/>
           <Route exact path='/shops/:id/reputations' component={Reputations}/>
