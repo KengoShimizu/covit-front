@@ -8,7 +8,9 @@ import { Comment } from './components/pages/shop/Comment';
 import { Reputations } from './components/pages/shop/Reputations';
 
 import { EmailRegister } from './components/pages/account/auth/EmailRegister';
+import { Login } from './components/pages/account/auth/Login';
 import { Logout } from './components/pages/account/auth/Logout';
+import { Send } from './components/pages/account/auth/Send';
 import { ProfileRegister } from './components/pages/account/auth/ProfileRegister';
 import { Register } from './components/pages/account/auth/Register';
 import { Delete } from './components/pages/account/manage/Delete';
@@ -16,6 +18,7 @@ import { Update } from './components/pages/account/manage/Update';
 import { AccountTop } from './components/pages/account/AccountTop';
 import { Privacy } from './components/pages/account/Privacy';
 import { Comments } from './components/pages/account/Comments';
+
 
 function App() {
   return (
@@ -32,9 +35,11 @@ function App() {
           <Route exact path='/accounts/:id/delete' component={Delete}/>
           <Route exact path='/accounts/:id/profileregister' component={ProfileRegister}/>
           <Route exact path='/accounts/privacy' component={Privacy}/>
+          <Route exact path='/accounts/login' component={Login}/>
           <Route exact path='/accounts/logout' component={Logout}/>
           <Route exact path='/accounts/register' component={Register}/>
           <Route exact path='/accounts/emailregister' component={EmailRegister}/>
+          <Route exact path='/accounts/send' component={Send}/>
         </Switch>
       </BrowserRouter>
       <style jsx>{`

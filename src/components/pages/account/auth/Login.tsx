@@ -2,17 +2,16 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
-export const EmailRegister: React.FC = (props: any) => {
+export const Login: React.FC = (props: any) => {
     const mailRef = useRef(document.createElement("input"));
     const buttonRef = useRef(document.createElement("button"));
     const [err, setErr] = useState("");
 
     const send = async () => {
-        if(!mailRef.current.value) return;
-        const user = await axios.post(
-            '/api/v1/user/users',
+        await axios.post(
+            '/api/v1/common/sessions/login',
             {
-                email: mailRef.current.value,
+                email: mailRef.current.value
             }
         )
         .then(res => res.data)
@@ -23,13 +22,15 @@ export const EmailRegister: React.FC = (props: any) => {
             pathname: "/accounts/send",
             state: { 
                 email: mailRef.current.value,
-                text: '登録'
+                text: 'ログイン'
             }
         });
         }
+
         return;
+
       }
-    
+
     return (
         <div className="form">
             <div className="err">{err}</div>
@@ -39,11 +40,10 @@ export const EmailRegister: React.FC = (props: any) => {
             </div>
             <div className="button-container">
             <button ref={ buttonRef } onClick={ send }>
-              登録する
+              ログインする
             </button>
             </div>
             <Link to='/accounts/register'>Register</Link>
-            <Link to='/accounts/login'>ログインはこちら</Link>
         </div>
     );
 }

@@ -25,7 +25,7 @@ export const History: React.FC = () => {
         </header>
           <div className="content">
             <div className="sub-header">
-              <Link to='/Top'>
+              <Link to='/'>
                 <div className="sub-header_btn">
                   <p>←</p>
                 </div>

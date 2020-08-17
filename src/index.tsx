@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import axios from "axios";
+
+// FIXME
+// Set axios default endpoint
+//axios.defaults.baseURL = process.env.REACT_APP_API_ENDPOINT;
+axios.defaults.baseURL = "http://localhost:3000";
 
 ReactDOM.render(
   <React.StrictMode>
