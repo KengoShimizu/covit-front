@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Top } from './components/pages/Top';
 import { History } from './components/pages/History';
 
-import { Comment } from './components/pages/shop/Comment';
-import { Reputations } from './components/pages/shop/Reputations';
+import { ShopComments } from './components/pages/shop/Comments';
+import { CreateComment } from './components/pages/shop/CreateComment';
 
 import { EmailRegister } from './components/pages/account/auth/EmailRegister';
 import { Login } from './components/pages/account/auth/Login';
@@ -24,11 +24,11 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Switch>yarn
+        <Switch>
           <Route exact path='/' component={Top}/>
           <Route exact path='/history' component={History}/>
-          <Route exact path='/shops/:id/reputations' component={Reputations}/>
-          <Route exact path='/shops/:id/comment' component={Comment}/>
+          <Route exact path='/shops/:id/comments' component={ShopComments}/>
+          <Route exact path='/shops/:id/comments/new' component={CreateComment}/>
           <Route exact path='/accounts/:id/accounttop' component={AccountTop}/>
           <Route exact path='/accounts/:id/comments' component={Comments}/>
           <Route exact path='/accounts/:id/update' component={Update}/>

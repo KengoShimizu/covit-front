@@ -8,7 +8,7 @@ import Distance from './../../../img/covid-icon_distance.svg'
 import HealthCare from './../../../img/covid-icon_health-care.svg'
 
 //レビュー記入
-export const Comment: React.FC = () => {
+export const CreateComment: React.FC = () => {
     return (
       <div className='container'>
         <header className="header">
