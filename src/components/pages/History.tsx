@@ -8,7 +8,7 @@ export const History: React.FC = () => {
           <header className="header">
           <img className="service-logo" src="" alt=""/>
           <ul className="icon-list">
-            <Link to='/History'>
+            <Link to='/history'>
               <li className="icon-list_option">
                 <img className="icon-list_img" src={HistoryIcon} alt=""/>
                 <p className="icon-list_caption">閲覧履歴</p>
