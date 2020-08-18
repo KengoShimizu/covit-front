@@ -4,6 +4,8 @@ import HistoryIcon from './../../img/history.svg'
 import ServiceIcon from './../../img/service-icon.svg'
 import Charactor from './../../img/charactor.png'
 
+import { MapBoard } from '../organisms/MapBoard';
+
 export const Top: React.FC = () => {
   return (
     <div className='container'>
@@ -26,10 +28,11 @@ export const Top: React.FC = () => {
           </ul>
         </header>
         {/* 地図部分 仮でGoogle マップ埋め込んでます*/}
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3132.6500209396736!2d140.8653857507623!3d38.26442229151004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8a29ffe59c7def%3A0xaa58af3429d7477!2z5a6u5Z-O44K044OB6YWS5aC0IOmKgOe1kOOBs--8iOOCruODs-ODoOOCueODk--8iQ!5e0!3m2!1sja!2sjp!4v1597491700226!5m2!1sja!2sjp" width="600100%" height="100vh" className="map-container"></iframe>
-        <button className="refinement-btn">お店のジャンルで絞り込む</button>
-        <button className="research-btn">このエリアで再検索</button>
-        <button className="current-place-btn">現在地</button>
+        <MapBoard/>
+        {/*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3132.6500209396736!2d140.8653857507623!3d38.26442229151004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f8a29ffe59c7def%3A0xaa58af3429d7477!2z5a6u5Z-O44K044OB6YWS5aC0IOmKgOe1kOOBs--8iOOCruODs-ODoOOCueODk--8iQ!5e0!3m2!1sja!2sjp!4v1597491700226!5m2!1sja!2sjp" width="600100%" height="100vh" className="map-container"></iframe>*/}
+        {/*<button className="refinement-btn">お店のジャンルで絞り込む</button>*/}
+        {/*<button className="research-btn">このエリアで再検索</button>*/}
+        {/*<button className="current-place-btn">現在地</button>*/}
         {/* 初回モーダル */}
         <div className="intro-mordal">
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
