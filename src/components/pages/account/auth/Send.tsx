@@ -8,7 +8,7 @@ export const Send: React.FC = (props: any) => {
     const [err, setErr] = useState("");
 
     const send = async () => {
-        const path :string = props.location.state.text == "登録" ? "resend_activation_email" : "resend_login_email";
+        const path :string = props.location.state.text === "登録" ? "resend_activation_email" : "resend_login_email";
         try {
           await axios.post(
             `/api/v1/user/users/${path}`,
