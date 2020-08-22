@@ -7,26 +7,26 @@ export const MapObject: React.FC = () => {
     const [zoom, setZoom] = useState(13);
 
     navigator.geolocation.getCurrentPosition(
-        pos => {
-            setLat(pos.coords.latitude)
-            setLng(pos.coords.longitude)
-        },
-        err => console.log(err)
+      pos => {
+          setLat(pos.coords.latitude)
+          setLng(pos.coords.longitude)
+      },
+      err => console.log(err)
     );
 
     const position = {lat: lat, lng: lng};
 
     return (
-        <Map center={position} zoom={zoom} style={{ height: '50vh' }}>
-            <TileLayer
-                attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={position}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </Map>
+      <Map center={position} zoom={zoom} style={{ height: '100%' }}>
+        <TileLayer
+          attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={position}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </Map>
     );
 }
