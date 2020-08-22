@@ -9,7 +9,7 @@ export const MapBoard: React.FC = () => {
           .map-container{
             padding-top: 56px;
             width: 100%;
-            height: 100%;
+            height: 100VH;
             background-color: #E8E6E2;
           }
         `}</style>

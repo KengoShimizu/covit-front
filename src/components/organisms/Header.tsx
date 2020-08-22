@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../img/history.svg';
+import { User } from 'react-feather';
+import { Menu } from 'react-feather';
+
 
 export const Header: React.FC = () => {
   return (
@@ -44,6 +47,7 @@ export const Header: React.FC = () => {
           justify-content: space-between;
           padding: 6px 10px;
           box-sizing: border-box;
+          z-index: 2000;
         }
         .icon-list{
           display: flex;

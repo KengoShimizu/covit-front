@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
-
 import { HomeLayout } from '../organisms/HomeLayout';
 import { MapBoard } from '../organisms/MapBoard';
 
@@ -10,25 +9,28 @@ export const Top: React.FC = () => {
   return (
     <HomeLayout>
       <div className='container'>
-          <MapBoard/>
-          {/* 初回モーダル */}
-          <div className="intro-mordal">
-            <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
-            <img className="intro-mordal_img" src={Charactor} alt=""/>
-            <p className="intro-mordal_text">
-              PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
-            </p>
-            <button className="intro-mordal_btn">
-              <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
-              さっそく飲食店を探す
-            </button>
-            <Link to=''>
-              <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
-            </Link>
-            <Link to=''>
-              <p className="intro-mordal_link">PAND-MEALにお店を追加したい！</p>
-            </Link>
-          </div>
+        <MapBoard/>
+        <button className="refinement-btn">お店のジャンルで絞り込む</button>
+        <button className="research-btn">このエリアで再検索</button>
+        <button className="current-place-btn">現在地</button>
+        {/* 初回モーダル */}
+        <div className="intro-mordal">
+          <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
+          <img className="intro-mordal_img" src={Charactor} alt=""/>
+          <p className="intro-mordal_text">
+            PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
+          </p>
+          <button className="intro-mordal_btn">
+            <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
+            さっそく飲食店を探す
+          </button>
+          <Link to=''>
+            <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
+          </Link>
+          <Link to=''>
+            <p className="intro-mordal_link">PAND-MEALにお店を追加したい！</p>
+          </Link>
+        </div>
         <style jsx>{`
           *{
             margin:0;
@@ -47,6 +49,7 @@ export const Top: React.FC = () => {
           .intro-mordal{
             top: 144px;
             left: 50%;
+            z-index: 1000;
             transform: translateX(-50%);
             -webkit- transform: translateX(-50%);
             position: fixed;
@@ -150,6 +153,51 @@ export const Top: React.FC = () => {
             border: 4px solid #FF8A1F;
             box-sizing: border-box;
             border-radius: 64px;
+          }
+          .refinement-btn{
+            position: fixed;
+            top: 64px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit- transform: translateX(-50%);
+            padding: 8px 16px;
+            background: #FFFFFF;
+            border-radius: 4px;
+            color: #333333;
+            font-size: 12px;
+            line-height: 12px;
+            font-weight: bold;
+            z-index: 1000;
+          }
+          .research-btn{
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            -webkit- transform: translateX(-50%);
+            height: 36px;
+            padding: 8px 20px;
+            background: #FFFFFF;
+            border: 1.5px solid #C0C0C0;
+            box-sizing: border-box;
+            border-radius: 36px;
+            color: #333333;
+            font-size: 12px;
+            line-height: 19px;
+            font-weight: bold;
+            z-index: 1000;
+          }
+          .current-place-btn{
+            position: fixed;
+            bottom: 20px;
+            right: 24px;
+            width: 64px;
+            height: 64px;
+            background: #FFFFFF;
+            border: 4px solid #FF8A1F;
+            box-sizing: border-box;
+            border-radius: 64px;
+            z-index: 1000;
           }
         `}</style>
       </div>
