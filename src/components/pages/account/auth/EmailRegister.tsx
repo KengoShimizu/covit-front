@@ -9,7 +9,7 @@ export const EmailRegister: React.FC = (props: any) => {
 
     const send = async () => {
         if(!mailRef.current.value) return;
-        const user = await axios.post(
+        await axios.post(
             '/api/v1/user/users',
             {
                 email: mailRef.current.value,
