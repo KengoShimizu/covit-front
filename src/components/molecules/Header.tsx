@@ -35,7 +35,6 @@ export const Header: React.FC = () => {
         .container{
           width: 100%
         }
-        // ヘッダー
         header{
           height: 56px;
           width: 100%;
