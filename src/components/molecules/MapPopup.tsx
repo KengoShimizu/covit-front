@@ -1,5 +1,4 @@
 import React from 'react';
-import { Popup } from 'react-leaflet';
 import Alcohol from './../../img/covid-icon_alcohol.svg'
 import Mask from './../../img/covid-icon_mask.svg'
 import Airing from './../../img/covid-icon_airing.svg'

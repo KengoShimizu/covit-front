@@ -33,32 +33,31 @@ export const MapObject: React.FC = (props: any) => {
   */
   const position = {lat: lat, lng: lng};
 
-  const GetSteps = async (shop: any) => {
-    await axios.get(`http://localhost:3000/api/v1/user/steps?shop_id=1`)
-    .then(res => {
+  const fetchStepsData = async (shop: any) => {
+    await axios.get(`/api/v1/user/steps?shop_id=1`)
+      .then(res => {
         setSteps(res.data);
         setIsOpen(true);
         setClickedShop(shop);
-    })
-    .catch(err => setErr(err));
+      })
+      .catch(err => setErr(err));
   }
 
-  const GetCoordinations = async () => {
+  const fetchCoordinationsData = async () => {
     await axios.get('/api/v1/user/coordinations',{
-        params: {
-            genre_id: 'a',
-            from_lat: 0,
-            to_lat: 0,
-            from_lng: 0,
-            to_lng: 0,
-        }
-    })
-    .then(res => setCoordinations(res.data))
-    .catch(err => setErr(err));
+      params: {
+        genre_id: 'a',
+        from_lat: 0,
+        to_lat: 0,
+        from_lng: 0,
+        to_lng: 0,
+      }})
+      .then(res => setCoordinations(res.data))
+      .catch(err => setErr(err));
   }
 
   useEffect(() => {
-    GetCoordinations();
+    fetchCoordinationsData();
   }, []);
 
   useEffect(() => {
@@ -85,7 +84,7 @@ export const MapObject: React.FC = (props: any) => {
             key={`shop${data.id}`}
             onClick={() => {
               setMapCenter({lat: data.latitude, lng: data.longitude});
-              GetSteps(data.shop);
+              fetchStepsData(data.shop);
             }} >
           </Marker>
         ))}

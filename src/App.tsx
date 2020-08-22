@@ -6,6 +6,7 @@ import { History } from './components/pages/History';
 import { CommonProvider } from "./context/CommonProvider";
 import { Authentication } from "./components/common/Authentication";
 
+import { Shop } from './components/pages/shop/Shop';
 import { ShopComments } from './components/pages/shop/Comments';
 import { CreateComment } from './components/pages/shop/CreateComment';
 
@@ -30,6 +31,7 @@ function App() {
           <Switch>
             <Route exact path='/' component={Top} />
             <Route exact path='/history' component={History} />
+            <Route exact path='/shops/:id' component={Shop} />
             <Route exact path='/shops/:id/comments' component={ShopComments} />
             <Route exact path='/accounts/:id/accounttop' component={AccountTop} />
             <Route exact path='/accounts/:id/comments' component={Comments} />

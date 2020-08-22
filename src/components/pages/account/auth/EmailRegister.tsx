@@ -11,7 +11,7 @@ export const EmailRegister: React.FC = (props: any) => {
   const send = async () => {
     if (!mailRef.current.value) return;
     await axios.post(
-      '/api/v1/user/users',
+      '/api/v1/common/sessions/sign_up',
       {
         email: mailRef.current.value,
       }
