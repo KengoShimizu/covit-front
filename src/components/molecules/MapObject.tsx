@@ -66,7 +66,7 @@ export const MapObject: React.FC = (props: any) => {
 
 
   return (
-      <Map center={mapcenter} zoom={13} style={{ height: '50vh' }}>
+      <Map center={mapcenter} zoom={13} style={{ height: '100%' }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
