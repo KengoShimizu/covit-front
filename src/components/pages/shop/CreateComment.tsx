@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../../img/history.svg'
 import Alcohol from './../../../img/covid-icon_alcohol.svg'
@@ -6,94 +6,128 @@ import Mask from './../../../img/covid-icon_mask.svg'
 import Airing from './../../../img/covid-icon_airing.svg'
 import Distance from './../../../img/covid-icon_distance.svg'
 import HealthCare from './../../../img/covid-icon_health-care.svg'
+import useReactRouter from "use-react-router";
+import axios from 'axios';
+import { Comment } from './../../../common/Const';
+
+export interface AddParam {
+  content: string;
+  shop_id: number;
+  reputation: number;
+  date: string;
+}
 
 //レビュー記入
+// FIXME formに来店日追加
 export const CreateComment: React.FC = () => {
-    return (
-      <div className='container'>
-        <header className="header">
-          <img className="service-logo" src="" alt=""/>
-          <ul className="icon-list">
-            <Link to='/History'>
-              <li className="icon-list_option">
-                <img className="icon-list_img" src={HistoryIcon} alt=""/>
-                <p className="icon-list_caption">レビュー</p>
-              </li>
-            </Link>
+  const { match }: any = useReactRouter();
+  const [addData, setAddData] = useState<AddParam>({
+    content: "",
+    shop_id: match.params.id,
+    reputation: 0,
+    date: ""
+  });
+
+  const postData = async () => {
+    console.log(addData)
+    await axios
+      .post(`/api/v1/user/comments`, addData)
+      .then(result => result.data)
+      .catch(error => console.log(error));
+  }
+
+  const handleChange = (event: any) => {
+    setAddData({
+      ...addData,
+      [event.target.name]: event.target.value
+    });
+  }
+
+  return (
+    <div className='container'>
+      <header className="header">
+        <img className="service-logo" src="" alt="" />
+        <ul className="icon-list">
+          <Link to='/History'>
             <li className="icon-list_option">
-              <img className="icon-list_img" src={HistoryIcon} alt=""/>
-              <p className="icon-list_caption">ログイン</p>
+              <img className="icon-list_img" src={HistoryIcon} alt="" />
+              <p className="icon-list_caption">レビュー</p>
             </li>
-            <li className="icon-list_option_menu">
-              <img className="icon-list_img" src={HistoryIcon} alt=""/>
+          </Link>
+          <li className="icon-list_option">
+            <img className="icon-list_img" src={HistoryIcon} alt="" />
+            <p className="icon-list_caption">ログイン</p>
+          </li>
+          <li className="icon-list_option_menu">
+            <img className="icon-list_img" src={HistoryIcon} alt="" />
+          </li>
+        </ul>
+      </header>
+      <div className="content">
+        <div className="sub-header">
+          <Link to='/'>
+            <div className="sub-header_btn">
+              <p>←</p>
+            </div>
+          </Link>
+          <h1 className="sub-header_title">レビュー記入</h1>
+        </div>
+        <h1 className="shop-name">cafe えにしえ</h1>
+        <section className="infection-control_card">
+          <h2 className="infection-control_title">感染症対策内容</h2>
+          <ol className="infection-control_list">
+            <li className="infection-control_option">
+              <img className="infection-control_icon" src={Alcohol} alt="" />
+            </li>
+            <li className="infection-control_option">
+              <img className="infection-control_icon" src={Airing} alt="" />
+            </li>
+            <li className="infection-control_option">
+              <img className="infection-control_icon" src={Mask} alt="" />
+            </li>
+            <li className="infection-control_option">
+              <img className="infection-control_icon" src={HealthCare} alt="" />
+            </li>
+            <li className="infection-control_option">
+              <img className="infection-control_icon" src={Distance} alt="" />
+            </li>
+          </ol>
+          <ol className="infection-control_comment-box">
+            <li className="infection-control_comment">従業員がマスクを着用しています。</li>
+            <li className="infection-control_comment">お客様にマスクの着用をお願いしています。</li>
+          </ol>
+        </section>
+        <div className="review-form">
+          <ul>
+            <li className="review-form_switch_container">
+              <ul className="review-form_switch">
+                <li className="review-form_switch-option">
+                  <label className="review-form_switch-label" htmlFor="">
+                    <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
+                    <p className="review-form_switch-label_text">期待通り</p>
+                  </label>
+                  <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_GOOD} />
+                </li>
+                <li className="review-form_switch-option">
+                  <label className="review-form_switch-label" htmlFor="">
+                    <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
+                    <p className="review-form_switch-label_text">表記と違う</p>
+                  </label>
+                  <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_BAD} />
+                </li>
+              </ul>
+            </li>
+            <li className="review-form_comment_container">
+              <label className="review-form_comment-label" htmlFor="">感染対策についての感想や評価を記入しよう！</label>
+              <textarea className="review-form_comment-input" placeholder="換気や消毒を徹底していてよかった。" name="content" id="comment" onChange={handleChange} />
+            </li>
+            <li className="review-form_btn_container">
+              <button className="review-form_btn" onClick={postData}>投稿する</button>
             </li>
           </ul>
-        </header>
-        <div className="content">
-          <div className="sub-header">
-            <Link to='/'>
-              <div className="sub-header_btn">
-                <p>←</p>
-              </div>
-            </Link>
-            <h1 className="sub-header_title">レビュー記入</h1>
-          </div>
-          <h1 className="shop-name">cafe えにしえ</h1>
-          <section className="infection-control_card">
-            <h2 className="infection-control_title">感染症対策内容</h2>
-            <ol className="infection-control_list">
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Alcohol} alt=""/>
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Airing} alt=""/>
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Mask} alt=""/>
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={HealthCare} alt=""/>
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Distance} alt=""/>
-              </li>
-            </ol>
-            <ol className="infection-control_comment-box">
-              <li className="infection-control_comment">従業員がマスクを着用しています。</li>
-              <li className="infection-control_comment">お客様にマスクの着用をお願いしています。</li>
-            </ol>
-          </section>
-          <form method="post" className="review-form">
-            <ul>
-              <li className="review-form_switch_container">
-                <ul className="review-form_switch">
-                  <li className="review-form_switch-option">
-                    <label className="review-form_switch-label" htmlFor="">
-                      <img className="review-form_switch-labe_img" src={HistoryIcon} alt=""/>
-                      <p className="review-form_switch-label_text">期待通り</p>
-                    </label>
-                    <input className="review-form_switch-input" type="radio" name="review" value="good"/>
-                  </li>
-                  <li className="review-form_switch-option">
-                    <label className="review-form_switch-label" htmlFor="">
-                      <img className="review-form_switch-labe_img" src={HistoryIcon} alt=""/>
-                      <p className="review-form_switch-label_text">表記と違う</p>
-                    </label>
-                    <input className="review-form_switch-input" type="radio" name="review" value="bad"/>
-                  </li>
-                </ul>
-              </li>
-              <li className="review-form_comment_container">
-                <label className="review-form_comment-label" htmlFor="">感染対策についての感想や評価を記入しよう！</label>
-                <textarea className="review-form_comment-input" placeholder="換気や消毒を徹底していてよかった。" name="comment" id="comment"></textarea>
-              </li>
-              <li className="review-form_btn_container">
-                <button className="review-form_btn" type="submit">投稿する</button>
-              </li>
-            </ul>
-          </form>
         </div>
-        <style jsx>{`
+      </div>
+      <style jsx>{`
           *{
             margin:0;
             padding:0;
@@ -324,6 +358,6 @@ export const CreateComment: React.FC = () => {
           }
           
         `}</style>
-      </div>
-    );
+    </div>
+  );
 }
