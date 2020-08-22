@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormatDate } from './../util/Function'
+import { FormatDate } from '../../common/Function'
 
 type CardProps = {
   HistoryIcon: any;
