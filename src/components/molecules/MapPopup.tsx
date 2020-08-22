@@ -6,14 +6,14 @@ import Airing from './../../img/covid-icon_airing.svg'
 import Distance from './../../img/covid-icon_distance.svg'
 import HealthCare from './../../img/covid-icon_health-care.svg'
 
-type MapPopupProps = {
+interface MapPopupProps {
     steps: {
-        id: number,
-        content: string,
-        image: string
-    }[],
-    data: any
-};
+        id: number;
+        content: string;
+        image: string;
+    }[];
+    data: any;
+}
 
 export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
 

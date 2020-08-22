@@ -93,6 +93,21 @@ export const MapObject: React.FC = (props: any) => {
         {isOpen &&
           <MapPopup steps={steps} data={clickedShop}/>
         }
+        <style jsx>{`
+          *{
+            margin:0;
+            padding:0;
+            border:0;
+            outline:0;
+            list-style:none;
+          }
+          a{
+            text-decoration: none;
+          }
+          .container{
+            width: 100%
+          }
+        `}</style>
       </Map>
   );
 }

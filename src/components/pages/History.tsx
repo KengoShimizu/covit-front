@@ -1,28 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import HistoryIcon from './../../img/history.svg'
+import HistoryIcon from './../../img/history.svg';
+
+import { HomeLayout } from '../organisms/HomeLayout';
 
 export const History: React.FC = () => {
     return (
+      <HomeLayout>
         <div className='container'>
-          <header className="header">
-          <img className="service-logo" src="" alt=""/>
-          <ul className="icon-list">
-            <Link to='/history'>
-              <li className="icon-list_option">
-                <img className="icon-list_img" src={HistoryIcon} alt=""/>
-                <p className="icon-list_caption">閲覧履歴</p>
-              </li>
-            </Link>
-            <li className="icon-list_option">
-              <img className="icon-list_img" src={HistoryIcon} alt=""/>
-              <p className="icon-list_caption">ログイン</p>
-            </li>
-            <li className="icon-list_option_menu">
-              <img className="icon-list_img" src={HistoryIcon} alt=""/>
-            </li>
-          </ul>
-        </header>
           <div className="content">
             <div className="sub-header">
               <Link to='/'>
@@ -226,7 +211,7 @@ export const History: React.FC = () => {
           }
         `}</style>
         </div>
-        
+      </HomeLayout>
     );
 
 }
