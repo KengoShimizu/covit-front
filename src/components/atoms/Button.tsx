@@ -7,19 +7,17 @@ interface ButtonProps {
 }
 
 export enum ButtonThemes {
-  GREEN = 'GREEN',
-  GREEN_OUTLINE = 'GREEN_OUTLINE',
+  INIT = 'INIT',
   GRAY_OUTLINE = 'GRAY_OUTLINE'
 }
 
 enum ModifierClassNames {
-  GREEN = 'button-green',
-  GREEN_OUTLINE = 'button-greenOutline',
+  INIT = 'button-init',
   GRAY_OUTLINE = 'button-grayOutline'
 }
 
 
-const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.GREEN], children, className = ''}) => {
+const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, className = ''}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <button className={["button", modifierClasses, className].join(' ')}>
@@ -29,8 +27,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.GREEN], children, 
           .button{
             cursor: pointer;
           }
-          .button-green{
-            color: green;
+          .button-init{
           }
           .button.button-grayOutline {
             border: solid 1px #808080;
