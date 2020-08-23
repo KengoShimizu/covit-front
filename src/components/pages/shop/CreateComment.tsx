@@ -30,7 +30,6 @@ export const CreateComment: React.FC = () => {
   });
 
   const postData = async () => {
-    console.log(addData)
     await axios
       .post(`/api/v1/user/comments`, addData)
       .then(result => result.data)

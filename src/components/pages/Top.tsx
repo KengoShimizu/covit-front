@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
 import { HomeLayout } from '../templates/HomeLayout';
-import { MapBoard } from '../organisms/MapBoard';
+import { MapObject } from '../organisms/MapObject';
 
 import Button, { ButtonThemes } from './../atoms/Button';
 
@@ -11,7 +11,7 @@ export const Top: React.FC = () => {
   return (
     <HomeLayout>
       <div className='container'>
-        <MapBoard/>
+        <MapObject/>
         <button className="refinement-btn">お店のジャンルで絞り込む</button>
         <button className="research-btn">このエリアで再検索</button>
         <button className="current-place-btn">現在地</button>
