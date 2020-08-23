@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
-import { HomeLayout } from './../../organisms/HomeLayout';
+import { HomeLayout } from '../../templates/HomeLayout';
 import Alcohol from './../../../img/covid-icon_alcohol.svg';
 import Mask from './../../../img/covid-icon_mask.svg';
 import Airing from './../../../img/covid-icon_airing.svg';

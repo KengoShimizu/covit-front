@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HomeLayout } from './../../../organisms/HomeLayout';
+import { HomeLayout } from '../../../templates/HomeLayout';
 
 export const Update: React.FC = () => {
   return (

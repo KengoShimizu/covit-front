@@ -6,7 +6,7 @@ import { CommentCard } from './../../molecules/CommentCard'
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import useReactRouter from "use-react-router";
-import { HomeLayout } from './../../organisms/HomeLayout';
+import { HomeLayout } from '../../templates/HomeLayout';
 
 // ショップのコメント一覧
 export const ShopComments: React.FC = () => {

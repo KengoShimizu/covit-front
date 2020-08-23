@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
-import { HomeLayout } from '../organisms/HomeLayout';
+import { HomeLayout } from '../templates/HomeLayout';
 import { MapBoard } from '../organisms/MapBoard';
 
 import Button, { ButtonThemes } from './../atoms/Button';

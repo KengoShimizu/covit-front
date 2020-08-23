@@ -3,7 +3,8 @@ import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import axios from "axios";
 import { MapPopup } from './MapPopup';
-import PopupIcon from './../../img/service-icon.svg';
+import curLocPin from './../../img/current_location_pin.svg';
+import shopPin from './../../img/shop_pin.svg';
 
 export const MapObject: React.FC = (props: any) => {
   const [lat, setLat] = useState(35.6513297);
@@ -15,9 +16,16 @@ export const MapObject: React.FC = (props: any) => {
   const [clickedShop, setClickedShop] = useState({});
   const [mapcenter, setMapCenter] = useState({lat: lat, lng: lng});
 
-  const marker = L.icon({
-    iconUrl: PopupIcon,
-    iconSize: [25, 41],
+  const curLocMarker = L.icon({
+    iconUrl: curLocPin,
+    iconSize: [55, 61],
+    iconAnchor: [13, 41],
+    popupAnchor: [0, -45]
+  });
+
+  const shopMarker = L.icon({
+    iconUrl: shopPin,
+    iconSize: [55, 61],
     iconAnchor: [13, 41],
     popupAnchor: [0, -45]
   });
@@ -46,11 +54,11 @@ export const MapObject: React.FC = (props: any) => {
   const fetchCoordinationsData = async () => {
     await axios.get('/api/v1/user/coordinations',{
       params: {
-        genre_id: 'a',
-        from_lat: 0,
-        to_lat: 0,
-        from_lng: 0,
-        to_lng: 0,
+        genre_id: [],
+        from_lat: lat-0.025,
+        to_lat: lat+0.025,
+        from_lng: lng-0.025,
+        to_lng: lat+0.025,
       }})
       .then(res => setCoordinations(res.data))
       .catch(err => setErr(err));
@@ -66,12 +74,13 @@ export const MapObject: React.FC = (props: any) => {
 
 
   return (
-      <Map center={mapcenter} zoom={13} style={{ height: '100%' }}>
+      <Map center={mapcenter} zoom={16} style={{ height: '100%' }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          minZoom={5}
         />
-        <Marker position={position}>
+        <Marker position={position} icon={curLocMarker}>
           <Popup>
             現在地
           </Popup>
@@ -80,7 +89,7 @@ export const MapObject: React.FC = (props: any) => {
         {coordinations.map((data: any, i: number) => (
           <Marker 
             position={{lat: data.latitude, lng: data.longitude}} 
-            icon={marker}
+            icon={shopMarker}
             key={`shop${data.id}`}
             onClick={() => {
               setMapCenter({lat: data.latitude, lng: data.longitude});

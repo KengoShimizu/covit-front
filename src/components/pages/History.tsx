@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../img/history.svg';
 
-import { HomeLayout } from '../organisms/HomeLayout';
+import { HomeLayout } from '../templates/HomeLayout';
 
 export const History: React.FC = () => {
     return (
