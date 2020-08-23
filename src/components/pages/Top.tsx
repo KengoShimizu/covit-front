@@ -5,6 +5,8 @@ import Charactor from './../../img/charactor.png';
 import { HomeLayout } from '../organisms/HomeLayout';
 import { MapBoard } from '../organisms/MapBoard';
 
+import Button, { ButtonThemes } from './../atoms/Button';
+
 export const Top: React.FC = () => {
   return (
     <HomeLayout>
@@ -20,6 +22,7 @@ export const Top: React.FC = () => {
           <p className="intro-mordal_text">
             PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
           </p>
+          <Button theme={[ButtonThemes.GRAY_OUTLINE, ButtonThemes.GREEN]} className="sample">サンプル</Button>
           <button className="intro-mordal_btn">
             <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
             さっそく飲食店を探す
