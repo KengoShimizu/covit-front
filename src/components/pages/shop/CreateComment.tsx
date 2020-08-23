@@ -9,7 +9,7 @@ import HealthCare from './../../../img/covid-icon_health-care.svg'
 import useReactRouter from "use-react-router";
 import axios from 'axios';
 import { Comment } from './../../../common/Const';
-import { HomeLayout } from './../../organisms/HomeLayout';
+import { HomeLayout } from '../../templates/HomeLayout';
 
 export interface AddParam {
   content: string;
