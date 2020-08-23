@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header } from '../organisms/Header';
+import { Header } from '../molecules/Header';
 
 interface HomeLayoutProps {
   children?: React.ReactNode;

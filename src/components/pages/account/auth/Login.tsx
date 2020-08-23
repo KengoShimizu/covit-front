@@ -5,7 +5,6 @@ import { HomeLayout } from '../../../templates/HomeLayout';
 
 export const Login: React.FC = (props: any) => {
   const mailRef = useRef(document.createElement("input"));
-  const buttonRef = useRef(document.createElement("button"));
   const [err, setErr] = useState("");
 
   const send = async () => {
@@ -44,7 +43,7 @@ export const Login: React.FC = (props: any) => {
             <label className="mail-form_label">メールアドレス</label>
             <input className="mail-form_input" ref={mailRef} type="text" placeholder="sample@sample.com" />
             <div className="mail-form_btn-container">
-              <button className="mail-form_btn" ref={buttonRef} onClick={send}>
+              <button className="mail-form_btn" onClick={send}>
                 認証コードを送信
                 </button>
             </div>

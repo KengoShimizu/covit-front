@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import axios from "axios";
-import { MapPopup } from './MapPopup';
+import { MapPopup } from '../molecules/MapPopup';
 import curLocPin from './../../img/current_location_pin.svg';
 import shopPin from './../../img/shop_pin.svg';
 
@@ -15,6 +15,7 @@ export const MapObject: React.FC = (props: any) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickedShop, setClickedShop] = useState({});
   const [mapcenter, setMapCenter] = useState({lat: lat, lng: lng});
+  const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
 
   const curLocMarker = L.icon({
     iconUrl: curLocPin,
@@ -41,12 +42,22 @@ export const MapObject: React.FC = (props: any) => {
   */
   const position = {lat: lat, lng: lng};
 
+  const GetUniqueImgs = (steps: any) => {
+    const images = steps.map((data: any) => data.image);
+    const uniqueImgs = images.filter(function (x: string, i: number, self: string[]) {
+      return self.indexOf(x) === i;
+    });
+    return uniqueImgs;
+  }
+
+
   const fetchStepsData = async (shop: any) => {
     await axios.get(`/api/v1/user/steps?shop_id=1`)
       .then(res => {
         setSteps(res.data);
         setIsOpen(true);
         setClickedShop(shop);
+        setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
       })
       .catch(err => setErr(err));
   }
@@ -74,6 +85,7 @@ export const MapObject: React.FC = (props: any) => {
 
 
   return (
+    <div className="map-container">
       <Map center={mapcenter} zoom={16} style={{ height: '100%' }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -99,23 +111,28 @@ export const MapObject: React.FC = (props: any) => {
         ))}
 
         {isOpen &&
-          <MapPopup steps={steps} data={clickedShop}/>
+          <MapPopup steps={steps} data={clickedShop} uniqueImgs={clickedShopUniqueStepsImages}/>
         }
-        <style jsx>{`
-          *{
-            margin:0;
-            padding:0;
-            border:0;
-            outline:0;
-            list-style:none;
-          }
-          a{
-            text-decoration: none;
-          }
-          .container{
-            width: 100%
-          }
-        `}</style>
       </Map>
+      <style jsx>{`
+        *{
+          margin:0;
+          padding:0;
+          border:0;
+          outline:0;
+          list-style:none;
+        }
+        a{
+          text-decoration: none;
+        }
+        .map-container{
+          padding-top: 56px;
+          width: 100%;
+          height: 100VH;
+          background-color: #E8E6E2;
+        }
+      `}</style>
+    
+    </div>
   );
 }
