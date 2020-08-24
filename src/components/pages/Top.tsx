@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
 import { HomeLayout } from '../templates/HomeLayout';
 import { MapObject } from '../organisms/MapObject';
-
+import Cookies from 'universal-cookie';
 import Button, { ButtonThemes } from './../atoms/Button';
 
 // ボタンのCSS
@@ -16,6 +16,19 @@ const propStyle = {
   }
 };
 export const Top: React.FC = () => {
+  const cookies = new Cookies();
+  const [modalCookie, setModalCookie] = useState(false);
+  const [initModalIsOpen, setInitModalIsOpen] = useState(true);
+
+  const handleInitModal = () => {
+    cookies.set('close-modal-once', true);
+    setInitModalIsOpen(cookies.get('close-modal-once'))
+  }
+
+  useEffect(() => {
+    setInitModalIsOpen(cookies.get('close-modal-once'))
+  }, [])
+
   return (
     <HomeLayout>
       <div className='container'>
@@ -24,17 +37,19 @@ export const Top: React.FC = () => {
         <button className="research-btn">このエリアで再検索</button>
         <button className="current-place-btn">現在地</button>
         {/* 初回モーダル */}
-        <div className="intro-mordal">
+        <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
           <img className="intro-mordal_img" src={Charactor} alt=""/>
           <p className="intro-mordal_text">
             PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
           </p>
           {/* propstyle */}
-          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopMordal}>
-            <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
-            さっそく飲食店を探す
-          </Button>
+          <div onClick={handleInitModal}>
+            <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopMordal}>
+              <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
+              さっそく飲食店を探す
+            </Button>
+          </div>
           <Link to=''>
             <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
           </Link>
@@ -58,6 +73,7 @@ export const Top: React.FC = () => {
           }
           // 初回のモーダル
           .intro-mordal{
+            visibility: visible;
             top: 144px;
             left: 50%;
             z-index: 1000;
@@ -71,6 +87,7 @@ export const Top: React.FC = () => {
             padding: 36px 16px;
             box-sizing: border-box;
             text-align: center;
+            transition-duration: .5s;
           }
           .intro-mordal_title{
             font-family: Century Gothic Pro;
@@ -104,6 +121,10 @@ export const Top: React.FC = () => {
           }
           .intro-mordal_btn_icon{
             margin-right: 4px;
+          }
+          .disable{
+            visibility: hidden;
+            opacity: 0;
           }
           // 中身
           .map-container{
