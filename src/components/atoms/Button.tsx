@@ -10,13 +10,15 @@ interface ButtonProps {
 export enum ButtonThemes {
   INIT = 'INIT',
   NORMAL = 'NORMAL',
-  SUBHEADER = 'SUBHEADER'
+  SUBHEADER = 'SUBHEADER',
+  SUBBTN = 'SUBBTN'
 }
 
 enum ModifierClassNames {
   INIT = 'button-init',
   NORMAL = 'normal-btn',
-  SUBHEADER = 'subheader_back-btn'
+  SUBHEADER = 'subheader_back-btn',
+  SUBBTN = 'btn_sub'
 }
 
 
@@ -30,17 +32,20 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
         {`
           .button{
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           .button-init{
           }
           .normal-btn {
-            padding: 8px 32px;
+            padding: 8px 24px;
             background: ${CommonStyle.AccentColor};
             border-radius: 4px;
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
-            color: white;
+            color: ${CommonStyle.TextWhite};
           }
           .subheader_back-btn{
             position: absolute;
@@ -49,6 +54,15 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             align-items: center;
             width: 40px;
             height: 40px;
+          }
+          .btn_sub{
+            background: #E7E7E7;
+            border-radius: 24px;
+            color: ${CommonStyle.TextBlack};
+            padding: 0px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 19px;
           }
         `}
       </style>

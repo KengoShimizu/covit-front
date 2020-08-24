@@ -39,7 +39,7 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             width: 40px;
             height: 40px;
           }
-          .icon_wrapper_normal{
+          .icon-wrapper_normal{
             width: 24px;
             height: 24px;
           }

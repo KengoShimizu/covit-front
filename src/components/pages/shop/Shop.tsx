@@ -11,8 +11,18 @@ import HealthCare from './../../../img/covid-icon_health-care.svg';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
 import Button, { ButtonThemes } from './../../atoms/Button';
+import { Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin} from 'react-feather';
+import { isAbsolute } from 'path';
 
-import { Menu } from 'react-feather';
+const propStyle = {
+  commentLink: {
+    marginRight: '0',
+    marginLeft: 'auto',
+  },
+  commentBtn: {
+    margin: '0 auto 0 auto'
+  }
+};
 
 export const Shop: React.FC = () => {
   const { match }: any = useReactRouter();
@@ -70,45 +80,104 @@ export const Shop: React.FC = () => {
               {shopData.name}
             </Title>
           </div>
-          
-          <img className="" src={shopData.image} alt="shop header"/><br/>
-          {shopData.good_count}<br/>
-          {shopData.bad_count}<br/>
-          {shopData.price_day}<br/>
-          {shopData.price_night}<br/>
-          {shopData.business_date}<br/>
-          {shopData.contact}<br/>
-          {shopData.address}<br/>
+          {/* ヘッダー画像 */}
+          <div className="shop-img_wrapper">
+            <img className="shop-img" src={shopData.image} alt="shop header"/>
+          </div>
+          {/* 感染対策情報 */}
+          <section className="infection-control_card">
+            <h2 className="infection-control_title">感染対策</h2>
+            {uniqueImgs.map((data: any) => (
+              <ol className="infection-control_list" key={`images${data}`}>
+                <li className="infection-control_option">
+                  <Icon theme={[IconThemes.COVIDMEASURE]}>
+                    <img className="infection-control_icon" src={Alcohol} alt=""/>
+                  </Icon>
+                </li>
+                <li className="infection-control_option">
+                  <Icon theme={[IconThemes.COVIDMEASURE]}>
+                    <img className="infection-control_icon" src={Airing} alt=""/>
+                  </Icon>
+                </li>
+                <li className="infection-control_option">
+                  <Icon theme={[IconThemes.COVIDMEASURE]}>
+                    <img className="infection-control_icon" src={Mask} alt=""/>
+                  </Icon>
+                </li>
+                <li className="infection-control_option">
+                  <Icon theme={[IconThemes.COVIDMEASURE]}>
+                    <img className="infection-control_icon" src={HealthCare} alt=""/>
+                  </Icon>
+                </li>
+                <li className="infection-control_option">
+                  <Icon theme={[IconThemes.COVIDMEASURE]}>
+                    <img className="infection-control_icon" src={Distance} alt=""/>
+                  </Icon>
+                </li>
+              </ol>
+            ))}
+            <div className="infection-control_comment">
+              従業員がマスクを着用しています。
+              お客様にマスクの着用をお願いしています。
+            </div>
+            <div className="infection-control_review">
+              <h3 className="infection-control_review-title">対策への評価</h3>
+              <ol className="infection-control_review-list">
+                <li className="infection-control_review-option">
+                  <Smile size={24} color="#ED753A" />
+                  <span className="infection-control_review-num">
+                    {shopData.good_count}<br/>
+                  </span>
+                </li>
+                <li className="infection-control_review-option">
+                  <Frown size={24} color="#3A8CED" />
+                  <span className="infection-control_review-num">
+                    {shopData.bad_count}<br/>
+                  </span>
+                </li>
+              </ol>
+              <Button theme={[ButtonThemes.SUBBTN]} propStyle={propStyle.commentLink}>
+                コメントを見る
+                <ChevronRight size={14} color="#333" />
+              </Button>
+            </div>
+            <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn}>
+              <Edit size={24} color="#fff" />
+              <span className="infection-control_comment-text">感染対策のレビューを書く</span>
+            </Button>
+          </section>
+          <hr className="shop_hr"/>
+          <ul className="shop_info-list">
+            <li className="shop_info-option">
+              <DollarSign size={16} color="#333" />
+              <span className="shop_info-option_content">
+                {shopData.price_day}
+              </span>
+              <span className="shop_info-option_content">
+                {shopData.price_night}
+              </span>
+            </li>
+            <li className="shop_info-option">
+              <Clock size={16} color="#333" />
+              <span className="shop_info-option_content">
+                {shopData.business_date}
+              </span>
+            </li>
+            <li className="shop_info-option">
+              <Phone size={16} color="#333" />
+              <span className="shop_info-option_content">
+              {shopData.contact}
+              </span>
+            </li>
+            <li className="shop_info-option">
+              <MapPin size={16} color="#333" />
+              <span className="shop_info-option_content">
+                {shopData.address}
+              </span>
+            </li>
+          </ul>
 
-          {uniqueImgs.map((data: any) => (
-            <ol className="infection-control_list" key={`images${data}`}>
-              <li className="infection-control_option">
-                <Icon theme={[IconThemes.COVIDMEASURE]}>
-                  <img className="infection-control_icon" src={Alcohol} alt=""/>
-                </Icon>
-              </li>
-              <li className="infection-control_option">
-                <Icon theme={[IconThemes.COVIDMEASURE]}>
-                  <img className="infection-control_icon" src={Airing} alt=""/>
-                </Icon>
-              </li>
-              <li className="infection-control_option">
-                <Icon theme={[IconThemes.COVIDMEASURE]}>
-                  <img className="infection-control_icon" src={Mask} alt=""/>
-                </Icon>
-              </li>
-              <li className="infection-control_option">
-                <Icon theme={[IconThemes.COVIDMEASURE]}>
-                  <img className="infection-control_icon" src={HealthCare} alt=""/>
-                </Icon>
-              </li>
-              <li className="infection-control_option">
-                <Icon theme={[IconThemes.COVIDMEASURE]}>
-                  <img className="infection-control_icon" src={Distance} alt=""/>
-                </Icon>
-              </li>
-            </ol>
-          ))}
+          
         </div>
         <style jsx>{`
           *{
@@ -137,8 +206,32 @@ export const Shop: React.FC = () => {
             top: 56px;
             min-height: 100vh;
           }
+          .shop-card{
+            padding: 20px;
+          }
+          .shop-img_wrapper{
+            width: 240px;
+            max-width: 80%;
+            height: 120px;
+            overflow: hidden;
+            margin: 0 auto;
+            margin-bottom: 32px;
+          }
+          .shop-img{
+            width: 100%;
+            height: auto;
+          }
+
+          // 感染対策
+          .infection-control_card{
+            margin-bottom: 16px;
+          }
+          .infection-control_title{
+            margin-bottom: 12px;
+          }
           .infection-control_list{
             display: flex;
+            margin-bottom: 16px;
           }
           .infection-control_option:not(:last-child) {
             margin-right: 8px;
@@ -146,6 +239,61 @@ export const Shop: React.FC = () => {
           .infection-control_icon{
             width: 32px;
             height: auto;
+          }
+
+          .infection-control_comment{
+            background-color: ${CommonStyle.BgGray};
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+          }
+          .infection-control_review{
+            display: flex;
+            margin-bottom: 24px;
+          }
+          .infection-control_review-title{
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            color: ${CommonStyle.TextBlack};
+            margin-right: 16px;
+          }
+          .infection-control_review-list{
+            display: flex;
+          }
+          .infection-control_review-option{
+            display: flex;
+            align-items: center;
+          }
+          .infection-control_review-option:not(:last-child){
+            margin-right: 12px;
+          }
+          .infection-control_review-num{
+            margin-left: 4px;
+          }
+          .infection-control_comment-text{
+            margin-left: 8px;
+          }
+
+          .shop_hr{
+            height: 2px;
+            background: ${CommonStyle.BorderGray};
+            margin-bottom: 24px;
+          }
+
+          // 基本情報
+          .shop_info-option{
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 12px;
+            color: ${CommonStyle.TextBlack}
+          }
+          .shop_info-option:not(:last-child){
+            margin-bottom: 16px;
+          }
+          .shop_info-option_content{
+            margin-left: 8px;
           }
         `}</style>
       </div>
