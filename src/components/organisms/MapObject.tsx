@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, TileLayer } from 'react-leaflet';
+import {CommonStyle} from './../../common/CommonStyle';
+import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
 import { MapPopup } from '../molecules/MapPopup';
 import curLocPin from './../../img/current_location_pin.svg';

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {CommonStyle} from './../../../common/CommonStyle';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
 import { HomeLayout } from '../../templates/HomeLayout';
@@ -7,6 +8,11 @@ import Mask from './../../../img/covid-icon_mask.svg';
 import Airing from './../../../img/covid-icon_airing.svg';
 import Distance from './../../../img/covid-icon_distance.svg';
 import HealthCare from './../../../img/covid-icon_health-care.svg';
+import Icon, { IconThemes } from './../../atoms/Icon';
+import Title, { TitleThemes } from './../../atoms/Title';
+import Button, { ButtonThemes } from './../../atoms/Button';
+
+import { Menu } from 'react-feather';
 
 export const Shop: React.FC = () => {
   const { match }: any = useReactRouter();
@@ -55,8 +61,16 @@ export const Shop: React.FC = () => {
   return (
     <HomeLayout>
       <div className="content">
-        <div>
-          {shopData.name}<br/>
+        <div className="shop-card">
+          <div className="sub-header">
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+              <Menu size={24} color="#333" />
+            </Button>
+            <Title theme={[TitleThemes.SUBHEADER]}>
+              {shopData.name}
+            </Title>
+          </div>
+          
           <img className="" src={shopData.image} alt="shop header"/><br/>
           {shopData.good_count}<br/>
           {shopData.bad_count}<br/>
@@ -69,19 +83,29 @@ export const Shop: React.FC = () => {
           {uniqueImgs.map((data: any) => (
             <ol className="infection-control_list" key={`images${data}`}>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Alcohol} alt=""/>
+                <Icon theme={[IconThemes.COVIDMEASURE]}>
+                  <img className="infection-control_icon" src={Alcohol} alt=""/>
+                </Icon>
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Airing} alt=""/>
+                <Icon theme={[IconThemes.COVIDMEASURE]}>
+                  <img className="infection-control_icon" src={Airing} alt=""/>
+                </Icon>
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Mask} alt=""/>
+                <Icon theme={[IconThemes.COVIDMEASURE]}>
+                  <img className="infection-control_icon" src={Mask} alt=""/>
+                </Icon>
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={HealthCare} alt=""/>
+                <Icon theme={[IconThemes.COVIDMEASURE]}>
+                  <img className="infection-control_icon" src={HealthCare} alt=""/>
+                </Icon>
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Distance} alt=""/>
+                <Icon theme={[IconThemes.COVIDMEASURE]}>
+                  <img className="infection-control_icon" src={Distance} alt=""/>
+                </Icon>
               </li>
             </ol>
           ))}
@@ -100,11 +124,28 @@ export const Shop: React.FC = () => {
           .container{
             width: 100%
           }
+          .sub-header{
+            background: ${CommonStyle.BgWhite};
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            margin-bottom: 8px;
+          }
           // 中身
           .content{
             position: relative;
             top: 56px;
             min-height: 100vh;
+          }
+          .infection-control_list{
+            display: flex;
+          }
+          .infection-control_option:not(:last-child) {
+            margin-right: 8px;
+          }
+          .infection-control_icon{
+            width: 32px;
+            height: auto;
           }
         `}</style>
       </div>

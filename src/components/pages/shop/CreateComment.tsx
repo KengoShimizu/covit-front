@@ -170,7 +170,7 @@ export const CreateComment: React.FC = () => {
               min-height: 100vh;
             }
             .sub-header{
-              background: #FFFFFF;
+              background: ${CommonStyle.BgWhite};
               width: 100%;
               height: 40px;
               text-align: center;
@@ -189,7 +189,7 @@ export const CreateComment: React.FC = () => {
               font-weight: bold;
               font-size: 14px;
               line-height: 24px;
-              color: #333333;
+              color: ${CommonStyle.TextBlack};
               margin: 9px auto 7px auto;
             }
             
@@ -204,8 +204,8 @@ export const CreateComment: React.FC = () => {
             // 感染対策
             .infection-control_card{
               padding: 16px 0;
-              border-top: 2px solid #C0C0C0;
-              border-bottom: 2px solid #C0C0C0;
+              border-top: 2px solid ${CommonStyle.BorderGray};
+              border-bottom: 2px solid ${CommonStyle.BorderGray};
             }
             .infection-control_title{
               font-weight: bold;
@@ -236,7 +236,7 @@ export const CreateComment: React.FC = () => {
               height: auto;
             }
             .infection-control_comment-box{
-              background: #E7E7E7;
+              background: ${CommonStyle.BgGray};
               position: relative;
               padding: 16px 20px;
               border-radius: 8px;
@@ -246,7 +246,7 @@ export const CreateComment: React.FC = () => {
               font-weight: bold;
               font-size: 12px;
               line-height: 19px;
-              color: #333333;
+              color: ${CommonStyle.TextBlack};
             }
             .infection-control_comment:not(:last-child){
               margin-bottom: 2px;
@@ -302,7 +302,7 @@ export const CreateComment: React.FC = () => {
             .review-form_switch-input{
               width: 24px;
               height 24px;
-              background: #E7E7E7;
+              background: ${CommonStyle.BgGray};
               margin: 14px;
             }
             .review-form_switch-input:checked {
@@ -325,7 +325,7 @@ export const CreateComment: React.FC = () => {
               font-size: 16px;
               line-height: 1.7em;
               height: calc( 1.7em * 5 );
-              border: 1px solid #C0C0C0;
+              border: 1px solid ${CommonStyle.BorderGray};
               border-radius: 4px;
             }
             .review-form_btn_container{

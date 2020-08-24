@@ -177,7 +177,7 @@ export const ShopComments: React.FC = () => {
             min-height: 100vh;
           }
           .sub-header{
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             width: 100%;
             height: 40px;
             text-align: center;

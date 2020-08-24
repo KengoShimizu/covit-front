@@ -1,8 +1,8 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 import { FormatDate } from '../../common/Function'
 import { Calendar } from 'react-feather';
 import { AlertTriangle } from 'react-feather';
-import {CommonStyle} from './../../common/CommonStyle';
 import Icon, { IconThemes } from './../atoms/Icon';
 
 type CardProps = {
@@ -41,7 +41,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
       <style jsx>
         {`
           .card{
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             width: 100%;
             display: flex;
             margin-bottom: 16px;
@@ -78,7 +78,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             color: ${CommonStyle.TextDarkGary};
           }
           .card_comment{
-            background: #E7E7E7;
+            background: ${CommonStyle.BgGray};
             padding: 4px 8px;
             box-sizing: border-box;
             border-radius: 4px;
@@ -88,7 +88,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
           }
           .card_report{
             display: flex;
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             font-weight: bold;
             font-size: 12px;
             line-height: 19px;
