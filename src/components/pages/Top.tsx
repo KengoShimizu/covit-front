@@ -9,14 +9,12 @@ import Button, { ButtonThemes } from './../atoms/Button';
 
 // ボタンのCSS
 const propStyle = {
-  sample: {
-    color: 'red',
-  },
-  sample2: {
-    color: 'red',
+  shopMordal: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: '0 auto 40px auto'
   }
 };
-
 export const Top: React.FC = () => {
   return (
     <HomeLayout>
@@ -33,11 +31,10 @@ export const Top: React.FC = () => {
             PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
           </p>
           {/* propstyle */}
-          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.sample}>サンプル</Button>
-          {/* <Button theme={[ButtonThemes.NORMAL]} className="intro-mordal_btn">
+          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopMordal}>
             <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
             さっそく飲食店を探す
-          </Button> */}
+          </Button>
           <Link to=''>
             <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
           </Link>
@@ -98,11 +95,6 @@ export const Top: React.FC = () => {
             font-size: 14px;
             line-height: 24px;
             margin-bottom: 24px;
-          }
-          .intro-mordal_btn{
-            display: flex;
-            align-items: center;
-            margin: 0 auto 40px auto;
           }
           .intro-mordal_link{
             color: #8C8C8C;
