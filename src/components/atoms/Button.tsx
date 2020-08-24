@@ -3,24 +3,25 @@ import React from 'react';
 interface ButtonProps {
   theme?: ButtonThemes[];
   children?: React.ReactNode;
-  className?: string;
+  propStyle?: {};
 }
 
 export enum ButtonThemes {
   INIT = 'INIT',
-  GRAY_OUTLINE = 'GRAY_OUTLINE'
+  NORMAL = 'NORMAL'
 }
 
 enum ModifierClassNames {
   INIT = 'button-init',
-  GRAY_OUTLINE = 'button-grayOutline'
+  NORMAL = 'normal-btn'
 }
 
 
-const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, className = ''}) => {
+const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, propStyle = {}}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <button className={["button", modifierClasses, className].join(' ')}>
+    //style={propStyle}style直書き
+    <button className={["button", modifierClasses].join(' ')} style={propStyle}>
       {children}
       <style jsx>
         {`
@@ -29,9 +30,14 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, c
           }
           .button-init{
           }
-          .button.button-grayOutline {
-            border: solid 1px #808080;
-            color: #333;
+          .normal-btn {
+            padding: 8px 32px;
+            background: #FF8A1F;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            color: white;
           }
         `}
       </style>

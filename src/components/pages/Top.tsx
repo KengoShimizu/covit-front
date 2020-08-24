@@ -7,6 +7,16 @@ import { MapObject } from '../organisms/MapObject';
 
 import Button, { ButtonThemes } from './../atoms/Button';
 
+// ボタンのCSS
+const propStyle = {
+  sample: {
+    color: 'red',
+  },
+  sample2: {
+    color: 'red',
+  }
+};
+
 export const Top: React.FC = () => {
   return (
     <HomeLayout>
@@ -22,11 +32,12 @@ export const Top: React.FC = () => {
           <p className="intro-mordal_text">
             PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
           </p>
-          <Button theme={[ButtonThemes.GRAY_OUTLINE]} className="sample">サンプル</Button>
-          <button className="intro-mordal_btn">
+          {/* propstyle */}
+          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.sample}>サンプル</Button>
+          {/* <Button theme={[ButtonThemes.NORMAL]} className="intro-mordal_btn">
             <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
             さっそく飲食店を探す
-          </button>
+          </Button> */}
           <Link to=''>
             <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
           </Link>
@@ -90,14 +101,8 @@ export const Top: React.FC = () => {
           }
           .intro-mordal_btn{
             display: flex;
+            align-items: center;
             margin: 0 auto 40px auto;
-            padding: 8px 24px;
-            background: #FF8A1F;
-            border-radius: 4px;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
           }
           .intro-mordal_link{
             color: #8C8C8C;

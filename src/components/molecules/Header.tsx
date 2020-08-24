@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../img/history.svg';
 import { User } from 'react-feather';
+import { LogIn } from 'react-feather';
 import { Menu } from 'react-feather';
 
 
@@ -12,16 +13,20 @@ export const Header: React.FC = () => {
       <ul className="icon-list">
         <Link to='/History'>
           <li className="icon-list_option">
-            <img className="icon-list_img" src={HistoryIcon} alt=""/>
+            <span className="icon-list_img-wrapper">
+              <img className="icon-list_img" src={HistoryIcon} alt=""/>
+            </span>
             <p className="icon-list_caption">閲覧履歴</p>
           </li>
         </Link>
         <li className="icon-list_option">
-          <img className="icon-list_img" src={HistoryIcon} alt=""/>
+          <span className="icon-list_img-wrapper">
+            <LogIn size={24} color="#fff" />
+          </span>
           <p className="icon-list_caption">ログイン</p>
         </li>
         <li className="icon-list_option_menu">
-          <img className="icon-list_img" src={HistoryIcon} alt=""/>
+          <Menu size={32} color="#fff" />
         </li>
       </ul>
       <style jsx>{`
@@ -66,9 +71,16 @@ export const Header: React.FC = () => {
           align-items: center;
           justify-content: center;
         }
-        .icon-list_img{
-          width: 32px;
+        .icon-list_img-wrapper{
+          width: 44px;
           height: 32px;
+          display:flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .icon-list_img{
+          width: 28px;
+          height: auto;
         }
         .icon-list_caption{
           font-size: 8px;
