@@ -9,6 +9,8 @@ import shopPin from './../../img/shop_pin.svg';
 interface MapPopupProps {
   coordinations: any;
   steps: any;
+  zoom: number;
+  setZoom: any;
   isOpen: any;
   clickedShop: any;
   mapCenter: any;
@@ -39,11 +41,14 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
     <div className="map-container">
       <Map 
         center={props.mapCenter} 
-        zoom={16} 
+        zoom={props.zoom}
         style={{ height: '100%' }} 
         onMoveend={(e:any) => {
-          props.setLastLat(e.sourceTarget._lastCenter.lat);
-          props.setLastLng(e.sourceTarget._lastCenter.lng);
+          const latlng = e.target.getCenter();
+          props.setLastLat(latlng.lat);
+          props.setLastLng(latlng.lng);
+          props.setZoom(e.target.getZoom());
+          props.setMapCenter({lat: latlng.lat, lng: latlng.lng});
         }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"

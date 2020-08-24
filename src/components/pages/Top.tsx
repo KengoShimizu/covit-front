@@ -23,15 +23,17 @@ export const Top: React.FC = () => {
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
+  const [zoom, setZoom] = useState(16);
   const [genre_id, setGenres] = useState([]);
   const [err, setErr] = useState("");
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [clickedShop, setClickedShop] = useState({});
-  const [mapCenter, setMapCenter] = useState({ lat: 35.6513297, lng: 139.5832906 });
-  const [curLoc, setCurLoc] = useState({ lat: 35.6513297, lng: 139.5832906 });
+  const [mapCenter, setMapCenter] = useState({ lat: lastlat, lng: lastlng });
+  const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng });
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
+  const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
     const images = steps.map((data: any) => data.image);
@@ -56,13 +58,13 @@ export const Top: React.FC = () => {
     axios.get('/api/v1/user/coordinations', {
         params: {
           genre_id: [],
-          from_lat: lat_ - 0.025,
-          to_lat: lat_ + 0.025,
-          from_lng: lng_ - 0.025,
-          to_lng: lat_ + 0.025,
+          from_lat: lat_ - threshold,
+          to_lat: lat_ + threshold,
+          from_lng: lng_ - threshold,
+          to_lng: lng_ + threshold,
         }
       })
-      .then(res => {console.log(res.data);setCoordinations(res.data)})
+      .then(res => setCoordinations(res.data))
       .catch(err => setErr(err));
   }
 
@@ -101,6 +103,7 @@ export const Top: React.FC = () => {
         <MapObject 
           coordinations={coordinations}
           steps={steps}
+          zoom={zoom}
           isOpen={isOpen}
           curLoc={curLoc}
           clickedShop={clickedShop}
@@ -109,7 +112,8 @@ export const Top: React.FC = () => {
           setMapCenter={setMapCenter}
           fetchStepsData={(shop: any) => fetchStepsData(shop)}
           setLastLat={setLastLat}
-          setLastLng={setLastLng}/>
+          setLastLng={setLastLng}
+          setZoom={setZoom}/>
         <button className="refinement-btn">お店のジャンルで絞り込む</button>
         <button className="research-btn" onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>このエリアで再検索</button>
         <button className="current-place-btn" onClick={() => setMapCenter(curLoc)}>現在地</button>
