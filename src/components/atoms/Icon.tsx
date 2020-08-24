@@ -3,38 +3,51 @@ import React from 'react';
 interface IconProps {
   theme?: IconThemes[];
   children?: React.ReactNode;
-  className?: string;
-  src: string;
-  alt: string;
+  propStyle?: {};
 }
-
 export enum IconThemes {
-  INIT = 'INIT'
+  INIT = 'INIT',
+  NORMAL = 'NORMAL',
+  SMALL = 'SMALL'
 }
-
 enum ModifierClassNames {
-  INIT = 'icon-init'
+  INIT = 'icon-init',
+  NORMAL = 'icon-wrapper_normal',
+  SMALL = 'icon-wrapper_small'
 }
 
 
-const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, className = '', src, alt}) => {
+const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propStyle = {}}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <img 
-      className={["icon", modifierClasses, className].join(' ')}
-      src={src}
-      alt={alt}>
+    <span 
+      className={["icon_wrapper", modifierClasses].join(' ')} style={propStyle}
+      >
       {children}
       <style jsx>
         {`
-          .icon{
+          .icon_wrapper{
             cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
-          .icon-init{
+          .icon_wrapper_lerge{
+            width: 40px;
+            height: 40px;
+          }
+          .icon_wrapper_normal{
+            width: 24px;
+            height: 24px;
+          }
+          .icon-wrapper_small{
+            width: 16px;
+            height: 16px;
+            margin-right: 4px;
           }
         `}
       </style>
-    </img>
+    </span>
   );
 }
 

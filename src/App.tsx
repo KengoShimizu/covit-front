@@ -44,9 +44,9 @@ function App() {
             <Route exact path='/accounts/register' component={Register} />
             <Route exact path='/accounts/emailregister' component={EmailRegister} />
             <Route exact path='/accounts/send' component={Send} />
-            <Authentication>
+            {/* <Authentication> */}
               <Route exact path='/shops/:id/comments/new' component={CreateComment} />
-            </Authentication>
+            {/* </Authentication> */}
           </Switch>
         </BrowserRouter>
       </CommonProvider>

@@ -1,5 +1,9 @@
 import React from 'react';
 import { FormatDate } from '../../common/Function'
+import { Calendar } from 'react-feather';
+import { AlertTriangle } from 'react-feather';
+import {CommonStyle} from './../../common/CommonStyle';
+import Icon, { IconThemes } from './../atoms/Icon';
 
 type CardProps = {
   HistoryIcon: any;
@@ -17,7 +21,9 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
         <div className="card_content">
           <div className="card_name">{props.comment.user.name}</div>
           <div className="card_date">
-            <img className="card_date_icon" src={props.HistoryIcon} alt="" />
+            <Icon theme={[IconThemes.SMALL]}>
+              <Calendar size={14} color="#8C8C8C" />
+            </Icon>
             <p className="card_date_text">来店日</p>
             <p className="card_date_num">{FormatDate(new Date(props.comment.date))}</p>
           </div>
@@ -25,7 +31,9 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             {props.comment.content}
           </div>
           <div className="card_report">
-            <img src="" alt="" />
+            <Icon theme={[IconThemes.SMALL]}>
+              <AlertTriangle size={14} color="#8C8C8C" />
+            </Icon>
             <p className="card_report_text">悪質なユーザーを報告</p>
           </div>
         </div>
@@ -54,7 +62,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             line-height: 24px;
           }
           .card_date{
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             font-weight: bold;
             font-size: 12px;
             line-height: 19px;
@@ -62,9 +70,12 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             align-items: center;
             margin-bottom: 4px;
           }
-          .card_date_icon{
-            width: 14px;
-            height: 14px;
+          .card_date_text{
+            color: ${CommonStyle.TextDarkGary};
+            margin-right: 8px;
+          }
+          .card_date_num{
+            color: ${CommonStyle.TextDarkGary};
           }
           .card_comment{
             background: #E7E7E7;
@@ -73,6 +84,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             border-radius: 4px;
             width: 100%;
             margin-bottom: 4px;
+            line-height: 24px;
           }
           .card_report{
             display: flex;
@@ -85,6 +97,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
           }
           .card_report_text{
             display: inline-block;
+            color: ${CommonStyle.TextDarkGary}
           }
         `}
       </style>

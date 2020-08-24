@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import {CommonStyle} from './../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HistoryIcon from './../../../img/history.svg'
 import { CommentCard } from './../../molecules/CommentCard'
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
+import { Smile } from 'react-feather';
+import { Frown } from 'react-feather';
+import { ChevronLeft } from 'react-feather';
+import Button, { ButtonThemes } from './../../atoms/Button';
+import Title, { TitleThemes } from './../../atoms/Title';
+import Icon, { IconThemes } from './../../atoms/Icon';
 import useReactRouter from "use-react-router";
 import { HomeLayout } from '../../templates/HomeLayout';
+
+const propStyle = {
+  reviewIcon: {
+    marginRight: '4px',
+  }
+};
 
 // ショップのコメント一覧
 export const ShopComments: React.FC = () => {
@@ -98,22 +111,27 @@ export const ShopComments: React.FC = () => {
       <div className='container'>
         <div className="content">
           <div className="sub-header">
-            <Link to='/'>
-              <div className="sub-header_btn">
-                <p>←</p>
-              </div>
-            </Link>
-            <h1 className="sub-header_title">コメント一覧</h1>
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+              <ChevronLeft size={24} color="#333" />
+            </Button>
+            <Title theme={[TitleThemes.SUBHEADER]}>
+              コメント一覧
+            </Title>
           </div>
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
-              <img className="review-switch_img" src={HistoryIcon} alt="" />
+              <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
+              <Smile className="review-icon_unselected" size={24} color="#ED753A" />
+              </Icon>
               <p className="review-switch_num" style={{ color: "#ED753A" }}>{pagenationForGood.total}</p>
             </div>
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'bad' ? "#3A8CED" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('bad')}>
-              <img className="review-switch_img" src={HistoryIcon} alt="" />
+            <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
+              <Frown className="review-icon_unselected" size={24} color="#3A8CED" />
+              </Icon>
               <p className="review-switch_num" style={{ color: "#3A8CED" }}>{pagenationForBad.total}</p>
             </div>
+            {/* FIXME 非選択時アイコンと数字も色かわる*/}
             {/* 選択中じゃない時は#B6B2AA */}
           </div>
           <InfiniteScroll
@@ -151,44 +169,7 @@ export const ShopComments: React.FC = () => {
           .container{
             width: 100%
           }
-          // ヘッダー
-          header{
-            height: 56px;
-            width: 100%;
-            position: fixed;
-            background: #FF8A1F;
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 10px;
-            box-sizing: border-box;
-            z-index: 100;
-          }
-          .icon-list{
-            display: flex;
-            padding: 0;
-          }
-          .icon-list_option{
-            text-align: center;
-            width: 44px;
-            height: 44px;
-            margin-right: 4px;
-          }
-          .icon-list_option_menu{
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .icon-list_img{
-            width: 32px;
-            height: 32px;
-          }
-          .icon-list_caption{
-            font-size: 8px;
-            line-height: 12px;
-            color: white;
-          }
+          
           // 中身
           .content{
             position: relative;
@@ -202,22 +183,6 @@ export const ShopComments: React.FC = () => {
             text-align: center;
             margin-bottom: 8px;
           }
-          .sub-header_btn{
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .sub-header_title{
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
-            color: #333333;
-            margin: 9px auto 7px auto;
-          }
           
           .review-switch_container{
             width: 100%;
@@ -226,12 +191,9 @@ export const ShopComments: React.FC = () => {
           .review-switch{
             width: 50%;
             display: flex;
+            align-items:center;
             justify-content: center;
-          }
-          .review-switch_img{
-            width: 24px;
-            margin-right: 4px;
-            height: auto;
+            padding-bottom: 6px;
           }
           .review-switch_num{
             font-weight: bold;

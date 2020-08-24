@@ -1,4 +1,5 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../img/history.svg';
 import { User } from 'react-feather';
@@ -47,7 +48,7 @@ export const Header: React.FC = () => {
           height: 56px;
           width: 100%;
           position: fixed;
-          background: #FF8A1F;
+          background: ${CommonStyle.AccentColor};
           display: flex;
           justify-content: space-between;
           padding: 6px 10px;
