@@ -7,6 +7,7 @@ import { HomeLayout } from '../templates/HomeLayout';
 import { MapObject } from '../organisms/MapObject';
 import Cookies from 'universal-cookie';
 import Button, { ButtonThemes } from './../atoms/Button';
+import axios from "axios";
 
 // ボタンのCSS
 const propStyle = {
@@ -16,27 +17,102 @@ const propStyle = {
     margin: '0 auto 40px auto'
   }
 };
+
 export const Top: React.FC = () => {
   const cookies = new Cookies();
-  const [modalCookie, setModalCookie] = useState(false);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
+  const [lastlat, setLastLat] = useState(35.6513297);
+  const [lastlng, setLastLng] = useState(139.5832906);
+  const [genre_id, setGenres] = useState([]);
+  const [err, setErr] = useState("");
+  const [coordinations, setCoordinations] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [clickedShop, setClickedShop] = useState({});
+  const [mapCenter, setMapCenter] = useState({ lat: 35.6513297, lng: 139.5832906 });
+  const [curLoc, setCurLoc] = useState({ lat: 35.6513297, lng: 139.5832906 });
+  const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
 
+  const GetUniqueImgs = (steps: any) => {
+    const images = steps.map((data: any) => data.image);
+    const uniqueImgs = images.filter(function (x: string, i: number, self: string[]) {
+      return self.indexOf(x) === i;
+    });
+    return uniqueImgs;
+  }
+
+  const fetchStepsData = (shop: any) => {
+    axios.get(`/api/v1/user/steps?shop_id=1`)
+      .then(res => {
+        setSteps(res.data);
+        setIsOpen(true);
+        setClickedShop(shop);
+        setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
+      })
+      .catch(err => setErr(err));
+  }
+
+  const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
+    axios.get('/api/v1/user/coordinations', {
+        params: {
+          genre_id: [],
+          from_lat: lat_ - 0.025,
+          to_lat: lat_ + 0.025,
+          from_lng: lng_ - 0.025,
+          to_lng: lat_ + 0.025,
+        }
+      })
+      .then(res => {console.log(res.data);setCoordinations(res.data)})
+      .catch(err => setErr(err));
+  }
+
+  const getCullentLocation = () => {
+    ///* FIXME 現在地座標取得（デバッグのためコメントアウト）
+    navigator.geolocation.getCurrentPosition(
+      pos => {
+        const pos_lat = pos.coords.latitude;
+        const pos_lng = pos.coords.longitude;
+        //setMapCenter({ lat: pos_lat, lng: pos_lng });
+        //setCurLoc({ lat: pos_lat, lng: pos_lng });
+        setMapCenter({ lat: lastlat, lng: lastlng });
+        setCurLoc({ lat: lastlat, lng: lastlng });
+      },
+      err => console.log(err)
+    );
+    //*/
+  }
+
+  // 初回モーダルクローズ
   const handleInitModal = () => {
     cookies.set('close-modal-once', true);
     setInitModalIsOpen(cookies.get('close-modal-once'))
   }
 
+  // モーダルクローズ履歴を参照
   useEffect(() => {
     setInitModalIsOpen(cookies.get('close-modal-once'))
+    getCullentLocation()
+    fetchCoordinationsData(genre_id, lastlat, lastlng);
   }, [])
 
   return (
     <HomeLayout>
       <div className='container'>
-        <MapObject/>
+        <MapObject 
+          coordinations={coordinations}
+          steps={steps}
+          isOpen={isOpen}
+          curLoc={curLoc}
+          clickedShop={clickedShop}
+          mapCenter={mapCenter}
+          clickedShopUniqueStepsImages={clickedShopUniqueStepsImages}
+          setMapCenter={setMapCenter}
+          fetchStepsData={(shop: any) => fetchStepsData(shop)}
+          setLastLat={setLastLat}
+          setLastLng={setLastLng}/>
         <button className="refinement-btn">お店のジャンルで絞り込む</button>
-        <button className="research-btn">このエリアで再検索</button>
-        <button className="current-place-btn">現在地</button>
+        <button className="research-btn" onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>このエリアで再検索</button>
+        <button className="current-place-btn" onClick={() => setMapCenter(curLoc)}>現在地</button>
         {/* 初回モーダル */}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
@@ -70,7 +146,7 @@ export const Top: React.FC = () => {
             text-decoration: none;
           }
           .container{
-            width: 100%
+            width: 100%;
           }
           // 初回のモーダル
           .intro-mordal{
