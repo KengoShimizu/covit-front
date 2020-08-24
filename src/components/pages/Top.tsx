@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
@@ -171,7 +172,7 @@ export const Top: React.FC = () => {
             width: 64px;
             height: 64px;
             background: #FFFFFF;
-            border: 4px solid #FF8A1F;
+            border: 4px solid ${CommonStyle.AccentColor};
             box-sizing: border-box;
             border-radius: 64px;
           }
@@ -215,7 +216,7 @@ export const Top: React.FC = () => {
             width: 64px;
             height: 64px;
             background: #FFFFFF;
-            border: 4px solid #FF8A1F;
+            border: 4px solid ${CommonStyle.AccentColor};
             box-sizing: border-box;
             border-radius: 64px;
             z-index: 1000;

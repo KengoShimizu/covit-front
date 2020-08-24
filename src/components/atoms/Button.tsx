@@ -1,4 +1,5 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 
 interface ButtonProps {
   theme?: ButtonThemes[];
@@ -8,12 +9,14 @@ interface ButtonProps {
 
 export enum ButtonThemes {
   INIT = 'INIT',
-  NORMAL = 'NORMAL'
+  NORMAL = 'NORMAL',
+  SUBHEADER = 'SUBHEADER'
 }
 
 enum ModifierClassNames {
   INIT = 'button-init',
-  NORMAL = 'normal-btn'
+  NORMAL = 'normal-btn',
+  SUBHEADER = 'subheader_back-btn'
 }
 
 
@@ -32,12 +35,20 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
           }
           .normal-btn {
             padding: 8px 32px;
-            background: #FF8A1F;
+            background: ${CommonStyle.AccentColor};
             border-radius: 4px;
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
             color: white;
+          }
+          .subheader_back-btn{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
           }
         `}
       </style>

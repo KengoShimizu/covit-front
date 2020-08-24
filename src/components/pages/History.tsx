@@ -1,8 +1,15 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 import { Link } from 'react-router-dom';
-import HistoryIcon from './../../img/history.svg';
-
+import { Trash2 } from 'react-feather';
+import { Smile } from 'react-feather';
+import { Frown } from 'react-feather';
+import { Calendar } from 'react-feather';
+import { ChevronRight } from 'react-feather';
+import { ChevronLeft } from 'react-feather';
 import { HomeLayout } from '../templates/HomeLayout';
+import Button, { ButtonThemes } from './../atoms/Button';
+import Title, { TitleThemes } from './../atoms/Title';
 
 export const History: React.FC = () => {
     return (
@@ -10,16 +17,16 @@ export const History: React.FC = () => {
         <div className='container'>
           <div className="content">
             <div className="sub-header">
-              <Link to='/'>
-                <div className="sub-header_btn">
-                  <p>←</p>
-                </div>
-              </Link>
-              <h1 className="sub-header_title">閲覧履歴</h1>
+              <Button theme={[ButtonThemes.SUBHEADER]}>
+                <ChevronLeft size={24} color="#333" />
+              </Button>
+              <Title theme={[TitleThemes.SUBHEADER]}>
+                閲覧履歴
+              </Title>
             </div>
             <button className="delete-btn">
-              <img className="delete-btn_icon" src={HistoryIcon} alt=""/>
-              履歴を削除
+              <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>
+              <span className="delete-btn_text">履歴を削除</span>
             </button>
             <ol className="card-list">
               <li className="history-card">
@@ -28,45 +35,22 @@ export const History: React.FC = () => {
                   <div className="history-card_info">
                     <ul className="history-card_review">
                       <li className="history-card_review_option">
-                        <img className="history-card_review_icon" src={HistoryIcon} alt=""/>
+                        <span className="history-card_review-icon"><Smile size="20" color="#ED753A" /></span>
                         24
                       </li>
                       <li className="history-card_review_option">
-                        <img className="history-card_review_icon" src={HistoryIcon} alt=""/>
+                        <span className="history-card_review-icon"><Frown size="20" color="#3A8CED" /></span>
                         2
                       </li>
                     </ul>
                     <div className="history-card_date">
-                      <img className="history-card_date_icon" src={HistoryIcon} alt=""/>
+                      <span className="history-card_review-icon"><Calendar size="14" color="#8C8C8C" /></span>
                       <p className="history-card_date_text">閲覧日</p>
                       <p className="history-card_date_num">2020/7/4</p>
                     </div>
                   </div>
                 </div>
-                <img className="history-card_btn" src="" alt=""/>
-              </li>
-              <li className="history-card">
-                <div className="history-card_content">
-                  <h2 className="history-card_name">cafe えにしえ</h2>
-                  <div className="history-card_info">
-                    <ul className="history-card_review">
-                      <li className="history-card_review_option">
-                        <img className="history-card_review_icon" src={HistoryIcon} alt=""/>
-                        24
-                      </li>
-                      <li className="history-card_review_option">
-                        <img className="history-card_review_icon" src={HistoryIcon} alt=""/>
-                        2
-                      </li>
-                    </ul>
-                    <div className="history-card_date">
-                    <img className="history-card_date_icon" src={HistoryIcon} alt=""/>
-                    <p className="history-card_date_text">閲覧日</p>
-                    <p className="history-card_date_num">2020/7/4</p>
-                  </div>
-                  </div>
-                </div>
-                <img className="history-card_btn" src="" alt=""/>
+                <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
               </li>
             </ol>
           </div>
@@ -89,7 +73,7 @@ export const History: React.FC = () => {
             height: 56px;
             width: 100%;
             position: fixed;
-            background: #FF8A1F;
+            background: ${CommonStyle.AccentColor};
             display: flex;
             justify-content: space-between;
             padding: 6px 10px;
@@ -162,7 +146,11 @@ export const History: React.FC = () => {
             margin-bottom: 20px;
           }
           .delete-btn_icon{
-            margin-right: 4px;
+            width:24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             fill: #8C8C8C;
           }
           //カード
@@ -175,6 +163,10 @@ export const History: React.FC = () => {
             align-items: center;
             margin-bottom: 16px;
           }
+          .history-card_content{
+            width: calc(100% - 60px);
+            margin-right: 16px;
+          }
           .history-card_name{
             font-weight: bold;
             font-size: 18px;
@@ -184,6 +176,7 @@ export const History: React.FC = () => {
           }
           .history-card_info{
             display: flex;
+            justify-content: space-between;
             align-items: center;
           }
           .history-card_review{
@@ -195,8 +188,14 @@ export const History: React.FC = () => {
           .history-card_review_option{
             display: flex;
             align-items: center;
+            margin-right: 12px;
           }
-          .history-card_review_icon{
+          .history-card_review-icon{
+            width: 24px;
+            height: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-right: 4px;
           }
           .history-card_date{
@@ -206,9 +205,23 @@ export const History: React.FC = () => {
             font-weight: bold;
             font-size: 12px;
           }
+          .history-card_date_text{
+            color: #8C8C8C;
+          }
+          .history-card_date_num{
+            color: #8C8C8C;
+          }
           .history-card_date_icon,.history-card_date_text{
             margin-right: 8px;
           }
+          .history-card_btn{
+            width: 44px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
         `}</style>
         </div>
       </HomeLayout>

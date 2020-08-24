@@ -3,24 +3,24 @@ import React from 'react';
 interface TitleProps {
   theme?: TitleThemes[];
   children?: React.ReactNode;
-  className?: string;
+  propStyle?: {};
 }
 
 export enum TitleThemes {
   INIT = 'INIT',
-  SUB_HEADER = 'SUB_HEADER'
+  SUBHEADER = 'SUBHEADER'
 }
 
 enum ModifierClassNames {
   INIT = 'title-init',
-  SUB_HEADER = 'title-sub-header'
+  SUBHEADER = 'subheader_title'
 }
 
 
-const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, className = ''}) => {
+const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, propStyle = {}}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <h1 className={["title", modifierClasses, className].join(' ')}>
+    <h1 className={["title", modifierClasses].join(' ')} style={propStyle}>
       {children}
       <style jsx>
         {`
@@ -29,7 +29,15 @@ const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, clas
           }
           .title-init{
           }
-          .title-sub-header{
+          .subheader_title{
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            color: #333333;
+            margin: 9px auto 7px auto;
+          }
+          .title-icon{
             display: inline-block;
             font-weight: bold;
             font-size: 14px;

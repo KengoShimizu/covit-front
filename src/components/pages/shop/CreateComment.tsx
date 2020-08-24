@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {CommonStyle} from './../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../../img/history.svg'
 import Alcohol from './../../../img/covid-icon_alcohol.svg'
@@ -129,7 +130,7 @@ export const CreateComment: React.FC = () => {
               height: 56px;
               width: 100%;
               position: fixed;
-              background: #FF8A1F;
+              background: ${CommonStyle.AccentColor};
               display: flex;
               justify-content: space-between;
               padding: 6px 10px;
@@ -331,7 +332,7 @@ export const CreateComment: React.FC = () => {
               text-align: center;
             }
             .review-form_btn{
-              background: #FF8A1F;
+              background: ${CommonStyle.AccentColor};
               border-radius: 4px;
               padding: 8px 32px;
               color: white;

@@ -1,7 +1,11 @@
 import React, { useRef, useState } from 'react';
+import {CommonStyle} from './../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { HomeLayout } from '../../../templates/HomeLayout';
+import { ChevronLeft } from 'react-feather';
+import Button, { ButtonThemes } from './../../../atoms/Button';
+import Title, { TitleThemes } from './../../../atoms/Title';
 
 export const Login: React.FC = (props: any) => {
   const mailRef = useRef(document.createElement("input"));
@@ -31,21 +35,21 @@ export const Login: React.FC = (props: any) => {
       <div className="form">
         <div className="content">
           <div className="sub-header">
-            <Link to='/'>
-              <div className="sub-header_btn">
-                <p>←</p>
-              </div>
-            </Link>
-            <h1 className="sub-header_title">ログイン</h1>
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+              <ChevronLeft size={24} color="#333" />
+            </Button>
+            <Title theme={[TitleThemes.SUBHEADER]}>
+              ログイン
+            </Title>
           </div>
           <div className="err">{err}</div>
           <div className="mail-form">
             <label className="mail-form_label">メールアドレス</label>
             <input className="mail-form_input" ref={mailRef} type="text" placeholder="sample@sample.com" />
             <div className="mail-form_btn-container">
-              <button className="mail-form_btn" onClick={send}>
+              <Button theme={[ButtonThemes.NORMAL]}>
                 認証コードを送信
-                </button>
+              </Button>
             </div>
             <Link to='/accounts/register'>
               <p className="regist-link">会員登録はこちら</p>
@@ -66,14 +70,6 @@ export const Login: React.FC = (props: any) => {
           .container{
             width: 100%
           }
-          // ヘッダー
-          header{
-            height: 56px;
-            width: 100%;
-            position: fixed;
-            background: #FF8A1F;
-            z-index: 100;
-          }
           
           // 中身
           .content{
@@ -86,23 +82,7 @@ export const Login: React.FC = (props: any) => {
             width: 100%;
             height: 40px;
             text-align: center;
-            margin-bottom: 8px;
-          }
-          .sub-header_btn{
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .sub-header_title{
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
-            color: #333333;
-            margin: 9px auto 7px auto;
+            margin-bottom: 24px;
           }
 
           .mail-form{
@@ -131,7 +111,7 @@ export const Login: React.FC = (props: any) => {
           }
           .mail-form_btn{
             padding: 8px 32px;
-            background: #FF8A1F;
+            background: ${CommonStyle.AccentColor};
             border-radius: 4px;
             font-size: 14px;
             font-weight: bold;
