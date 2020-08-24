@@ -111,37 +111,21 @@ export const History: React.FC = () => {
             position: relative;
             top: 56px;
             min-height: 100vh;
-            background-color: #E7E7E7;
+            background-color: ${CommonStyle.BgGray};
           }
           .sub-header{
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             width: 100%;
             height: 40px;
             text-align: center;
             margin-bottom: 8px;
-          }
-          .sub-header_btn{
-            width: 40px;
-            height: 40px;
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .sub-header_title{
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
-            color: #333333;
-            margin: 9px auto 7px auto;
           }
           .delete-btn{
             margin-right: 24px;
             margin-left: auto;
             display: flex;
             align-items: center;
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             background: none;
             margin-bottom: 20px;
           }
@@ -151,11 +135,11 @@ export const History: React.FC = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            fill: #8C8C8C;
+            fill: ${CommonStyle.TextDarkGary};
           }
           //カード
           .history-card{
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             width: 100%;
             padding: 12px 16px;
             box-sizing: border-box;
@@ -171,7 +155,7 @@ export const History: React.FC = () => {
             font-weight: bold;
             font-size: 18px;
             line-height: 24px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             margin-bottom: 8px;
           }
           .history-card_info{
@@ -201,15 +185,15 @@ export const History: React.FC = () => {
           .history-card_date{
             display: flex;
             align-items: center;
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             font-weight: bold;
             font-size: 12px;
           }
           .history-card_date_text{
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
           }
           .history-card_date_num{
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
           }
           .history-card_date_icon,.history-card_date_text{
             margin-right: 8px;

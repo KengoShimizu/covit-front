@@ -1,4 +1,5 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 
 interface TitleProps {
   theme?: TitleThemes[];
@@ -34,7 +35,7 @@ const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, prop
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             margin: 9px auto 7px auto;
           }
           .title-icon{
@@ -42,7 +43,7 @@ const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, prop
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             margin: 9px auto 7px auto;
           }
         `}

@@ -1,4 +1,5 @@
 import React from 'react';
+import {CommonStyle} from './../../common/CommonStyle';
 import Alcohol from './../../img/covid-icon_alcohol.svg';
 import Mask from './../../img/covid-icon_mask.svg';
 import Airing from './../../img/covid-icon_airing.svg';

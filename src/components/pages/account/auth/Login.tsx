@@ -78,7 +78,7 @@ export const Login: React.FC = (props: any) => {
             min-height: 100vh;
           }
           .sub-header{
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             width: 100%;
             height: 40px;
             text-align: center;
@@ -94,7 +94,7 @@ export const Login: React.FC = (props: any) => {
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             margin-bottom: 4px;
           }
           .mail-form_input{
@@ -115,14 +115,14 @@ export const Login: React.FC = (props: any) => {
             border-radius: 4px;
             font-size: 14px;
             font-weight: bold;
-            color: #FFFFFF;
+            color: ${CommonStyle.TextWhite}
           }
 
           .regist-link{
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             text-align: right;
           }
         `}</style>

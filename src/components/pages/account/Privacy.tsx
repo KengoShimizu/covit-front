@@ -1,6 +1,8 @@
 import React from 'react';
+import {CommonStyle} from './../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../templates/HomeLayout';
+
 
 export const Privacy: React.FC = () => {
     return (

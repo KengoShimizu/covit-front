@@ -157,7 +157,7 @@ export const Top: React.FC = () => {
             transform: translateX(-50%);
             -webkit- transform: translateX(-50%);
             position: fixed;
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             border-radius: 8px;
             max-width: 280px;
             width: 80%;
@@ -191,7 +191,7 @@ export const Top: React.FC = () => {
             margin-bottom: 24px;
           }
           .intro-mordal_link{
-            color: #8C8C8C;
+            color: ${CommonStyle.TextDarkGary};
             text-align: center;
             font-size: 12px;
             line-height: 19px;
@@ -217,9 +217,9 @@ export const Top: React.FC = () => {
             transform: translateX(-50%);
             -webkit- transform: translateX(-50%);
             padding: 8px 16px;
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             border-radius: 4px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             font-size: 12px;
             line-height: 12px;
             font-weight: bold;
@@ -232,11 +232,11 @@ export const Top: React.FC = () => {
             -webkit- transform: translateX(-50%);
             height: 36px;
             padding: 8px 20px;
-            background: #FFFFFF;
-            border: 1.5px solid #C0C0C0;
+            background: ${CommonStyle.BgWhite};
+            border: 1.5px solid ${CommonStyle.BorderGray};
             box-sizing: border-box;
             border-radius: 36px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             font-size: 12px;
             line-height: 19px;
             font-weight: bold;
@@ -247,7 +247,7 @@ export const Top: React.FC = () => {
             right: 24px;
             width: 64px;
             height: 64px;
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             border: 4px solid ${CommonStyle.AccentColor};
             box-sizing: border-box;
             border-radius: 64px;
@@ -259,9 +259,9 @@ export const Top: React.FC = () => {
             transform: translateX(-50%);
             -webkit- transform: translateX(-50%);
             padding: 8px 16px;
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             border-radius: 4px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             font-size: 12px;
             line-height: 12px;
             font-weight: bold;
@@ -275,11 +275,11 @@ export const Top: React.FC = () => {
             -webkit- transform: translateX(-50%);
             height: 36px;
             padding: 8px 20px;
-            background: #FFFFFF;
-            border: 1.5px solid #C0C0C0;
+            background: ${CommonStyle.BgWhite};
+            border: 1.5px solid ${CommonStyle.BorderGray};
             box-sizing: border-box;
             border-radius: 36px;
-            color: #333333;
+            color: ${CommonStyle.TextBlack};
             font-size: 12px;
             line-height: 19px;
             font-weight: bold;
@@ -291,7 +291,7 @@ export const Top: React.FC = () => {
             right: 24px;
             width: 64px;
             height: 64px;
-            background: #FFFFFF;
+            background: ${CommonStyle.BgWhite};
             border: 4px solid ${CommonStyle.AccentColor};
             box-sizing: border-box;
             border-radius: 64px;

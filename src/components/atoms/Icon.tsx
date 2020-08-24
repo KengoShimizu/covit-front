@@ -1,4 +1,5 @@
 import React from 'react';
+import { CommonStyle } from '../../common/CommonStyle';
 
 interface IconProps {
   theme?: IconThemes[];
@@ -8,12 +9,14 @@ interface IconProps {
 export enum IconThemes {
   INIT = 'INIT',
   NORMAL = 'NORMAL',
-  SMALL = 'SMALL'
+  SMALL = 'SMALL',
+  COVIDMEASURE = 'COVIDMEASURE',
 }
 enum ModifierClassNames {
   INIT = 'icon-init',
   NORMAL = 'icon-wrapper_normal',
-  SMALL = 'icon-wrapper_small'
+  SMALL = 'icon-wrapper_small',
+  COVIDMEASURE = 'infection-control_icon-wrapper',
 }
 
 
@@ -44,6 +47,15 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             width: 16px;
             height: 16px;
             margin-right: 4px;
+          }
+          .infection-control_icon-wrapper{
+            background-color: ${CommonStyle.KeyColor};
+            width: 60px;
+            height: 60px;
+            border-radius: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
         `}
       </style>

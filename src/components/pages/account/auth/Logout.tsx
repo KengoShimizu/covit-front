@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import {CommonStyle} from './../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { HomeLayout } from '../../../templates/HomeLayout';
