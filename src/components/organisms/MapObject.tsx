@@ -1,117 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-import axios from "axios";
 import { MapPopup } from '../molecules/MapPopup';
 import curLocPin from './../../img/current_location_pin.svg';
 import shopPin from './../../img/shop_pin.svg';
 
-export const MapObject: React.FC = (props: any) => {
-  const [lat, setLat] = useState(35.6513297);
-  const [lng, setLng] = useState(139.5832906);
-  const [err, setErr] = useState("");
-  const [coordinations, setCoordinations] = useState([]);
-  const [steps, setSteps] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [clickedShop, setClickedShop] = useState({});
-  const [mapcenter, setMapCenter] = useState({lat: lat, lng: lng});
-  const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
+interface MapPopupProps {
+  coordinations: any;
+  steps: any;
+  isOpen: any;
+  clickedShop: any;
+  mapCenter: any;
+  curLoc: any;
+  clickedShopUniqueStepsImages: any;
+  fetchStepsData: any;
+  setMapCenter: any;
+  setLastLat: any;
+  setLastLng: any;
+}
+
+
+export const MapObject: React.FC<MapPopupProps> = (props: any) => {
 
   const curLocMarker = L.icon({
     iconUrl: curLocPin,
     iconSize: [55, 61],
-    iconAnchor: [13, 41],
-    popupAnchor: [0, -45]
+    iconAnchor: [27, 30]
   });
 
   const shopMarker = L.icon({
     iconUrl: shopPin,
     iconSize: [55, 61],
-    iconAnchor: [13, 41],
-    popupAnchor: [0, -45]
+    iconAnchor: [27, 30]
   });
-
-  /* FIXME 現在地座標取得（デバッグのためコメントアウト）
-  navigator.geolocation.getCurrentPosition(
-    pos => {
-      setLat(pos.coords.latitude)
-      setLng(pos.coords.longitude)
-    },
-    err => console.log(err)
-  );
-  */
-  const position = {lat: lat, lng: lng};
-
-  const GetUniqueImgs = (steps: any) => {
-    const images = steps.map((data: any) => data.image);
-    const uniqueImgs = images.filter(function (x: string, i: number, self: string[]) {
-      return self.indexOf(x) === i;
-    });
-    return uniqueImgs;
-  }
-
-
-  const fetchStepsData = async (shop: any) => {
-    await axios.get(`/api/v1/user/steps?shop_id=1`)
-      .then(res => {
-        setSteps(res.data);
-        setIsOpen(true);
-        setClickedShop(shop);
-        setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
-      })
-      .catch(err => setErr(err));
-  }
-
-  const fetchCoordinationsData = async () => {
-    await axios.get('/api/v1/user/coordinations',{
-      params: {
-        genre_id: [],
-        from_lat: lat-0.025,
-        to_lat: lat+0.025,
-        from_lng: lng-0.025,
-        to_lng: lat+0.025,
-      }})
-      .then(res => setCoordinations(res.data))
-      .catch(err => setErr(err));
-  }
-
-  useEffect(() => {
-    fetchCoordinationsData();
-  }, []);
-
-  useEffect(() => {
-    console.log(clickedShop)
-  }, [clickedShop]);
-
 
   return (
     <div className="map-container">
-      <Map center={mapcenter} zoom={16} style={{ height: '100%' }}>
+      <Map 
+        center={props.mapCenter} 
+        zoom={16} 
+        style={{ height: '100%' }} 
+        onMoveend={(e:any) => {
+          props.setLastLat(e.sourceTarget._lastCenter.lat);
+          props.setLastLng(e.sourceTarget._lastCenter.lng);
+        }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          minZoom={5}
-        />
-        <Marker position={position} icon={curLocMarker}>
-          <Popup>
-            現在地
-          </Popup>
-        </Marker>
-        
-        {coordinations.map((data: any, i: number) => (
-          <Marker 
-            position={{lat: data.latitude, lng: data.longitude}} 
+          minZoom={5}/>
+        <Marker position={props.curLoc} icon={curLocMarker} />
+
+        {props.coordinations.map((data: any, i: number) => (
+          <Marker
+            position={{ lat: data.latitude, lng: data.longitude }}
             icon={shopMarker}
             key={`shop${data.id}`}
             onClick={() => {
-              setMapCenter({lat: data.latitude, lng: data.longitude});
-              fetchStepsData(data.shop);
+              props.setMapCenter({ lat: data.latitude, lng: data.longitude });
+              props.fetchStepsData(data.shop);
             }} >
           </Marker>
         ))}
 
-        {isOpen &&
-          <MapPopup steps={steps} data={clickedShop} uniqueImgs={clickedShopUniqueStepsImages}/>
+        {props.isOpen &&
+          <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />
         }
       </Map>
       <style jsx>{`
@@ -132,7 +84,7 @@ export const MapObject: React.FC = (props: any) => {
           background-color: #E8E6E2;
         }
       `}</style>
-    
+
     </div>
   );
 }
