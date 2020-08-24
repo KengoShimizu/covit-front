@@ -35,7 +35,9 @@ export const History: React.FC = () => {
                   <div className="history-card_info">
                     <ul className="history-card_review">
                       <li className="history-card_review_option">
-                        <span className="history-card_review-icon"><Smile size="20" color="#ED753A" /></span>
+                        <span className="history-card_review-icon">
+                          <Smile size="20" color="#ED753A" />
+                        </span>
                         24
                       </li>
                       <li className="history-card_review_option">
@@ -44,7 +46,9 @@ export const History: React.FC = () => {
                       </li>
                     </ul>
                     <div className="history-card_date">
-                      <span className="history-card_review-icon"><Calendar size="14" color="#8C8C8C" /></span>
+                      <span className="history-card_review-icon">
+                        <Calendar size="14" color="#8C8C8C" />
+                      </span>
                       <p className="history-card_date_text">閲覧日</p>
                       <p className="history-card_date_num">2020/7/4</p>
                     </div>
