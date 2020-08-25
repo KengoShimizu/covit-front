@@ -12,54 +12,44 @@ export const History: React.FC = () => {
     return (
       <HomeLayout subHeaderText='閲覧履歴' prevRef='/'>
         <div className='container'>
-          <div className="content">
-            <button className="delete-btn">
-              <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>
-              <span className="delete-btn_text">履歴を削除</span>
-            </button>
-            <ol className="card-list">
-              <li className="history-card">
-                <div className="history-card_content">
-                  <h2 className="history-card_name">cafe えにしえ</h2>
-                  <div className="history-card_info">
-                    <ul className="history-card_review">
-                      <li className="history-card_review_option">
-                        <span className="history-card_review-icon">
-                          <Smile size="20" color="#ED753A" />
-                        </span>
-                        24
-                      </li>
-                      <li className="history-card_review_option">
-                        <span className="history-card_review-icon"><Frown size="20" color="#3A8CED" /></span>
-                        2
-                      </li>
-                    </ul>
-                    <div className="history-card_date">
+          <button className="delete-btn">
+            <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>
+            <span className="delete-btn_text">履歴を削除</span>
+          </button>
+          <ol className="card-list">
+            <li className="history-card">
+              <div className="history-card_content">
+                <h2 className="history-card_name">cafe えにしえ</h2>
+                <div className="history-card_info">
+                  <ul className="history-card_review">
+                    <li className="history-card_review_option">
                       <span className="history-card_review-icon">
-                        <Calendar size="14" color="#8C8C8C" />
+                        <Smile size="20" color="#ED753A" />
                       </span>
-                      <p className="history-card_date_text">閲覧日</p>
-                      <p className="history-card_date_num">2020/7/4</p>
-                    </div>
+                      24
+                    </li>
+                    <li className="history-card_review_option">
+                      <span className="history-card_review-icon"><Frown size="20" color="#3A8CED" /></span>
+                      2
+                    </li>
+                  </ul>
+                  <div className="history-card_date">
+                    <span className="history-card_review-icon">
+                      <Calendar size="14" color="#8C8C8C" />
+                    </span>
+                    <p className="history-card_date_text">閲覧日</p>
+                    <p className="history-card_date_num">2020/7/4</p>
                   </div>
                 </div>
-                <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
-              </li>
-            </ol>
-          </div>
+              </div>
+              <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
+            </li>
+          </ol>
         <style jsx>{`
-          *{
-            margin:0;
-            padding:0;
-            border:0;
-            outline:0;
-            list-style:none;
-          }
-          a{
-            text-decoration: none;
-          }
           .container{
-            width: 100%
+            width: 100%;
+            min-height: 100vh;
+            background-color: ${CommonStyle.BgGray};
           }
           // ヘッダー
           header{
@@ -100,9 +90,6 @@ export const History: React.FC = () => {
             color: white;
           }
           // 中身
-          .content{
-            background-color: ${CommonStyle.BgGray};
-          }
           .delete-btn{
             margin-right: 24px;
             margin-left: auto;
