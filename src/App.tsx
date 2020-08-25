@@ -19,6 +19,8 @@ import { Register } from './components/pages/account/auth/Register';
 import { Delete } from './components/pages/account/manage/Delete';
 import { EditLogin } from './components/pages/account/manage/EditLogin';
 import { EditProfile } from './components/pages/account/manage/EditProfile';
+import { EditEmail } from './components/pages/account/manage/EditEmail';
+import { AddEmail } from './components/pages/account/manage/AddEmail';
 import { AccountTop } from './components/pages/account/AccountTop';
 import { Privacy } from './components/pages/account/Privacy';
 import { Comments } from './components/pages/account/Comments';
@@ -47,6 +49,8 @@ function App() {
               <Route exact path='/accounts/comments' component={Comments} />
               <Route exact path='/accounts/editlogin' component={EditLogin} />
               <Route exact path='/accounts/editprofile' component={EditProfile} />
+              <Route exact path='/accounts/editemail' component={EditEmail} />
+              <Route exact path='/accounts/addemail' component={AddEmail} />
               <Route exact path='/accounts/delete' component={Delete} />
               <Route exact path='/accounts/profileregister' component={ProfileRegister} />
             </Authentication>
