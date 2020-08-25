@@ -66,7 +66,7 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             line-height: 1.em;
           }
         `}
-      </style>6
+      </style>
     </p>
   );
 }
