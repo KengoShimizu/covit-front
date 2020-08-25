@@ -19,8 +19,6 @@ export const AuthContext = React.createContext<AuthState>({
       email: "",
       image: "",
       token: "",
-      status: 0,
-      is_admin: 0,
       is_owner: 0,
       created_at: "",
       updated_at: ""

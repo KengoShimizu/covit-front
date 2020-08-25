@@ -40,15 +40,16 @@ function App() {
             <Route exact path='/accounts/register' component={Register} />
             <Route exact path='/accounts/emailregister' component={EmailRegister} />
             <Route exact path='/accounts/send' component={Send} />
-            {/* <Authentication> */}
+            <Route exact path='/users/:id/comments' component={Comments} />
+            <Authentication>
               <Route exact path='/shops/:id/comments/new' component={CreateComment} />
-              <Route exact path='/accounts/:id/accounttop' component={AccountTop} />
-              <Route exact path='/accounts/:id/comments' component={Comments} />
-              <Route exact path='/accounts/:id/editlogin' component={EditLogin} />
-              <Route exact path='/accounts/:id/editprofile' component={EditProfile} />
-              <Route exact path='/accounts/:id/delete' component={Delete} />
-              <Route exact path='/accounts/:id/profileregister' component={ProfileRegister} />
-            {/* </Authentication> */}
+              <Route exact path='/accounts' component={AccountTop} />
+              <Route exact path='/accounts/comments' component={Comments} />
+              <Route exact path='/accounts/editlogin' component={EditLogin} />
+              <Route exact path='/accounts/editprofile' component={EditProfile} />
+              <Route exact path='/accounts/delete' component={Delete} />
+              <Route exact path='/accounts/profileregister' component={ProfileRegister} />
+            </Authentication>
           </Switch>
         </BrowserRouter>
       </CommonProvider>
