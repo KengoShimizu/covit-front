@@ -9,19 +9,25 @@ interface TextProps {
 
 export enum TextThemes {
   INIT = 'INIT',
-  SUBHEADER = 'SUBHEADER'
+  SMALL = 'SMALL',
+  CAPTION = 'CAPTION',
+  TEXT = 'TEXT',
+  SUBTITLE = 'SUBTITLE'
 }
 
 enum ModifierClassNames {
   INIT = 'Text-init',
-  SUBHEADER = 'subheader_Text'
+  SMALL = 'small-text',
+  CAPTION = 'caption-text',
+  TEXT = 'normal-text',
+  SUBTITLE = 'subtitle-text'
 }
 
 
 const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propStyle = {}}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <h1 className={["Text", modifierClasses].join(' ')} style={propStyle}>
+    <p className={["Text", modifierClasses].join(' ')} style={propStyle}>
       {children}
       <style jsx>
         {`
@@ -29,6 +35,7 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             color: ${CommonStyle.TextBlack};
           }
           .Text-init{
+
           }
           .subheader_Text{
             display: inline-block;
@@ -38,13 +45,24 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             color: ${CommonStyle.TextBlack};
             margin: 9px auto 7px auto;
           }
+          .subtitle-text{
+            text-size: ${CommonStyle.SubTitle};
+            font-weight: bold;
+          }
           .normal-text{
+            text-size: ${CommonStyle.Text};
+          }
+          .caption-text{
             text-size: ${CommonStyle.Caption};
+            font-weight: bold;
+          }
+          .small-text{
+            text-size: ${CommonStyle.Smallest};
             font-weight: bold;
           }
         `}
       </style>
-    </h1>
+    </p>
   );
 }
 

@@ -12,7 +12,8 @@ import HealthCare from './../../../img/covid-icon_health-care.svg';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
 import Button, { ButtonThemes } from './../../atoms/Button';
-import { Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
+import { SubHeader } from './../../molecules/SubHeader';
+import { ChevronLeft, Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
 import { isAbsolute } from 'path';
 
 const propStyle = {
@@ -72,15 +73,15 @@ export const Shop: React.FC = () => {
   return (
     <HomeLayout>
       <div className="content">
+        <SubHeader>
+          <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+          </Button>
+          <Title theme={[TitleThemes.SUBHEADER]}>
+            閲覧履歴
+          </Title>
+        </SubHeader>
         <div className="shop-card">
-          <div className="sub-header">
-            <Button theme={[ButtonThemes.SUBHEADER]}>
-              <Menu size={24} color="#333" />
-            </Button>
-            <Title theme={[TitleThemes.SUBHEADER]}>
-              {shopData.name}
-            </Title>
-          </div>
           {/* ヘッダー画像 */}
           <div className="shop-img_wrapper">
             <img className="shop-img" src={shopData.image} alt="shop header"/>
@@ -229,22 +230,7 @@ export const Shop: React.FC = () => {
           a{
             text-decoration: none;
           }
-          .container{
-            width: 100%
-          }
-          .sub-header{
-            background: ${CommonStyle.BgWhite};
-            width: 100%;
-            height: 40px;
-            text-align: center;
-            margin-bottom: 8px;
-          }
           // 中身
-          .content{
-            position: relative;
-            top: 56px;
-            min-height: 100vh;
-          }
           .shop-card{
             padding: 20px;
           }
