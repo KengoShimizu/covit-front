@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {CommonStyle} from './../../../common/CommonStyle';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
@@ -11,7 +12,7 @@ import HealthCare from './../../../img/covid-icon_health-care.svg';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
 import Button, { ButtonThemes } from './../../atoms/Button';
-import { Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin} from 'react-feather';
+import { Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
 import { isAbsolute } from 'path';
 
 const propStyle = {
@@ -84,6 +85,24 @@ export const Shop: React.FC = () => {
           <div className="shop-img_wrapper">
             <img className="shop-img" src={shopData.image} alt="shop header"/>
           </div>
+          <ol className="shop_cost-list">
+            <li className="shop_cost-option">
+              <span className="shop_cost-icon_day">
+                <Sun size={16} color="#333" />
+              </span>
+              <span className="shop_cost-text">
+                {shopData.price_day}
+              </span>
+            </li>
+            <li className="shop_cost-option">
+              <span className="shop_cost-icon_night">
+                <Moon size={16} color="#333" />
+              </span>
+              <span className="shop_cost-text">
+                {shopData.price_night}
+              </span>
+            </li>
+          </ol>
           {/* 感染対策情報 */}
           <section className="infection-control_card">
             <h2 className="infection-control_title">感染対策</h2>
@@ -149,15 +168,6 @@ export const Shop: React.FC = () => {
           <hr className="shop_hr"/>
           <ul className="shop_info-list">
             <li className="shop_info-option">
-              <DollarSign size={16} color="#333" />
-              <span className="shop_info-option_content">
-                {shopData.price_day}
-              </span>
-              <span className="shop_info-option_content">
-                {shopData.price_night}
-              </span>
-            </li>
-            <li className="shop_info-option">
               <Clock size={16} color="#333" />
               <span className="shop_info-option_content">
                 {shopData.business_date}
@@ -176,7 +186,36 @@ export const Shop: React.FC = () => {
               </span>
             </li>
           </ul>
-
+          <ul className="shop_sns-list">
+            <li className="shop_sns-option">
+              <Link to=''>
+                <Button theme={[ButtonThemes.SHOPSNS]}>
+                  <Twitter size={24} color="#333" />
+                </Button>
+              </Link>
+            </li>
+            <li className="shop_sns-option">
+              <Link to=''>
+                <Button theme={[ButtonThemes.SHOPSNS]}>
+                  <Monitor size={24} color="#333" />
+                </Button>
+              </Link>
+            </li>
+            <li className="shop_sns-option">
+              <Link to=''>
+                <Button theme={[ButtonThemes.SHOPSNS]}>
+                  <Instagram size={24} color="#333" />
+                </Button>
+              </Link>
+            </li>
+            <li className="shop_sns-option">
+              <Link to=''>
+                <Button theme={[ButtonThemes.SHOPSNS]}>
+                  <Facebook size={24} color="#333" />
+                </Button>
+              </Link>
+            </li>
+          </ul>
           
         </div>
         <style jsx>{`
@@ -216,10 +255,41 @@ export const Shop: React.FC = () => {
             overflow: hidden;
             margin: 0 auto;
             margin-bottom: 32px;
+            background: ${CommonStyle.BgGray}
           }
           .shop-img{
             width: 100%;
             height: auto;
+          }
+
+          .shop_cost-list{
+            display: flex;
+          }
+          .shop_cost-option{
+            display: flex;
+          }
+          .shop_cost-icon_day{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: ${CommonStyle.AccentColor};
+          }
+          .shop_cost-icon_night{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: ${CommonStyle.BadColor};
+          }
+          .shop_cost-text{
+            font-weight: bold;
+            font-size: 12px;
+            color: ${CommonStyle.TextBlack}
           }
 
           // 感染対策
@@ -246,6 +316,20 @@ export const Shop: React.FC = () => {
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 24px;
+            position: relative;
+          }
+          .infection-control_comment::before{
+            content: '';
+            position: absolute;
+            left: 20px;
+            //FIXME 選択中の対策内容によって吹き出しの位置が変わると○
+            top: -8px;
+            display: block;
+            width: 0;
+            height: 0;
+            border-right:8px solid transparent;
+            border-bottom: 12px solid ${CommonStyle.BgGray};
+            border-left: 8px solid transparent;
           }
           .infection-control_review{
             display: flex;
@@ -294,6 +378,14 @@ export const Shop: React.FC = () => {
           }
           .shop_info-option_content{
             margin-left: 8px;
+          }
+
+          .shop_sns-list{
+            display: flex;
+            justify-content: center;
+          }
+          .shop_sns-option:not(:last-child){
+            margin-right: 4px;
           }
         `}</style>
       </div>

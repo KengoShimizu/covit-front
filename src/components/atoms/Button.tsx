@@ -11,14 +11,16 @@ export enum ButtonThemes {
   INIT = 'INIT',
   NORMAL = 'NORMAL',
   SUBHEADER = 'SUBHEADER',
-  SUBBTN = 'SUBBTN'
+  SUBBTN = 'SUBBTN',
+  SHOPSNS = 'SHOPSNS',
 }
 
 enum ModifierClassNames {
   INIT = 'button-init',
   NORMAL = 'normal-btn',
   SUBHEADER = 'subheader_back-btn',
-  SUBBTN = 'btn_sub'
+  SUBBTN = 'btn_sub',
+  SHOPSNS = 'shop_sns-btn',
 }
 
 
@@ -63,6 +65,10 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             font-size: 12px;
             font-weight: bold;
             line-height: 19px;
+          }
+          .shop_sns-btn{
+            width:44px;
+            height: 44px;
           }
         `}
       </style>
