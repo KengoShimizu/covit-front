@@ -6,25 +6,13 @@ import { Smile } from 'react-feather';
 import { Frown } from 'react-feather';
 import { Calendar } from 'react-feather';
 import { ChevronRight } from 'react-feather';
-import { ChevronLeft } from 'react-feather';
 import { HomeLayout } from '../templates/HomeLayout';
-import { SubHeader } from './../molecules/SubHeader';
-import Button, { ButtonThemes } from './../atoms/Button';
-import Title, { TitleThemes } from './../atoms/Title';
 
 export const History: React.FC = () => {
     return (
-      <HomeLayout>
+      <HomeLayout subHeaderText='閲覧履歴' prevRef='/'>
         <div className='container'>
           <div className="content">
-            <SubHeader>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-              <Title theme={[TitleThemes.SUBHEADER]}>
-                閲覧履歴
-              </Title>
-            </SubHeader>
             <button className="delete-btn">
               <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>
               <span className="delete-btn_text">履歴を削除</span>

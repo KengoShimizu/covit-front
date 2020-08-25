@@ -3,10 +3,7 @@ import {CommonStyle} from './../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { HomeLayout } from '../../../templates/HomeLayout';
-import { ChevronLeft } from 'react-feather';
 import Button, { ButtonThemes } from './../../../atoms/Button';
-import Title, { TitleThemes } from './../../../atoms/Title';
-import { SubHeader } from './../../../molecules/SubHeader';
 
 export const Login: React.FC = (props: any) => {
   const mailRef = useRef(document.createElement("input"));
@@ -32,19 +29,9 @@ export const Login: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={'ログイン'} prevRef={'/'}>
       <div className="form">
         <div className="content">
-          <SubHeader>
-            <Link to='/'>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </Link>
-            <Title theme={[TitleThemes.SUBHEADER]}>
-              ログイン
-            </Title>
-          </SubHeader>
           <div className="err">{err}</div>
           <div className="mail-form">
             <label className="mail-form_label">メールアドレス</label>

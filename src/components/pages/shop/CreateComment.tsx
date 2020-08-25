@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {CommonStyle} from './../../../common/CommonStyle';
-import { Link } from 'react-router-dom';
 import HistoryIcon from './../../../img/history.svg'
 import Alcohol from './../../../img/covid-icon_alcohol.svg'
 import Mask from './../../../img/covid-icon_mask.svg'
@@ -9,12 +8,8 @@ import Distance from './../../../img/covid-icon_distance.svg'
 import HealthCare from './../../../img/covid-icon_health-care.svg'
 import useReactRouter from "use-react-router";
 import axios from 'axios';
-import { ChevronLeft } from 'react-feather';
 import { Comment } from './../../../common/Const';
 import { HomeLayout } from '../../templates/HomeLayout';
-import { SubHeader } from './../../molecules/SubHeader';
-import Title, { TitleThemes } from './../../atoms/Title';
-import Button, { ButtonThemes } from './../../atoms/Button';
 
 export interface AddParam {
   content: string;
@@ -49,19 +44,9 @@ export const CreateComment: React.FC = () => {
   }
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={'レビュー記入'} prevRef={`/shops/${match.params.id}`}>
       <div className='container'>
         <div className="content">
-          <SubHeader>
-            <Link to={`/shops/${match.params.id}`}>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </Link>
-            <Title theme={[TitleThemes.SUBHEADER]}>
-              レビュー記入
-            </Title>
-          </SubHeader>
           <h1 className="shop-name">cafe えにしえ</h1>
           <section className="infection-control_card">
             <h2 className="infection-control_title">感染症対策内容</h2>

@@ -1,16 +1,29 @@
 import React from 'react';
 import {CommonStyle} from './../../common/CommonStyle';
+import Button, { ButtonThemes } from './../atoms/Button';
+import Title, { TitleThemes } from './../atoms/Title';
+import { ChevronLeft } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 interface SubHeaderProps {
-  children?: React.ReactNode;
+  subHeaderText: string;
+  prevRef: string;
 }
 
-export const SubHeader: React.FC<SubHeaderProps> = ({children}) => {
+export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef}) => {
   return (
     <div className="sub-header">
-      {children}
+      <Link to={prevRef}>
+        <Button theme={[ButtonThemes.SUBHEADER]}>
+          <ChevronLeft size={24} color="#333" />
+        </Button>
+      </Link>
+      <Title theme={[TitleThemes.SUBHEADER]}>
+        {subHeaderText}
+      </Title>
       <style jsx>{`
         .sub-header{
+          padding-top: 56px;
           background: ${CommonStyle.BgWhite};
           width: 100%;
           height: 40px;

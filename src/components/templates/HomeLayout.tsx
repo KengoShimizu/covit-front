@@ -2,13 +2,15 @@ import React from 'react';
 import { Header } from '../molecules/Header';
 
 interface HomeLayoutProps {
+  subHeaderText?: string;
+  prevRef?: string;
   children?: React.ReactNode;
 }
 
-export const HomeLayout: React.FC<HomeLayoutProps> = ({children}) => {
+export const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children}) => {
   return (
     <div className="container">
-      <Header/>
+      <Header subHeaderText={subHeaderText} prevRef={prevRef}/>
       <div className="wrap">
         <main>
           {children}
@@ -29,7 +31,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({children}) => {
           width: 100%
         }
         .wrap{
-          padding-top: 56px;
+          padding-top: ${prevRef ? '0px' : '56px'};
           width: 100%;
           height: calc(100vh - 56px);
         }
