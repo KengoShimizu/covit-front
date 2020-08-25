@@ -4,7 +4,7 @@ import { CommonStyle } from '../../common/CommonStyle';
 interface InputProps {
   theme?: InputThemes;
   propStyle?: {};
-  handleChange?: () => {};
+  handleChange: any;
   label: string;
   placeholder: string;
   content: string;
@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
       <span className="input-icon">{icon}</span>
-      <input value={content} onChange={handleChange} name="content" placeholder={placeholder} />
+      <input value={content} onChange={handleChange} placeholder={placeholder} />
       <style jsx>
         {`
           .input-init{
@@ -37,11 +37,13 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
             justify-content: center;
             align-items: center;
             padding: 1rem 1.5rem;
+            max-width: 400px;
+            position: relative;
           }
 
           .input-icon {
             display: inline-block;
-            position: fixed;
+            position: absolute;
             right: 2rem;
             padding-top: 5px;
           }
@@ -63,7 +65,6 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
             border-radius: 4px;
             padding: 0.5rem 0.75rem;
             width: 100%;
-            max-width: 400px;
           }
 
           .input-required label span {
