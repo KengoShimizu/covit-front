@@ -6,7 +6,8 @@ import Airing from './../../img/covid-icon_airing.svg';
 import Distance from './../../img/covid-icon_distance.svg';
 import HealthCare from './../../img/covid-icon_health-care.svg';
 import Text, { TextThemes } from './../atoms/Text';
-import { ChevronLeft, Smile, DollarSign, ChevronRight, Frown} from 'react-feather';
+import { Smile, Frown} from 'react-feather';
+import { Link } from 'react-router-dom';
 
 interface MapPopupProps {
   steps: {
@@ -26,53 +27,55 @@ const propStyle = {
 export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
   return (
     <section className="shop-mordal_container">
-      <div className="shop-card_content">
-        <ul className="shop-card_info">
-          <li className="shop-card_name">
-            <Text theme={[TextThemes.SUBTITLE]}>
-              {props.data.name}
-            </Text>
-          </li>
-          <li className="shop-card_review">
-            <ul className="shop-card_review-list">
-              <li className="shop-card_review-option">
-                <Smile size={24} color="#ED753A" />
-                <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                  {props.data.good_count}
-                </Text>
+      <Link to={`/shops/${props.data.id}`}>
+        <div className="shop-card_content">
+          <ul className="shop-card_info">
+            <li className="shop-card_name">
+              <Text theme={[TextThemes.SUBTITLE]}>
+                {props.data.name}
+              </Text>
+            </li>
+            <li className="shop-card_review">
+              <ul className="shop-card_review-list">
+                <li className="shop-card_review-option">
+                  <Smile size={24} color="#ED753A" />
+                  <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
+                    {props.data.good_count}
+                  </Text>
+                </li>
+                <li className="shop-card_review-option">
+                  <Frown size={24} color="#3A8CED" />
+                  <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
+                    {props.data.bad_count}
+                  </Text>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          {props.uniqueImgs.map((data: any) => (
+            <ol className="infection-control_list" key={`images${data}`}>
+              <li className="infection-control_option">
+                <img className="infection-control_icon" src={Alcohol} alt="" />
               </li>
-              <li className="shop-card_review-option">
-                <Frown size={24} color="#3A8CED" />
-                <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                  {props.data.bad_count}
-                </Text>
+              <li className="infection-control_option">
+                <img className="infection-control_icon" src={Airing} alt="" />
               </li>
-            </ul>
-          </li>
-        </ul>
-        {props.uniqueImgs.map((data: any) => (
-          <ol className="infection-control_list" key={`images${data}`}>
-            <li className="infection-control_option">
-              <img className="infection-control_icon" src={Alcohol} alt="" />
-            </li>
-            <li className="infection-control_option">
-              <img className="infection-control_icon" src={Airing} alt="" />
-            </li>
-            <li className="infection-control_option">
-              <img className="infection-control_icon" src={Mask} alt="" />
-            </li>
-            <li className="infection-control_option">
-              <img className="infection-control_icon" src={HealthCare} alt="" />
-            </li>
-            <li className="infection-control_option">
-              <img className="infection-control_icon" src={Distance} alt="" />
-            </li>
-          </ol>
-        ))}
-      </div>
-      <div　className="shop-card_header-img_wrapper">
-        <img className="shop-card_header-img" src={props.data.image} alt="shop image" />
-      </div>
+              <li className="infection-control_option">
+                <img className="infection-control_icon" src={Mask} alt="" />
+              </li>
+              <li className="infection-control_option">
+                <img className="infection-control_icon" src={HealthCare} alt="" />
+              </li>
+              <li className="infection-control_option">
+                <img className="infection-control_icon" src={Distance} alt="" />
+              </li>
+            </ol>
+          ))}
+        </div>
+        <div　className="shop-card_header-img_wrapper">
+          <img className="shop-card_header-img" src={props.data.image} alt="shop image" />
+        </div>
+      </Link>
     <style jsx>{`
         .shop-mordal_container{
           width: 308px;
