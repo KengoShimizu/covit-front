@@ -6,6 +6,7 @@ import { HomeLayout } from '../../../templates/HomeLayout';
 import { ChevronLeft } from 'react-feather';
 import Button, { ButtonThemes } from './../../../atoms/Button';
 import Title, { TitleThemes } from './../../../atoms/Title';
+import { SubHeader } from './../../../molecules/SubHeader';
 
 export const Login: React.FC = (props: any) => {
   const mailRef = useRef(document.createElement("input"));
@@ -34,14 +35,16 @@ export const Login: React.FC = (props: any) => {
     <HomeLayout>
       <div className="form">
         <div className="content">
-          <div className="sub-header">
-            <Button theme={[ButtonThemes.SUBHEADER]}>
-              <ChevronLeft size={24} color="#333" />
-            </Button>
+          <SubHeader>
+            <Link to='/'>
+              <Button theme={[ButtonThemes.SUBHEADER]}>
+                <ChevronLeft size={24} color="#333" />
+              </Button>
+            </Link>
             <Title theme={[TitleThemes.SUBHEADER]}>
               ログイン
             </Title>
-          </div>
+          </SubHeader>
           <div className="err">{err}</div>
           <div className="mail-form">
             <label className="mail-form_label">メールアドレス</label>
@@ -70,21 +73,6 @@ export const Login: React.FC = (props: any) => {
           .container{
             width: 100%
           }
-          
-          // 中身
-          .content{
-            position: relative;
-            top: 56px;
-            min-height: 100vh;
-          }
-          .sub-header{
-            background: ${CommonStyle.BgWhite};
-            width: 100%;
-            height: 40px;
-            text-align: center;
-            margin-bottom: 24px;
-          }
-
           .mail-form{
             max-width: 324px;
             width: 90%;

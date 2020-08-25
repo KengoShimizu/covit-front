@@ -9,8 +9,12 @@ import Distance from './../../../img/covid-icon_distance.svg'
 import HealthCare from './../../../img/covid-icon_health-care.svg'
 import useReactRouter from "use-react-router";
 import axios from 'axios';
+import { ChevronLeft } from 'react-feather';
 import { Comment } from './../../../common/Const';
 import { HomeLayout } from '../../templates/HomeLayout';
+import { SubHeader } from './../../molecules/SubHeader';
+import Title, { TitleThemes } from './../../atoms/Title';
+import Button, { ButtonThemes } from './../../atoms/Button';
 
 export interface AddParam {
   content: string;
@@ -48,14 +52,16 @@ export const CreateComment: React.FC = () => {
     <HomeLayout>
       <div className='container'>
         <div className="content">
-          <div className="sub-header">
-            <Link to='/'>
-              <div className="sub-header_btn">
-                <p>←</p>
-              </div>
+          <SubHeader>
+            <Link to={`/shops/${match.params.id}`}>
+              <Button theme={[ButtonThemes.SUBHEADER]}>
+                <ChevronLeft size={24} color="#333" />
+              </Button>
             </Link>
-            <h1 className="sub-header_title">レビュー記入</h1>
-          </div>
+            <Title theme={[TitleThemes.SUBHEADER]}>
+              レビュー記入
+            </Title>
+          </SubHeader>
           <h1 className="shop-name">cafe えにしえ</h1>
           <section className="infection-control_card">
             <h2 className="infection-control_title">感染症対策内容</h2>
@@ -163,19 +169,6 @@ export const CreateComment: React.FC = () => {
               line-height: 12px;
               color: white;
             }
-            // 中身
-            .content{
-              position: relative;
-              top: 56px;
-              min-height: 100vh;
-            }
-            .sub-header{
-              background: ${CommonStyle.BgWhite};
-              width: 100%;
-              height: 40px;
-              text-align: center;
-              margin-bottom: 8px;
-            }
             .sub-header_btn{
               width: 40px;
               height: 40px;
@@ -184,15 +177,6 @@ export const CreateComment: React.FC = () => {
               align-items: center;
               justify-content: center;
             }
-            .sub-header_title{
-              display: inline-block;
-              font-weight: bold;
-              font-size: 14px;
-              line-height: 24px;
-              color: ${CommonStyle.TextBlack};
-              margin: 9px auto 7px auto;
-            }
-            
             //カード
             .shop-name{
               font-weight: bold;

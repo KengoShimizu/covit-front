@@ -28,6 +28,11 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({children}) => {
         .container{
           width: 100%
         }
+        .wrap{
+          padding-top: 56px;
+          width: 100%;
+          height: calc(100vh - 56px);
+        }
       `}</style>
     </div>
   );
