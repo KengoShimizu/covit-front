@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CommonStyle } from '../../common/CommonStyle';
 import { GenreCard } from './../molecules/GenreCard';
 import Text, { TextThemes } from './../atoms/Text';
@@ -43,51 +43,42 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
   }
 
   return (
-    <div className={genreSerchIsOpen ? 'container-blur' : 'container-blur close'}>
-      <div className='container'>
-        <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
-        <ul className="genres-container">
-          {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data == num) ? 'selected' : ''}/></li>)}
-        </ul>
-        <div className="genre-btns">
-          <Button 
-            theme={[ButtonThemes.SUBNORMAL]} 
-            propStyle={propStyle.btn}
-            onClick={() => setSelectedGenre([])}>
-            絞り込み解除
-          </Button>
-          <Button
-            theme={[ButtonThemes.NORMAL]} 
-            propStyle={propStyle.btn}
-            onClick={() => {
-              fetchCoordinationsData(selectedGenre, lastlat, lastlng);
-              setGenreSerchIsOpen(false);
-            }}>
-            絞り込み
-          </Button>
-        </div>
+    <div className={genreSerchIsOpen ? 'container' : 'container close'}>
+      <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
+      <ul className="genres-container">
+        {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data == num) ? 'selected' : ''}/></li>)}
+      </ul>
+      <div className="genre-btns">
+        <Button 
+          theme={[ButtonThemes.SUBNORMAL]} 
+          propStyle={propStyle.btn}
+          onClick={() => setSelectedGenre([])}>
+          絞り込み解除
+        </Button>
+        <Button
+          theme={[ButtonThemes.NORMAL]} 
+          propStyle={propStyle.btn}
+          onClick={() => {
+            fetchCoordinationsData(selectedGenre, lastlat, lastlng);
+            setGenreSerchIsOpen(false);
+          }}>
+          絞り込み
+        </Button>
       </div>
-      <div className="blur-range" onClick={() => setGenreSerchIsOpen(false)}></div>
       <style jsx>{`
-        .container-blur{
-          height: 100vh;
+        .container {
           position: fixed;
           top: 0;
           left: 50%;
-          z-index: 1000;
-          transform: translateX(-50%);
-          -webkit- transform: translateX(-50%);
-          transition-duration: .5s;
-          width: 100%;
-          backdrop-filter: blur(3px);
-          -webkit-backdrop-filter: blur(3px);
-        }
-        .container {
           width: 100%;
           margin: 0 auto;
           margin-top: 50px;
+          transform: translateX(-50%);
+          -webkit- transform: translateX(-50%);
           background-color: ${CommonStyle.BgWhite};
           text-align: center;
+          z-index: 1500;
+          transition-duration: .5s;
         }
         .close {
           top: -200vh;

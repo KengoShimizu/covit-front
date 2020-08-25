@@ -103,7 +103,7 @@ export const Top: React.FC = () => {
   }
 
   const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
-    const genre_id_str = genre_id.join(',')
+    const genre_id_str = genre_id.length == 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
     axios.get('/api/v1/user/coordinations', {
         params: {
           genre_ids: genre_id_str,
@@ -181,6 +181,7 @@ export const Top: React.FC = () => {
           fetchCoordinationsData={fetchCoordinationsData}
           lastlat={lastlat} 
           lastlng={lastlng}/>
+        <div className={genreSerchIsOpen ? "genre-search-blur" : "disable"} onClick={() => setGenreSerchIsOpen(false)}></div>
 
         {/* 初回モーダル */}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
@@ -261,6 +262,17 @@ export const Top: React.FC = () => {
           .disable{
             visibility: hidden;
             opacity: 0;
+          }
+          .genre-search-blur{
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            visibility: visible;
+            transition-duration: .5s;
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
           }
         `}</style>
       </div>
