@@ -4,6 +4,7 @@ import { FormatDate } from '../../common/Function'
 import { Calendar } from 'react-feather';
 import { AlertTriangle } from 'react-feather';
 import Icon, { IconThemes } from './../atoms/Icon';
+import Text, { TextThemes } from './../atoms/Text';
 
 type CardProps = {
   HistoryIcon: any;
@@ -25,7 +26,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
               <Calendar size={14} color="#8C8C8C" />
             </Icon>
             <p className="card_date_text">来店日</p>
-            <p className="card_date_num">{FormatDate(new Date(props.comment.date))}</p>
+            <Text theme={[TextThemes.SMALL]}>{FormatDate(new Date(props.comment.date))}</Text>
           </div>
           <div className="card_comment">
             {props.comment.content}
@@ -63,8 +64,6 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
           }
           .card_date{
             color: ${CommonStyle.TextDarkGary};
-            font-weight: bold;
-            font-size: 12px;
             line-height: 19px;
             display:flex;
             align-items: center;
