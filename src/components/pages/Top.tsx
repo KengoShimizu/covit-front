@@ -72,7 +72,7 @@ export const Top: React.FC = () => {
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
   const [zoom, setZoom] = useState(16);
-  const [genre_id, setGenres] = useState([]);
+  const [genre_id, setGenres] = useState(Array.from(new Array(12)).map((v,i)=> i + 1));
   const [err, setErr] = useState("");
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
@@ -106,7 +106,7 @@ export const Top: React.FC = () => {
     const genre_id_str = genre_id.join(',')
     axios.get('/api/v1/user/coordinations', {
         params: {
-          genre_id: genre_id_str,
+          genre_ids: genre_id_str,
           from_lat: lat_ - threshold,
           to_lat: lat_ + threshold,
           from_lng: lng_ - threshold,
