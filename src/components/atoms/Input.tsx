@@ -4,29 +4,32 @@ import { CommonStyle } from '../../common/CommonStyle';
 interface InputProps {
   theme?: InputThemes;
   propStyle?: {};
-  handleChange: any;
+  handleChange?: any;
   label: string;
   placeholder: string;
   content: string;
   icon?: React.ReactNode;
+  readonly?: boolean;
 }
 
 export enum InputThemes {
-  INIT = 'INIT',
+  INIT     = 'INIT',
   REQUIRED = 'REQUIRED',
+  DISABLED = 'DISABLED',
 }
 
 enum ModifierClassNames {
-  INIT = 'input-init',
+  INIT     = 'input-init',
   REQUIRED = 'input-required',
+  DISABLED = 'input-disabled',
 }
 
-const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon }) => {
+const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly }) => {
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
       <span className="input-icon">{icon}</span>
-      <input value={content} onChange={handleChange} placeholder={placeholder} />
+      <input defaultValue={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly}/>
       <style jsx>
         {`
           .input-init{
@@ -54,7 +57,7 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
 
           .input label {
             font-size: ${CommonStyle.Caption};
-            color: ${CommonStyle.TextDarkGary};
+            // color: ${CommonStyle.TextDarkGary};
             display: block;
             margin-bottom: 0.25rem;
           }
@@ -65,6 +68,10 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
             border-radius: 4px;
             padding: 0.5rem 0.75rem;
             width: 100%;
+          }
+
+          .input-disabled input {
+            border: none;
           }
 
           .input-required label span {
