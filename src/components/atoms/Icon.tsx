@@ -5,7 +5,9 @@ interface IconProps {
   theme?: IconThemes[];
   children?: React.ReactNode;
   propStyle?: {};
+  onClick?: any;
 }
+
 export enum IconThemes {
   INIT            = 'INIT',
   NORMAL          = 'NORMAL',
@@ -15,6 +17,7 @@ export enum IconThemes {
   SELECTEDPROFILE = 'SELECTEDPROFILE',
   LIST            = 'LIST',
 }
+
 enum ModifierClassNames {
   INIT            = 'icon-init',
   NORMAL          = 'icon-wrapper_normal',
@@ -25,11 +28,11 @@ enum ModifierClassNames {
   LIST            = 'profile-icon-wrapper_list',
 }
 
-
-const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propStyle = {}}) => {
+const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propStyle = {}, onClick}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
     <span 
+      onClick={onClick}
       className={["icon_wrapper", modifierClasses].join(' ')} style={propStyle}
       >
       {children}
@@ -72,6 +75,7 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
           }
           //プロフィール変更の選択肢・ユーザー情報のアイコン
           .profile-icon-wrapper{
@@ -79,13 +83,14 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            margin: 0.5rem;
+            overflow: hidden;
           }
           //プロフィール変更で選択中のアイコン
           .profile-icon-wrapper_selected{
             display: inline-block;
             width: 80px;
             height: 80px;
+            overflow: hidden;
           }
         `}
       </style>
