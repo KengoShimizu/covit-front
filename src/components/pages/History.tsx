@@ -50,44 +50,7 @@ export const History: React.FC = () => {
             width: 100%;
             min-height: 100vh;
             background-color: ${CommonStyle.BgGray};
-          }
-          // ヘッダー
-          header{
-            height: 56px;
-            width: 100%;
-            position: fixed;
-            background: ${CommonStyle.AccentColor};
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 10px;
-            box-sizing: border-box;
-            z-index: 100;
-          }
-          .icon-list{
-            display: flex;
-            padding: 0;
-          }
-          .icon-list_option{
-            text-align: center;
-            width: 44px;
-            height: 44px;
-            margin-right: 4px;
-          }
-          .icon-list_option_menu{
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .icon-list_img{
-            width: 32px;
-            height: 32px;
-          }
-          .icon-list_caption{
-            font-size: 8px;
-            line-height: 12px;
-            color: white;
+            padding-top: 8px;
           }
           // 中身
           .delete-btn{
@@ -95,9 +58,11 @@ export const History: React.FC = () => {
             margin-left: auto;
             display: flex;
             align-items: center;
-            color: ${CommonStyle.TextDarkGary};
             background: none;
             margin-bottom: 20px;
+          }
+          .delete-btn_text{
+            color: ${CommonStyle.TextDarkGary};
           }
           .delete-btn_icon{
             width:24px;

@@ -28,7 +28,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef}) =>
           width: 100%;
           height: 40px;
           text-align: center;
-          margin-bottom: 8px;
+          margin-bottom: ${subHeaderText === '閲覧履歴' ? '0px' : '8px'};
         }
       `}</style>
     </div>
