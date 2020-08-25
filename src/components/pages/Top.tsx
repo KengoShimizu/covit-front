@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
+import { CommonStyle } from './../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import ServiceIcon from './../../img/service-icon.svg';
 import Charactor from './../../img/charactor.png';
@@ -8,6 +8,9 @@ import { MapObject } from '../organisms/MapObject';
 import Cookies from 'universal-cookie';
 import Button, { ButtonThemes } from './../atoms/Button';
 import axios from "axios";
+import { ChevronDown } from 'react-feather';
+import { InputAdornment } from '@material-ui/core';
+import { GenreCardList } from './../organisms/GenreCardList';
 
 // ボタンのCSS
 const propStyle = {
@@ -15,6 +18,51 @@ const propStyle = {
     display: 'flex',
     alignItems: 'center',
     margin: '0 auto 40px auto'
+  },
+  refinementBtn: {
+    position: 'fixed',
+    top: '64px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    WebkitTransform: 'translateX(-50%)',
+    padding: '8px 16px',
+    background: CommonStyle.BgWhite,
+    borderRadius: '4px',
+    color: CommonStyle.TextBlack,
+    fontSize: '12px',
+    lineHeight: '12px',
+    fontWeight: 'bold',
+    zIndex: 1000,
+  },
+  researchBtn: {
+    position: 'fixed',
+    bottom: '32px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    WebkitTransform: 'translateX(-50%)',
+    height: '36px',
+    padding: '8px 20px',
+    background: CommonStyle.BgWhite,
+    border: `1.5px solid ${CommonStyle.BorderGray}`,
+    boxSizing: 'border-box',
+    borderRadius: '36px',
+    color: CommonStyle.TextBlack,
+    fontSize: '12px',
+    lineHeight: '19px',
+    fontWeight: 'bold',
+    zIndex: 1000,
+  },
+  currentPlaceBtn: {
+    position: 'fixed',
+    bottom: '20px',
+    right: '24px',
+    width: '64px',
+    height: '64px',
+    background: CommonStyle.BgWhite,
+    border: `4px solid ${CommonStyle.AccentColor}`,
+    boxSizing: 'border-box',
+    borderRadius: '64px',
+    zIndex: 1000,
   }
 };
 
@@ -28,11 +76,11 @@ export const Top: React.FC = () => {
   const [err, setErr] = useState("");
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [clickedShop, setClickedShop] = useState({});
   const [mapCenter, setMapCenter] = useState({ lat: lastlat, lng: lastlng });
   const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng });
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState([]);
   const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
@@ -47,7 +95,6 @@ export const Top: React.FC = () => {
     axios.get(`/api/v1/user/steps?shop_id=1`)
       .then(res => {
         setSteps(res.data);
-        setIsOpen(true);
         setClickedShop(shop);
         setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
       })
@@ -104,7 +151,6 @@ export const Top: React.FC = () => {
           coordinations={coordinations}
           steps={steps}
           zoom={zoom}
-          isOpen={isOpen}
           curLoc={curLoc}
           clickedShop={clickedShop}
           mapCenter={mapCenter}
@@ -114,9 +160,19 @@ export const Top: React.FC = () => {
           setLastLat={setLastLat}
           setLastLng={setLastLng}
           setZoom={setZoom}/>
-        <button className="refinement-btn">お店のジャンルで絞り込む</button>
-        <button className="research-btn" onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>このエリアで再検索</button>
-        <button className="current-place-btn" onClick={() => setMapCenter(curLoc)}>現在地</button>
+
+        <Button propStyle={propStyle.refinementBtn}>
+          お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
+        </Button>
+        <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>
+          このエリアで再検索
+        </Button>
+        <Button propStyle={propStyle.currentPlaceBtn} onClick={() => setMapCenter(curLoc)}>
+          現在地
+        </Button>
+
+        <GenreCardList selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
+
         {/* 初回モーダル */}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
@@ -196,93 +252,6 @@ export const Top: React.FC = () => {
           .disable{
             visibility: hidden;
             opacity: 0;
-          }
-          .refinement-btn{
-            position: fixed;
-            top: 64px;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
-            padding: 8px 16px;
-            background: ${CommonStyle.BgWhite};
-            border-radius: 4px;
-            color: ${CommonStyle.TextBlack};
-            font-size: 12px;
-            line-height: 12px;
-            font-weight: bold;
-          }
-          .research-btn{
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
-            height: 36px;
-            padding: 8px 20px;
-            background: ${CommonStyle.BgWhite};
-            border: 1.5px solid ${CommonStyle.BorderGray};
-            box-sizing: border-box;
-            border-radius: 36px;
-            color: ${CommonStyle.TextBlack};
-            font-size: 12px;
-            line-height: 19px;
-            font-weight: bold;
-          }
-          .current-place-btn{
-            position: fixed;
-            bottom: 20px;
-            right: 24px;
-            width: 64px;
-            height: 64px;
-            background: ${CommonStyle.BgWhite};
-            border: 4px solid ${CommonStyle.AccentColor};
-            box-sizing: border-box;
-            border-radius: 64px;
-          }
-          .refinement-btn{
-            position: fixed;
-            top: 64px;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
-            padding: 8px 16px;
-            background: ${CommonStyle.BgWhite};
-            border-radius: 4px;
-            color: ${CommonStyle.TextBlack};
-            font-size: 12px;
-            line-height: 12px;
-            font-weight: bold;
-            z-index: 1000;
-          }
-          .research-btn{
-            position: fixed;
-            bottom: 32px;
-            left: 50%;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
-            height: 36px;
-            padding: 8px 20px;
-            background: ${CommonStyle.BgWhite};
-            border: 1.5px solid ${CommonStyle.BorderGray};
-            box-sizing: border-box;
-            border-radius: 36px;
-            color: ${CommonStyle.TextBlack};
-            font-size: 12px;
-            line-height: 19px;
-            font-weight: bold;
-            z-index: 1000;
-          }
-          .current-place-btn{
-            position: fixed;
-            bottom: 20px;
-            right: 24px;
-            width: 64px;
-            height: 64px;
-            background: ${CommonStyle.BgWhite};
-            border: 4px solid ${CommonStyle.AccentColor};
-            box-sizing: border-box;
-            border-radius: 64px;
-            z-index: 1000;
           }
         `}</style>
       </div>

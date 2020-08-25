@@ -11,7 +11,6 @@ interface MapPopupProps {
   steps: any;
   zoom: number;
   setZoom: any;
-  isOpen: any;
   clickedShop: any;
   mapCenter: any;
   curLoc: any;
@@ -24,6 +23,7 @@ interface MapPopupProps {
 
 
 export const MapObject: React.FC<MapPopupProps> = (props: any) => {
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   const curLocMarker = L.icon({
     iconUrl: curLocPin,
@@ -49,7 +49,8 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
           props.setLastLng(latlng.lng);
           props.setZoom(e.target.getZoom());
           props.setMapCenter({lat: latlng.lat, lng: latlng.lng});
-        }}>
+        }}
+        onMovestart={() => setPopupIsOpen(false)}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -64,11 +65,12 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
             onClick={() => {
               props.setMapCenter({ lat: data.latitude, lng: data.longitude });
               props.fetchStepsData(data.shop);
+              setPopupIsOpen(true);
             }} >
           </Marker>
         ))}
 
-        {props.isOpen &&
+        {popupIsOpen &&
           <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />
         }
       </Map>
