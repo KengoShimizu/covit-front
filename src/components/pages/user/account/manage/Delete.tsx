@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HomeLayout } from '../../../templates/HomeLayout';
+import { HomeLayout } from '../../../../templates/HomeLayout';
 
 export const Delete: React.FC = () => {
   return (

@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { HomeLayout } from '../../../templates/HomeLayout';
-import Input, { InputThemes } from '../../../atoms/Input'
+import { HomeLayout } from '../../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../../atoms/Input'
 import { Edit2 } from 'react-feather';
-import { UserIconSellection } from './../../../organisms/UserIconSellection';
-import Button, { ButtonThemes } from '../../../atoms/Button'
+import { UserIconSellection } from '../../../../organisms/UserIconSellection';
+import Button, { ButtonThemes } from '../../../../atoms/Button'
 import axios from 'axios';
 
-import { AuthContext } from "../../../../context/CommonProvider";
+import { AuthContext } from "../../../../../context/CommonProvider";
 
 interface EditParam {
   image: string;

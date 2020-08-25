@@ -1,26 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { HomeLayout } from '../../../templates/HomeLayout';
-import {CommonStyle} from './../../../../common/CommonStyle';
-import Input, { InputThemes } from '../../../atoms/Input';
-import { LoginFlexCard } from './../../../molecules/LoginFlexCard';
-import Twitter from './../../../../img/twitter.png';
-import Google from './../../../../img/googlr.png';
-import Facebook from './../../../../img/facebook.png';
-import Mail from './../../../../img/mail.png';
+import { HomeLayout } from '../../../../templates/HomeLayout';
+import {CommonStyle} from '../../../../../common/CommonStyle';
+import Input, { InputThemes } from '../../../../atoms/Input';
+import { LoginFlexCard } from '../../../../molecules/LoginFlexCard';
 
 export const EditLogin: React.FC = () => {
   return (
     <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/'>
         <div className='container'>
           <ul>
-            <LoginFlexCard src={Twitter} text={'Twitter'} />
+            <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />
             <hr className="sub-hr"/>
-            <LoginFlexCard src={Google} text={'Google'} />
+            <LoginFlexCard src={'/google.png'} text={'Google'} />
             <hr className="sub-hr"/>
-            <LoginFlexCard src={Facebook} text={'Facebook'} />
+            <LoginFlexCard src={'/facebook.png'} text={'Facebook'} />
             <hr className="main-hr"/>
-            <LoginFlexCard src={Mail} text={'メールアドレス'} />
+            <LoginFlexCard src={'/mail.png'} text={'メールアドレス'} />
           </ul>
           
           <style jsx>{`

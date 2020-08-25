@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import {CommonStyle} from './../../../common/CommonStyle';
-import HistoryIcon from './../../../img/history.svg'
-import Alcohol from './../../../img/covid-icon_alcohol.svg'
-import Mask from './../../../img/covid-icon_mask.svg'
-import Airing from './../../../img/covid-icon_airing.svg'
-import Distance from './../../../img/covid-icon_distance.svg'
-import HealthCare from './../../../img/covid-icon_health-care.svg'
+import {CommonStyle} from '../../../../common/CommonStyle';
+import HistoryIcon from './../../../../img/history.svg'
+import Alcohol from './../../../../img/covid-icon_alcohol.svg'
+import Mask from './../../../../img/covid-icon_mask.svg'
+import Airing from './../../../../img/covid-icon_airing.svg'
+import Distance from './../../../../img/covid-icon_distance.svg'
+import HealthCare from './../../../../img/covid-icon_health-care.svg'
 import useReactRouter from "use-react-router";
 import axios from 'axios';
-import { Comment } from './../../../common/Const';
-import { HomeLayout } from '../../templates/HomeLayout';
+import { Comment } from '../../../../common/Const';
+import { HomeLayout } from '../../../templates/HomeLayout';
 
 export interface AddParam {
   content: string;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {CommonStyle} from './../../../common/CommonStyle';
-import { HomeLayout } from '../../templates/HomeLayout';
-import Button, { ButtonThemes } from './../../atoms/Button';
-import HistoryIcon from './../../../img/history_black.svg';
-import Icon, { IconThemes } from './../../atoms/Icon';
-import Text, { TextThemes } from './../../atoms/Text';
+import {CommonStyle} from '../../../../common/CommonStyle';
+import { HomeLayout } from '../../../templates/HomeLayout';
+import Button, { ButtonThemes } from '../../../atoms/Button';
+import HistoryIcon from './../../../../img/history_black.svg';
+import Icon, { IconThemes } from '../../../atoms/Icon';
+import Text, { TextThemes } from '../../../atoms/Text';
 import { ChevronRight, Edit, Mail, LogOut, Trash2 } from 'react-feather';
-import { FlexCard } from './../../molecules/FlexCard';
-import { AuthContext } from "../../../context/CommonProvider";
+import { FlexCard } from '../../../molecules/FlexCard';
+import { AuthContext } from "../../../../context/CommonProvider";
 
 const propStyle = {
   profileCardBtn: {

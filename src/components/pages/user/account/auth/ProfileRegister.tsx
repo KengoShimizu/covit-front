@@ -1,9 +1,9 @@
 import React from 'react';
-import {CommonStyle} from './../../../common/CommonStyle';
+import {CommonStyle} from '../../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
-import { HomeLayout } from '../../templates/HomeLayout';
+import { HomeLayout } from '../../../../templates/HomeLayout';
 
-export const Comments: React.FC = () => {
+export const ProfileRegister: React.FC = () => {
   return (
     <HomeLayout>
       <div>

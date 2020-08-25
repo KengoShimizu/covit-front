@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {CommonStyle} from './../../../common/CommonStyle';
+import {CommonStyle} from '../../../../common/CommonStyle';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
-import { HomeLayout } from '../../templates/HomeLayout';
-import Alcohol from './../../../img/covid-icon_alcohol.svg';
-import Mask from './../../../img/covid-icon_mask.svg';
-import Airing from './../../../img/covid-icon_airing.svg';
-import Distance from './../../../img/covid-icon_distance.svg';
-import HealthCare from './../../../img/covid-icon_health-care.svg';
-import Icon, { IconThemes } from './../../atoms/Icon';
-import Text, { TextThemes } from './../../atoms/Text';
-import Button, { ButtonThemes } from './../../atoms/Button';
+import { HomeLayout } from '../../../templates/HomeLayout';
+import Alcohol from './../../../../img/covid-icon_alcohol.svg';
+import Mask from './../../../../img/covid-icon_mask.svg';
+import Airing from './../../../../img/covid-icon_airing.svg';
+import Distance from './../../../../img/covid-icon_distance.svg';
+import HealthCare from './../../../../img/covid-icon_health-care.svg';
+import Icon, { IconThemes } from '../../../atoms/Icon';
+import Text, { TextThemes } from '../../../atoms/Text';
+import Button, { ButtonThemes } from '../../../atoms/Button';
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
 
 
@@ -171,16 +171,20 @@ export const Shop: React.FC = () => {
                   </span>
                 </li>
               </ol>
-              <Button theme={[ButtonThemes.SUBBTN]} propStyle={propStyle.commentLink}>
-                コメントを見る
-                <ChevronRight size={14} color="#333" />
-              </Button>
+              <Link to={`/shops/${match.params.id}/comments`}>
+                <Button theme={[ButtonThemes.SUBBTN]} propStyle={propStyle.commentLink}>
+                  コメントを見る
+                  <ChevronRight size={14} color="#333" />
+                </Button>
+              </Link>
             </div>
             <hr className="infection-control_hr"/>
-            <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn}>
-              <Edit size={20} color="#fff" />
-              <span className="infection-control_comment-text">感染対策のレビューを書く</span>
-            </Button>
+            <Link to={`/shops/${match.params.id}/comments/new`}>
+              <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn}>
+                <Edit size={20} color="#fff" />
+                <span className="infection-control_comment-text">感染対策のレビューを書く</span>
+              </Button>
+            </Link>
           </section>
           <hr className="shop_hr"/>
           <section className="shop-card_section">

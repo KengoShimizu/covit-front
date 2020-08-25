@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import {CommonStyle} from './../../../../common/CommonStyle';
+import {CommonStyle} from '../../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { HomeLayout } from '../../../templates/HomeLayout';
+import { HomeLayout } from '../../../../templates/HomeLayout';
 import Cookies from 'universal-cookie';
 
 export const Logout: React.FC = () => {
