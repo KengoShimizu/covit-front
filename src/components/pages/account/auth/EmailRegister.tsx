@@ -3,20 +3,27 @@ import {CommonStyle} from './../../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import { HomeLayout } from '../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../atoms/Input'
+import Button, { ButtonThemes } from '../../../atoms/Button'
+
+interface AddParam {
+  email: string;
+}
 
 export const EmailRegister: React.FC = (props: any) => {
-  const mailRef = useRef(document.createElement("input"));
-  const buttonRef = useRef(document.createElement("button"));
   const [err, setErr] = useState("");
+  const [addData, setAddData] = useState<AddParam>({
+    email: ""
+  });
+
+  const handleChange = (event: any) => {
+    setAddData({
+      "email": event.target.value
+    });
+  }
 
   const send = async () => {
-    if (!mailRef.current.value) return;
-    await axios.post(
-      '/api/v1/common/sessions/sign_up',
-      {
-        email: mailRef.current.value,
-      }
-    )
+    await axios.post('/api/v1/common/sessions/sign_up', addData)
       .then(res => res.data)
       .catch(err => setErr(err.response.data.errors[0]));
 
@@ -24,7 +31,7 @@ export const EmailRegister: React.FC = (props: any) => {
       props.history.push({
         pathname: "/accounts/send",
         state: {
-          email: mailRef.current.value,
+          email: addData.email,
           text: '登録'
         }
       });
@@ -33,20 +40,12 @@ export const EmailRegister: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout>
-      <div className="form">
-        <div className="err">{err}</div>
-        <div className="mail-form">
-          <label>メールアドレス</label>
-          <input ref={mailRef} type="text" placeholder="メールアドレス" />
-        </div>
-        <div className="button-container">
-          <button ref={buttonRef} onClick={send}>
-            登録する
-            </button>
-        </div>
-        <Link to='/accounts/register'>Register</Link>
-        <Link to='/accounts/login'>ログインはこちら</Link>
+    <HomeLayout subHeaderText="メールアドレス登録" prevRef="#">
+      {/* FIXME リンク先 */}
+      <Input theme={InputThemes.REQUIRED} label="メールアドレス" placeholder="sample@sample.com" content={addData.email} handleChange={handleChange} propStyle={{margin: '32px auto'}}/>
+      <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{margin: '16px auto'}}>登録する</Button>
+      <div style={{textAlign: "right" }}>
+        <Link to='/accounts/login'>ログインはこちら＞</Link>
       </div>
     </HomeLayout>
   );
