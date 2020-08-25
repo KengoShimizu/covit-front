@@ -2,7 +2,7 @@ export const CommonStyle = {
   // 色
   AccentColor: '#FF8A1F',
   BaseColor: '#333',
-  KeyColor: '#98D4F6',
+  KeyColor: '#FDE79B',
   BadColor: '#3A8CED',
   TextBlack: '#333',
   TextDarkGary: '#8C8C8C',

@@ -14,6 +14,7 @@ export enum ButtonThemes {
   SUBHEADER = 'SUBHEADER',
   SUBBTN = 'SUBBTN',
   SHOPSNS = 'SHOPSNS',
+  SUBNORMAL = 'SUBNORMAL',
 }
 
 enum ModifierClassNames {
@@ -22,6 +23,7 @@ enum ModifierClassNames {
   SUBHEADER = 'subheader_back-btn',
   SUBBTN = 'btn_sub',
   SHOPSNS = 'shop_sns-btn',
+  SUBNORMAL = 'normal-btn_gray',
 }
 
 
@@ -50,6 +52,15 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             line-height: 24px;
             color: ${CommonStyle.TextWhite};
           }
+          .normal-btn_gray {
+            padding: 8px 24px;
+            background: ${CommonStyle.BgGray};
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 24px;
+            color: ${CommonStyle.TextBlack};
+          }
           .subheader_back-btn{
             position: absolute;
             display: flex;
@@ -62,7 +73,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             background: #E7E7E7;
             border-radius: 24px;
             color: ${CommonStyle.TextBlack};
-            padding: 0px 12px;
+            padding: 4px 12px;
             font-size: 12px;
             font-weight: bold;
             line-height: 19px;
@@ -71,6 +82,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             width:44px;
             height: 44px;
           }
+          
         `}
       </style>
     </button>
