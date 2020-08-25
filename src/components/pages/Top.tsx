@@ -103,9 +103,10 @@ export const Top: React.FC = () => {
   }
 
   const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
+    const genre_id_str = genre_id.join(',')
     axios.get('/api/v1/user/coordinations', {
         params: {
-          genre_id: selectedGenre,
+          genre_id: genre_id_str,
           from_lat: lat_ - threshold,
           to_lat: lat_ + threshold,
           from_lng: lng_ - threshold,
