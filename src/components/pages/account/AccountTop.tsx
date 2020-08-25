@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { CommonStyle } from './../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../templates/HomeLayout';
@@ -8,9 +8,10 @@ import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
 import Text, { TextThemes } from './../../atoms/Text';
 import { ChevronLeft, ChevronRight } from 'react-feather';
-import Airing from './../../../img/covid-icon_airing.svg';
 import axios from "axios";
 import useReactRouter from "use-react-router";
+import { FlexCard } from './../../molecules/FlexCard';
+import { AuthContext } from "../../../context/CommonProvider";
 
 const propStyle = {
   profileCardBtn: {
@@ -19,37 +20,23 @@ const propStyle = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  profileText: {
+    fontSize: '14px'
+  },
+  profileName: {
+    marginLeft: '10px'
   }
-}
-
-interface UserParams {
-  email: string,
-  image: string,
-  name: string
 }
 
 export const AccountTop: React.FC = () => {
-  const { match }: any = useReactRouter();
-  const [err, setErr] = useState("");
-  const [account, setAccount] = useState<UserParams>({
-    email: '',
-    image: '',
-    name: ''
-  });
-
-  const fetchAccountInfo = () => {
-    axios.get(`/api/v1/user/users/${match.params.id}`)
-      .then(res => setAccount(res.data))
-      .catch(err => setErr(err.response.data.errors[0]));
-  }
-
-  //useEffect(() => {
-  //  console.log(account)
-  //}, [account])
+  const { authState, setAuth } = useContext(AuthContext);
+  const [account, setAccount] = useState(authState.user);
 
   useEffect(() => {
-    fetchAccountInfo();
+    console.log(account);
   }, [])
+
   return (
     <HomeLayout>
       <div className="">
@@ -66,15 +53,16 @@ export const AccountTop: React.FC = () => {
 
         <div className="profile-card">
           <div className="profile-card-icon-name">
-            <Icon theme={[IconThemes.NORMAL]}>
-              <img className="infection-control_icon" src={Airing} alt=""/>
+            {/* FIXME IconThemes.COVIDMEASURE*/}
+            <Icon theme={[IconThemes.COVIDMEASURE]}>
+              <img className="infection-control_icon" src={account.image} alt=""/>
             </Icon>
-            <Text theme={[TextThemes.CAPTION]}> 
+            <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileName}> 
               {account.name}
             </Text>
           </div>
           <div className="profile-card-edit">
-            <Text theme={[TextThemes.CAPTION]}> 
+            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.profileText}> 
               プロフィールを編集
             </Text>
             
@@ -84,15 +72,12 @@ export const AccountTop: React.FC = () => {
           </Button>
         </div>
 
-        <Link to='/history'>閲覧履歴</Link>
-        <br />
-        <Link to='/accounts/:id/editlogin'>ログイン情報の編集</Link>
-        <br />
-        <Link to='/accounts/logout'>Logout</Link>
-        <br />
-        <Link to='/accounts/privacy'>Privacy</Link>
-        <br />
-        <Link to='/accounts/:id/delete'>Delete</Link>
+        <FlexCard src={account.image} text={'閲覧履歴'}/>
+        <FlexCard src={account.image} text={'レビューしたお店'}/>
+        <FlexCard src={account.image} text={'ログイン情報の編集'}/>
+        <FlexCard src={account.image} text={'ログアウト'}/>
+        <FlexCard src={account.image} text={'アカウントを削除する'}/>
+        
       </div>
       <style jsx>{`
         .infection-control_icon{
@@ -104,7 +89,6 @@ export const AccountTop: React.FC = () => {
           width: 100%;
           padding: 12px 0px 12px 15px;
           box-sizing: border-box;
-          display: flex;
           align-items: center;
           margin-bottom: 16px;
         }
