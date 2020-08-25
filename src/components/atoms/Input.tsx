@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
-import { CommonStyle } from './../../common/CommonStyle';
+import { CommonStyle } from '../../common/CommonStyle';
 
-interface FormProps {
-  theme?: FormThemes;
+interface InputProps {
+  theme?: InputThemes;
   propStyle?: {};
   handleChange?: () => {};
   label: string;
@@ -11,53 +11,53 @@ interface FormProps {
   icon?: React.ReactNode;
 }
 
-export enum FormThemes {
+export enum InputThemes {
   INIT = 'INIT',
   REQUIRED = 'REQUIRED',
 }
 
 enum ModifierClassNames {
-  INIT = 'form-init',
-  REQUIRED = 'form-required',
+  INIT = 'input-init',
+  REQUIRED = 'input-required',
 }
 
-const Form: React.FC<FormProps> = ({ theme = FormThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon }) => {
+const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon }) => {
   return (
-    <div className={["form", ModifierClassNames[theme]].join(' ')} style={propStyle}>
+    <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
-      <span className="form-icon">{icon}</span>
+      <span className="input-icon">{icon}</span>
       <input value={content} onChange={handleChange} name="content" placeholder={placeholder} />
       <style jsx>
         {`
-          .form-init{
+          .input-init{
           }
 
-          .form {
+          .input {
             display: block;
             justify-content: center;
             align-items: center;
             padding: 1rem 1.5rem;
           }
 
-          .form-icon {
+          .input-icon {
             display: inline-block;
             position: fixed;
             right: 2rem;
             padding-top: 5px;
           }
 
-          .form label span {
+          .input label span {
             display: none;
           }
 
-          .form label {
+          .input label {
             font-size: ${CommonStyle.Caption};
             color: ${CommonStyle.TextDarkGary};
             display: block;
             margin-bottom: 0.25rem;
           }
 
-          .form input {
+          .input input {
             border: 1px solid ${CommonStyle.BorderGray};
             box-sizing: border-box;
             border-radius: 4px;
@@ -66,7 +66,7 @@ const Form: React.FC<FormProps> = ({ theme = FormThemes.INIT, propStyle = {}, ha
             max-width: 400px;
           }
 
-          .form-required label span {
+          .input-required label span {
             display: inline;
             color: ${CommonStyle.TextAccent};
           }
@@ -77,4 +77,4 @@ const Form: React.FC<FormProps> = ({ theme = FormThemes.INIT, propStyle = {}, ha
   );
 }
 
-export default Form;
+export default Input;

@@ -7,16 +7,22 @@ interface IconProps {
   propStyle?: {};
 }
 export enum IconThemes {
-  INIT = 'INIT',
-  NORMAL = 'NORMAL',
-  SMALL = 'SMALL',
-  COVIDMEASURE = 'COVIDMEASURE',
+  INIT            = 'INIT',
+  NORMAL          = 'NORMAL',
+  SMALL           = 'SMALL',
+  COVIDMEASURE    = 'COVIDMEASURE',
+  PROFILE         = 'PROFILE',
+  SELECTEDPROFILE = 'SELECTEDPROFILE',
+  LIST            = 'LIST',
 }
 enum ModifierClassNames {
-  INIT = 'icon-init',
-  NORMAL = 'icon-wrapper_normal',
-  SMALL = 'icon-wrapper_small',
-  COVIDMEASURE = 'infection-control_icon-wrapper',
+  INIT            = 'icon-init',
+  NORMAL          = 'icon-wrapper_normal',
+  SMALL           = 'icon-wrapper_small',
+  COVIDMEASURE    = 'infection-control_icon-wrapper',
+  PROFILE         = 'profile-icon-wrapper',
+  SELECTEDPROFILE = 'profile-icon-wrapper_selected',
+  LIST            = 'profile-icon-wrapper_list',
 }
 
 
@@ -56,6 +62,30 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             display: flex;
             justify-content: center;
             align-items: center;
+          }
+
+          //コメントリストで表示されるアイコン
+          .profile-icon-wrapper_list{
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          //プロフィール変更の選択肢・ユーザー情報のアイコン
+          .profile-icon-wrapper{
+            display: inline-block;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            margin: 0.5rem;
+          }
+          //プロフィール変更で選択中のアイコン
+          .profile-icon-wrapper_selected{
+            display: inline-block;
+            width: 80px;
+            height: 80px;
           }
         `}
       </style>
