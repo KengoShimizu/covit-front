@@ -4,8 +4,8 @@ import Icon, { IconThemes } from './../atoms/Icon';
 import Text, { TextThemes } from './../atoms/Text';
 
 const propStyle = {
-  genreCardText: {
-    //marginLeft: '20px',
+  genreCardIcon: {
+    margin: 'auto',
   }
 }
 
@@ -17,25 +17,27 @@ interface FlexCardProps {
 export const GenreCard: React.FC<FlexCardProps> = ({src, text}) => {
   return (
     <div className="genre-card">
-      <Icon theme={[IconThemes.NORMAL]}>
-        <img className="genre-card-image" src={src} alt=""/>
-      </Icon>
-      <Text theme={[TextThemes.SMALL]} propStyle={propStyle.genreCardText}>
-        {text}
-      </Text>
+      <div className="genre-card-inner">
+        <Icon theme={[IconThemes.LERGE]} propStyle={propStyle.genreCardIcon}>
+          <img className="genre-card-image" src={src} alt=""/>
+        </Icon>
+        <Text theme={[TextThemes.CAPTION]} >
+          {text}
+        </Text>
+      </div>
       <style jsx>{`
         .genre-card{
+          border: 2px solid gray;
+          border-radius: 5px;
+          text-align: center;
           z-index: 1000;
-          position: fixed;
-          top: 100px;
-          left: 100px;
           background: ${CommonStyle.BgWhite};
           height: 72px;
           width: 72px;
-          flex: none;
-          order: 1;
-          align-self: center;
           margin: 16px 0px;
+        }
+        .genre-card-inner{
+          padding: 5px;
         }
         .genre-card-image{
           width: 100%;
