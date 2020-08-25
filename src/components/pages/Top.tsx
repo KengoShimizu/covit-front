@@ -81,6 +81,7 @@ export const Top: React.FC = () => {
   const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng });
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
+  const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
@@ -104,7 +105,7 @@ export const Top: React.FC = () => {
   const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
     axios.get('/api/v1/user/coordinations', {
         params: {
-          genre_id: [],
+          genre_id: selectedGenre,
           from_lat: lat_ - threshold,
           to_lat: lat_ + threshold,
           from_lng: lng_ - threshold,
@@ -161,7 +162,7 @@ export const Top: React.FC = () => {
           setLastLng={setLastLng}
           setZoom={setZoom}/>
 
-        <Button propStyle={propStyle.refinementBtn}>
+        <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
           お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
         </Button>
         <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>
@@ -170,8 +171,15 @@ export const Top: React.FC = () => {
         <Button propStyle={propStyle.currentPlaceBtn} onClick={() => setMapCenter(curLoc)}>
           現在地
         </Button>
-
-        <GenreCardList selectedGenre={selectedGenre} setSelectedGenre={setSelectedGenre}/>
+  
+        <GenreCardList 
+          selectedGenre={selectedGenre} 
+          setSelectedGenre={setSelectedGenre}
+          genreSerchIsOpen={genreSerchIsOpen}
+          setGenreSerchIsOpen={setGenreSerchIsOpen}
+          fetchCoordinationsData={fetchCoordinationsData}
+          lastlat={lastlat} 
+          lastlng={lastlng}/>
 
         {/* 初回モーダル */}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
