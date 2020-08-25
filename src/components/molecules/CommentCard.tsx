@@ -25,7 +25,7 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             <Icon theme={[IconThemes.SMALL]}>
               <Calendar size={14} color="#8C8C8C" />
             </Icon>
-            <p className="card_date_text">来店日</p>
+            <Text theme={[TextThemes.SMALL]}>来店日</Text>
             <Text theme={[TextThemes.SMALL]}>{FormatDate(new Date(props.comment.date))}</Text>
           </div>
           <div className="card_comment">

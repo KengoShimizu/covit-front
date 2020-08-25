@@ -44,21 +44,26 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             line-height: 24px;
             color: ${CommonStyle.TextBlack};
             margin: 9px auto 7px auto;
+            line-height: 1.4em;
           }
           .subtitle-text{
             text-size: ${CommonStyle.SubTitle};
             font-weight: bold;
+            line-height: 1.7em;
           }
           .normal-text{
             text-size: ${CommonStyle.Text};
+            line-height: 1.7em;
           }
           .caption-text{
             text-size: ${CommonStyle.Caption};
             font-weight: bold;
+            line-height: 1.7em;
           }
           .small-text{
             text-size: ${CommonStyle.Smallest};
             font-weight: bold;
+            line-height: 1.em;
           }
         `}
       </style>
