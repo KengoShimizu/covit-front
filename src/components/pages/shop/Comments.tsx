@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {CommonStyle} from './../../../common/CommonStyle';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import HistoryIcon from './../../../img/history.svg'
 import { CommentCard } from './../../molecules/CommentCard'
@@ -8,13 +6,9 @@ import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import { Smile } from 'react-feather';
 import { Frown } from 'react-feather';
-import { ChevronLeft } from 'react-feather';
-import Button, { ButtonThemes } from './../../atoms/Button';
-import Title, { TitleThemes } from './../../atoms/Title';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import useReactRouter from "use-react-router";
 import { HomeLayout } from '../../templates/HomeLayout';
-import { SubHeader } from './../../molecules/SubHeader';
 
 const propStyle = {
   reviewIcon: {
@@ -108,19 +102,9 @@ export const ShopComments: React.FC = () => {
   }, [])
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={'コメント一覧'} prevRef={`/shops/${match.params.id}`}>
       <div className='container'>
         <div className="content">
-          <SubHeader>
-            <Link to={`/shops/${match.params.id}`}>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </Link>
-            <Title theme={[TitleThemes.SUBHEADER]}>
-              コメント一覧
-            </Title>
-          </SubHeader>
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
               <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>

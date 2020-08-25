@@ -10,12 +10,10 @@ import Airing from './../../../img/covid-icon_airing.svg';
 import Distance from './../../../img/covid-icon_distance.svg';
 import HealthCare from './../../../img/covid-icon_health-care.svg';
 import Icon, { IconThemes } from './../../atoms/Icon';
-import Title, { TitleThemes } from './../../atoms/Title';
 import Text, { TextThemes } from './../../atoms/Text';
 import Button, { ButtonThemes } from './../../atoms/Button';
-import { SubHeader } from './../../molecules/SubHeader';
-import { ChevronLeft, Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
-import { isAbsolute } from 'path';
+import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
+
 
 const propStyle = {
   commentLink: {
@@ -75,16 +73,8 @@ export const Shop: React.FC = () => {
   }, [])
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={shopData.name} prevRef={'/'}>
       <div className="content">
-        <SubHeader>
-          <Button theme={[ButtonThemes.SUBHEADER]}>
-            <ChevronLeft size={24} color="#333" />
-          </Button>
-          <Title theme={[TitleThemes.SUBHEADER]}>
-            {shopData.name}
-          </Title>
-        </SubHeader>
         <div className="shop-card">
           {/* ヘッダー画像 */}
           <section className="shop-card_section">

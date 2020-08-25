@@ -5,31 +5,39 @@ import HistoryIcon from './../../img/history.svg';
 import { User } from 'react-feather';
 import { LogIn } from 'react-feather';
 import { Menu } from 'react-feather';
+import { SubHeader } from './SubHeader';
 
+interface HeaderProps {
+  subHeaderText?: string;
+  prevRef?: string;
+}
 
-export const Header: React.FC = () => {
+export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef}) => {
   return (
-    <header className="header">
-      <img className="service-logo" src="" alt=""/>
-      <ul className="icon-list">
-        <Link to='/History'>
+    <React.Fragment>
+      <header className="header">
+        <img className="service-logo" src="" alt=""/>
+        <ul className="icon-list">
+          <Link to='/History'>
+            <li className="icon-list_option">
+              <span className="icon-list_img-wrapper">
+                <img className="icon-list_img" src={HistoryIcon} alt=""/>
+              </span>
+              <p className="icon-list_caption">閲覧履歴</p>
+            </li>
+          </Link>
           <li className="icon-list_option">
             <span className="icon-list_img-wrapper">
-              <img className="icon-list_img" src={HistoryIcon} alt=""/>
+              <LogIn size={24} color="#fff" />
             </span>
-            <p className="icon-list_caption">閲覧履歴</p>
+            <p className="icon-list_caption">ログイン</p>
           </li>
-        </Link>
-        <li className="icon-list_option">
-          <span className="icon-list_img-wrapper">
-            <LogIn size={24} color="#fff" />
-          </span>
-          <p className="icon-list_caption">ログイン</p>
-        </li>
-        <li className="icon-list_option_menu">
-          <Menu size={32} color="#fff" />
-        </li>
-      </ul>
+          <li className="icon-list_option_menu">
+            <Menu size={32} color="#fff" />
+          </li>
+        </ul>
+      </header>
+      {(subHeaderText && prevRef) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef}/>}
       <style jsx>{`
         *{
           margin:0;
@@ -89,7 +97,8 @@ export const Header: React.FC = () => {
           color: white;
         }
       `}</style>
-    </header>
+    
+    </React.Fragment>
   );
 }
 
