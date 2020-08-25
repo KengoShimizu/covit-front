@@ -84,9 +84,7 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
           text-decoration: none;
         }
         .map-container{
-          padding-top: 56px;
-          width: 100%;
-          height: 100VH;
+          height: calc(100vh - 56px);
           background-color: #E8E6E2;
         }
       `}</style>

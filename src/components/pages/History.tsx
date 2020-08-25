@@ -8,6 +8,7 @@ import { Calendar } from 'react-feather';
 import { ChevronRight } from 'react-feather';
 import { ChevronLeft } from 'react-feather';
 import { HomeLayout } from '../templates/HomeLayout';
+import { SubHeader } from './../molecules/SubHeader';
 import Button, { ButtonThemes } from './../atoms/Button';
 import Title, { TitleThemes } from './../atoms/Title';
 
@@ -16,14 +17,14 @@ export const History: React.FC = () => {
       <HomeLayout>
         <div className='container'>
           <div className="content">
-            <div className="sub-header">
+            <SubHeader>
               <Button theme={[ButtonThemes.SUBHEADER]}>
                 <ChevronLeft size={24} color="#333" />
               </Button>
               <Title theme={[TitleThemes.SUBHEADER]}>
                 閲覧履歴
               </Title>
-            </div>
+            </SubHeader>
             <button className="delete-btn">
               <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>
               <span className="delete-btn_text">履歴を削除</span>
@@ -112,17 +113,7 @@ export const History: React.FC = () => {
           }
           // 中身
           .content{
-            position: relative;
-            top: 56px;
-            min-height: 100vh;
             background-color: ${CommonStyle.BgGray};
-          }
-          .sub-header{
-            background: ${CommonStyle.BgWhite};
-            width: 100%;
-            height: 40px;
-            text-align: center;
-            margin-bottom: 8px;
           }
           .delete-btn{
             margin-right: 24px;

@@ -139,16 +139,6 @@ export const Top: React.FC = () => {
           </Link>
         </div>
         <style jsx>{`
-          *{
-            margin:0;
-            padding:0;
-            border:0;
-            outline:0;
-            list-style:none;
-          }
-          a{
-            text-decoration: none;
-          }
           .container{
             width: 100%;
           }
@@ -206,13 +196,6 @@ export const Top: React.FC = () => {
           .disable{
             visibility: hidden;
             opacity: 0;
-          }
-          // 中身
-          .map-container{
-            margin-top: 56px;
-            width: 100%;
-            height: calc(100vh - 56px);
-            background-color: #E8E6E2;
           }
           .refinement-btn{
             position: fixed;

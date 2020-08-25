@@ -14,6 +14,7 @@ import Title, { TitleThemes } from './../../atoms/Title';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import useReactRouter from "use-react-router";
 import { HomeLayout } from '../../templates/HomeLayout';
+import { SubHeader } from './../../molecules/SubHeader';
 
 const propStyle = {
   reviewIcon: {
@@ -110,14 +111,16 @@ export const ShopComments: React.FC = () => {
     <HomeLayout>
       <div className='container'>
         <div className="content">
-          <div className="sub-header">
-            <Button theme={[ButtonThemes.SUBHEADER]}>
-              <ChevronLeft size={24} color="#333" />
-            </Button>
+          <SubHeader>
+            <Link to={`/shops/${match.params.id}`}>
+              <Button theme={[ButtonThemes.SUBHEADER]}>
+                <ChevronLeft size={24} color="#333" />
+              </Button>
+            </Link>
             <Title theme={[TitleThemes.SUBHEADER]}>
               コメント一覧
             </Title>
-          </div>
+          </SubHeader>
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
               <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
@@ -169,21 +172,6 @@ export const ShopComments: React.FC = () => {
           .container{
             width: 100%
           }
-          
-          // 中身
-          .content{
-            position: relative;
-            top: 56px;
-            min-height: 100vh;
-          }
-          .sub-header{
-            background: ${CommonStyle.BgWhite};
-            width: 100%;
-            height: 40px;
-            text-align: center;
-            margin-bottom: 8px;
-          }
-          
           .review-switch_container{
             width: 100%;
             display: flex;
