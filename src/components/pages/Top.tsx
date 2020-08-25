@@ -181,7 +181,6 @@ export const Top: React.FC = () => {
           fetchCoordinationsData={fetchCoordinationsData}
           lastlat={lastlat} 
           lastlng={lastlng}/>
-        <div className={genreSerchIsOpen ? "genre-search-blur" : "disable"} onClick={() => setGenreSerchIsOpen(false)}></div>
 
         {/* 初回モーダル */}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
@@ -262,17 +261,6 @@ export const Top: React.FC = () => {
           .disable{
             visibility: hidden;
             opacity: 0;
-          }
-          .genre-search-blur{
-            position: fixed;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            visibility: visible;
-            transition-duration: .5s;
-            z-index: 1000;
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
           }
         `}</style>
       </div>

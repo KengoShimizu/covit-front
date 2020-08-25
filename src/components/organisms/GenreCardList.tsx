@@ -43,27 +43,30 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
   }
 
   return (
-    <div className={genreSerchIsOpen ? 'container' : 'container close'}>
-      <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
-      <ul className="genres-container">
-        {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data == num) ? 'selected' : ''}/></li>)}
-      </ul>
-      <div className="genre-btns">
-        <Button 
-          theme={[ButtonThemes.SUBNORMAL]} 
-          propStyle={propStyle.btn}
-          onClick={() => setSelectedGenre([])}>
-          絞り込み解除
-        </Button>
-        <Button
-          theme={[ButtonThemes.NORMAL]} 
-          propStyle={propStyle.btn}
-          onClick={() => {
-            fetchCoordinationsData(selectedGenre, lastlat, lastlng);
-            setGenreSerchIsOpen(false);
-          }}>
-          絞り込み
-        </Button>
+    <React.Fragment>
+      <div className={genreSerchIsOpen ? "genre-search-blur" : "disable"} onClick={() => setGenreSerchIsOpen(false)}></div>
+      <div className={genreSerchIsOpen ? 'container' : 'container close'}>
+        <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
+        <ul className="genres-container">
+          {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data == num) ? 'selected' : ''}/></li>)}
+        </ul>
+        <div className="genre-btns">
+          <Button 
+            theme={[ButtonThemes.SUBNORMAL]} 
+            propStyle={propStyle.btn}
+            onClick={() => setSelectedGenre([])}>
+            絞り込み解除
+          </Button>
+          <Button
+            theme={[ButtonThemes.NORMAL]} 
+            propStyle={propStyle.btn}
+            onClick={() => {
+              fetchCoordinationsData(selectedGenre, lastlat, lastlng);
+              setGenreSerchIsOpen(false);
+            }}>
+            絞り込み
+          </Button>
+        </div>
       </div>
       <style jsx>{`
         .container {
@@ -99,8 +102,22 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
         .blur-range{
           height: 500px;
         }
+        .disable{
+          visibility: hidden;
+          opacity: 0;
+        }
+        .genre-search-blur{
+          position: fixed;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          visibility: visible;
+          transition-duration: .5s;
+          z-index: 1000;
+          backdrop-filter: blur(3px);
+          -webkit-backdrop-filter: blur(3px);
+        }
       `}</style>
-
-    </div>
+    </React.Fragment>
   );
 }
