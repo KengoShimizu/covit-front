@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../templates/HomeLayout';
 import { SubHeader } from './../../molecules/SubHeader';
 import Button, { ButtonThemes } from './../../atoms/Button';
+import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
-import { ChevronLeft } from 'react-feather';
+import { ChevronLeft, ChevronRight } from 'react-feather';
+import Airing from './../../../img/covid-icon_airing.svg';
 
 export const AccountTop: React.FC = () => {
   return (
@@ -21,8 +23,11 @@ export const AccountTop: React.FC = () => {
             ユーザ情報
           </Title>
         </SubHeader>
-
-        <br />
+        <div className="">
+          <Icon theme={[IconThemes.NORMAL]}>
+            <img className="infection-control_icon" src={Airing} alt=""/>
+          </Icon>
+        </div>
         <Link to='/history'>閲覧履歴</Link>
         <br />
         <Link to='/accounts/:id/editlogin'>ログイン情報の編集</Link>
@@ -34,6 +39,10 @@ export const AccountTop: React.FC = () => {
         <Link to='/accounts/:id/delete'>Delete</Link>
       </div>
       <style jsx>{`
+        .infection-control_icon{
+          width: 32px;
+          height: auto;
+        }
       `}</style>
     </HomeLayout>
   );
