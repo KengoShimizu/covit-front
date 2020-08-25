@@ -5,6 +5,8 @@ import Mask from './../../img/covid-icon_mask.svg';
 import Airing from './../../img/covid-icon_airing.svg';
 import Distance from './../../img/covid-icon_distance.svg';
 import HealthCare from './../../img/covid-icon_health-care.svg';
+import Text, { TextThemes } from './../atoms/Text';
+import { ChevronLeft, Smile, DollarSign, ChevronRight, Frown} from 'react-feather';
 
 interface MapPopupProps {
   steps: {
@@ -15,23 +17,39 @@ interface MapPopupProps {
   data: any;
   uniqueImgs: string[];
 }
+const propStyle = {
+  reviewIcon: {
+    marginLeft: '8px'
+  }
+};
 
 export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
   return (
-    <div className="container">
-      <div className="shop-card">
-        <img className="" src={props.data.image} alt="shop image" />
-        <ol className="shop-name-header">
-          <li>
-            <p className="">{props.data.name}</p>
+    <section className="shop-mordal_container">
+      <div className="shop-card_content">
+        <ul className="shop-card_info">
+          <li className="shop-card_name">
+            <Text theme={[TextThemes.SUBTITLE]}>
+              {props.data.name}
+            </Text>
           </li>
-          <li>
-            <p>{props.data.good_count}</p>
+          <li className="shop-card_review">
+            <ul className="shop-card_review-list">
+              <li className="shop-card_review-option">
+                <Smile size={24} color="#ED753A" />
+                <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
+                  {props.data.good_count}
+                </Text>
+              </li>
+              <li className="shop-card_review-option">
+                <Frown size={24} color="#3A8CED" />
+                <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
+                  {props.data.bad_count}
+                </Text>
+              </li>
+            </ul>
           </li>
-          <li>
-            <p>{props.data.bad_count}</p>
-          </li>
-        </ol>
+        </ul>
         {props.uniqueImgs.map((data: any) => (
           <ol className="infection-control_list" key={`images${data}`}>
             <li className="infection-control_option">
@@ -52,53 +70,78 @@ export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           </ol>
         ))}
       </div>
-      <style jsx>{`
-          *{
-            margin:0;
-            padding:0;
-            border:0;
-            outline:0;
-            list-style:none;
-          }
-          a{
-            text-decoration: none;
-          }
-          .container{
-            width: 100%
-          }
-          // ポップアップ
-          .shop-card{
-              z-index: 100;
-          }
-          // 店名と評価数のヘッダー
-          .shop-name-header{
-            display: flex;
-            justify-content: center;
-            margin-bottom: 16px;
-          }
-          // 感染対策
-          .infection-control_list{
-            display: flex;
-            justify-content: center;
-            margin-bottom: 16px;
-          }
-          .infection-control_option :not(:last-child) {
-            margin-right: 12px;
-          }
-          .infection-control_option{
-            width: 60px;
-            height: 60px;
-            border-radius: 60px;
-            background: #98D4F6;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-          .infection-control_icon{
-            width: 34px;
-            height: auto;
-          }
-        `}</style>
-    </div>
+      <div　className="shop-card_header-img_wrapper">
+        <img className="shop-card_header-img" src={props.data.image} alt="shop image" />
+      </div>
+    <style jsx>{`
+        .shop-mordal_container{
+          width: 308px;
+          height: 205px;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit- transform: translateX(-50%);
+          bottom: 20px;
+          z-index: 6000;
+          border-radius: 24px;
+          overflow: hidden;
+          background: ${CommonStyle.BgWhite}
+        }
+        .shop-card_header-img_wrapper{
+          width: 100%;
+          height: 98px;
+          position: absolute;
+          overflow: hidden;
+        }
+        .shop-card_header-img{
+          width: 100%;
+          height: auto;
+        }
+        .shop-card_content{
+          top: 98px;
+          position: absolute;
+          padding: 8px 16px;
+        }
+        // 店名と評価数のヘッダー
+        .shop-card_info{
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 10px;
+        }
+        .shop-card_review-list{
+          display: flex;
+        }
+        .shop-card_review-option{
+          display: flex;
+          align-items: center;
+        }
+        .shop-card_review-option:not(:last-child){
+          margin-right: 12px;
+        }
+        // 感染対策
+        .infection-control_list{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 16px;
+        }
+        .infection-control_option :not(:last-child) {
+          margin-right: 8px;
+        }
+        .infection-control_option{
+          width: 48px;
+          height: 48px;
+          border-radius: 48px;
+          background: ${CommonStyle.KeyColor};
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .infection-control_icon{
+          width: 26px;
+          height: auto;
+        }
+      `}</style>
+    </section>
   );
 }
