@@ -11,6 +11,7 @@ import Distance from './../../../img/covid-icon_distance.svg';
 import HealthCare from './../../../img/covid-icon_health-care.svg';
 import Icon, { IconThemes } from './../../atoms/Icon';
 import Title, { TitleThemes } from './../../atoms/Title';
+import Text, { TextThemes } from './../../atoms/Text';
 import Button, { ButtonThemes } from './../../atoms/Button';
 import { SubHeader } from './../../molecules/SubHeader';
 import { ChevronLeft, Smile, DollarSign, ChevronRight, Frown, Menu, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
@@ -18,11 +19,14 @@ import { isAbsolute } from 'path';
 
 const propStyle = {
   commentLink: {
-    marginRight: '0',
-    marginLeft: 'auto',
+    // marginRight: '0',
+    // marginLeft: 'auto',
   },
   commentBtn: {
     margin: '0 auto 0 auto'
+  },
+  shopedit: {
+    margin: '0 auto 0 auto',
   }
 };
 
@@ -78,34 +82,46 @@ export const Shop: React.FC = () => {
             <ChevronLeft size={24} color="#333" />
           </Button>
           <Title theme={[TitleThemes.SUBHEADER]}>
-            閲覧履歴
+            {shopData.name}
           </Title>
         </SubHeader>
         <div className="shop-card">
           {/* ヘッダー画像 */}
-          <div className="shop-img_wrapper">
-            <img className="shop-img" src={shopData.image} alt="shop header"/>
-          </div>
-          <ol className="shop_cost-list">
-            <li className="shop_cost-option">
-              <span className="shop_cost-icon_day">
-                <Sun size={16} color="#333" />
-              </span>
-              <span className="shop_cost-text">
-                {shopData.price_day}
-              </span>
-            </li>
-            <li className="shop_cost-option">
-              <span className="shop_cost-icon_night">
-                <Moon size={16} color="#333" />
-              </span>
-              <span className="shop_cost-text">
-                {shopData.price_night}
-              </span>
-            </li>
-          </ol>
+          <section className="shop-card_section">
+            <div className="shop-img_wrapper">
+              <img className="shop-img" src={shopData.image} alt="shop header"/>
+            </div>
+            <ol className="shop_base-info">
+              <li className="shop_base-info_option">
+                <Text theme={[TextThemes.CAPTION]}>
+                  {shopData.name}
+                </Text>
+              </li>
+              <li className="shop_base-info_option">
+                <ol className="shop_cost-list">
+                  <li className="shop_cost-option">
+                    <span className="shop_cost-icon_day">
+                      <Sun size={10} color="#fff" />
+                    </span>
+                    <Text theme={[TextThemes.SMALL]}>
+                      {shopData.price_day}円
+                    </Text>
+                  </li>
+                  <li className="shop_cost-option">
+                    <span className="shop_cost-icon_night">
+                      <Moon size={10} color="#fff" />
+                    </span>
+                    <Text theme={[TextThemes.SMALL]}>
+                      {shopData.price_night}円
+                    </Text>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </section>
+          <hr className="shop_hr"/>
           {/* 感染対策情報 */}
-          <section className="infection-control_card">
+          <section className="shop-card_section nfection-control_card">
             <h2 className="infection-control_title">感染対策</h2>
             {uniqueImgs.map((data: any) => (
               <ol className="infection-control_list" key={`images${data}`}>
@@ -136,10 +152,19 @@ export const Shop: React.FC = () => {
                 </li>
               </ol>
             ))}
-            <div className="infection-control_comment">
-              従業員がマスクを着用しています。
-              お客様にマスクの着用をお願いしています。
-            </div>
+            <ul className="infection-control_comment">
+              <li className="infection-control_comment-option">
+                <Text theme={[TextThemes.SMALL]}>
+                  従業員がマスクを着用しています。
+                </Text>
+              </li>
+              <li className="infection-control_comment-option">
+                <Text theme={[TextThemes.SMALL]}>
+                  お客様にマスクの着用をお願いしています。
+                </Text>
+              </li>
+            </ul>
+            <hr className="infection-control_hr"/>
             <div className="infection-control_review">
               <h3 className="infection-control_review-title">対策への評価</h3>
               <ol className="infection-control_review-list">
@@ -161,78 +186,84 @@ export const Shop: React.FC = () => {
                 <ChevronRight size={14} color="#333" />
               </Button>
             </div>
+            <hr className="infection-control_hr"/>
             <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn}>
-              <Edit size={24} color="#fff" />
+              <Edit size={20} color="#fff" />
               <span className="infection-control_comment-text">感染対策のレビューを書く</span>
             </Button>
           </section>
           <hr className="shop_hr"/>
-          <ul className="shop_info-list">
-            <li className="shop_info-option">
-              <Clock size={16} color="#333" />
-              <span className="shop_info-option_content">
-                {shopData.business_date}
-              </span>
-            </li>
-            <li className="shop_info-option">
-              <Phone size={16} color="#333" />
-              <span className="shop_info-option_content">
-              {shopData.contact}
-              </span>
-            </li>
-            <li className="shop_info-option">
-              <MapPin size={16} color="#333" />
-              <span className="shop_info-option_content">
-                {shopData.address}
-              </span>
-            </li>
-          </ul>
-          <ul className="shop_sns-list">
-            <li className="shop_sns-option">
-              <Link to=''>
-                <Button theme={[ButtonThemes.SHOPSNS]}>
-                  <Twitter size={24} color="#333" />
-                </Button>
-              </Link>
-            </li>
-            <li className="shop_sns-option">
-              <Link to=''>
-                <Button theme={[ButtonThemes.SHOPSNS]}>
-                  <Monitor size={24} color="#333" />
-                </Button>
-              </Link>
-            </li>
-            <li className="shop_sns-option">
-              <Link to=''>
-                <Button theme={[ButtonThemes.SHOPSNS]}>
-                  <Instagram size={24} color="#333" />
-                </Button>
-              </Link>
-            </li>
-            <li className="shop_sns-option">
-              <Link to=''>
-                <Button theme={[ButtonThemes.SHOPSNS]}>
-                  <Facebook size={24} color="#333" />
-                </Button>
-              </Link>
-            </li>
-          </ul>
-          
+          <section className="shop-card_section">
+            <ul className="shop_info-list">
+                <li className="shop_info-option">
+                  <Clock size={16} color="#333" />
+                  <span className="shop_info-option_content">
+                    {shopData.business_date}
+                  </span>
+                </li>
+                <li className="shop_info-option">
+                  <Phone size={16} color="#333" />
+                  <span className="shop_info-option_content">
+                  {shopData.contact}
+                  </span>
+                </li>
+                <li className="shop_info-option">
+                  <MapPin size={16} color="#333" />
+                  <span className="shop_info-option_content">
+                    {shopData.address}
+                  </span>
+                </li>
+              </ul>
+            <ul className="shop_sns-list">
+              <li className="shop_sns-option">
+                <Link to=''>
+                  <Button theme={[ButtonThemes.SHOPSNS]}>
+                    <Twitter size={24} color="#333" />
+                  </Button>
+                </Link>
+              </li>
+              <li className="shop_sns-option">
+                <Link to=''>
+                  <Button theme={[ButtonThemes.SHOPSNS]}>
+                    <Monitor size={24} color="#333" />
+                  </Button>
+                </Link>
+              </li>
+              <li className="shop_sns-option">
+                <Link to=''>
+                  <Button theme={[ButtonThemes.SHOPSNS]}>
+                    <Instagram size={24} color="#333" />
+                  </Button>
+                </Link>
+              </li>
+              <li className="shop_sns-option">
+                <Link to=''>
+                  <Button theme={[ButtonThemes.SHOPSNS]}>
+                    <Facebook size={24} color="#333" />
+                  </Button>
+                </Link>
+              </li>
+            </ul>
+          </section>
+          <hr className="shop_hr"/>
+          <section className="shop-card_section">
+            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
+              情報の編集をリクエスト
+            </Button>
+          </section>
         </div>
         <style jsx>{`
-          *{
-            margin:0;
-            padding:0;
-            border:0;
-            outline:0;
-            list-style:none;
+          .shop-card_section{
+            padding: 24px 16px;
           }
-          a{
-            text-decoration: none;
+          .shop_hr{
+            height: 8px;
+            width: 100%;
+            background: ${CommonStyle.BgGray};
+            margin: 0;
           }
           // 中身
           .shop-card{
-            padding: 20px;
           }
           .shop-img_wrapper{
             width: 240px;
@@ -248,18 +279,30 @@ export const Shop: React.FC = () => {
             height: auto;
           }
 
+          // 基本情報
+          .shop_base-info{
+          }
+          .shop_base-info_option:not(:last-child){
+            margin-bottom: 8px;
+            
+          }
+          // コスト
           .shop_cost-list{
             display: flex;
+            width: fit-content;
           }
           .shop_cost-option{
             display: flex;
+            align-items: center;
+            margin-right: 24px;
           }
           .shop_cost-icon_day{
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
             border-radius: 4px;
             background: ${CommonStyle.AccentColor};
           }
@@ -267,8 +310,9 @@ export const Shop: React.FC = () => {
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
             border-radius: 4px;
             background: ${CommonStyle.BadColor};
           }
@@ -279,11 +323,16 @@ export const Shop: React.FC = () => {
           }
 
           // 感染対策
+          .infection-control_hr{
+            height: 2px;
+            margin: 0 0 16px 0;
+            background: ${CommonStyle.BgGray}
+          }
           .infection-control_card{
             margin-bottom: 16px;
           }
           .infection-control_title{
-            margin-bottom: 12px;
+            margin-bottom: 16px;
           }
           .infection-control_list{
             display: flex;
@@ -296,13 +345,15 @@ export const Shop: React.FC = () => {
             width: 32px;
             height: auto;
           }
-
           .infection-control_comment{
             background-color: ${CommonStyle.BgGray};
             padding: 12px;
             border-radius: 8px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             position: relative;
+          }
+          .infection-control_comment-option:not(:last-child){
+            margin-bottom: 4px;
           }
           .infection-control_comment::before{
             content: '';
@@ -318,18 +369,19 @@ export const Shop: React.FC = () => {
             border-left: 8px solid transparent;
           }
           .infection-control_review{
-            display: flex;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
           }
           .infection-control_review-title{
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
             color: ${CommonStyle.TextBlack};
-            margin-right: 16px;
+            margin-bottom: 12px;
           }
           .infection-control_review-list{
             display: flex;
+            float: left;
+            margin-right: 24px;
           }
           .infection-control_review-option{
             display: flex;
@@ -345,13 +397,12 @@ export const Shop: React.FC = () => {
             margin-left: 8px;
           }
 
-          .shop_hr{
-            height: 2px;
-            background: ${CommonStyle.BorderGray};
-            margin-bottom: 24px;
-          }
+          
 
           // 基本情報
+          .shop_info-list{
+            margin-bottom: 16px;
+          }
           .shop_info-option{
             display: flex;
             align-items: center;
@@ -365,7 +416,7 @@ export const Shop: React.FC = () => {
           .shop_info-option_content{
             margin-left: 8px;
           }
-
+          //sns
           .shop_sns-list{
             display: flex;
             justify-content: center;
