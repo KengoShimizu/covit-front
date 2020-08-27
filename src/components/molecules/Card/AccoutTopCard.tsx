@@ -1,6 +1,6 @@
 import React from 'react';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 import { Link } from 'react-router-dom';
 
 const propStyle = {

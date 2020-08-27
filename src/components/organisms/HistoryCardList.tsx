@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CommonStyle } from './../../common/CommonStyle';
-import { HistoryCard } from './../molecules/HistoryCard';
+import { HistoryCard } from '../molecules/Card/HistoryCard';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import Text, { TextThemes } from './../atoms/Text';

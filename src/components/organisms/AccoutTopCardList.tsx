@@ -1,6 +1,6 @@
 import React from 'react';
 import { CommonStyle } from './../../common/CommonStyle';
-import { AccountTopCard } from './../molecules/AccoutTopCard';
+import { AccountTopCard } from '../molecules/Card/AccoutTopCard';
 import HistoryIcon from './../../img/history_black.svg';
 import { Edit, Mail, LogOut, Trash2 } from 'react-feather';
 

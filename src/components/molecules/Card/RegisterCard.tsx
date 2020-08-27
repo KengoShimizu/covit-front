@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+import {CommonStyle} from '../../../common/CommonStyle';
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   registerCardIcon: {

@@ -4,7 +4,7 @@ import { Frown } from 'react-feather';
 import { Calendar } from 'react-feather';
 import { ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
-import { CommonStyle } from './../../common/CommonStyle';
+import { CommonStyle } from '../../../common/CommonStyle';
 
 interface HistoryCardProps {
   name: string;
