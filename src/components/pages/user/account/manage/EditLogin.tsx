@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../../../templates/HomeLayout';
 import {CommonStyle} from '../../../../../common/CommonStyle';
-import Input, { InputThemes } from '../../../../atoms/Input';
 import { LoginFlexCard } from '../../../../molecules/LoginFlexCard';
 
 export const EditLogin: React.FC = () => {
   return (
-    <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/'>
+    <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/accounts'>
         <div className='container'>
           <ul>
             <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />

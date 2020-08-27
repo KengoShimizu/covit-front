@@ -1,16 +1,11 @@
 import React from 'react';
-import {CommonStyle} from '../../../../../common/CommonStyle';
-import { Link } from 'react-router-dom';
 import { HomeLayout } from '../../../../templates/HomeLayout';
+import { RegisterCardList } from './../../../../organisms/RegisterCardList';
 
 export const Register: React.FC = () => {
   return (
-    <HomeLayout>
-      <div>
-        <Link to='/'>Top</Link>
-        <br />
-        <Link to='/accounts/emailregister'>EmailRegister</Link>
-      </div>
+    <HomeLayout subHeaderText='会員登録・ログイン' prevRef='/'>
+      <RegisterCardList/>
     </HomeLayout>
   );
 }

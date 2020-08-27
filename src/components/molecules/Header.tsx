@@ -26,12 +26,14 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef}) => {
               <p className="icon-list_caption">閲覧履歴</p>
             </li>
           </Link>
-          <li className="icon-list_option">
-            <span className="icon-list_img-wrapper">
-              <LogIn size={24} color="#fff" />
-            </span>
-            <p className="icon-list_caption">ログイン</p>
-          </li>
+          <Link to='/accounts/register'>
+            <li className="icon-list_option">
+              <span className="icon-list_img-wrapper">
+                <LogIn size={24} color="#fff" />
+              </span>
+              <p className="icon-list_caption">ログイン</p>
+            </li>
+          </Link>
           <li className="icon-list_option_menu">
             <Menu size={32} color="#fff" />
           </li>
