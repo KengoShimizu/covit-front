@@ -92,7 +92,8 @@ export const Top: React.FC = (props: any) => {
   }
 
   const fetchStepsData = (shop: any) => {
-    axios.get(`/api/v1/user/steps?shop_id=1`)
+    // FIXME
+    axios.get(`/api/v1/user/steps?shop_id=${1}`)
       .then(res => {
         setSteps(res.data);
         setClickedShop(shop);
