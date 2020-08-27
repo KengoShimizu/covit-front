@@ -10,15 +10,16 @@ import { SubHeader } from './SubHeader';
 interface HeaderProps {
   subHeaderText?: string;
   prevRef?: string;
+  history?: any;
 }
 
-export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef}) => {
+export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <React.Fragment>
       <header className="header">
         <img className="service-logo" src="" alt=""/>
         <ul className="icon-list">
-          <Link to='/History'>
+          <Link to='/history'>
             <li className="icon-list_option">
               <span className="icon-list_img-wrapper">
                 <img className="icon-list_img" src={HistoryIcon} alt=""/>
@@ -39,7 +40,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef}) => {
           </li>
         </ul>
       </header>
-      {(subHeaderText && prevRef) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef}/>}
+      {(subHeaderText && prevRef && history) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
       <style jsx>{`
         *{
           margin:0;

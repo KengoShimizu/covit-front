@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {CommonStyle} from '../../../../common/CommonStyle';
 import { HomeLayout } from '../../../templates/HomeLayout';
-import Button, { ButtonThemes } from '../../../atoms/Button';
+import Button from '../../../atoms/Button';
 import Icon, { IconThemes } from '../../../atoms/Icon';
 import Text, { TextThemes } from '../../../atoms/Text';
 import { ChevronRight } from 'react-feather';
@@ -22,16 +21,12 @@ const propStyle = {
   }
 }
 
-export const AccountTop: React.FC = () => {
+export const AccountTop: React.FC = (props: any) => {
   const { authState, setAuth } = useContext(AuthContext);
   const [account, setAccount] = useState(authState.user);
 
-  useEffect(() => {
-    console.log(account);
-  }, [])
-
   return (
-    <HomeLayout subHeaderText={'ユーザ情報'} prevRef={'/'}>
+    <HomeLayout subHeaderText={'ユーザ情報'} prevRef={'/'} history={props.history}>
       <div className="account-info_card">
         <div className="account-info_profile">
           {/* FIXME IconThemes.COVIDMEASURE*/}

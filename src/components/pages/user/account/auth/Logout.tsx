@@ -5,7 +5,7 @@ import axios from "axios";
 import { HomeLayout } from '../../../../templates/HomeLayout';
 import Cookies from 'universal-cookie';
 
-export const Logout: React.FC = () => {
+export const Logout: React.FC = (props: any) => {
   const cookies = new Cookies();
   const buttonRef = useRef(document.createElement("button"));
   const [loggedout, setLoggedout] = useState("");
@@ -19,7 +19,7 @@ export const Logout: React.FC = () => {
   }
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText="ログアウト" prevRef="/" history={props.history}>
       <div className="container">
         {loggedout !== 'ok' ?
           <React.Fragment>

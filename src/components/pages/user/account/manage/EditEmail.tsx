@@ -2,16 +2,13 @@ import React, { useState, useContext } from 'react';
 import { HomeLayout } from '../../../../templates/HomeLayout';
 import Input, { InputThemes } from '../../../../atoms/Input'
 import Button, { ButtonThemes } from '../../../../atoms/Button'
-import axios from 'axios';
-
 import { AuthContext } from "../../../../../context/CommonProvider";
-
 
 interface EditParam {
   email: string;
 }
 
-export const EditEmail: React.FC = () => {
+export const EditEmail: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const [editData, setEditData] = useState<EditParam>({
     email: ""
@@ -32,7 +29,7 @@ export const EditEmail: React.FC = () => {
   }
 
   return (
-    <HomeLayout subHeaderText="メールアドレスの編集" prevRef="#">
+    <HomeLayout subHeaderText="メールアドレスの編集" prevRef="#" history={props.history}>
       {/* FIXME リンク先 */}
       <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{margin: '32px auto'}} readonly={true}/>
       <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{margin: '32px auto'}}/>

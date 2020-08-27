@@ -17,7 +17,7 @@ const propStyle = {
 };
 
 // ショップのコメント一覧
-export const ShopComments: React.FC = () => {
+export const ShopComments: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const [state, setState] = useState('good');
   const [showLoader, setShowLoader] = useState(false);
@@ -102,7 +102,7 @@ export const ShopComments: React.FC = () => {
   }, [])
 
   return (
-    <HomeLayout subHeaderText={'コメント一覧'} prevRef={`/shops/${match.params.id}`}>
+    <HomeLayout subHeaderText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       <div className='container'>
         <div className="content">
           <div className="review-switch_container">

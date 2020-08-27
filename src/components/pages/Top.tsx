@@ -9,7 +9,6 @@ import Cookies from 'universal-cookie';
 import Button, { ButtonThemes } from './../atoms/Button';
 import axios from "axios";
 import { ChevronDown } from 'react-feather';
-import { InputAdornment } from '@material-ui/core';
 import { GenreCardList } from './../organisms/GenreCardList';
 
 // ボタンのCSS
@@ -66,7 +65,7 @@ const propStyle = {
   }
 };
 
-export const Top: React.FC = () => {
+export const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);

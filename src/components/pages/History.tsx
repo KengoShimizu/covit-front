@@ -1,6 +1,5 @@
 import React from 'react';
 import {CommonStyle} from './../../common/CommonStyle';
-import { Link } from 'react-router-dom';
 import { Trash2 } from 'react-feather';
 import { Smile } from 'react-feather';
 import { Frown } from 'react-feather';
@@ -8,9 +7,9 @@ import { Calendar } from 'react-feather';
 import { ChevronRight } from 'react-feather';
 import { HomeLayout } from '../templates/HomeLayout';
 
-export const History: React.FC = () => {
+export const History: React.FC = (props: any) => {
     return (
-      <HomeLayout subHeaderText='閲覧履歴' prevRef='/'>
+      <HomeLayout subHeaderText='閲覧履歴' prevRef='/' history={props.history}>
         <div className='container'>
           <button className="delete-btn">
             <span className="delete-btn_icon"><Trash2 size="16" color="#8C8C8C" /></span>

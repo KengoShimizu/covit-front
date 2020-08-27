@@ -5,12 +5,17 @@ interface HomeLayoutProps {
   subHeaderText?: string;
   prevRef?: string;
   children?: React.ReactNode;
+  history?: any;
 }
 
-export const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children}) => {
+export const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children, history}) => {
   return (
     <div className="container">
-      <Header subHeaderText={subHeaderText} prevRef={prevRef}/>
+      {history ? 
+        <Header subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>
+        :
+        <Header subHeaderText={subHeaderText} prevRef={prevRef}/>
+      }
       <div className="wrap">
         <main>
           {children}

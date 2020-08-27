@@ -28,7 +28,7 @@ const propStyle = {
   }
 };
 
-export const Shop: React.FC = () => {
+export const Shop: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const [err, setErr] = useState("");
   const [shopData, setShopData] = useState({
@@ -73,7 +73,7 @@ export const Shop: React.FC = () => {
   }, [])
 
   return (
-    <HomeLayout subHeaderText={shopData.name} prevRef={'/'}>
+    <HomeLayout subHeaderText={shopData.name} prevRef={'/'} history={props.history}>
       <div className="content">
         <div className="shop-card">
           {/* ヘッダー画像 */}

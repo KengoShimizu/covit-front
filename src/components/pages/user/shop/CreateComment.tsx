@@ -20,7 +20,7 @@ export interface AddParam {
 
 //レビュー記入
 // FIXME formに来店日追加
-export const CreateComment: React.FC = () => {
+export const CreateComment: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const [addData, setAddData] = useState<AddParam>({
     content: "",
@@ -44,7 +44,7 @@ export const CreateComment: React.FC = () => {
   }
 
   return (
-    <HomeLayout subHeaderText={'レビュー記入'} prevRef={`/shops/${match.params.id}`}>
+    <HomeLayout subHeaderText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       <div className='container'>
         <div className="content">
           <h1 className="shop-name">cafe えにしえ</h1>
