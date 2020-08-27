@@ -5,6 +5,9 @@ import { HomeLayout } from '../templates/HomeLayout';
 import { HistoryCardList } from './../organisms/HistoryCardList';
 import Button, { ButtonThemes } from './../atoms/Button';
 import Icon, { IconThemes } from './../atoms/Icon';
+import Cookies from 'universal-cookie';
+import isModalShown from './../../context/isModalShown';
+import { Modal } from './../molecules/Modal';
 
 const propStyle = {
   deleteBtn: {
@@ -26,10 +29,18 @@ const propStyle = {
 }
 
 export const History: React.FC = (props: any) => {
+    const cookies = new Cookies();
+
+    const handleCookie = () => {
+      cookies.set('histories', '');
+      cookies.set('histories_date', '');
+    }
+
     return (
       <HomeLayout subHeaderText='閲覧履歴' prevRef='/' history={props.history}>
+        <Modal/>
         <div className='container'>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn}>
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={() => handleCookie}>
             <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.deleteBtnIcon}><Trash2 size="18" color="#8C8C8C" /></Icon>
             <span className="delete-btn_text">履歴を削除</span>
           </Button>

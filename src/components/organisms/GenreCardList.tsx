@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CommonStyle } from '../../common/CommonStyle';
-import { GenreCard } from './../molecules/GenreCard';
+import { GenreCard } from '../molecules/Card/GenreCard';
 import Text, { TextThemes } from './../atoms/Text';
 import Button, { ButtonThemes } from './../atoms/Button';
 

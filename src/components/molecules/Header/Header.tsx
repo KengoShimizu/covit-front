@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
+import {CommonStyle} from '../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
-import HistoryIcon from './../../img/history.svg';
+import HistoryIcon from './../../../img/history.svg';
 import { User } from 'react-feather';
 import { LogIn } from 'react-feather';
 import { Menu } from 'react-feather';

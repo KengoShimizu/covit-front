@@ -1,7 +1,7 @@
 import React from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import Button, { ButtonThemes } from './../atoms/Button';
-import Title, { TitleThemes } from './../atoms/Title';
+import {CommonStyle} from '../../../common/CommonStyle';
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Title, { TitleThemes } from '../../atoms/Title';
 import { ChevronLeft } from 'react-feather';
 import { Link } from 'react-router-dom';
 

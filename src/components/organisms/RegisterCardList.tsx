@@ -1,5 +1,5 @@
 import React from 'react';
-import { RegisterCard } from './../molecules/RegisterCard';
+import { RegisterCard } from '../molecules/Card/RegisterCard';
 import { NextRefBtn } from '../molecules/NextRefBtn';
 
 interface RegisterCardListProps {

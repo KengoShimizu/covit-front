@@ -1,10 +1,10 @@
 import React from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import { FormatDate } from '../../common/Function'
+import {CommonStyle} from '../../../common/CommonStyle';
+import { FormatDate } from '../../../common/Function'
 import { Calendar } from 'react-feather';
 import { AlertTriangle } from 'react-feather';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 
 type CardProps = {
   HistoryIcon: any;

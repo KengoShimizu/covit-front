@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import HistoryIcon from './../../../../img/history.svg'
-import { CommentCard } from '../../../molecules/CommentCard'
+import { CommentCard } from '../../../molecules/Card/CommentCard'
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import { Smile } from 'react-feather';
