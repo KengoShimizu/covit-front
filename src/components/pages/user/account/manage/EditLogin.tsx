@@ -3,9 +3,9 @@ import { HomeLayout } from '../../../../templates/HomeLayout';
 import {CommonStyle} from '../../../../../common/CommonStyle';
 import { LoginFlexCard } from '../../../../molecules/LoginFlexCard';
 
-export const EditLogin: React.FC = () => {
+export const EditLogin: React.FC = (props: any) => {
   return (
-    <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/accounts'>
+    <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/accounts' history={props.history}>
         <div className='container'>
           <ul>
             <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />

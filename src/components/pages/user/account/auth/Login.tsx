@@ -29,7 +29,7 @@ export const Login: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout subHeaderText={'ログイン'} prevRef={'/accounts/register'}>
+    <HomeLayout subHeaderText={'ログイン'} prevRef={'/accounts/register'} history={props.history}>
       <div className="form">
         <div className="content">
           <div className="err">{err}</div>

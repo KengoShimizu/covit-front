@@ -8,16 +8,25 @@ import { Link } from 'react-router-dom';
 interface SubHeaderProps {
   subHeaderText: string;
   prevRef: string;
+  history: any;
 }
 
-export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef}) => {
+export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <div className="sub-header">
-      <Link to={prevRef}>
-        <Button theme={[ButtonThemes.SUBHEADER]}>
-          <ChevronLeft size={24} color="#333" />
-        </Button>
-      </Link>
+      {subHeaderText === '閲覧履歴' ?
+        <div onClick={() => history.goBack()}>
+          <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+          </Button>
+        </div>
+        :
+        <Link to={prevRef}>
+          <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+          </Button>
+        </Link>
+      }
       <Title theme={[TitleThemes.SUBHEADER]}>
         {subHeaderText}
       </Title>
