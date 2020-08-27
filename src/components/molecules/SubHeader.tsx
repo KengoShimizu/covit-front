@@ -14,7 +14,9 @@ interface SubHeaderProps {
 export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <div className="sub-header">
-      {subHeaderText === '閲覧履歴' ?
+      {subHeaderText === '閲覧履歴' || 
+       subHeaderText === '会員登録・ログイン' ||
+       subHeaderText === 'ユーザ情報' ?
         <div onClick={() => history.goBack()}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />

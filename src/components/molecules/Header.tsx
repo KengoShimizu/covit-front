@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {CommonStyle} from './../../common/CommonStyle';
 import { Link } from 'react-router-dom';
 import HistoryIcon from './../../img/history.svg';
@@ -6,6 +6,7 @@ import { User } from 'react-feather';
 import { LogIn } from 'react-feather';
 import { Menu } from 'react-feather';
 import { SubHeader } from './SubHeader';
+import { AuthContext } from "./../../context/CommonProvider";
 
 interface HeaderProps {
   subHeaderText?: string;
@@ -14,6 +15,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
+  const { authState, setAuth } = useContext(AuthContext);
   return (
     <React.Fragment>
       <header className="header">
@@ -27,14 +29,25 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
               <p className="icon-list_caption">閲覧履歴</p>
             </li>
           </Link>
-          <Link to='/accounts/register'>
-            <li className="icon-list_option">
-              <span className="icon-list_img-wrapper">
-                <LogIn size={24} color="#fff" />
-              </span>
-              <p className="icon-list_caption">ログイン</p>
-            </li>
-          </Link>
+          {authState.isLogin ?
+            <Link to='/accounts'>
+              <li className="icon-list_option">
+                <span className="icon-list_img-wrapper">
+                  <User size={24} color="#fff" />
+                </span>
+                <p className="icon-list_caption">マイページ</p>
+              </li>
+            </Link>
+            :
+            <Link to='/accounts/register'>
+              <li className="icon-list_option">
+                <span className="icon-list_img-wrapper">
+                  <LogIn size={24} color="#fff" />
+                </span>
+                <p className="icon-list_caption">ログイン</p>
+              </li>
+            </Link>
+          }
           <li className="icon-list_option_menu">
             <Menu size={32} color="#fff" />
           </li>
@@ -72,7 +85,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
         }
         .icon-list_option{
           text-align: center;
-          width: 44px;
+          width: 50px;
           height: 44px;
           margin-right: 4px;
         }
@@ -84,6 +97,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
           justify-content: center;
         }
         .icon-list_img-wrapper{
+          margin: 0 auto;
           width: 44px;
           height: 32px;
           display:flex;
