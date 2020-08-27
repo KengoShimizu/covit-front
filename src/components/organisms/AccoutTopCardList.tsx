@@ -13,7 +13,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({}) => {
     <div className="container">
       <ul className="account-function_list">
         <AccountTopCard src={HistoryIcon} text='閲覧履歴' nextRef='/history'/>
-        <AccountTopCard text='レビューしてお店' nextRef='/history'>
+        <AccountTopCard text='レビューしたお店' nextRef='/history'>
           <Edit size={20} color="#333" />
         </AccountTopCard>
         <hr className="account-function_hr" />
