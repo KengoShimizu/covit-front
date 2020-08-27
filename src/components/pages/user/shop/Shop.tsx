@@ -46,14 +46,14 @@ export const Shop: React.FC = (props: any) => {
   });
   const [stepData, setStepData] = useState([]);
   
-  const fetchShopData = async () => {
-    await axios.get(`/api/v1/user/shops/${match.params.id}`)
+  const fetchShopData = () => {
+    axios.get(`/api/v1/user/shops/${match.params.id}`)
     .then(res => setShopData(res.data))
     .catch(err => setErr(err));
   }
 
-  const fetchStepsData = async () => {
-    await axios.get(`/api/v1/user/steps?shop_id=${match.params.id}`)
+  const fetchStepsData = () => {
+    axios.get(`/api/v1/user/steps?shop_id=${match.params.id}`)
     .then(res => setStepData(res.data))
     .catch(err => setErr(err));
   }
