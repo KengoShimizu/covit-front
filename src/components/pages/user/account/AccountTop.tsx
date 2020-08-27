@@ -2,12 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import {CommonStyle} from '../../../../common/CommonStyle';
 import { HomeLayout } from '../../../templates/HomeLayout';
 import Button, { ButtonThemes } from '../../../atoms/Button';
-import HistoryIcon from './../../../../img/history_black.svg';
 import Icon, { IconThemes } from '../../../atoms/Icon';
 import Text, { TextThemes } from '../../../atoms/Text';
-import { ChevronRight, Edit, Mail, LogOut, Trash2 } from 'react-feather';
-import { FlexCard } from '../../../molecules/FlexCard';
+import { ChevronRight } from 'react-feather';
+import { Link } from 'react-router-dom';
 import { AuthContext } from "../../../../context/CommonProvider";
+import { AccountTopCardList } from './../../../organisms/AccoutTopCardList';
 
 const propStyle = {
   profileCardBtn: {
@@ -42,48 +42,18 @@ export const AccountTop: React.FC = () => {
             {account.name}
           </Text>
         </div>
-        <Button propStyle={propStyle.profileCardBtn}>
-          <Text theme={[TextThemes.SMALL]} propStyle={propStyle.profileText}> 
-            プロフィールを編集
-          </Text>
-          <ChevronRight size={16} color="#333"/>
-        </Button>
+        <Link to='/accounts/editprofile'>
+          <Button propStyle={propStyle.profileCardBtn}>
+            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.profileText}> 
+              プロフィールを編集
+            </Text>
+            <ChevronRight size={16} color="#333"/>
+          </Button>
+        </Link>
       </div>
 
-      <ul className="account-function_list">
-        <li className="account-function_option">
-          <Icon theme={[IconThemes.LERGE]}><img className="account-function_img" src={HistoryIcon} alt=""/></Icon>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
-            閲覧履歴
-          </Text>
-        </li>
-        <li className="account-function_option">
-          <Icon theme={[IconThemes.LERGE]}><Edit size={20} color="#333" /></Icon>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
-            レビューしたお店
-          </Text>
-        </li>
-        <hr className="account-function_hr" />
-        <li className="account-function_option">
-          <Icon theme={[IconThemes.LERGE]}><Mail size={20} color="#333" /></Icon>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
-            ログイン情報の編集
-          </Text>
-        </li>
-        <hr className="account-function_hr" />
-        <li className="account-function_option">
-          <Icon theme={[IconThemes.LERGE]}><LogOut size={20} color="#333" /></Icon>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
-            ログアウト
-          </Text>
-        </li>
-        <li className="account-function_option">
-          <Icon theme={[IconThemes.LERGE]}><Trash2 size={20} color="#333" /></Icon>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
-            アカウントを削除する
-          </Text>
-        </li>
-      </ul>
+      <AccountTopCardList/>
+
       <ul className="privacy_container">
         <li className="privacy_text">プライバシー</li>
         <li className="privacy_text">サービス名 © ︎2020</li>
@@ -104,24 +74,6 @@ export const AccountTop: React.FC = () => {
           width: 100%;
           height: 100%;
         }
-        .account-function_list{
-          padding: 0 16px;
-        }
-        .account-function_hr{
-          height: 2px;
-          margin: 0 0 12px 0;
-          background: ${CommonStyle.BgGray}
-        }
-        .account-function_option{
-          display: flex;
-          align-items: center;
-          margin-bottom: 12px;
-        }
-        .account-function_img{
-          width: 100%;
-          height: auto;
-        }
-
         //プライバシー
         .privacy_container{
           text-align: center;

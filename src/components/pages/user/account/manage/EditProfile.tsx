@@ -35,7 +35,7 @@ export const EditProfile: React.FC = () => {
   }
 
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={'プロフィールの編集'} prevRef={'/accounts'}>
       <Input theme={InputThemes.REQUIRED} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto'}}/>
       <UserIconSellection data={editData} setData={setEditData} />
       <Button theme={[ButtonThemes.NORMAL]} onClick={putData} propStyle={{margin: '16px auto'}}>登録する</Button>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {CommonStyle} from './../../common/CommonStyle';
 import Icon, { IconThemes } from './../atoms/Icon';
 import Text, { TextThemes } from './../atoms/Text';
@@ -9,15 +9,13 @@ const propStyle = {
   }
 }
 
-interface FlexCardProps {
+interface GenreCardProps {
   src: string;
   text: string;
   className: string;
 }
 
-export const GenreCard: React.FC<FlexCardProps> = ({src, text, className}) => {
-  //const [isClicked, setIsClicked] = useState();
-
+export const GenreCard: React.FC<GenreCardProps> = ({src, text, className}) => {
   return (
     <div className={`genre-card ${className}`}>
       <div className="genre-card-inner">

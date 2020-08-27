@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {CommonStyle} from '../../../../../common/CommonStyle';
-import { Link } from 'react-router-dom';
+import { NextRefBtn } from './../../../../molecules/NextRefBtn';
 import axios from "axios";
 import { HomeLayout } from '../../../../templates/HomeLayout';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
@@ -29,7 +29,7 @@ export const Login: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout subHeaderText={'ログイン'} prevRef={'/'}>
+    <HomeLayout subHeaderText={'ログイン'} prevRef={'/accounts/register'}>
       <div className="form">
         <div className="content">
           <div className="err">{err}</div>
@@ -41,9 +41,7 @@ export const Login: React.FC = (props: any) => {
                 認証コードを送信
               </Button>
             </div>
-            <Link to='/accounts/register'>
-              <p className="regist-link">会員登録はこちら</p>
-            </Link>
+            <NextRefBtn nextRef='/accounts/register' text='会員登録はこちら'/>
           </div>
         </div>
         <style jsx>{`

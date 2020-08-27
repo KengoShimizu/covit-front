@@ -18,4 +18,8 @@ export const CommonStyle = {
   Text: '16px',
   Caption: '14px',
   Smallest: '12px',
+  // snsカラー
+  TwitterColor: '#91C4F3',
+  GoogleColor: '#D8503F',
+  FacebookColor: '#425994',
 }
