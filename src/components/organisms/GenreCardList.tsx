@@ -30,7 +30,7 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
   const handleChange = (event: any) => {
     const selectedId = genres.findIndex(data => data === event.currentTarget.id) + 1;
     // 既に選択されていたら除去
-    if(selectedGenre.find(data => data == selectedId)){
+    if(selectedGenre.find(data => data === selectedId)){
       setSelectedGenre(selectedGenre.filter(data => data != selectedId));
     }
     // 追加
@@ -48,7 +48,7 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
       <div className={genreSerchIsOpen ? 'container' : 'container close'}>
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
         <ul className="genres-container">
-          {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data == num) ? 'selected' : ''}/></li>)}
+          {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data === num) ? 'selected' : ''}/></li>)}
         </ul>
         <div className="genre-btns">
           <Button 
