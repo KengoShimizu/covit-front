@@ -7,14 +7,15 @@ import { Link } from 'react-router-dom';
 
 interface SubHeaderProps {
   subHeaderText: string;
-  prevRef: string;
+  prevRef?: string;
   history: any;
 }
 
 export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <div className="sub-header">
-      {subHeaderText === '閲覧履歴' ?
+      {prevRef ?
+      (subHeaderText === '閲覧履歴' ?
         <div onClick={() => history.goBack()}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
@@ -25,7 +26,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, his
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
           </Button>
-        </Link>
+        </Link>) : ""
       }
       <Title theme={[TitleThemes.SUBHEADER]}>
         {subHeaderText}

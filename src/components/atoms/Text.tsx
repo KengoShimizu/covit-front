@@ -8,19 +8,21 @@ interface TextProps {
 }
 
 export enum TextThemes {
-  INIT = 'INIT',
-  SMALL = 'SMALL',
-  CAPTION = 'CAPTION',
-  TEXT = 'TEXT',
-  SUBTITLE = 'SUBTITLE'
+  INIT     = 'INIT',
+  SMALL    = 'SMALL',
+  CAPTION  = 'CAPTION',
+  TEXT     = 'TEXT',
+  SUBTITLE = 'SUBTITLE',
+  LEFT     = 'LEFT'
 }
 
 enum ModifierClassNames {
-  INIT = 'Text-init',
-  SMALL = 'small-text',
-  CAPTION = 'caption-text',
-  TEXT = 'normal-text',
-  SUBTITLE = 'subtitle-text'
+  INIT     = 'Text-init',
+  SMALL    = 'small-text',
+  CAPTION  = 'caption-text',
+  TEXT     = 'normal-text',
+  SUBTITLE = 'subtitle-text',
+  LEFT     = 'left-text'
 }
 
 
@@ -64,6 +66,9 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             font-size: ${CommonStyle.Smallest};
             font-weight: bold;
             line-height: 1.em;
+          }
+          .left-text {
+            text-align: left;
           }
         `}
       </style>
