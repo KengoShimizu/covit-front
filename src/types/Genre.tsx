@@ -1,6 +1,7 @@
-export interface Step {
+export interface Genre {
   id: number;
-  content: string;
+  name: string;
+  image: string;
   created_at: string;
   updated_at: string;
 }

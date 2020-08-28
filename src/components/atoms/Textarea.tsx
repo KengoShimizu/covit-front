@@ -9,6 +9,7 @@ interface TextareaProps {
   subtitle?: string;
   content?: string;
   rows?: number;
+  name: string;
 }
 
 export enum TextareaThemes {
@@ -21,12 +22,12 @@ enum ModifierClassNames {
   REQUIRED = 'textarea-required',
 }
 
-const Textarea: React.FC<TextareaProps> = ({ theme = TextareaThemes.INIT, propStyle = {}, handleChange, label, content, rows = 5, subtitle}) => {
+const Textarea: React.FC<TextareaProps> = ({ theme = TextareaThemes.INIT, propStyle = {}, handleChange, label, content, rows = 5, subtitle, name}) => {
   return (
     <div className={["textarea", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
       <p className="subtitle">{subtitle}</p>
-      <textarea onChange={handleChange} rows={rows}>
+      <textarea onChange={handleChange} rows={rows} name={name}>
         {content}
       </textarea>
       <style jsx>

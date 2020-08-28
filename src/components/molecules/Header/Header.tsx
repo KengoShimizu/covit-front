@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
           </li>
         </ul>
       </header>
-      {(subHeaderText && prevRef && history) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
+      {(subHeaderText && history) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
       <style jsx>{`
         *{
           margin:0;

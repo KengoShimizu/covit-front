@@ -36,7 +36,7 @@ export const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, c
           width: 100%
         }
         .wrap{
-          padding-top: ${prevRef ? '0px' : '56px'};
+          padding-top: ${subHeaderText ? '0px' : '56px'};
           width: 100%;
           height: calc(100vh - 56px);
         }
