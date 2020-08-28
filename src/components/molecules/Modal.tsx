@@ -6,11 +6,14 @@ import Button, { ButtonThemes } from './../atoms/Button';
 import { CommonStyle } from './../../common/CommonStyle';
 
 const propStyle = {
+  title: {
+    marginBottom: '15px'
+  },
   subTitle: {
     textAlign: 'left',
-    margin: '15px 0 35px'
   },
   btn: {
+    marginTop: '35px',
     width: '40%',
   }
 }
@@ -35,7 +38,7 @@ export const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick})
         <div className="modal-background" onClick={() => changeShownModal(false)}></div>
         <div className='modal-container'>
           <div className='modal-inner'>
-            <Text theme={[TextThemes.SUBTITLE]}>{title}</Text>
+            <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.title}>{title}</Text>
             {subtitle && <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.subTitle}>{subtitle}</Text>}
             <div className="modal-btns">
               <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn} onClick={() => changeShownModal(false)}>
