@@ -1,6 +1,8 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
+// library
 import { Image } from 'react-feather';
-import { CommonStyle } from '../../common/CommonStyle';
+// common
+import CommonStyle from '../../common/CommonStyle';
 
 interface InputFileProps {
   theme?: InputFileThemes;

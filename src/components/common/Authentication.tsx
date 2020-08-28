@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState, useCallback } from "react";
+// library
 import { Redirect } from "react-router-dom";
 import useReactRouter from "use-react-router";
-
-import { AuthContext } from "../../context/CommonProvider";
-
 import axios from "axios";
+// context
+import AuthContext from "../../context/CommonProvider";
 
 type AuthProps = {
   children: React.ReactNode;

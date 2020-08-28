@@ -1,9 +1,13 @@
 import React from 'react';
-import {CommonStyle} from '../../../common/CommonStyle';
-import Button, { ButtonThemes } from '../../atoms/Button';
-import Title, { TitleThemes } from '../../atoms/Title';
+// library
 import { ChevronLeft } from 'react-feather';
 import { Link } from 'react-router-dom';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Title, { TitleThemes } from '../../atoms/Title';
+
 
 interface SubHeaderProps {
   subHeaderText: string;
@@ -11,7 +15,7 @@ interface SubHeaderProps {
   history: any;
 }
 
-export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
+const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <div className="sub-header">
       {prevRef ?
@@ -45,3 +49,4 @@ export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, his
   );
 }
 
+export default SubHeader;

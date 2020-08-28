@@ -1,16 +1,14 @@
-import React, { useState, useContext } from 'react';
-import { HomeLayout } from '../../../../templates/HomeLayout';
+import React, { useState } from 'react';
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
 import Input, { InputThemes } from '../../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
-
-import { AuthContext } from "../../../../../context/CommonProvider";
 
 interface AddParam {
   email: string;
 }
 
 export const AddEmail: React.FC = (props: any) => {
-  const { authState } = useContext(AuthContext);
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });

@@ -1,5 +1,7 @@
 import React from 'react';
-import {CommonStyle} from '../../../common/CommonStyle';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
 
@@ -13,7 +15,7 @@ interface LoginFlexCardProps {
   text: string;
 }
 
-export const LoginFlexCard: React.FC<LoginFlexCardProps> = ({src, text}) => {
+const LoginFlexCard: React.FC<LoginFlexCardProps> = ({src, text}) => {
   return (
     <li className="login-card">
       <div　className="login-card_content">
@@ -62,3 +64,4 @@ export const LoginFlexCard: React.FC<LoginFlexCardProps> = ({src, text}) => {
   );
 }
 
+export default LoginFlexCard;

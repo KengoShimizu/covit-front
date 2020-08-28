@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { HomeLayout } from '../../../../templates/HomeLayout';
-import Input, { InputThemes } from '../../../../atoms/Input'
-import Button, { ButtonThemes } from '../../../../atoms/Button'
-import { AuthContext } from "../../../../../context/CommonProvider";
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../../atoms/Input';
+import Button, { ButtonThemes } from '../../../../atoms/Button';
+// ccontext
+import AuthContext from "../../../../../context/CommonProvider";
 
 interface EditParam {
   email: string;

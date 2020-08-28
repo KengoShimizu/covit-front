@@ -1,13 +1,17 @@
-import React, { useContext, useEffect } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
+import React, { useContext } from 'react';
+// library
 import { Trash2 } from 'react-feather';
-import { HomeLayout } from '../templates/HomeLayout';
-import { HistoryCardList } from './../organisms/HistoryCardList';
+import Cookies from 'universal-cookie';
+// common
+import CommonStyle from './../../common/CommonStyle';
+// components
+import HomeLayout from '../templates/HomeLayout';
+import HistoryCardList from './../organisms/HistoryCardList';
 import Button, { ButtonThemes } from './../atoms/Button';
 import Icon, { IconThemes } from './../atoms/Icon';
-import Cookies from 'universal-cookie';
-import { ModalContext } from './../../context/ModalContext';
-import { Modal } from '../molecules/Modal/Modal';
+import Modal from '../molecules/Modal/Modal';
+// context
+import ModalContext from './../../context/ModalContext';
 
 const propStyle = {
   deleteBtn: {

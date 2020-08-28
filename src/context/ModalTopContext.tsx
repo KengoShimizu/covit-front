@@ -1,22 +1,28 @@
 import React, { useState, useContext } from 'react';
 
-type ModalTopState_isShown = {
+type ModalTopStateIsShown = {
   isModalTopShown: boolean;
   setIsModalTopShown: any;
 };
 
-type ModalTopState_text = {
-  modalText: string;
+type ModalTopStateText = {
+  modalText: {
+    caption: string;
+    small?: string;
+  };
   setModalText: any;
 };
 
-export const ModalTopContext_isShown = React.createContext<ModalTopState_isShown>({
+export const ModalTopContextIsShown = React.createContext<ModalTopStateIsShown>({
   isModalTopShown: false,
   setIsModalTopShown: () => {}
 });
 
-export const ModalTopContext_text = React.createContext<ModalTopState_text>({
-  modalText: '',
+export const ModalTopContextText = React.createContext<ModalTopStateText>({
+  modalText: {
+    caption: '',
+    small: ''
+  },
   setModalText: () => {}
 });
 
@@ -25,14 +31,14 @@ type ProviderProps = {
 };
 
 export const ModalTopStateProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [isModalTopShown, setIsModalTopShown] = useState(useContext(ModalTopContext_isShown).isModalTopShown);
-  const [modalText, setModalText] = useState(useContext(ModalTopContext_text).modalText);
+  const [isModalTopShown, setIsModalTopShown] = useState(useContext(ModalTopContextIsShown).isModalTopShown);
+  const [modalText, setModalText] = useState(useContext(ModalTopContextText).modalText);
 
   return (
-    <ModalTopContext_isShown.Provider value={{isModalTopShown, setIsModalTopShown}}>
-      <ModalTopContext_text.Provider value={{modalText, setModalText}}>
+    <ModalTopContextIsShown.Provider value={{isModalTopShown, setIsModalTopShown}}>
+      <ModalTopContextText.Provider value={{modalText, setModalText}}>
       {children}
-      </ModalTopContext_text.Provider>
-    </ModalTopContext_isShown.Provider>
+      </ModalTopContextText.Provider>
+    </ModalTopContextIsShown.Provider>
   );
 };

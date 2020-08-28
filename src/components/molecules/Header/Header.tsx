@@ -1,12 +1,14 @@
-import React, { useState, useContext } from 'react';
-import {CommonStyle} from '../../../common/CommonStyle';
+import React from 'react';
+// library
 import { Link } from 'react-router-dom';
-import HistoryIcon from './../../../img/history.svg';
-import { User } from 'react-feather';
-import { LogIn } from 'react-feather';
-import { Menu } from 'react-feather';
-import { SubHeader } from './SubHeader';
+import { User, LogIn, Menu } from 'react-feather';
 import Cookies from 'universal-cookie';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import SubHeader from './SubHeader';
+// image
+import HistoryIcon from './../../../img/history.svg';
 
 interface HeaderProps {
   subHeaderText?: string;
@@ -14,7 +16,7 @@ interface HeaderProps {
   history?: any;
 }
 
-export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
+const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
   const cookies = new Cookies();
   return (
     <React.Fragment>
@@ -119,3 +121,4 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
   );
 }
 
+export default Header;

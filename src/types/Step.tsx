@@ -1,4 +1,4 @@
-export interface Step {
+export default interface Step {
   id: number;
   content: string;
   created_at: string;

@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
+// library
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { HomeLayout } from '../../../../templates/HomeLayout';
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
 
 export const Send: React.FC = (props: any) => {
   const buttonRef = useRef(document.createElement("button"));

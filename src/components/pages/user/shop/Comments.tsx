@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import HistoryIcon from './../../../../img/history.svg'
-import { CommentCard } from '../../../molecules/Card/CommentCard'
+// library
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import { Smile } from 'react-feather';
 import { Frown } from 'react-feather';
-import Icon, { IconThemes } from '../../../atoms/Icon';
+import axios from 'axios';
 import useReactRouter from "use-react-router";
-import { HomeLayout } from '../../../templates/HomeLayout';
+// components
+import CommentCard from '../../../molecules/Card/CommentCard';
+import Icon, { IconThemes } from '../../../atoms/Icon';
+import HomeLayout from '../../../templates/HomeLayout';
+// image
+import HistoryIcon from './../../../../img/history.svg';
 
 const propStyle = {
   reviewIcon: {

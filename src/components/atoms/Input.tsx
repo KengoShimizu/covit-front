@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
-import { CommonStyle } from '../../common/CommonStyle';
+import React from 'react';
+// common
+import CommonStyle from '../../common/CommonStyle';
 
 interface InputProps {
   theme?: InputThemes;
@@ -17,12 +18,14 @@ export enum InputThemes {
   INIT     = 'INIT',
   REQUIRED = 'REQUIRED',
   DISABLED = 'DISABLED',
+  EDIT_PROFILE = 'EDIT_PROFILE',
 }
 
 enum ModifierClassNames {
   INIT     = 'input-init',
   REQUIRED = 'input-required',
   DISABLED = 'input-disabled',
+  EDIT_PROFILE = 'input-edit_profile',
 }
 
 const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name }) => {
@@ -49,7 +52,7 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
             display: inline-block;
             position: absolute;
             right: 2rem;
-            padding-top: 5px;
+            top: 57px;
           }
 
           .input label span {
@@ -57,18 +60,19 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
           }
 
           .input label {
-            font-size: ${CommonStyle.Caption};
             font-weight: bold;
-            // color: ${CommonStyle.TextDarkGary};
-            display: block;
-            margin-bottom: 0.25rem;
+            font-size: 14px;
+            line-height: 24px;
+            color: ${CommonStyle.TextDarkGary};
+            display: inline-block;
+            margin-bottom: 7px;
           }
 
           .input input {
             border: 1px solid ${CommonStyle.BorderGray};
             box-sizing: border-box;
             border-radius: 4px;
-            padding: 0.5rem 0.75rem;
+            padding: 12px 10px;
             width: 100%;
           }
 
@@ -79,6 +83,11 @@ const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {},
           .input-required label span {
             display: inline;
             color: ${CommonStyle.TextAccent};
+          }
+
+          .input-edit_profile label{
+            display: flex;
+            justify-content: center;
           }
         `}
       </style>

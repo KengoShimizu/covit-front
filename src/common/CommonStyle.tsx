@@ -1,4 +1,4 @@
-export const CommonStyle = {
+const CommonStyle = {
   // 色
   AccentColor: '#FF8A1F',
   BaseColor: '#333',
@@ -22,4 +22,6 @@ export const CommonStyle = {
   TwitterColor: '#91C4F3',
   GoogleColor: '#D8503F',
   FacebookColor: '#425994',
-}
+};
+
+export default CommonStyle;

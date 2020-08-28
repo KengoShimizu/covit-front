@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { CommonStyle } from './../../common/CommonStyle';
-import { HistoryCard } from '../molecules/Card/HistoryCard';
+// library
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+// common
+import CommonStyle from './../../common/CommonStyle';
+// components
+import HistoryCard from '../molecules/Card/HistoryCard';
 import Text, { TextThemes } from './../atoms/Text';
 
 const propStyle = {
@@ -14,7 +17,7 @@ const propStyle = {
   }
 }
 
-export const HistoryCardList: React.FC = () => {
+const HistoryCardList: React.FC = () => {
   const cookies = new Cookies();
   const cookie_histories = cookies.get('histories');
   const cookie_histories_date = cookies.get('histories_date');
@@ -25,7 +28,7 @@ export const HistoryCardList: React.FC = () => {
   const fetchShopData = () => {
     axios.get(`/api/v1/user/shops?histories=${cookie_histories}`)
     .then(res => setShopData(res.data))
-    .catch(err => setErr('存在しないお店があります。'));
+    .catch(() => setErr('存在しないお店があります。'));
   }
 
   useEffect(() => {
@@ -75,3 +78,5 @@ export const HistoryCardList: React.FC = () => {
     </div>
   );
 }
+
+export default HistoryCardList;

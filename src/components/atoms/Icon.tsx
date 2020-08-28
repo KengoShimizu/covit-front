@@ -1,5 +1,6 @@
 import React from 'react';
-import { CommonStyle } from '../../common/CommonStyle';
+// common
+import CommonStyle from '../../common/CommonStyle';
 
 interface IconProps {
   theme?: IconThemes[];
