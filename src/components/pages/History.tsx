@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import {CommonStyle} from './../../common/CommonStyle';
 import { Trash2 } from 'react-feather';
 import { HomeLayout } from '../templates/HomeLayout';
@@ -6,7 +6,7 @@ import { HistoryCardList } from './../organisms/HistoryCardList';
 import Button, { ButtonThemes } from './../atoms/Button';
 import Icon, { IconThemes } from './../atoms/Icon';
 import Cookies from 'universal-cookie';
-import isModalShown from './../../context/isModalShown';
+import { ModalContext } from './../../context/ModalContext';
 import { Modal } from './../molecules/Modal';
 
 const propStyle = {
@@ -38,9 +38,13 @@ export const History: React.FC = (props: any) => {
 
     return (
       <HomeLayout subHeaderText='閲覧履歴' prevRef='/' history={props.history}>
-        <Modal/>
+        <Modal 
+          title='本当に履歴を削除しますか？'
+          subtitle='本当に履歴を削除しますか？本当に履歴を削除しますか？本当に履歴を削除しますか？本当に履歴を削除しますか？本当に履歴を削除しますか？'
+          btntext='削除する'
+          onClick={handleCookie}/>
         <div className='container'>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={() => handleCookie}>
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={useContext(ModalContext).toggleModalShown}>
             <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.deleteBtnIcon}><Trash2 size="18" color="#8C8C8C" /></Icon>
             <span className="delete-btn_text">履歴を削除</span>
           </Button>

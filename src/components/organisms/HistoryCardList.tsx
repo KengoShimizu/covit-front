@@ -32,7 +32,10 @@ export const HistoryCardList: React.FC = () => {
     if(cookie_histories){
       fetchShopData();
     }
-  }, [])
+    else{
+      setHistoryElements([]);
+    }
+  }, [cookies.get('histories')])
 
   useEffect(() => {
     if(shopData.length){
