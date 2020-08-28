@@ -1,14 +1,14 @@
 export const CommonStyle = {
   // 色
-  AccentColor: '#FF8A1F',
+  AccentColor: '#DF6059',
   BaseColor: '#333',
-  KeyColor: '#FDE79B',
+  KeyColor: '#FFAE95',
   BadColor: '#3A8CED',
   TextBlack: '#333',
   TextDarkGary: '#8C8C8C',
   TextGary: '#B6B2AA',
   TextWhite: '#fff',
-  TextAccent: '#ED753A',
+  TextAccent: '#ED653A',
   BorderGray: '#C0C0C0',
   BgWhite: '#fff',
   BgGray: '#E7E7E7',
