@@ -31,8 +31,8 @@ export const EditEmail: React.FC = (props: any) => {
   return (
     <HomeLayout subHeaderText="メールアドレスの編集" prevRef="#" history={props.history}>
       {/* FIXME リンク先 */}
-      <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{margin: '32px auto'}} readonly={true}/>
-      <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{margin: '32px auto'}}/>
+      <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{margin: '32px auto', padding: '1rem'}} readonly={true}/>
+      <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{margin: '32px auto', padding: '1rem'}}/>
       <Button theme={[ButtonThemes.NORMAL]} onClick={putData} propStyle={{margin: '16px auto'}}>登録する</Button>
     </HomeLayout>
   );
