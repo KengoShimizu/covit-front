@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
-import { ModalContext } from '../../context/ModalContext';
-import Text, { TextThemes } from './../atoms/Text';
-import Button, { ButtonThemes } from './../atoms/Button';
-import { CommonStyle } from './../../common/CommonStyle';
+import { ModalContext } from '../../../context/ModalContext';
+import Text, { TextThemes } from '../../atoms/Text';
+import Button, { ButtonThemes } from '../../atoms/Button';
+import { CommonStyle } from '../../../common/CommonStyle';
 
 const propStyle = {
   title: {

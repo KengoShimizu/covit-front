@@ -1,7 +1,8 @@
 import React from 'react';
-import Icon, { IconThemes } from '../../atoms/Icon';
-import Text, { TextThemes } from '../../atoms/Text';
+import Icon, { IconThemes } from './../../atoms/Icon';
+import Text, { TextThemes } from './../../atoms/Text';
 import { Link } from 'react-router-dom';
+import { Modal } from './../Modal/Modal';
 
 const propStyle = {
   profileText: {
@@ -13,10 +14,10 @@ interface AccoutTopCardProps {
   src?: string;
   children?: React.ReactNode;
   text: string;
-  nextRef: string;
+  nextRef?: string;
 }
 
-export const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, children, nextRef}) => {
+export const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, children, nextRef='#'}) => {
   return (
     <Link to={nextRef}>
       <li className="account-function_option">
