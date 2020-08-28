@@ -1,6 +1,8 @@
 import React from 'react';
-import Icon, { IconThemes } from '../atoms/Icon'
-import { CommonStyle } from '../../common/CommonStyle';
+// components
+import Icon, { IconThemes } from '../atoms/Icon';
+import Text, { TextThemes } from '../atoms/Text';
+import CommonStyle from '../../common/CommonStyle';
 
 interface UserIconSellectionProps {
   data: any;
@@ -8,7 +10,7 @@ interface UserIconSellectionProps {
 }
 
 
-export const UserIconSellection: React.FC<UserIconSellectionProps> = ({data, setData}) => {
+const UserIconSellection: React.FC<UserIconSellectionProps> = ({data, setData}) => {
   const handleChange = (event: any) => {
     setData({
       ...data,
@@ -18,12 +20,12 @@ export const UserIconSellection: React.FC<UserIconSellectionProps> = ({data, set
 
   return (
     <div className="container">
-      <p>アイコン</p>
+      <Text theme={[TextThemes.CAPTION]} propStyle={{color: CommonStyle.TextDarkGary}}>アイコン</Text>
       <div className="selected-icon">
-        <Icon theme={[IconThemes.SELECTEDPROFILE]} ><img src={data.image ? data.image : "/profile-icon1.png"} width="80px" height="80px" style={{borderRadius: '50%'}} /></Icon>
+        <Icon theme={[IconThemes.SELECTEDPROFILE]} ><img src={data.image ? data.image : "/profile-icon1.png"} width="80px" height="80px" style={{borderRadius: '50%'}} alt='selected profile icon'/></Icon>
       </div>
       <ul className="icons-container">
-        {Array.from(Array(8).keys(), x => x+1).map(num => <li><Icon key={`icon_${num}`} theme={[IconThemes.PROFILE]} onClick={handleChange} ><img src={`/profile-icon${num}.png`} width="56px" height="56px" style={{borderRadius: '50%'}} id={`/profile-icon${num}.png`}/></Icon></li>)}
+        {Array.from(Array(8).keys(), x => x+1).map(num => <li key={`icon${num}}`}><Icon key={`icon_${num}`} theme={[IconThemes.PROFILE]} onClick={handleChange} ><img src={`/profile-icon${num}.png`} width="56px" height="56px" style={{borderRadius: '50%'}} id={`/profile-icon${num}.png`} alt='profile icon'/></Icon></li>)}
       </ul>
       <style jsx>{`
         .container {
@@ -51,3 +53,5 @@ export const UserIconSellection: React.FC<UserIconSellectionProps> = ({data, set
     </div>
   );
 }
+
+export default UserIconSellection;

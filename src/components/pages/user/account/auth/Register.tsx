@@ -1,6 +1,7 @@
 import React from 'react';
-import { HomeLayout } from '../../../../templates/HomeLayout';
-import { RegisterCardList } from './../../../../organisms/RegisterCardList';
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
+import RegisterCardList from './../../../../organisms/RegisterCardList';
 
 export const Register: React.FC = (props: any) => {
   return (

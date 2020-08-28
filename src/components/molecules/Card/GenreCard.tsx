@@ -1,7 +1,9 @@
 import React from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   genreCardIcon: {
@@ -15,7 +17,7 @@ interface GenreCardProps {
   className: string;
 }
 
-export const GenreCard: React.FC<GenreCardProps> = ({src, text, className}) => {
+const GenreCard: React.FC<GenreCardProps> = ({src, text, className}) => {
   return (
     <div className={`genre-card ${className}`}>
       <div className="genre-card-inner">
@@ -52,3 +54,4 @@ export const GenreCard: React.FC<GenreCardProps> = ({src, text, className}) => {
   );
 }
 
+export default GenreCard;

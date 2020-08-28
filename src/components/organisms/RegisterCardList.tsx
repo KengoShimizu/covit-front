@@ -1,11 +1,12 @@
 import React from 'react';
-import { RegisterCard } from './../molecules/RegisterCard';
-import { NextRefBtn } from '../molecules/NextRefBtn';
+// components
+import RegisterCard from '../molecules/Card/RegisterCard';
+import NextRefBtn from '../molecules/NextRefBtn';
 
 interface RegisterCardListProps {
 }
 
-export const RegisterCardList: React.FC<RegisterCardListProps> = ({}) => {
+const RegisterCardList: React.FC<RegisterCardListProps> = ({}) => {
 
   return (
     <div className="container">
@@ -34,3 +35,5 @@ export const RegisterCardList: React.FC<RegisterCardListProps> = ({}) => {
     </div>
   );
 }
+
+export default RegisterCardList;

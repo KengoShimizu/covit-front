@@ -1,22 +1,25 @@
 import React from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import Button, { ButtonThemes } from './../atoms/Button';
-import Title, { TitleThemes } from './../atoms/Title';
+// library
 import { ChevronLeft } from 'react-feather';
 import { Link } from 'react-router-dom';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Title, { TitleThemes } from '../../atoms/Title';
+
 
 interface SubHeaderProps {
   subHeaderText: string;
-  prevRef: string;
+  prevRef?: string;
   history: any;
 }
 
-export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
+const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
   return (
     <div className="sub-header">
-      {subHeaderText === '閲覧履歴' || 
-       subHeaderText === '会員登録・ログイン' ||
-       subHeaderText === 'ユーザ情報' ?
+      {prevRef ?
+      (subHeaderText === '閲覧履歴' ?
         <div onClick={() => history.goBack()}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
@@ -27,7 +30,7 @@ export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, his
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
           </Button>
-        </Link>
+        </Link>) : ""
       }
       <Title theme={[TitleThemes.SUBHEADER]}>
         {subHeaderText}
@@ -46,3 +49,4 @@ export const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, his
   );
 }
 
+export default SubHeader;

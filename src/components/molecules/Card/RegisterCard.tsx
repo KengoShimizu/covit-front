@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+import React from 'react';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   registerCardIcon: {
@@ -23,7 +25,7 @@ interface RegisterCardProps {
   className: string;
 }
 
-export const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className}) => {
+const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className}) => {
   return (
     <div className={`register-card ${className}`}>
       <div className="register-card-inner">
@@ -70,3 +72,4 @@ export const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className}
   );
 }
 
+export default RegisterCard;

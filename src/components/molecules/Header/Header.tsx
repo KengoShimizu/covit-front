@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
+import React from 'react';
+// library
 import { Link } from 'react-router-dom';
-import HistoryIcon from './../../img/history.svg';
-import { User } from 'react-feather';
-import { LogIn } from 'react-feather';
-import { Menu } from 'react-feather';
-import { SubHeader } from './SubHeader';
-import { AuthContext } from "./../../context/CommonProvider";
+import { User, LogIn, Menu } from 'react-feather';
+import Cookies from 'universal-cookie';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
+import SubHeader from './SubHeader';
+// image
+import HistoryIcon from './../../../img/history.svg';
 
 interface HeaderProps {
   subHeaderText?: string;
@@ -14,8 +16,8 @@ interface HeaderProps {
   history?: any;
 }
 
-export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
-  const { authState, setAuth } = useContext(AuthContext);
+const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history}) => {
+  const cookies = new Cookies();
   return (
     <React.Fragment>
       <header className="header">
@@ -29,7 +31,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
               <p className="icon-list_caption">閲覧履歴</p>
             </li>
           </Link>
-          {authState.isLogin ?
+          {cookies.get('token') ?
             <Link to='/accounts'>
               <li className="icon-list_option">
                 <span className="icon-list_img-wrapper">
@@ -53,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
           </li>
         </ul>
       </header>
-      {(subHeaderText && prevRef && history) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
+      {(subHeaderText && history) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
       <style jsx>{`
         *{
           margin:0;
@@ -119,3 +121,4 @@ export const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history})
   );
 }
 
+export default Header;

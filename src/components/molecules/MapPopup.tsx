@@ -1,13 +1,17 @@
 import React from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
+// library
+import { Smile, Frown } from 'react-feather';
+import { Link } from 'react-router-dom';
+// common
+import CommonStyle from './../../common/CommonStyle';
+// components
+import Text, { TextThemes } from './../atoms/Text';
+// image
 import Alcohol from './../../img/covid-icon_alcohol.svg';
 import Mask from './../../img/covid-icon_mask.svg';
 import Airing from './../../img/covid-icon_airing.svg';
 import Distance from './../../img/covid-icon_distance.svg';
 import HealthCare from './../../img/covid-icon_health-care.svg';
-import Text, { TextThemes } from './../atoms/Text';
-import { Smile, Frown} from 'react-feather';
-import { Link } from 'react-router-dom';
 
 interface MapPopupProps {
   steps: {
@@ -24,7 +28,7 @@ const propStyle = {
   }
 };
 
-export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
+const MapPopup: React.FC<MapPopupProps> = (props: any) => {
   return (
     <section className="shop-mordal_container">
       <Link to={`/shops/${props.data.id}`}>
@@ -55,25 +59,25 @@ export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           {props.uniqueImgs.map((data: any) => (
             <ol className="infection-control_list" key={`images${data}`}>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Alcohol} alt="" />
+                <img className="infection-control_icon" src={Alcohol} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Airing} alt="" />
+                <img className="infection-control_icon" src={Airing} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Mask} alt="" />
+                <img className="infection-control_icon" src={Mask} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={HealthCare} alt="" />
+                <img className="infection-control_icon" src={HealthCare} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Distance} alt="" />
+                <img className="infection-control_icon" src={Distance} alt="sample" />
               </li>
             </ol>
           ))}
         </div>
         <div　className="shop-card_header-img_wrapper">
-          <img className="shop-card_header-img" src={props.data.image} alt="shop image" />
+          <img className="shop-card_header-img" src={props.data.image} alt="shop" />
         </div>
       </Link>
     <style jsx>{`
@@ -148,3 +152,5 @@ export const MapPopup: React.FC<MapPopupProps> = (props: any) => {
     </section>
   );
 }
+
+export default MapPopup;

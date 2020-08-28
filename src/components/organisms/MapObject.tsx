@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import {CommonStyle} from './../../common/CommonStyle';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
+import React, { useState } from 'react';
+// library
+import { Map, Marker, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-import { MapPopup } from '../molecules/MapPopup';
+import Cookies from 'universal-cookie';
+// components
+import MapPopup from '../molecules/MapPopup';
+// image
 import curLocPin from './../../img/current_location_pin.svg';
 import shopPin from './../../img/shop_pin.svg';
+
 
 interface MapPopupProps {
   coordinations: any;
@@ -22,7 +26,8 @@ interface MapPopupProps {
 }
 
 
-export const MapObject: React.FC<MapPopupProps> = (props: any) => {
+const MapObject: React.FC<MapPopupProps> = (props: any) => {
+  const cookies = new Cookies();
   const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   const curLocMarker = L.icon({
@@ -36,6 +41,38 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
     iconSize: [55, 61],
     iconAnchor: [27, 30]
   });
+
+  const createDate = () => {
+      const dd = new Date();
+      const YYYY = dd.getFullYear();
+      const MM = dd.getMonth()+1;
+      const DD = dd.getDate();
+      return YYYY + "/" + MM + "/" + DD;
+  }
+
+  const handleMarkerClick = (data: any) => {
+    const c = cookies.get('histories');
+    const c_d = cookies.get('histories_date');
+    if(c && c_d){
+      const cookies_array = c.split(',').map((item: string) => parseInt(item));
+      const cookies_date_array = c_d.split(',');
+      if(cookies_array[0] !== data.id){
+        while(cookies_array.length > 99){
+          cookies_array.pop();
+          cookies_date_array.pop();
+        }
+        cookies.set('histories', `${data.id},` + cookies_array.join(','));
+        cookies.set('histories_date', createDate() + ',' + cookies_date_array.join(','));
+      }
+    }
+    else{
+      cookies.set('histories', data.id);
+      cookies.set('histories_date', createDate());
+    }
+    props.setMapCenter({ lat: data.latitude, lng: data.longitude });
+    props.fetchStepsData(data.shop);
+    setPopupIsOpen(true);
+  }
 
   return (
     <div className="map-container">
@@ -62,11 +99,7 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
             position={{ lat: data.latitude, lng: data.longitude }}
             icon={shopMarker}
             key={`shop${data.id}`}
-            onClick={() => {
-              props.setMapCenter({ lat: data.latitude, lng: data.longitude });
-              props.fetchStepsData(data.shop);
-              setPopupIsOpen(true);
-            }} >
+            onClick={() => handleMarkerClick(data)} >
           </Marker>
         ))}
 
@@ -94,3 +127,5 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
     </div>
   );
 }
+
+export default MapObject;

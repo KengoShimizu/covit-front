@@ -1,8 +1,10 @@
 import React from 'react';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+// library
 import { ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
+// components
+import Icon, { IconThemes } from './../atoms/Icon';
+import Text, { TextThemes } from './../atoms/Text';
 
 const propStyle = {
   nextRefBtnText: {
@@ -15,7 +17,7 @@ interface NextRefBtnProps {
   text: string;
 }
 
-export const NextRefBtn: React.FC<NextRefBtnProps> = ({nextRef, text}) => {
+const NextRefBtn: React.FC<NextRefBtnProps> = ({nextRef, text}) => {
   return (
     <Link to={nextRef}>
       <div className="next-ref-btn">
@@ -33,4 +35,6 @@ export const NextRefBtn: React.FC<NextRefBtnProps> = ({nextRef, text}) => {
     </Link>
   );
 }
+
+export default NextRefBtn;
 

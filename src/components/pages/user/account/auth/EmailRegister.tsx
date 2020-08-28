@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
-import {CommonStyle} from '../../../../../common/CommonStyle';
+import React, { useState } from 'react';
+// library
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { HomeLayout } from '../../../../templates/HomeLayout';
-import Input, { InputThemes } from '../../../../atoms/Input'
-import Button, { ButtonThemes } from '../../../../atoms/Button'
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../../atoms/Input';
+import Button, { ButtonThemes } from '../../../../atoms/Button';
 
 interface AddParam {
   email: string;
