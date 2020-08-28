@@ -1,7 +1,7 @@
-import { User } from "./User";
-import { Genre } from "./Genre";
+import User from "./User";
+import Genre from "./Genre";
 
-export interface Shop {
+export default interface Shop {
   id: number;
   user_id: number;
   user: User;

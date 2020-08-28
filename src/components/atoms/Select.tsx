@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react';
-import { CommonStyle } from '../../common/CommonStyle';
+import React from 'react';
+// common
+import CommonStyle from '../../common/CommonStyle';
 
 interface SelectProps {
   theme?: SelectThemes;

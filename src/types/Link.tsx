@@ -1,4 +1,4 @@
-export interface Link {
+export default interface Link {
   id?: number;
   shop_id?: number;
   name: string;

@@ -1,12 +1,16 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { HomeLayout } from '../../../templates/HomeLayout';
+import React, { useState, useContext } from 'react';
+// library
+import { ChevronRight } from 'react-feather';
+import { Link } from 'react-router-dom';
+// components
+import HomeLayout from '../../../templates/HomeLayout';
 import Button from '../../../atoms/Button';
 import Icon, { IconThemes } from '../../../atoms/Icon';
 import Text, { TextThemes } from '../../../atoms/Text';
-import { ChevronRight } from 'react-feather';
-import { Link } from 'react-router-dom';
-import { AuthContext } from "../../../../context/CommonProvider";
 import { AccountTopCardList } from './../../../organisms/AccoutTopCardList';
+// context
+import AuthContext from "../../../../context/CommonProvider";
+
 
 const propStyle = {
   profileCardBtn: {
@@ -22,8 +26,8 @@ const propStyle = {
 }
 
 export const AccountTop: React.FC = (props: any) => {
-  const { authState, setAuth } = useContext(AuthContext);
-  const [account, setAccount] = useState(authState.user);
+  const { authState } = useContext(AuthContext);
+  const [account] = useState(authState.user);
 
   return (
     <HomeLayout subHeaderText={'ユーザ情報'} prevRef={'/'} history={props.history}>

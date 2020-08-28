@@ -1,7 +1,8 @@
 import React from 'react';
-import { HomeLayout } from '../../../../templates/HomeLayout';
-import {CommonStyle} from '../../../../../common/CommonStyle';
-import { LoginFlexCard } from '../../../../molecules/Card/LoginFlexCard';
+// components
+import HomeLayout from '../../../../templates/HomeLayout';
+import CommonStyle from '../../../../../common/CommonStyle';
+import LoginFlexCard from '../../../../molecules/Card/LoginFlexCard';
 
 export const EditLogin: React.FC = (props: any) => {
   return (

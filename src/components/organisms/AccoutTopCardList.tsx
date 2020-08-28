@@ -1,13 +1,19 @@
 import React, { useState, useContext } from 'react';
-import { CommonStyle } from './../../common/CommonStyle';
-import { AccountTopCard } from '../molecules/Card/AccoutTopCard';
-import HistoryIcon from './../../img/history_black.svg';
+// library
 import { Edit, Mail, LogOut, Trash2 } from 'react-feather';
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import { ModalTopContext_isShown, ModalTopContext_text } from './../../context/ModalTopContext';
-import { ModalContext } from './../../context/ModalContext';
-import { Modal } from './../molecules/Modal/Modal';
+// common
+import CommonStyle from './../../common/CommonStyle';
+// components
+import AccountTopCard from '../molecules/Card/AccoutTopCard';
+import Modal from './../molecules/Modal/Modal';
+// context
+import { ModalTopContextIsShown, ModalTopContextText } from './../../context/ModalTopContext';
+import ModalContext from './../../context/ModalContext';
+// image
+import HistoryIcon from './../../img/history_black.svg';
+
 
 
 interface AccoutTopCardListProps {
@@ -16,8 +22,8 @@ interface AccoutTopCardListProps {
 
 export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) => {
   const cookies = new Cookies();
-  const modalTop_isShownContext = useContext(ModalTopContext_isShown);
-  const modalTop_textContext = useContext(ModalTopContext_text);
+  const modalTop_isShownContext = useContext(ModalTopContextIsShown);
+  const modalTop_textContext = useContext(ModalTopContextText);
   const modalContext = useContext(ModalContext);
   const [modalState, setModalState] = useState({
     title: '',
@@ -29,21 +35,38 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
   const handleLogout = (toggleModalTopShown: any, setModalText: any) => {
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
-        setModalText('ログアウトしました。');
+        setModalText({
+          caption: 'ログアウトしました。'
+        });
         toggleModalTopShown(true);
         history.push('/');
       }).catch(() => {
-        setModalText('ログアウトに失敗');
+        setModalText({
+          caption: 'ログアウトに失敗しました。'
+        });
+        toggleModalTopShown(true);
+        history.push('/');
+      })
+  }
+  const handleDeleteAccount = (toggleModalTopShown: any, setModalText: any) => {
+    axios.delete(`/api/v1/user/users/1`)
+      .then(() => {
+        setModalText({
+          caption: 'アカウントの削除が完了しました。', 
+          small: '今までご利用ありがとうございました！'
+        });
+        toggleModalTopShown(true);
+        history.push('/');
+      }).catch(() => {
+        setModalText({
+          caption: 'アカウントの削除に失敗しました。'
+        });
         toggleModalTopShown(true);
         history.push('/');
       })
   }
 
-  const handleDeleteAccount = () => {
-    history.push('/')
-  }
-
-  const sample = (i: number, toggleModalShown: any) => {
+  const handleModalState = (i: number, toggleModalShown: any) => {
     setModalState(states[i]);
     toggleModalShown(true);
   }
@@ -59,7 +82,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
       title: '本当にアカウントを削除しますか？',
       subtitle: 'アカウントを削除すると、レビューなどの情報が全て削除され復元はできません。',
       btntext: '削除する',
-      onClick: () => {}
+      onClick: () => handleDeleteAccount(modalTop_isShownContext.setIsModalTopShown, modalTop_textContext.setModalText)
     }
   ];
 
@@ -80,12 +103,12 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
           <Mail size={20} color="#333" />
         </AccountTopCard>
         <hr className="account-function_hr" />
-        <div onClick={() => sample(0, modalContext.toggleModalShown)}>
+        <div onClick={() => handleModalState(0, modalContext.toggleModalShown)}>
           <AccountTopCard text='ログアウト'>
             <LogOut size={20} color="#333"/>
           </AccountTopCard>
         </div>
-        <div onClick={() => sample(1, modalContext.toggleModalShown)}>
+        <div onClick={() => handleModalState(1, modalContext.toggleModalShown)}>
           <AccountTopCard text='アカウントを削除する'>
             <Trash2 size={20} color="#333" />
           </AccountTopCard>

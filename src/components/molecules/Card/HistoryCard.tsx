@@ -1,10 +1,9 @@
 import React from 'react';
-import { Smile } from 'react-feather';
-import { Frown } from 'react-feather';
-import { Calendar } from 'react-feather';
-import { ChevronRight } from 'react-feather';
+// library
+import { Smile, Frown, Calendar, ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
-import { CommonStyle } from '../../../common/CommonStyle';
+// common
+import CommonStyle from '../../../common/CommonStyle';
 
 interface HistoryCardProps {
   name: string;
@@ -14,7 +13,7 @@ interface HistoryCardProps {
   nextRef: string;
 }
 
-export const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, browse_date, nextRef}) => {
+const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, browse_date, nextRef}) => {
   return (
     <Link to={nextRef}>
       <li className="history-card">
@@ -119,3 +118,4 @@ export const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_c
   );
 }
 
+export default HistoryCard;

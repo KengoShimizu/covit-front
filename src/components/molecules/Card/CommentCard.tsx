@@ -1,8 +1,10 @@
 import React from 'react';
-import {CommonStyle} from '../../../common/CommonStyle';
-import { FormatDate } from '../../../common/Function'
-import { Calendar } from 'react-feather';
-import { AlertTriangle } from 'react-feather';
+// library
+import { Calendar, AlertTriangle } from 'react-feather';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+import { FormatDate } from '../../../common/Function';
+// components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
 
@@ -11,7 +13,7 @@ type CardProps = {
   comment: any;
 };
 
-export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
+const CommentCard: React.FC<CardProps> = (props: CardProps) => {
 
   return (
     <div>
@@ -104,3 +106,5 @@ export const CommentCard: React.FC<CardProps> = (props: CardProps) => {
 
   );
 }
+
+export default CommentCard;

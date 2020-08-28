@@ -5,10 +5,11 @@ type ModalState = {
   toggleModalShown: any;
 };
 
-export const ModalContext = React.createContext<ModalState>({
+const ModalContext = React.createContext<ModalState>({
   isModalShown: false,
   toggleModalShown: () => {},
 });
+export default ModalContext;
 
 type ProviderProps = {
   children: React.ReactNode;
