@@ -27,8 +27,8 @@ import { Privacy } from './components/pages/user/account/Privacy';
 import { Comments } from './components/pages/user/account/Comments';
 
 //Owner用 component
-//import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
-//import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
+import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
+import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
 
 function App() {
   return (
@@ -48,9 +48,8 @@ function App() {
                 <Route exact path='/accounts/emailregister' component={EmailRegister} />
                 <Route exact path='/accounts/send' component={Send} />
                 <Route exact path='/users/:id/comments' component={Comments} />
-                {/* ここ普通のユーザーもいけていいの？オーナーのユーザー登録も同時にやるのは仕組み的にどうなんだろ */}
-                {/*<Route exact path='/owners/requesttop' component={OwnerRequestTop} />*/}
-                {/*<Route exact path='/owners/shopform' component={OwnerShopForm} />*/}
+                {/* ログインの導線でどうだろ */}
+                <Route exact path='/owners/requesttop' component={OwnerRequestTop} />
                 <Authentication>
                   <Route exact path='/shops/:id/comments/new' component={CreateComment} />
                   <Route exact path='/accounts' component={AccountTop} />
@@ -61,6 +60,7 @@ function App() {
                   <Route exact path='/accounts/addemail' component={AddEmail} />
                   <Route exact path='/accounts/delete' component={Delete} />
                   <Route exact path='/accounts/profileregister' component={ProfileRegister} />
+                  <Route exact path='/owners/shopform' component={OwnerShopForm} />
                 </Authentication>
               </Switch>
             </BrowserRouter>

@@ -1,52 +1,56 @@
 import React, { ReactNode } from 'react';
 import { CommonStyle } from '../../common/CommonStyle';
 
-interface TextareaProps {
-  theme?: TextareaThemes;
+interface SelectProps {
+  theme?: SelectThemes;
   propStyle?: {};
   handleChange: any;
   label: string;
-  subtitle?: string;
-  content?: string;
-  rows?: number;
+  defaultLabel?: string;
+  items: any[];
   name: string;
 }
 
-export enum TextareaThemes {
+export enum SelectThemes {
   INIT     = 'INIT',
   REQUIRED = 'REQUIRED',
 }
 
 enum ModifierClassNames {
-  INIT     = 'textarea-init',
-  REQUIRED = 'textarea-required',
+  INIT     = 'select-init',
+  REQUIRED = 'select-required',
 }
 
-const Textarea: React.FC<TextareaProps> = ({ theme = TextareaThemes.INIT, propStyle = {}, handleChange, label, content, rows = 5, subtitle, name}) => {
+const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = {}, handleChange, label, items, name, defaultLabel}) => {
   return (
-    <div className={["textarea", ModifierClassNames[theme]].join(' ')} style={propStyle}>
+    <div className={["select", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
-      <p className="subtitle">{subtitle}</p>
-      <textarea onChange={handleChange} rows={rows} name={name}>
-        {content}
-      </textarea>
+      <select onChange={handleChange} name={name}>
+        {defaultLabel ? <option value={0}>{defaultLabel}</option> : ""}
+        {items.map((item: any) => {
+          return (
+            <option value={item.id}>{item.name}</option>
+          )
+        })}
+      </select>
       <style jsx>
         {`
-          .textarea-init{
+          .select-init{
           }
 
-          .textarea {
+          .select {
             display: block;
             justify-content: center;
             align-items: center;
             max-width: 400px;
+            margin-bottom: 32px;
           }
 
-          .textarea label span {
+          .select label span {
             display: none;
           }
 
-          .textarea label {
+          .select label {
             font-size: ${CommonStyle.Caption};
             font-weight: bold;
             text-align: left;
@@ -54,21 +58,16 @@ const Textarea: React.FC<TextareaProps> = ({ theme = TextareaThemes.INIT, propSt
             margin-bottom: 0.25rem;
           }
 
-          .subtitle {
-            margin: 16px 0 16px 8px;
-            text-align: left;
-            font-size: 14px;
-          }
-
-          .textarea textarea {
+          .select select {
             border: 1px solid ${CommonStyle.BorderGray};
             box-sizing: border-box;
             border-radius: 4px;
             padding: 0.5rem 0.75rem;
             width: 100%;
+            height: 40px;
           }
 
-          .textarea-required label span {
+          .select-required label span {
             display: inline;
             color: ${CommonStyle.TextAccent};
           }
@@ -79,4 +78,4 @@ const Textarea: React.FC<TextareaProps> = ({ theme = TextareaThemes.INIT, propSt
   );
 }
 
-export default Textarea;
+export default Select;
