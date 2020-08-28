@@ -47,7 +47,7 @@ export const AccountTop: React.FC = (props: any) => {
         </Link>
       </div>
 
-      <AccountTopCardList/>
+      <AccountTopCardList history={props.history}/>
 
       <ul className="privacy_container">
         <li className="privacy_text">プライバシー</li>

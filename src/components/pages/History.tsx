@@ -7,7 +7,7 @@ import Button, { ButtonThemes } from './../atoms/Button';
 import Icon, { IconThemes } from './../atoms/Icon';
 import Cookies from 'universal-cookie';
 import { ModalContext } from './../../context/ModalContext';
-import { Modal } from './../molecules/Modal';
+import { Modal } from '../molecules/Modal/Modal';
 
 const propStyle = {
   deleteBtn: {

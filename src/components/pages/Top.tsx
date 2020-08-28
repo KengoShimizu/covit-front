@@ -10,6 +10,7 @@ import Button, { ButtonThemes } from './../atoms/Button';
 import axios from "axios";
 import { ChevronDown } from 'react-feather';
 import { GenreCardList } from './../organisms/GenreCardList';
+import { ModalTop } from './../molecules/Modal/ModalTop'
 
 // ボタンのCSS
 const propStyle = {
@@ -141,15 +142,17 @@ export const Top: React.FC = (props: any) => {
 
   // モーダルクローズ履歴を参照
   useEffect(() => {
-    setInitModalIsOpen(cookies.get('close-modal-once'))
-    getCullentLocation()
+    setInitModalIsOpen(cookies.get('close-modal-once'));
+    getCullentLocation();
     fetchCoordinationsData(genre_id, lastlat, lastlng);
   }, [])
 
+
   return (
     <HomeLayout>
+      <ModalTop/>
       <div className='container'>
-        <MapObject 
+        <MapObject
           coordinations={coordinations}
           steps={steps}
           zoom={zoom}
