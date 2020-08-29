@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { User } from "./../types/User";
+import User from "./../types/User";
 
 type AuthState = {
   authState: {
@@ -9,7 +9,7 @@ type AuthState = {
   setAuth: any;
 };
 
-export const AuthContext = React.createContext<AuthState>({
+const AuthContext = React.createContext<AuthState>({
   authState: {
     isLogin: false,
     user: {
@@ -26,6 +26,7 @@ export const AuthContext = React.createContext<AuthState>({
   },
   setAuth: () => {}
 });
+export default AuthContext;
 
 export const AuthProvider = AuthContext.Provider;
 

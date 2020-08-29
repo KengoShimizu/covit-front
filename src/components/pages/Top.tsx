@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { CommonStyle } from './../../common/CommonStyle';
+// library
 import { Link } from 'react-router-dom';
-import ServiceIcon from './../../img/service-icon.svg';
-import Charactor from './../../img/charactor.png';
-import { HomeLayout } from '../templates/HomeLayout';
-import { MapObject } from '../organisms/MapObject';
 import Cookies from 'universal-cookie';
-import Button, { ButtonThemes } from './../atoms/Button';
 import axios from "axios";
 import { ChevronDown } from 'react-feather';
-import { GenreCardList } from './../organisms/GenreCardList';
-import { ModalTop } from './../molecules/Modal/ModalTop'
+// common
+import CommonStyle from './../../common/CommonStyle';
+// image
+import ServiceIcon from './../../img/service-icon.svg';
+import Charactor from './../../img/charactor.png';
+// components
+import HomeLayout from '../templates/HomeLayout';
+import MapObject from '../organisms/MapObject';
+import Button, { ButtonThemes } from './../atoms/Button';
+import GenreCardList from './../organisms/GenreCardList';
+import ModalTop from './../molecules/Modal/ModalTop';
 
 // ボタンのCSS
 const propStyle = {
@@ -72,8 +76,6 @@ export const Top: React.FC = (props: any) => {
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
   const [zoom, setZoom] = useState(16);
-  const [genre_id, setGenres] = useState(Array.from(new Array(12)).map((v,i)=> i + 1));
-  const [err, setErr] = useState("");
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
   const [clickedShop, setClickedShop] = useState({});
@@ -83,6 +85,7 @@ export const Top: React.FC = (props: any) => {
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   const threshold = 0.015;
+  const genre_id = Array.from(new Array(12)).map((v,i)=> i + 1);
 
   const GetUniqueImgs = (steps: any) => {
     const images = steps.map((data: any) => data.image);
@@ -100,11 +103,11 @@ export const Top: React.FC = (props: any) => {
         setClickedShop(shop);
         setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
       })
-      .catch(err => setErr(err));
+      .catch(err => console.log(err));
   }
 
   const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
-    const genre_id_str = genre_id.length == 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
+    const genre_id_str = genre_id.length === 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
     axios.get('/api/v1/user/coordinations', {
         params: {
           genre_ids: genre_id_str,
@@ -115,15 +118,15 @@ export const Top: React.FC = (props: any) => {
         }
       })
       .then(res => setCoordinations(res.data))
-      .catch(err => setErr(err));
+      .catch(err => console.log(err));
   }
 
   const getCullentLocation = () => {
     ///* FIXME 現在地座標取得（デバッグのためコメントアウト）
     navigator.geolocation.getCurrentPosition(
       pos => {
-        const pos_lat = pos.coords.latitude;
-        const pos_lng = pos.coords.longitude;
+        //const pos_lat = pos.coords.latitude;
+        //const pos_lng = pos.coords.longitude;
         //setMapCenter({ lat: pos_lat, lng: pos_lng });
         //setCurLoc({ lat: pos_lat, lng: pos_lng });
         setMapCenter({ lat: lastlat, lng: lastlng });

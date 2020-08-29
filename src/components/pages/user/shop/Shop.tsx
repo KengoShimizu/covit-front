@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
+// library
 import { Link } from 'react-router-dom';
-import {CommonStyle} from '../../../../common/CommonStyle';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
-import { HomeLayout } from '../../../templates/HomeLayout';
+import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
+// common
+import CommonStyle from '../../../../common/CommonStyle';
+// components
+import HomeLayout from '../../../templates/HomeLayout';
+import Icon, { IconThemes } from '../../../atoms/Icon';
+import Text, { TextThemes } from '../../../atoms/Text';
+import Button, { ButtonThemes } from '../../../atoms/Button';
+// image
 import Alcohol from './../../../../img/covid-icon_alcohol.svg';
 import Mask from './../../../../img/covid-icon_mask.svg';
 import Airing from './../../../../img/covid-icon_airing.svg';
 import Distance from './../../../../img/covid-icon_distance.svg';
 import HealthCare from './../../../../img/covid-icon_health-care.svg';
-import Icon, { IconThemes } from '../../../atoms/Icon';
-import Text, { TextThemes } from '../../../atoms/Text';
-import Button, { ButtonThemes } from '../../../atoms/Button';
-import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
-
 
 const propStyle = {
   commentLink: {
@@ -30,7 +33,6 @@ const propStyle = {
 
 export const Shop: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
-  const [err, setErr] = useState("");
   const [shopData, setShopData] = useState({
     user_id: 0,
     name: '',
@@ -49,13 +51,13 @@ export const Shop: React.FC = (props: any) => {
   const fetchShopData = () => {
     axios.get(`/api/v1/user/shops/${match.params.id}`)
     .then(res => setShopData(res.data))
-    .catch(err => setErr(err));
+    .catch(err => console.log(err));
   }
 
   const fetchStepsData = () => {
     axios.get(`/api/v1/user/steps?shop_id=${match.params.id}`)
     .then(res => setStepData(res.data))
-    .catch(err => setErr(err));
+    .catch(err => console.log(err));
   }
 
   const GetUniqueImgs = () => {

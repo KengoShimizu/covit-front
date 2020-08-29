@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';
+// library
 import ReactDOM from 'react-dom';
-import { ModalContext } from '../../../context/ModalContext';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
 import Text, { TextThemes } from '../../atoms/Text';
 import Button, { ButtonThemes } from '../../atoms/Button';
-import { CommonStyle } from '../../../common/CommonStyle';
+// context
+import ModalContext from '../../../context/ModalContext';
 
 const propStyle = {
   title: {
@@ -25,7 +29,7 @@ interface ModalProps {
   onClick: any;
 }
 
-export const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
+const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
   const renderModal = (modalHookState: any) => {
     const changeShownModal = modalHookState;
     let propsOnClick = onClick;
@@ -92,3 +96,5 @@ export const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick})
   );
 
 };
+
+export default Modal;

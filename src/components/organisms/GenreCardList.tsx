@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { CommonStyle } from '../../common/CommonStyle';
-import { GenreCard } from '../molecules/Card/GenreCard';
+import React from 'react';
+// components
+import CommonStyle from '../../common/CommonStyle';
+import GenreCard from '../molecules/Card/GenreCard';
 import Text, { TextThemes } from './../atoms/Text';
 import Button, { ButtonThemes } from './../atoms/Button';
 
+// FIXME
 const genres = ['カフェ', 'ラーメン', '和食', '洋食', '中華', 'イタリアン', 'カレー', '焼肉', '寿司', '居酒屋', 'バー', 'その他'];
 
 const propStyle = {
@@ -25,13 +27,13 @@ interface GenreCardListProps {
   lastlng: number;
 }
 
-export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelectedGenre, genreSerchIsOpen, setGenreSerchIsOpen, fetchCoordinationsData, lastlat, lastlng}) => {
+const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelectedGenre, genreSerchIsOpen, setGenreSerchIsOpen, fetchCoordinationsData, lastlat, lastlng}) => {
 
   const handleChange = (event: any) => {
     const selectedId = genres.findIndex(data => data === event.currentTarget.id) + 1;
     // 既に選択されていたら除去
     if(selectedGenre.find(data => data === selectedId)){
-      setSelectedGenre(selectedGenre.filter(data => data != selectedId));
+      setSelectedGenre(selectedGenre.filter(data => data !== selectedId));
     }
     // 追加
     else{
@@ -121,3 +123,5 @@ export const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setS
     </React.Fragment>
   );
 }
+
+export default GenreCardList;

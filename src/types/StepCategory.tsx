@@ -1,6 +1,6 @@
-import { Step } from './Step'
+import Step from './Step'
 
-export interface StepCategory {
+export default interface StepCategory {
   id: number;
   image: string;
   content: string;

@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
+// library
 import ReactDOM from 'react-dom';
-import { ModalTopContext_isShown, ModalTopContext_text } from '../../../context/ModalTopContext';
+// common
+import CommonStyle from '../../../common/CommonStyle';
+// components
 import Text, { TextThemes } from '../../atoms/Text';
-import { CommonStyle } from '../../../common/CommonStyle';
+// context
+import { ModalTopContextIsShown, ModalTopContextText } from '../../../context/ModalTopContext';
 
 const propStyle = {
   text: {
@@ -10,15 +14,18 @@ const propStyle = {
   }
 }
 
-export const ModalTop: React.FC = () => {
-  const renderModal = (isModalTopShown: boolean, setIsModalTopShown: any, modalText: string) => {
+const ModalTop: React.FC = () => {
+  const renderModal = (isModalTopShown: boolean, setIsModalTopShown: any, modalText: any) => {
     setTimeout(() => {
       setIsModalTopShown(false)
     }, 2500)
     return (
       <div className={isModalTopShown ? 'modal-top-container show' : 'modal-top-container'}>
         <div className='modal-top-inner'>
-          <Text theme={[TextThemes.SMALL]} propStyle={propStyle.text}>{modalText}</Text>
+          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.text}>{modalText.caption}</Text>
+          {modalText.small &&
+            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.text}>{modalText.small}</Text>
+          }
         </div>
         <style jsx>{`
           .modal-top-container{
@@ -45,8 +52,8 @@ export const ModalTop: React.FC = () => {
   };
 
   // Contextの値を取得して開閉制御
-  const modalTop_isShownContext = useContext(ModalTopContext_isShown);
-  const modalTop_textContext = useContext(ModalTopContext_text);
+  const modalTop_isShownContext = useContext(ModalTopContextIsShown);
+  const modalTop_textContext = useContext(ModalTopContextText);
 
   const modalTopElement: any = document.getElementById('modal-top');
   return ReactDOM.createPortal(
@@ -58,3 +65,5 @@ export const ModalTop: React.FC = () => {
   );
 
 };
+
+export default ModalTop;

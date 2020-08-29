@@ -1,7 +1,8 @@
 import React from 'react';
-import { HomeLayout } from '../../../templates/HomeLayout';
-import Text, { TextThemes } from '../../../atoms/Text'
-import Button, { ButtonThemes } from '../../../atoms/Button'
+// components
+import HomeLayout from '../../../templates/HomeLayout';
+import Text, { TextThemes } from '../../../atoms/Text';
+import Button, { ButtonThemes } from '../../../atoms/Button';
 
 
 export const OwnerRequestTop: React.FC = (props: any) => {

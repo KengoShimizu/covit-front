@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+// library
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-import { MapPopup } from '../molecules/MapPopup';
+import Cookies from 'universal-cookie';
+// components
+import MapPopup from '../molecules/MapPopup';
+// image
 import curLocPin from './../../img/current_location_pin.svg';
 import shopPin from './../../img/shop_pin.svg';
-import Cookies from 'universal-cookie';
+
 
 interface MapPopupProps {
   coordinations: any;
@@ -22,7 +26,7 @@ interface MapPopupProps {
 }
 
 
-export const MapObject: React.FC<MapPopupProps> = (props: any) => {
+const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const cookies = new Cookies();
   const [popupIsOpen, setPopupIsOpen] = useState(false);
 
@@ -123,3 +127,5 @@ export const MapObject: React.FC<MapPopupProps> = (props: any) => {
     </div>
   );
 }
+
+export default MapObject;

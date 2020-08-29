@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
-import {CommonStyle} from '../../../../common/CommonStyle';
-import HistoryIcon from './../../../../img/history.svg'
-import Alcohol from './../../../../img/covid-icon_alcohol.svg'
-import Mask from './../../../../img/covid-icon_mask.svg'
-import Airing from './../../../../img/covid-icon_airing.svg'
-import Distance from './../../../../img/covid-icon_distance.svg'
-import HealthCare from './../../../../img/covid-icon_health-care.svg'
+// library
 import useReactRouter from "use-react-router";
 import axios from 'axios';
+// common
+import CommonStyle from '../../../../common/CommonStyle';
 import { Comment } from '../../../../common/Const';
-import { HomeLayout } from '../../../templates/HomeLayout';
+// components
+import HomeLayout from '../../../templates/HomeLayout';
+// image
+import HistoryIcon from './../../../../img/history.svg';
+import Alcohol from './../../../../img/covid-icon_alcohol.svg';
+import Mask from './../../../../img/covid-icon_mask.svg';
+import Airing from './../../../../img/covid-icon_airing.svg';
+import Distance from './../../../../img/covid-icon_distance.svg';
+import HealthCare from './../../../../img/covid-icon_health-care.svg';
 
 export interface AddParam {
   content: string;
@@ -81,14 +85,14 @@ export const CreateComment: React.FC = (props: any) => {
                       <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
                       <p className="review-form_switch-label_text">期待通り</p>
                     </label>
-                    <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_GOOD} />
+                    <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_GOOD} />
                   </li>
                   <li className="review-form_switch-option">
                     <label className="review-form_switch-label" htmlFor="">
                       <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
                       <p className="review-form_switch-label_text">表記と違う</p>
                     </label>
-                    <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_BAD} />
+                    <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_BAD} />
                   </li>
                 </ul>
               </li>
