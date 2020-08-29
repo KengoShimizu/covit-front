@@ -8,7 +8,7 @@ const CommonStyle = {
   TextDarkGary: '#8C8C8C',
   TextGary: '#B6B2AA',
   TextWhite: '#fff',
-  TextAccent: '#ED753A',
+  TextAccent: '#ED653A',
   BorderGray: '#C0C0C0',
   BgWhite: '#fff',
   BgGray: '#E7E7E7',
