@@ -28,7 +28,7 @@ import { Comments } from './components/pages/user/account/Comments';
 
 //Owner用 component
 import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
-//import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
+import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
 
 function App() {
   return (
@@ -60,7 +60,7 @@ function App() {
                   <Route exact path='/accounts/addemail' component={AddEmail} />
                   <Route exact path='/accounts/delete' component={Delete} />
                   <Route exact path='/accounts/profileregister' component={ProfileRegister} />
-                  {/*<Route exact path='/owners/shopform' component={OwnerShopForm} />*/}
+                  <Route exact path='/owners/shopform' component={OwnerShopForm} />
                 </Authentication>
               </Switch>
             </BrowserRouter>
