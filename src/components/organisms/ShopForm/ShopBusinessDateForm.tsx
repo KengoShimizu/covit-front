@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 // atoms
 import Input, { InputThemes } from '../../atoms/Input'
 import Button, { ButtonThemes } from '../../atoms/Button'
+// molecules
 import { BusinessDateInput } from '../../molecules/BusinessDateInput'
-import { CommonStyle } from '../../../common/CommonStyle';
+// others
+import CommonStyle from '../../../common/CommonStyle';
 
 interface ShopBusinessDateFormProps {
   setAddData: any;

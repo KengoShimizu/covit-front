@@ -9,7 +9,7 @@ import Textarea, { TextareaThemes } from '../../../../atoms/Textarea'
 // organisms
 import { CheckSectionList } from '../../../../organisms/ShopForm/CheckSectionList'
 // types
-import { StepCategory } from '../../../../../types/StepCategory';
+import StepCategory from '../../../../../types/StepCategory';
 
 interface InfectionControlProps {
   setPage: any;

@@ -1,6 +1,5 @@
 import React from 'react';
-
-// components
+// molecules
 import Header from '../molecules/Header/Header';
 
 interface HomeLayoutProps {

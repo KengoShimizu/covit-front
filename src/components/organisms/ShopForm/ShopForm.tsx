@@ -2,7 +2,6 @@ import React from 'react';
 // atoms
 import Input, { InputThemes } from '../../atoms/Input'
 
-
 interface ShopFormProps {
   handleChange: any;
   addData: any;

@@ -4,7 +4,7 @@ import Text, { TextThemes } from './../atoms/Text';
 import Input, { InputThemes } from './../atoms/Input';
 import { ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
-import { CommonStyle } from '../../common/CommonStyle';
+import CommonStyle from '../../common/CommonStyle';
 
 
 interface BusinessDateInputProps {

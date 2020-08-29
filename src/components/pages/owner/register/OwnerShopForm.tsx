@@ -3,11 +3,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import queryString from 'query-string';
 // template
-import { HomeLayout } from '../../../templates/HomeLayout';
+import HomeLayout from '../../../templates/HomeLayout';
 // context
-import { AuthContext } from './../../../../context/CommonProvider';
+import AuthContext from './../../../../context/CommonProvider';
 // types
-import { Link } from './../../../../types/Link'
+import Link from './../../../../types/Link'
 // others
 import { InfectionControl } from './components/InfectionControl';
 import { ShopInfo } from './components/ShopInfo';

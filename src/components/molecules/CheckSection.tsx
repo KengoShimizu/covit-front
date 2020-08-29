@@ -1,14 +1,7 @@
 import React from 'react';
-import { StepCategory } from './../../types/StepCategory'
-import {CommonStyle} from './../../common/CommonStyle';
-import Alcohol from './../../img/covid-icon_alcohol.svg';
-import Mask from './../../img/covid-icon_mask.svg';
-import Airing from './../../img/covid-icon_airing.svg';
-import Distance from './../../img/covid-icon_distance.svg';
-import HealthCare from './../../img/covid-icon_health-care.svg';
-import Text, { TextThemes } from './../atoms/Text';
-import { Link } from 'react-router-dom';
-import { Step } from './../../types/Step'
+// types
+import StepCategory from './../../types/StepCategory'
+import Step from './../../types/Step'
 
 interface CheckSectionProps {
   stepCategory: StepCategory;

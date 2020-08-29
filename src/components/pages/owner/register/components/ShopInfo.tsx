@@ -12,13 +12,11 @@ import { ShopForm } from '../../../../organisms/ShopForm/ShopForm';
 import { ShopLinkForm } from '../../../../organisms/ShopForm/ShopLinkForm';
 import { ShopBusinessDateForm } from '../../../../organisms/ShopForm/ShopBusinessDateForm';
 // types
-import { Genre } from '../../../../../types/Genre';
-import { Link } from '../../../../../types/Link';
+import Genre from '../../../../../types/Genre';
+import Link from '../../../../../types/Link';
 // others
 import { PriceArray, LinkType } from '../../../../../common/Const'
-import { CommonStyle } from '../../../../../common/CommonStyle';
-
-
+import CommonStyle from '../../../../../common/CommonStyle';
 
 interface ShopInfoProps {
   setPage: any;

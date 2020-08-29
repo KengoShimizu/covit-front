@@ -1,9 +1,9 @@
 import React from 'react';
-// components
-import HomeLayout from '../../../templates/HomeLayout';
+// atoms
 import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
-
+// templates
+import HomeLayout from '../../../templates/HomeLayout';
 
 export const OwnerRequestTop: React.FC = (props: any) => {
   const onClick = () => {
