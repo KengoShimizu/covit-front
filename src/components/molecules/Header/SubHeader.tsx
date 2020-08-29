@@ -8,7 +8,6 @@ import CommonStyle from '../../../common/CommonStyle';
 import Button, { ButtonThemes } from '../../atoms/Button';
 import Title, { TitleThemes } from '../../atoms/Title';
 
-
 interface SubHeaderProps {
   subHeaderText: string;
   prevRef?: string;
@@ -19,7 +18,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) 
   return (
     <div className="sub-header">
       {prevRef ?
-      (subHeaderText === '閲覧履歴' ?
+      (prevRef === '#'?
         <div onClick={() => history.goBack()}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
@@ -37,6 +36,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) 
       </Title>
       <style jsx>{`
         .sub-header{
+          position: fixed;
           padding-top: 56px;
           background: ${CommonStyle.BgWhite};
           width: 100%;

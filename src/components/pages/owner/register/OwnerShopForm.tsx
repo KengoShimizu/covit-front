@@ -57,11 +57,6 @@ export const OwnerShopForm: React.FC = (props: any) => {
   }
 
   useEffect(() => {
-    console.log(page)
-    console.log(addData)
-  }, [page, addData])
-
-  useEffect(() => {
     setErr('');
   }, [addData])
 

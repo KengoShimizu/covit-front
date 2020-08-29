@@ -1,30 +1,35 @@
 import React from 'react';
+// library
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import { Top } from './components/pages/Top';
-import { History } from './components/pages/History';
+// provider
 import { CommonProvider } from "./context/CommonProvider";
 import { Authentication } from "./components/common/Authentication";
 import { ModalStateProvider } from './context/ModalContext';
 import { ModalTopStateProvider } from './context/ModalTopContext';
-
+// components/pages
+import { Top } from './components/pages/Top';
+import { History } from './components/pages/History';
+// components/pages/user/shop
 import { Shop } from './components/pages/user/shop/Shop';
 import { ShopComments } from './components/pages/user/shop/Comments';
 import { CreateComment } from './components/pages/user/shop/CreateComment';
-
+// components/pages/user/account
+import { AccountTop } from './components/pages/user/account/AccountTop';
+import { Privacy } from './components/pages/user/account/Privacy';
+import { Comments } from './components/pages/user/account/Comments';
+// components/pages/user/account/auth
 import { EmailRegister } from './components/pages/user/account/auth/EmailRegister';
 import { Login } from './components/pages/user/account/auth/Login';
 import { Send } from './components/pages/user/account/auth/Send';
 import { ProfileRegister } from './components/pages/user/account/auth/ProfileRegister';
 import { Register } from './components/pages/user/account/auth/Register';
+// components/pages/user/account/manage
 import { Delete } from './components/pages/user/account/manage/Delete';
 import { EditLogin } from './components/pages/user/account/manage/EditLogin';
 import { EditProfile } from './components/pages/user/account/manage/EditProfile';
 import { EditEmail } from './components/pages/user/account/manage/EditEmail';
 import { AddEmail } from './components/pages/user/account/manage/AddEmail';
-import { AccountTop } from './components/pages/user/account/AccountTop';
-import { Privacy } from './components/pages/user/account/Privacy';
-import { Comments } from './components/pages/user/account/Comments';
+
 
 //Owner用 component
 import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';

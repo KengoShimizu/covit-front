@@ -3,10 +3,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 // common
-import CommonStyle from './../../common/CommonStyle';
+import CommonStyle from '../../../common/CommonStyle';
 // components
-import HistoryCard from '../molecules/Card/HistoryCard';
-import Text, { TextThemes } from './../atoms/Text';
+import HistoryCard from '../../molecules/Card/HistoryCard';
+import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   errorText: {

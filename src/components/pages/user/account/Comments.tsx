@@ -1,17 +1,84 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 // library
-import { Link } from 'react-router-dom';
+import useReactRouter from "use-react-router";
+import axios from 'axios';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
+import ProfileIconNameCard from './../../../molecules/Card/ProfileIconNameCard';
+import CommentsCardList from '../../../organisms/CardList/CommentsCardList';
+// context
+import AuthContext from './../../../../context/CommonProvider';
+import CommonStyle from '../../../../common/CommonStyle';
 
-export const Comments: React.FC = () => {
+export const Comments: React.FC = (props: any) => {
+  const { authState } = useContext(AuthContext);
+  const { match }: any = useReactRouter();
+  const user_id = match.params.id ? match.params.id : authState.user.id;
+  const [pageState, setPageState] = useState({
+    subHeaderText: '',
+    prevRef: '#',
+    sqlQuery: 'user_id=0',
+    update: false
+  });
+  const [user, setUser] = useState({
+    id: 0,
+    image: '',
+    name: '',
+  });
+  
+
+  const fetchUserData = async () => {
+    let response = await axios
+      .get(`/api/v1/user/users/${user_id}`)
+      .then(result => result.data)
+      .catch(error => console.log(error));
+    setUser(response);
+  }
+
+  useEffect(() => {
+    if(match.params.id) fetchUserData();
+  }, [])
+
+  useEffect(() => {
+    match.params.id ? 
+      setPageState({
+        subHeaderText: `${user.name} さんのレビュー一覧`,
+        prevRef: '#',
+        sqlQuery: `user_id=${user_id}`,
+        update: true
+      }) : 
+      setPageState({
+        subHeaderText: 'レビューしたお店',
+        prevRef: '/accounts',
+        sqlQuery: `user_id=${user_id}`,
+        update: true
+      });
+  }, [user])
+
   return (
-    <HomeLayout>
+    <HomeLayout subHeaderText={pageState.subHeaderText} prevRef={pageState.prevRef} history={props.history}>
       <div>
-        <Link to='/'>Top</Link>
-        <br />
-        <Link to='/accounts/:id/accounttop'>AccountTop</Link>
+        {match.params.id && user &&
+          <div className="profile-card">
+            <ProfileIconNameCard src={user.image} name={user.name}/>
+          </div>
+        }
+        {pageState.update && 
+          <div className="comment-card-list">
+            <CommentsCardList sqlQuery={pageState.sqlQuery}/>
+          </div>
+        }
       </div>
+      <style jsx>{`
+        .profile-card{
+          position: fixed;
+          width: 100%;
+          background-color: ${CommonStyle.BgWhite};
+        }
+        .comment-card-list{
+          ${match.params.id && 'padding-top: 100px;'}
+        }
+      `}</style>
     </HomeLayout>
   );
 }
