@@ -56,7 +56,11 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           <Button 
             theme={[ButtonThemes.SUBNORMAL]} 
             propStyle={propStyle.btn}
-            onClick={() => setSelectedGenre([])}>
+            onClick={() => {
+              setSelectedGenre([])
+              fetchCoordinationsData([], lastlat, lastlng);
+              setGenreSerchIsOpen(false);
+            }}>
             絞り込み解除
           </Button>
           <Button

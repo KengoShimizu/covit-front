@@ -61,7 +61,7 @@ export const OwnerShopForm: React.FC = (props: any) => {
   }, [addData])
 
   return (
-    <HomeLayout subHeaderText={page === 1 ? "01 感染症対策について" : "02 お店の情報について"} history={props.history}>
+    <HomeLayout subHeaderText={page === 1 ? "" : "02 お店の情報について"} onClick={() => {page === 2 && setPage(1)}}>
       <div className="container">
         {
           page === 2 ?

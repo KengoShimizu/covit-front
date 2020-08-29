@@ -7,16 +7,15 @@ interface HomeLayoutProps {
   prevRef?: string;
   children?: React.ReactNode;
   history?: any;
+  onClick?: any;
 }
 
-const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children, history}) => {
+const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children, history, onClick}) => {
   return (
     <div className="container">
-      {history ? 
-        <Header subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>
-        :
-        <Header subHeaderText={subHeaderText} prevRef={prevRef}/>
-      }
+      {history && <Header subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
+      {!history && <Header subHeaderText={subHeaderText} prevRef={prevRef}/>}
+      {onClick && <Header subHeaderText={subHeaderText} prevRef={prevRef} onClick={onClick}/>}
       <div className="wrap">
         <main>
           {children}

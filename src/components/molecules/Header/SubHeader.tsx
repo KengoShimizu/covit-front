@@ -11,7 +11,7 @@ import Title, { TitleThemes } from '../../atoms/Title';
 interface SubHeaderProps {
   subHeaderText: string;
   prevRef?: string;
-  history: any;
+  history?: any;
   onClick?: any;
 }
 
@@ -45,6 +45,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history, o
       <style jsx>{`
         .sub-header{
           position: fixed;
+          z-index: 500;
           padding-top: 56px;
           background: ${CommonStyle.BgWhite};
           width: 100%;

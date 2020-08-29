@@ -84,7 +84,8 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           props.setZoom(e.target.getZoom());
           props.setMapCenter({lat: latlng.lat, lng: latlng.lng});
         }}
-        onMovestart={() => setPopupIsOpen(false)}>
+        onMovestart={() => setPopupIsOpen(false)}
+        onClick={() => setPopupIsOpen(false)}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
