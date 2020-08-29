@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history, onClick
         </ul>
       </header>
       {(subHeaderText && history && prevRef && !onClick) && <SubHeader subHeaderText={subHeaderText} prevRef={prevRef} history={history}/>}
-      {(subHeaderText && history && !prevRef && onClick) && <SubHeader subHeaderText={subHeaderText} onClick={onClick} history={history}/>}
+      {(subHeaderText && !history && !prevRef && onClick) && <SubHeader subHeaderText={subHeaderText} onClick={onClick}/>}
       <style jsx>{`
         *{
           margin:0;
