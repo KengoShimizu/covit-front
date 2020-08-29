@@ -10,6 +10,7 @@ export const Send: React.FC = (props: any) => {
   const [text, setText] = useState("");
   const [err, setErr] = useState("");
 
+  // FIXME sendはここじゃなくボタン押した時に発火、成功すればこのページにリダイレクト
   const send = async () => {
     const path: string = props.location.state.text === "登録" ? "resend_activation_email" : "resend_login_email";
     try {

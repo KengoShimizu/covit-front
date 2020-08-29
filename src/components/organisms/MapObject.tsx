@@ -5,9 +5,6 @@ import L from 'leaflet';
 import Cookies from 'universal-cookie';
 // components
 import MapPopup from '../molecules/MapPopup';
-// image
-import curLocPin from './../../img/current_location_pin.svg';
-import shopPin from './../../img/shop_pin.svg';
 
 
 interface MapPopupProps {
@@ -31,13 +28,13 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   const curLocMarker = L.icon({
-    iconUrl: curLocPin,
+    iconUrl: '/current_location_pin.svg',
     iconSize: [55, 61],
     iconAnchor: [27, 30]
   });
 
   const shopMarker = L.icon({
-    iconUrl: shopPin,
+    iconUrl: '/shop_pin.svg',
     iconSize: [55, 61],
     iconAnchor: [27, 30]
   });

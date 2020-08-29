@@ -6,9 +6,6 @@ import axios from "axios";
 import { ChevronDown } from 'react-feather';
 // common
 import CommonStyle from './../../common/CommonStyle';
-// image
-import ServiceIcon from './../../img/service-icon.svg';
-import Charactor from './../../img/charactor.png';
 // components
 import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
@@ -192,14 +189,14 @@ export const Top: React.FC = (props: any) => {
         {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
-          <img className="intro-mordal_img" src={Charactor} alt=""/>
+          <img className="intro-mordal_img" src='/charactor.png' alt=""/>
           <p className="intro-mordal_text">
             PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
           </p>
           {/* propstyle */}
           <div onClick={handleInitModal}>
             <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopMordal}>
-              <img className="intro-mordal_btn_icon" src={ServiceIcon} alt=""/>
+              <img className="intro-mordal_btn_icon" src='/service-icon.svg' alt=""/>
               さっそく飲食店を探す
             </Button>
           </div>

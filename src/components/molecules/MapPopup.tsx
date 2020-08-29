@@ -6,12 +6,6 @@ import { Link } from 'react-router-dom';
 import CommonStyle from './../../common/CommonStyle';
 // components
 import Text, { TextThemes } from './../atoms/Text';
-// image
-import Alcohol from './../../img/covid-icon_alcohol.svg';
-import Mask from './../../img/covid-icon_mask.svg';
-import Airing from './../../img/covid-icon_airing.svg';
-import Distance from './../../img/covid-icon_distance.svg';
-import HealthCare from './../../img/covid-icon_health-care.svg';
 
 interface MapPopupProps {
   steps: {
@@ -59,19 +53,19 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           {props.uniqueImgs.map((data: any) => (
             <ol className="infection-control_list" key={`images${data}`}>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Alcohol} alt="sample" />
+                <img className="infection-control_icon" src={'/covid-icon_alcohol.svg'} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Airing} alt="sample" />
+                <img className="infection-control_icon" src={'/covid-icon_airing.svg'} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Mask} alt="sample" />
+                <img className="infection-control_icon" src={'/covid-icon_mask.svg'} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={HealthCare} alt="sample" />
+                <img className="infection-control_icon" src={'covid-icon_health-care.svg'} alt="sample" />
               </li>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={Distance} alt="sample" />
+                <img className="infection-control_icon" src={'/covid-icon_distance.svg'} alt="sample" />
               </li>
             </ol>
           ))}
