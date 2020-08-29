@@ -16,6 +16,7 @@ export enum TextThemes {
   SUBTITLE = 'SUBTITLE',
   LEFT     = 'LEFT',
   ERROR    = 'ERROR',
+  DARKGRAY = 'DARKGRAY',
 }
 
 enum ModifierClassNames {
@@ -26,6 +27,7 @@ enum ModifierClassNames {
   SUBTITLE = 'subtitle-text',
   LEFT     = 'left-text',
   ERROR    = 'error-text',
+  DARKGRAY = 'dark-gray-text',
 }
 
 
@@ -77,6 +79,9 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
             font-size: ${CommonStyle.Caption};
             color: ${CommonStyle.AccentColor};
             margin: -30px 0 30px;
+          }
+          .dark-gray-text{
+            color: ${CommonStyle.TextDarkGary};
           }
         `}
       </style>

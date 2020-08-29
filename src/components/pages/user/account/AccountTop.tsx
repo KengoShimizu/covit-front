@@ -1,13 +1,9 @@
 import React, { useState, useContext } from 'react';
-// library
-import { ChevronRight } from 'react-feather';
-import { Link } from 'react-router-dom';
 // components
+import ProfileIconNameCard from './../../../molecules/Card/ProfileIconNameCard'
 import HomeLayout from '../../../templates/HomeLayout';
-import Button from '../../../atoms/Button';
-import Icon, { IconThemes } from '../../../atoms/Icon';
-import Text, { TextThemes } from '../../../atoms/Text';
-import { AccountTopCardList } from './../../../organisms/AccoutTopCardList';
+import NextRefBtn from './../../../molecules/NextRefBtn';
+import { AccountTopCardList } from '../../../organisms/CardList/AccoutTopCardList';
 // context
 import AuthContext from "../../../../context/CommonProvider";
 
@@ -20,8 +16,10 @@ const propStyle = {
   profileText: {
     marginRight: '8px'
   },
-  accountIcon: {
-    marginRight: '8px'
+  nextRefBtn: {
+    position: 'absolute',
+    top: '120px',
+    right: '10px',
   }
 }
 
@@ -31,26 +29,10 @@ export const AccountTop: React.FC = (props: any) => {
 
   return (
     <HomeLayout subHeaderText={'ユーザ情報'} prevRef={'/'} history={props.history}>
-      <div className="account-info_card">
-        <div className="account-info_profile">
-          {/* FIXME IconThemes.COVIDMEASURE*/}
-          <Icon theme={[IconThemes.PROFILE]} propStyle={propStyle.accountIcon}>
-            <img className="account-info_profile-icon" src={account.image} alt=""/>
-          </Icon>
-          <Text theme={[TextThemes.CAPTION]}> 
-            {account.name}
-          </Text>
-        </div>
-        <Link to='/accounts/editprofile'>
-          <Button propStyle={propStyle.profileCardBtn}>
-            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.profileText}> 
-              プロフィールを編集
-            </Text>
-            <ChevronRight size={16} color="#333"/>
-          </Button>
-        </Link>
+      <ProfileIconNameCard src={account.image} name={account.name}/>
+      <div className="next-ref-btn">
+      <NextRefBtn nextRef='/accounts/editprofile' text='プロフィールを編集'/>
       </div>
-
       <AccountTopCardList history={props.history}/>
 
       <ul className="privacy_container">
@@ -58,20 +40,10 @@ export const AccountTop: React.FC = (props: any) => {
         <li className="privacy_text">サービス名 © ︎2020</li>
       </ul>
       <style jsx>{`
-        .account-info_card{
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding: 0 22px;
-          margin-bottom: 40px;
-        }
-        .account-info_profile{
-          display: flex;
-          align-items: center;
-        }
-        .account-info_profile-icon{
-          width: 100%;
-          height: 100%;
+        .next-ref-btn{
+          position: absolute;
+          top: 120px;
+          right: 10px;
         }
         //プライバシー
         .privacy_container{

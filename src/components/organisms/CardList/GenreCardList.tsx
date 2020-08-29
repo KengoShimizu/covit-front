@@ -1,9 +1,9 @@
 import React from 'react';
 // components
-import CommonStyle from '../../common/CommonStyle';
-import GenreCard from '../molecules/Card/GenreCard';
-import Text, { TextThemes } from './../atoms/Text';
-import Button, { ButtonThemes } from './../atoms/Button';
+import CommonStyle from '../../../common/CommonStyle';
+import GenreCard from '../../molecules/Card/GenreCard';
+import Text, { TextThemes } from '../../atoms/Text';
+import Button, { ButtonThemes } from '../../atoms/Button';
 
 // FIXME
 const genres = ['カフェ', 'ラーメン', '和食', '洋食', '中華', 'イタリアン', 'カレー', '焼肉', '寿司', '居酒屋', 'バー', 'その他'];

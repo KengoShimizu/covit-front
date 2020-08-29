@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 import CommonStyle from './../../common/CommonStyle';
 // components
 import HomeLayout from '../templates/HomeLayout';
-import HistoryCardList from './../organisms/HistoryCardList';
+import HistoryCardList from '../organisms/CardList/HistoryCardList';
 import Button, { ButtonThemes } from './../atoms/Button';
 import Icon, { IconThemes } from './../atoms/Icon';
 import Modal from '../molecules/Modal/Modal';
@@ -41,7 +41,7 @@ export const History: React.FC = (props: any) => {
     }
 
     return (
-      <HomeLayout subHeaderText='閲覧履歴' prevRef='/' history={props.history}>
+      <HomeLayout subHeaderText='閲覧履歴' prevRef='#' history={props.history}>
         <Modal 
           title='本当に履歴を削除しますか？'
           btntext='削除する'

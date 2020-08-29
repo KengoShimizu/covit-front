@@ -37,9 +37,9 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({subHeaderText, prevRef, children
           width: 100%
         }
         .wrap{
-          padding-top: ${subHeaderText ? '0px' : '56px'};
+          padding-top: ${subHeaderText ? '96px' : '56px'};
           width: 100%;
-          height: calc(100vh - 56px);
+          height: ${subHeaderText ? 'calc(100vh - 96px)' : 'calc(100vh - 56px)'};
         }
       `}</style>
     </div>

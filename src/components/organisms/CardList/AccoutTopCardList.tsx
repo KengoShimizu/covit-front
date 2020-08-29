@@ -4,15 +4,15 @@ import { Edit, Mail, LogOut, Trash2 } from 'react-feather';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 // common
-import CommonStyle from './../../common/CommonStyle';
+import CommonStyle from '../../../common/CommonStyle';
 // components
-import AccountTopCard from '../molecules/Card/AccoutTopCard';
-import Modal from './../molecules/Modal/Modal';
+import AccountTopCard from '../../molecules/Card/AccoutTopCard';
+import Modal from '../../molecules/Modal/Modal';
 // context
-import { ModalTopContextIsShown, ModalTopContextText } from './../../context/ModalTopContext';
-import ModalContext from './../../context/ModalContext';
+import { ModalTopContextIsShown, ModalTopContextText } from '../../../context/ModalTopContext';
+import ModalContext from '../../../context/ModalContext';
 // image
-import HistoryIcon from './../../img/history_black.svg';
+import HistoryIcon from './../../../img/history_black.svg';
 
 
 
@@ -95,7 +95,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
         onClick={modalState.onClick}/>
       <ul className="account-function_list">
         <AccountTopCard src={HistoryIcon} text='閲覧履歴' nextRef='/history'/>
-        <AccountTopCard text='レビューしたお店' nextRef='/history'>
+        <AccountTopCard text='レビューしたお店' nextRef='/accounts/comments'>
           <Edit size={20} color="#333" />
         </AccountTopCard>
         <hr className="account-function_hr" />

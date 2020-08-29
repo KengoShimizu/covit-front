@@ -13,7 +13,7 @@ import Charactor from './../../img/charactor.png';
 import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
 import Button, { ButtonThemes } from './../atoms/Button';
-import GenreCardList from './../organisms/GenreCardList';
+import GenreCardList from '../organisms/CardList/GenreCardList';
 import ModalTop from './../molecules/Modal/ModalTop';
 
 // ボタンのCSS
@@ -189,6 +189,7 @@ export const Top: React.FC = (props: any) => {
           lastlng={lastlng}/>
 
         {/* 初回モーダル */}
+        {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
         <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
           <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
           <img className="intro-mordal_img" src={Charactor} alt=""/>
@@ -214,6 +215,13 @@ export const Top: React.FC = (props: any) => {
             width: 100%;
           }
           // 初回のモーダル
+          .intro-mordal-back{
+            height: 100%;
+            width: 100%;
+            z-index: 999;
+            position: absolute;
+            top: 0;
+          }
           .intro-mordal{
             visibility: visible;
             top: 144px;

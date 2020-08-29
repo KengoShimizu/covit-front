@@ -1,43 +1,50 @@
 import React from 'react';
 // library
 import { Calendar, AlertTriangle } from 'react-feather';
+import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { FormatDate } from '../../../common/Function';
+import { FormatDate_YM } from '../../../common/Function';
 // components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
 
 type CardProps = {
-  HistoryIcon: any;
   comment: any;
+  onClick?: any;
 };
 
-const CommentCard: React.FC<CardProps> = (props: CardProps) => {
+const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
 
   return (
     <div>
       <li className="card">
-        <div className="card_icon_wrapper">
-          <img className="card_icon" src="" alt="" />
-        </div>
+        <Link to={`/users/${comment.user.id}/comments`}>
+          <Icon theme={[IconThemes.LIST]} propStyle={{margin: '6px 6px 0 0'}}>
+            <img className="card_icon" src={comment.user.image} alt="" />
+          </Icon>
+        </Link>
         <div className="card_content">
-          <div className="card_name">{props.comment.user.name}</div>
-          <div className="card_date">
-            <Icon theme={[IconThemes.SMALL]}>
-              <Calendar size={14} color="#8C8C8C" />
-            </Icon>
-            <Text theme={[TextThemes.SMALL]}>来店日</Text>
-            <Text theme={[TextThemes.SMALL]}>{FormatDate(new Date(props.comment.date))}</Text>
-          </div>
-          <div className="card_comment">
-            {props.comment.content}
-          </div>
+          <Link to={`/users/${comment.user.id}/comments`}>
+            <Text theme={[TextThemes.CAPTION]}>{comment.user.name}</Text>
+            <div className="card_date">
+              <Icon theme={[IconThemes.SMALL]}>
+                <Calendar size={14} color="#8C8C8C" />
+              </Icon>
+              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={{margin: '0 6px 0 3px'}}>来店日</Text>
+              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YM(new Date(comment.date))}</Text>
+            </div>
+            <div className="card_comment">
+              <Text theme={[TextThemes.TEXT]}>{comment.content}</Text>
+            </div>
+          </Link>
           <div className="card_report">
             <Icon theme={[IconThemes.SMALL]}>
               <AlertTriangle size={14} color="#8C8C8C" />
             </Icon>
-            <p className="card_report_text">悪質なユーザーを報告</p>
+            <div onClick={onClick}>
+              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>悪質なユーザーを報告</Text>
+            </div>
           </div>
         </div>
       </li>
@@ -49,34 +56,18 @@ const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             display: flex;
             margin-bottom: 16px;
           }
+          .card_icon{
+            width: 100%;
+            height: auto;
+          }
           .card_content{
             width: calc(100% - 42px);
           }
-          .card_icon_wrapper{
-            width: 34px;
-            height: 34px;
-            border-radius: 34px;
-            background: blue;
-            margin-right: 8px;
-          }
-          .card_name{
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
-          }
           .card_date{
-            color: ${CommonStyle.TextDarkGary};
             line-height: 19px;
             display:flex;
             align-items: center;
             margin-bottom: 4px;
-          }
-          .card_date_text{
-            color: ${CommonStyle.TextDarkGary};
-            margin-right: 8px;
-          }
-          .card_date_num{
-            color: ${CommonStyle.TextDarkGary};
           }
           .card_comment{
             background: ${CommonStyle.BgGray};
@@ -96,10 +87,6 @@ const CommentCard: React.FC<CardProps> = (props: CardProps) => {
             margin: 0 0 auto auto;
             width: fit-content;
           }
-          .card_report_text{
-            display: inline-block;
-            color: ${CommonStyle.TextDarkGary}
-          }
         `}
       </style>
     </div>
@@ -107,4 +94,4 @@ const CommentCard: React.FC<CardProps> = (props: CardProps) => {
   );
 }
 
-export default CommentCard;
+export default ShopCommentCard;
