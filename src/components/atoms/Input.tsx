@@ -1,7 +1,8 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { CommonStyle } from '../../common/CommonStyle';
 
 interface InputProps {
+  id?: string;
   theme?: InputThemes;
   propStyle?: {};
   handleChange?: any;
@@ -25,12 +26,12 @@ enum ModifierClassNames {
   DISABLED = 'input-disabled',
 }
 
-const Input: React.FC<InputProps> = ({ theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name }) => {
+const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name }) => {
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
       <span className="input-icon">{icon}</span>
-      <input defaultValue={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name}/>
+      <input id={id} defaultValue={content} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name}/>
       <style jsx>
         {`
           .input-init{
