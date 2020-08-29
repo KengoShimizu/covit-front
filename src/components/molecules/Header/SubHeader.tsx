@@ -12,24 +12,32 @@ interface SubHeaderProps {
   subHeaderText: string;
   prevRef?: string;
   history: any;
+  onClick?: any;
 }
 
-const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history}) => {
+const SubHeader: React.FC<SubHeaderProps> = ({subHeaderText, prevRef, history, onClick}) => {
   return (
     <div className="sub-header">
-      {prevRef ?
-      (prevRef === '#'?
+      {onClick &&
+        <div onClick={onClick}>
+          <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+          </Button>
+        </div>
+      }
+      {prevRef === '#' &&
         <div onClick={() => history.goBack()}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
           </Button>
         </div>
-        :
+      }
+      {(prevRef && prevRef !== '#') &&
         <Link to={prevRef}>
           <Button theme={[ButtonThemes.SUBHEADER]}>
             <ChevronLeft size={24} color="#333" />
           </Button>
-        </Link>) : ""
+        </Link>
       }
       <Title theme={[TitleThemes.SUBHEADER]}>
         {subHeaderText}

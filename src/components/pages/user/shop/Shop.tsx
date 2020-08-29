@@ -8,15 +8,9 @@ import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monito
 import CommonStyle from '../../../../common/CommonStyle';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
-import Icon, { IconThemes } from '../../../atoms/Icon';
 import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
-// image
-import Alcohol from './../../../../img/covid-icon_alcohol.svg';
-import Mask from './../../../../img/covid-icon_mask.svg';
-import Airing from './../../../../img/covid-icon_airing.svg';
-import Distance from './../../../../img/covid-icon_distance.svg';
-import HealthCare from './../../../../img/covid-icon_health-care.svg';
+import InfectionControlList from './../../../organisms/InfectionControlList';
 
 const propStyle = {
   commentLink: {
@@ -45,8 +39,14 @@ export const Shop: React.FC = (props: any) => {
     price_day: 0,
     price_night: 0,
     other_step: '',
+    steps: [{
+      content: '',
+      step_category: {
+        image: '',
+        content: ''
+      }
+    }],
   });
-  const [stepData, setStepData] = useState([]);
   
   const fetchShopData = () => {
     axios.get(`/api/v1/user/shops/${match.params.id}`)
@@ -54,25 +54,10 @@ export const Shop: React.FC = (props: any) => {
     .catch(err => console.log(err));
   }
 
-  const fetchStepsData = () => {
-    axios.get(`/api/v1/user/steps?shop_id=${match.params.id}`)
-    .then(res => setStepData(res.data))
-    .catch(err => console.log(err));
-  }
-
-  const GetUniqueImgs = () => {
-    const images = stepData.map((data: any) => data.image);
-    const uniqueImgs = images.filter(function (x: string, i: number, self: string[]) {
-      return self.indexOf(x) === i;
-    });
-    return uniqueImgs;
-  }
-  const uniqueImgs = GetUniqueImgs();
-
   useEffect(() => {
     fetchShopData();
-    fetchStepsData();
   }, [])
+
 
   return (
     <HomeLayout subHeaderText={shopData.name} prevRef={'/'} history={props.history}>
@@ -115,47 +100,7 @@ export const Shop: React.FC = (props: any) => {
           {/* 感染対策情報 */}
           <section className="shop-card_section nfection-control_card">
             <h2 className="infection-control_title">感染対策</h2>
-            {uniqueImgs.map((data: any) => (
-              <ol className="infection-control_list" key={`images${data}`}>
-                <li className="infection-control_option">
-                  <Icon theme={[IconThemes.COVIDMEASURE]}>
-                    <img className="infection-control_icon" src={Alcohol} alt=""/>
-                  </Icon>
-                </li>
-                <li className="infection-control_option">
-                  <Icon theme={[IconThemes.COVIDMEASURE]}>
-                    <img className="infection-control_icon" src={Airing} alt=""/>
-                  </Icon>
-                </li>
-                <li className="infection-control_option">
-                  <Icon theme={[IconThemes.COVIDMEASURE]}>
-                    <img className="infection-control_icon" src={Mask} alt=""/>
-                  </Icon>
-                </li>
-                <li className="infection-control_option">
-                  <Icon theme={[IconThemes.COVIDMEASURE]}>
-                    <img className="infection-control_icon" src={HealthCare} alt=""/>
-                  </Icon>
-                </li>
-                <li className="infection-control_option">
-                  <Icon theme={[IconThemes.COVIDMEASURE]}>
-                    <img className="infection-control_icon" src={Distance} alt=""/>
-                  </Icon>
-                </li>
-              </ol>
-            ))}
-            <ul className="infection-control_comment">
-              <li className="infection-control_comment-option">
-                <Text theme={[TextThemes.SMALL]}>
-                  従業員がマスクを着用しています。
-                </Text>
-              </li>
-              <li className="infection-control_comment-option">
-                <Text theme={[TextThemes.SMALL]}>
-                  お客様にマスクの着用をお願いしています。
-                </Text>
-              </li>
-            </ul>
+            <InfectionControlList stepData={shopData.steps}/>
             <hr className="infection-control_hr"/>
             <div className="infection-control_review">
               <h3 className="infection-control_review-title">対策への評価</h3>

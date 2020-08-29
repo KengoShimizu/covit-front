@@ -11,8 +11,6 @@ import Modal from '../../molecules/Modal/Modal';
 // context
 import { ModalTopContextIsShown, ModalTopContextText } from '../../../context/ModalTopContext';
 import ModalContext from '../../../context/ModalContext';
-// image
-import HistoryIcon from './../../../img/history_black.svg';
 
 
 
@@ -94,7 +92,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
       <ul className="account-function_list">
-        <AccountTopCard src={HistoryIcon} text='閲覧履歴' nextRef='/history'/>
+        <AccountTopCard src='/history_black.svg' text='閲覧履歴' nextRef='/history'/>
         <AccountTopCard text='レビューしたお店' nextRef='/accounts/comments'>
           <Edit size={20} color="#333" />
         </AccountTopCard>

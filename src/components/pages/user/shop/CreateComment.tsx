@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // library
 import useReactRouter from "use-react-router";
 import axios from 'axios';
+import { Smile, Frown } from 'react-feather';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
 import { Comment } from '../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
-// image
-import HistoryIcon from './../../../../img/history.svg';
-import Alcohol from './../../../../img/covid-icon_alcohol.svg';
-import Mask from './../../../../img/covid-icon_mask.svg';
-import Airing from './../../../../img/covid-icon_airing.svg';
-import Distance from './../../../../img/covid-icon_distance.svg';
-import HealthCare from './../../../../img/covid-icon_health-care.svg';
+import InfectionControlList from './../../../organisms/InfectionControlList';
 
 export interface AddParam {
   content: string;
@@ -32,6 +27,26 @@ export const CreateComment: React.FC = (props: any) => {
     reputation: 0,
     date: ""
   });
+  const [shopData, setShopData] = useState({
+    user_id: 0,
+    name: '',
+    address: '',
+    contact: '',
+    good_count: 0,
+    bad_count: 0,
+    image: '',
+    business_date: '',
+    price_day: 0,
+    price_night: 0,
+    other_step: '',
+    steps: [{
+      content: '',
+      step_category: {
+        image: '',
+        content: ''
+      }
+    }],
+  });
 
   const postData = async () => {
     await axios
@@ -47,6 +62,17 @@ export const CreateComment: React.FC = (props: any) => {
     });
   }
 
+  const fetchShopData = () => {
+    axios.get(`/api/v1/user/shops/${match.params.id}`)
+    .then(res => setShopData(res.data))
+    .catch(err => console.log(err));
+  }
+
+  useEffect(() => {
+    fetchShopData();
+  }, [])
+
+
   return (
     <HomeLayout subHeaderText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       <div className='container'>
@@ -54,27 +80,7 @@ export const CreateComment: React.FC = (props: any) => {
           <h1 className="shop-name">cafe えにしえ</h1>
           <section className="infection-control_card">
             <h2 className="infection-control_title">感染症対策内容</h2>
-            <ol className="infection-control_list">
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Alcohol} alt="" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Airing} alt="" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Mask} alt="" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={HealthCare} alt="" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={Distance} alt="" />
-              </li>
-            </ol>
-            <ol className="infection-control_comment-box">
-              <li className="infection-control_comment">従業員がマスクを着用しています。</li>
-              <li className="infection-control_comment">お客様にマスクの着用をお願いしています。</li>
-            </ol>
+            <InfectionControlList stepData={shopData.steps}/>
           </section>
           <div className="review-form">
             <ul>
@@ -82,15 +88,15 @@ export const CreateComment: React.FC = (props: any) => {
                 <ul className="review-form_switch">
                   <li className="review-form_switch-option">
                     <label className="review-form_switch-label" htmlFor="">
-                      <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
-                      <p className="review-form_switch-label_text">期待通り</p>
+                      <Smile size={24} color="#ED753A"/>
+                      <p className="review-form_switch-label_text">バッチリ</p>
                     </label>
                     <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_GOOD} />
                   </li>
                   <li className="review-form_switch-option">
                     <label className="review-form_switch-label" htmlFor="">
-                      <img className="review-form_switch-labe_img" src={HistoryIcon} alt="" />
-                      <p className="review-form_switch-label_text">表記と違う</p>
+                      <Frown size={24} color="#3A8CED"/>
+                      <p className="review-form_switch-label_text">いまいち</p>
                     </label>
                     <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_BAD} />
                   </li>
@@ -107,31 +113,6 @@ export const CreateComment: React.FC = (props: any) => {
           </div>
         </div>
         <style jsx>{`
-            *{
-              margin:0;
-              padding:0;
-              border:0;
-              outline:0;
-              list-style:none;
-            }
-            a{
-              text-decoration: none;
-            }
-            .container{
-              width: 100%
-            }
-            // ヘッダー
-            header{
-              height: 56px;
-              width: 100%;
-              position: fixed;
-              background: ${CommonStyle.AccentColor};
-              display: flex;
-              justify-content: space-between;
-              padding: 6px 10px;
-              box-sizing: border-box;
-              z-index: 100;
-            }
             .icon-list{
               display: flex;
               padding: 0;
@@ -186,55 +167,6 @@ export const CreateComment: React.FC = (props: any) => {
               line-height: 24px;
               margin-bottom: 8px;
               margin-left: 24px;
-            }
-            .infection-control_list{
-              display: flex;
-              justify-content: center;
-              margin-bottom: 16px;
-            }
-            .infection-control_option :not(:last-child) {
-              margin-right: 12px;
-            }
-            .infection-control_option{
-              width: 60px;
-              height: 60px;
-              border-radius: 60px;
-              background: #98D4F6;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-            }
-            .infection-control_icon{
-              width: 34px;
-              height: auto;
-            }
-            .infection-control_comment-box{
-              background: ${CommonStyle.BgGray};
-              position: relative;
-              padding: 16px 20px;
-              border-radius: 8px;
-              max-width: 344px;
-              width: 80%;
-              margin: 0 auto;
-              font-weight: bold;
-              font-size: 12px;
-              line-height: 19px;
-              color: ${CommonStyle.TextBlack};
-            }
-            .infection-control_comment:not(:last-child){
-              margin-bottom: 2px;
-            }
-            .infection-control_comment::before{
-              content: '';
-              position: absolute;
-              left: calc(50% - 4px);
-              top: -8px;
-              display: block;
-              width: 0;
-              height: 0;
-              border-right: 6px solid transparent;
-              border-bottom: 8px solid #E7E7E7;
-              border-left: 6px solid transparent;
             }
             
             .review-form{
