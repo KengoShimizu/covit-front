@@ -1,9 +1,5 @@
 import React from 'react';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
-import Input, { InputThemes } from './../atoms/Input';
-import { ChevronRight } from 'react-feather';
-import { Link } from 'react-router-dom';
+import Input from './../atoms/Input';
 import CommonStyle from '../../common/CommonStyle';
 
 

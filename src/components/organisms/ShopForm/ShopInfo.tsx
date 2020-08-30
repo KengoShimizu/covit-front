@@ -1,28 +1,29 @@
 import React, { useEffect, useState } from 'react';
 // library
-import { Sun, Moon } from 'react-feather';
+import { Sun, Moon, ArrowRight } from 'react-feather';
 import axios from "axios";
+import useReactRouter from "use-react-router";
 // atoms
-import Button, { ButtonThemes } from '../../../../atoms/Button'
-import Text, { TextThemes } from '../../../../atoms/Text'
-import Select, { SelectThemes } from '../../../../atoms/Select'
-import InputFile, { InputFileThemes } from '../../../../atoms/InputFile';
+import Button, { ButtonThemes } from '../../atoms/Button'
+import Text, { TextThemes } from '../../atoms/Text'
+import Select, { SelectThemes } from '../../atoms/Select'
+import InputFile, { InputFileThemes } from '../../atoms/InputFile';
 // organisms
-import { ShopForm } from '../../../../organisms/ShopForm/ShopForm';
-import { ShopLinkForm } from '../../../../organisms/ShopForm/ShopLinkForm';
-import { ShopBusinessDateForm } from '../../../../organisms/ShopForm/ShopBusinessDateForm';
+import { ShopForm } from '../../organisms/ShopForm/ShopForm';
+import { ShopLinkForm } from '../../organisms/ShopForm/ShopLinkForm';
+import { ShopBusinessDateForm } from '../../organisms/ShopForm/ShopBusinessDateForm';
 // types
-import Genre from '../../../../../types/Genre';
-import Link from '../../../../../types/Link';
+import Genre from '../../../types/Genre';
+import Link from '../../../types/Link';
 // others
-import { PriceArray, LinkType } from '../../../../../common/Const'
-import CommonStyle from '../../../../../common/CommonStyle';
+import { PriceArray, LinkType } from '../../../common/Const'
+import CommonStyle from '../../../common/CommonStyle';
 
 interface ShopInfoProps {
   setPage: any;
   addData: any;
   setAddData: any;
-  post: any;
+  post?: any;
 }
 // FIXME 汚すぎだけど、どう実装しよう~
 var defaultLinks = {
@@ -49,11 +50,13 @@ var defaultLinks = {
 }
 
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, post }) => {
+  const { match }: any = useReactRouter();
+  const isOwnerPage = match.path.match(/owners/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState(defaultLinks);
 
   const fetchGenres = async () => {
-    await axios.get('/api/v1/owner/genres')
+    await axios.get('/api/v1/user/genres')
       .then(res => setGenres(res.data.data))
       .catch(err => console.log(err));
     return;
@@ -107,10 +110,21 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     <div className="container">
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text>
       <ShopForm handleChange={handleChange} addData={addData} />
-      {/* 営業時間フォーム */}
-      <ShopBusinessDateForm setAddData={setAddData} addData={addData}/>
+      {isOwnerPage && 
+        /* 営業時間フォーム */
+        <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
+      }
       {/* ジャンル系 */}
       <Select theme={SelectThemes.REQUIRED} handleChange={handleChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
+      {!isOwnerPage && 
+        <React.Fragment>
+          <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
+            詳細をスキップしてリクエストする
+          </Button>
+          {/* 営業時間フォーム */}
+          <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
+        </React.Fragment>
+      }
       <label>料理の価格帯</label>
       <div>
         <Sun color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
@@ -128,9 +142,15 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
-      <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
-        リクエストする
-      </Button>
+      {post ?
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
+          リクエストする
+        </Button>
+        :
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(3)}>
+          次へ <ArrowRight />
+        </Button>
+        }
       <style jsx>
         {`
         label {

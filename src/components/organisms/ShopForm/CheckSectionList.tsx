@@ -20,9 +20,9 @@ export const CheckSectionList: React.FC<CheckSectionListProps> = ({ stepCategori
 
   return (
     <div className="container">
-      {stepCategories.map((stepCategory: StepCategory) => {
+      {stepCategories.map((stepCategory: StepCategory, i: number) => {
         return (
-          <CheckSection stepCategory={stepCategory} handleChange={handleChange} />
+          <CheckSection stepCategory={stepCategory} handleChange={handleChange} key={`check-section${i}`}/>
         )
       })}
     </div>

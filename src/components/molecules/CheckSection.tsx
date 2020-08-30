@@ -16,10 +16,10 @@ export const CheckSection: React.FC<CheckSectionProps> = ({ stepCategory, handle
       </p>
       <div className='checkbox-container'>
         {
-          stepCategory.steps.map((step: Step) => {
+          stepCategory.steps.map((step: Step, i: number) => {
             return(
-              <p>
-                <input type="checkbox" name={step.content} value={step.id} onChange={handleChange} /><label>{step.content}</label>
+              <p key={`checkbox${i}`}>
+                <input type="checkbox" name={step.content} value={step.id} onChange={handleChange}/><label>{step.content}</label>
               </p>
             )
           })

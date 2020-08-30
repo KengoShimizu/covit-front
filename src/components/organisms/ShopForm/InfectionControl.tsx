@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 // library
 import { ArrowRight } from 'react-feather';
 import axios from "axios";
+import useReactRouter from "use-react-router";
 // atoms
-import Button, { ButtonThemes } from '../../../../atoms/Button'
-import Text, { TextThemes } from '../../../../atoms/Text'
-import Textarea, { TextareaThemes } from '../../../../atoms/Textarea'
+import Button, { ButtonThemes } from '../../atoms/Button'
+import Text, { TextThemes } from '../../atoms/Text'
+import Textarea, { TextareaThemes } from '../../atoms/Textarea'
 // organisms
-import { CheckSectionList } from '../../../../organisms/ShopForm/CheckSectionList'
+import { CheckSectionList } from './CheckSectionList'
 // types
-import StepCategory from '../../../../../types/StepCategory';
+import StepCategory from '../../../types/StepCategory';
 
 interface InfectionControlProps {
   setPage: any;
@@ -18,11 +19,13 @@ interface InfectionControlProps {
 }
 
 export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData }) => {
+  const { match }: any = useReactRouter();
+  const identifer = match.path.match(/owners/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
   const [stepIDs, setStepIDs] = useState<number[]>([]);
 
   const fetchStepCategories = async () => {
-    await axios.get('/api/v1/owner/step_categories')
+    await axios.get(`/api/v1/${identifer}/step_categories`)
       .then(res => setStepCategories(res.data.data))
       .catch(err => console.log(err));
     return;

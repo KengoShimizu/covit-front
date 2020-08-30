@@ -9,15 +9,11 @@ import AuthContext from './../../../../context/CommonProvider';
 // types
 import Link from './../../../../types/Link'
 // others
-import { InfectionControl } from './../../../organisms/ShopForm/InfectionControl';
+import { InfectionControl } from '../../../organisms/ShopForm/InfectionControl';
 import { ShopInfo } from './../../../organisms/ShopForm/ShopInfo';
-import OwnerInfo from './../../../organisms/ShopForm/OwnerInfo';
 
 interface AddParam {
   user_id: number;
-  user_name: string;
-  user_kana_name: string;
-  mail: string;
   name: string;
   kana_name: string;
   address: string;
@@ -32,16 +28,13 @@ interface AddParam {
   links: Link[];
 }
 
-export const OwnerShopForm: React.FC = (props: any) => {
+export const UserShopForm: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
   const [err, setErr] = useState<string>('');
   const [addData, setAddData] = useState<AddParam>({
     user_id: authState.user.id,
-    user_name: "",
-    user_kana_name: "",
-    mail: "",
     name: "",
     kana_name: "",
     address: "",
@@ -56,13 +49,6 @@ export const OwnerShopForm: React.FC = (props: any) => {
     links: []
   });
 
-  const handleChange = (event: any) => {
-    setAddData({
-      ...addData,
-      [event.target.name]: event.target.value
-    });
-  }
-
   const post = async () => {
     await axios.post('/api/v1/owner/shops', addData)
       .catch(err => console.log(err))
@@ -75,25 +61,11 @@ export const OwnerShopForm: React.FC = (props: any) => {
   }, [addData])
 
   return (
-    <React.Fragment>
-      {page === 1 &&
-        <HomeLayout subHeaderText="01 お店の情報について" prevRef='#' history={props.history}>
-          <div className="container">
-            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
-          </div>
-        </HomeLayout>}
-      {page === 2 &&
-        <HomeLayout subHeaderText="02 お店の情報について" onClick={() => setPage(1)}>
-          <div className="container">
-            <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
-          </div>
-        </HomeLayout>}
-      {page === 3 &&
-        <HomeLayout subHeaderText="03 担当者様について" onClick={() => setPage(2)}>
-          <div className="container">
-            <OwnerInfo post={post} handleChange={handleChange} addData={addData}/>
-          </div>
-        </HomeLayout>}
+    page === 1 ?
+    <HomeLayout subHeaderText="01 お店の情報について" prevRef='#' history={props.history}>
+      <div className="container">
+        <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
+      </div>
       <style jsx>
         {`
           .container {
@@ -103,6 +75,21 @@ export const OwnerShopForm: React.FC = (props: any) => {
           }
         `}
       </style>
-    </React.Fragment>
+    </HomeLayout>
+    :
+    <HomeLayout subHeaderText="02 お店の情報について" onClick={() => setPage(1)}>
+      <div className="container">
+        <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} post={post}/>
+      </div>
+      <style jsx>
+        {`
+          .container {
+            width: 100%;
+            max-width: 330px;
+            margin: 0 auto;
+          }
+        `}
+      </style>
+    </HomeLayout>
   );
 }
