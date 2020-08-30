@@ -15,9 +15,10 @@ import OwnerInfo from './../../../organisms/ShopForm/OwnerInfo';
 
 interface AddParam {
   user_id: number;
-  user_name: string;
-  user_kana_name: string;
-  mail: string;
+  owner: {
+    name: string;
+    kana_name: string;
+  },
   name: string;
   kana_name: string;
   address: string;
@@ -39,9 +40,10 @@ export const OwnerShopForm: React.FC = (props: any) => {
   const [err, setErr] = useState<string>('');
   const [addData, setAddData] = useState<AddParam>({
     user_id: authState.user.id,
-    user_name: "",
-    user_kana_name: "",
-    mail: "",
+    owner: {
+      name: "",
+      kana_name: "",
+    },
     name: "",
     kana_name: "",
     address: "",
@@ -91,7 +93,7 @@ export const OwnerShopForm: React.FC = (props: any) => {
       {page === 3 &&
         <HomeLayout subHeaderText="03 担当者様について" onClick={() => setPage(2)}>
           <div className="container">
-            <OwnerInfo post={post} handleChange={handleChange} addData={addData}/>
+            <OwnerInfo post={post} handleChange={handleChange} addDataOwner={addData.owner}/>
           </div>
         </HomeLayout>}
       <style jsx>

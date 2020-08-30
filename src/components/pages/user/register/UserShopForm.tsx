@@ -50,7 +50,7 @@ export const UserShopForm: React.FC = (props: any) => {
   });
 
   const post = async () => {
-    await axios.post('/api/v1/owner/shops', addData)
+    await axios.post('/api/v1/user/shops', addData)
       .catch(err => console.log(err))
       .finally(() => console.log('FIXME 遷移先'));
     return;
