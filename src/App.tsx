@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // provider
 import { CommonProvider } from "./context/CommonProvider";
 import { Authentication } from "./components/common/Authentication";
+import { LoginJudge } from "./components/common/LoginJudge";
 import { ModalStateProvider } from './context/ModalContext';
 import { ModalTopStateProvider } from './context/ModalTopContext';
 // components/pages
@@ -44,6 +45,7 @@ function App() {
         <ModalStateProvider>
           <ModalTopStateProvider>
             <BrowserRouter>
+            <LoginJudge>
               <Switch>
                 <Route exact path='/' component={Top} />
                 <Route exact path='/history' component={History} />
@@ -71,6 +73,7 @@ function App() {
                   <Route exact path='/users/shopform' component={UserShopForm} />
                 </Authentication>
               </Switch>
+              </LoginJudge>
             </BrowserRouter>
           </ModalTopStateProvider>
         </ModalStateProvider>
