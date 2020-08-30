@@ -129,9 +129,9 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
         <Button theme={[ButtonThemes.NORMAL]} onClick={allBusinessTimeChanged} propStyle={{ display: 'inline-block' }} >一括で変更する</Button>
       </div>
       {
-        businessDate.map((dateInfo: any) => {
+        businessDate.map((dateInfo: any, i: number) => {
           return (
-            <BusinessDateInput handleChange={handleDateInfoChange} dateInfo={dateInfo} />
+            <BusinessDateInput handleChange={handleDateInfoChange} dateInfo={dateInfo} key={`business-date${i}`}/>
           )
         })
       }

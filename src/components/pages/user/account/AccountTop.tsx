@@ -7,22 +7,6 @@ import { AccountTopCardList } from '../../../organisms/CardList/AccoutTopCardLis
 // context
 import AuthContext from "../../../../context/CommonProvider";
 
-
-const propStyle = {
-  profileCardBtn: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  profileText: {
-    marginRight: '8px'
-  },
-  nextRefBtn: {
-    position: 'absolute',
-    top: '120px',
-    right: '10px',
-  }
-}
-
 export const AccountTop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const [account] = useState(authState.user);

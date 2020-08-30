@@ -30,8 +30,10 @@ import { EditProfile } from './components/pages/user/account/manage/EditProfile'
 import { EditEmail } from './components/pages/user/account/manage/EditEmail';
 import { AddEmail } from './components/pages/user/account/manage/AddEmail';
 
+// components/pages/owner/register
+import { UserShopForm } from './components/pages/user/register/UserShopForm';
 
-//Owner用 component
+// components/pages/owner/register
 import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
 import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
 
@@ -66,6 +68,7 @@ function App() {
                   <Route exact path='/accounts/delete' component={Delete} />
                   <Route exact path='/accounts/profileregister' component={ProfileRegister} />
                   <Route exact path='/owners/shopform' component={OwnerShopForm} />
+                  <Route exact path='/users/shopform' component={UserShopForm} />
                 </Authentication>
               </Switch>
             </BrowserRouter>
