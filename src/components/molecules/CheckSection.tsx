@@ -6,9 +6,10 @@ import Step from './../../types/Step'
 interface CheckSectionProps {
   stepCategory: StepCategory;
   handleChange: any;
+  stepIDs?: number[];
 }
 
-export const CheckSection: React.FC<CheckSectionProps> = ({ stepCategory, handleChange }) => {
+export const CheckSection: React.FC<CheckSectionProps> = ({ stepCategory, handleChange, stepIDs }) => {
   return (
     <section className="container">
       <p className="label-container">
@@ -17,9 +18,9 @@ export const CheckSection: React.FC<CheckSectionProps> = ({ stepCategory, handle
       <div className='checkbox-container'>
         {
           stepCategory.steps.map((step: Step, i: number) => {
-            return(
+            return (
               <p key={`checkbox${i}`}>
-                <input type="checkbox" name={step.content} value={step.id} onChange={handleChange}/><label>{step.content}</label>
+                <input type="checkbox" name={step.content} value={step.id} onChange={handleChange} checked={stepIDs?.includes(step.id)} /><label>{step.content}</label>
               </p>
             )
           })
@@ -27,7 +28,7 @@ export const CheckSection: React.FC<CheckSectionProps> = ({ stepCategory, handle
       </div>
 
       <style jsx>
-      {`
+        {`
         .container {
           margin-bottom: 32px;
         }

@@ -14,45 +14,46 @@ import { ShopInfo } from './../../../organisms/ShopForm/ShopInfo';
 import OwnerInfo from './../../../organisms/ShopForm/OwnerInfo';
 
 interface AddParam {
-  user_id: number;
   owner: {
     name: string;
     kana_name: string;
   },
-  name: string;
-  kana_name: string;
-  address: string;
-  contact: string;
-  image: string;
-  business_date: string;
-  price_day: number;
-  price_night: number;
-  other_step: string;
+  shop: {
+    name: string;
+    kana_name: string;
+    address: string;
+    contact: string;
+    image: string;
+    business_date: string;
+    price_day: number;
+    price_night: number;
+    other_step: string;
+  };
   step_ids: number[];
   genre_id: number;
   links: Link[];
 }
 
 export const OwnerShopForm: React.FC = (props: any) => {
-  const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
   const [err, setErr] = useState<string>('');
   const [addData, setAddData] = useState<AddParam>({
-    user_id: authState.user.id,
     owner: {
       name: "",
       kana_name: "",
     },
-    name: "",
-    kana_name: "",
-    address: "",
-    contact: "",
-    image: "",
-    business_date: "",
-    price_day: 0,
-    price_night: 0,
-    other_step: "",
+    shop: {
+      name: "",
+      kana_name: "",
+      address: "",
+      contact: "",
+      image: "",
+      business_date: "",
+      price_day: 0,
+      price_night: 0,
+      other_step: ""
+    },
     step_ids: [],
     genre_id: 0,
     links: []
@@ -62,6 +63,16 @@ export const OwnerShopForm: React.FC = (props: any) => {
     setAddData({
       ...addData,
       [event.target.name]: event.target.value
+    });
+  }
+
+  const handleOwnerChange = (event: any) => {
+    setAddData({
+      ...addData,
+      owner: {
+        ...addData.owner,
+        [event.target.name]: event.target.value
+      }
     });
   }
 
@@ -93,7 +104,7 @@ export const OwnerShopForm: React.FC = (props: any) => {
       {page === 3 &&
         <HomeLayout subHeaderText="03 担当者様について" onClick={() => setPage(2)}>
           <div className="container">
-            <OwnerInfo post={post} handleChange={handleChange} addDataOwner={addData.owner}/>
+            <OwnerInfo post={post} handleChange={handleOwnerChange} addData={addData}/>
           </div>
         </HomeLayout>}
       <style jsx>

@@ -5,16 +5,16 @@ import Button, { ButtonThemes } from '../../atoms/Button'
 
 interface OwnerInfoProps {
   handleChange: any;
-  addDataOwner: any;
+  addData: any;
   post: any;
 }
 
-const OwnerInfo: React.FC<OwnerInfoProps> = ({ handleChange, addDataOwner, post }) => {
+const OwnerInfo: React.FC<OwnerInfoProps> = ({ handleChange, addData, post }) => {
 
   return (
     <div className="container">
-      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='お名前' placeholder='名前太郎' content={addDataOwner.name} name='name' />
-      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='ふりがな' placeholder='なまえたろう' content={addDataOwner.kana_name} name='kana_name' />
+      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='お名前' placeholder='名前太郎' content={addData.owner.name} name='name' />
+      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='ふりがな' placeholder='なまえたろう' content={addData.owner.kana_name} name='kana_name' />
       <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={post}>
         リクエストする
       </Button>

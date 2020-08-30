@@ -113,7 +113,10 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
   useEffect(() => {
     setAddData({
       ...addData,
-      business_date: JSON.stringify(businessDate)
+      shop: {
+        ...addData.shop,
+        business_date: JSON.stringify(businessDate)
+      }
     })
   }, [businessDate])
 

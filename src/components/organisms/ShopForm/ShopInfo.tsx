@@ -90,21 +90,34 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   const handleChange = (event: any) => {
     setAddData({
       ...addData,
-      [event.target.name]: event.target.value
+      shop: {
+        ...addData.shop,
+        [event.target.name]: event.target.value
+      }
     });
   }
 
-  const request = async () => {
+  const handleGenreChange = (event: any) => {
     setAddData({
       ...addData,
-      links: Object.values(links).filter((link: Link) => link.url !== '')
-    });
+        [event.target.name]: event.target.value
+      });
+  }
+
+  const request = async () => {
     post();
   }
 
   useEffect(() => {
     fetchGenres();
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    setAddData({
+      ...addData,
+      links: Object.values(links).filter((link: Link) => link.url !== '')
+    });
+  }, [links]);
 
   return (
     <div className="container">
@@ -115,7 +128,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
       }
       {/* ジャンル系 */}
-      <Select theme={SelectThemes.REQUIRED} handleChange={handleChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
+      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
       {!isOwnerPage && 
         <React.Fragment>
           <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
@@ -137,7 +150,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       {/* FIXME ImageUploaderみたいなAPI作った方が良い */}
       <label>ヘッダー画像</label>
       <div className="shop-img_wrapper">
-        <img className="shop-img" src={addData.image ? addData.image : ""} alt="shop header" />
+        <img className="shop-img" src={addData.shop.image ? addData.shop.image : ""} alt="shop header" />
       </div>
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
       {/* リンク系 */}
@@ -147,7 +160,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           リクエストする
         </Button>
         :
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(3)}>
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => { setPage(3); }}>
           次へ <ArrowRight />
         </Button>
         }

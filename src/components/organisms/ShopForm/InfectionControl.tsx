@@ -34,7 +34,10 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   const handleChange = (event: any) => {
     setAddData({
       ...addData,
-      [event.target.name]: event.target.value
+      shop: {
+        ...addData.shops,
+        [event.target.name]: event.target.value
+      }
     })
   }
 
