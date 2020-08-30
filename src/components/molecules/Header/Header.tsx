@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // library
 import { Link } from 'react-router-dom';
 import { User, LogIn, Menu } from 'react-feather';
-import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 // components
 import SubHeader from './SubHeader';
+// context
+import AuthContext from './../../../context/CommonProvider';
 
 interface HeaderProps {
   subHeaderText?: string;
@@ -16,7 +17,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history, onClick}) => {
-  const cookies = new Cookies();
+  const { authState } = useContext(AuthContext);
   return (
     <React.Fragment>
       <header className="header">
@@ -30,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({subHeaderText, prevRef, history, onClick
               <p className="icon-list_caption">閲覧履歴</p>
             </li>
           </Link>
-          {cookies.get('token') ?
+          {authState.isLogin ?
             <Link to='/accounts'>
               <li className="icon-list_option">
                 <span className="icon-list_img-wrapper">
