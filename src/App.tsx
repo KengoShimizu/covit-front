@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // provider
 import { CommonProvider } from "./context/CommonProvider";
 import { Authentication } from "./components/common/Authentication";
+import { UserAuth } from "./components/common/UserAuth";
+import { OwnerAuth } from "./components/common/OwnerAuth";
 import { ModalStateProvider } from './context/ModalContext';
 import { ModalTopStateProvider } from './context/ModalTopContext';
 // components/pages
@@ -29,11 +31,7 @@ import { EditLogin } from './components/pages/user/account/manage/EditLogin';
 import { EditProfile } from './components/pages/user/account/manage/EditProfile';
 import { EditEmail } from './components/pages/user/account/manage/EditEmail';
 import { AddEmail } from './components/pages/user/account/manage/AddEmail';
-
-// components/pages/owner/register
-import { UserShopForm } from './components/pages/user/register/UserShopForm';
-
-// components/pages/owner/register
+//Owner用 component
 import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
 import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
 
@@ -58,7 +56,6 @@ function App() {
                 {/* ログインの導線でどうだろ */}
                 <Route exact path='/owners/requesttop' component={OwnerRequestTop} />
                 <Authentication>
-                  <Route exact path='/shops/:id/comments/new' component={CreateComment} />
                   <Route exact path='/accounts' component={AccountTop} />
                   <Route exact path='/accounts/comments' component={Comments} />
                   <Route exact path='/accounts/editlogin' component={EditLogin} />
@@ -67,8 +64,6 @@ function App() {
                   <Route exact path='/accounts/addemail' component={AddEmail} />
                   <Route exact path='/accounts/delete' component={Delete} />
                   <Route exact path='/accounts/profileregister' component={ProfileRegister} />
-                  <Route exact path='/owners/shopform' component={OwnerShopForm} />
-                  <Route exact path='/users/shopform' component={UserShopForm} />
                 </Authentication>
               </Switch>
             </BrowserRouter>

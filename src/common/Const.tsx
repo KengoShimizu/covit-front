@@ -72,3 +72,9 @@ export class LinkType {
   public static readonly INSTAGRAM = 3
   public static readonly OTHER     = 4
 }
+
+export class OwnerType {
+  public static readonly NOTOWNER         = 0
+  public static readonly UNAPPROVEDOWNER  = 1
+  public static readonly APPROVEDOWNER    = 2
+}
