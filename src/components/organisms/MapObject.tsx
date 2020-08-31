@@ -106,7 +106,8 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
       </Map>
       <style jsx>{`
         .map-container{
-          height: 100vh;
+          width: 100%;
+          height: ${window.innerHeight}px;
           background-color: #E8E6E2;
         }
       `}</style>
