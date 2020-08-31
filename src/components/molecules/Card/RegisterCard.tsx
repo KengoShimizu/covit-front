@@ -23,19 +23,22 @@ interface RegisterCardProps {
   src: string;
   text: string;
   className: string;
+  nextRef: string;
 }
 
-const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className}) => {
+const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className, nextRef}) => {
   return (
     <div className={`register-card ${className}`}>
-      <div className="register-card-inner">
-        <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.registerCardIcon}>
-          <img className="register-card-image" src={src} alt=""/>
-        </Icon>
-        <Text theme={[TextThemes.SMALL]} propStyle={propStyle.registerCardText}>
-          {text}
-        </Text>
-      </div>
+      <a href={nextRef}>
+        <div className="register-card-inner">
+          <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.registerCardIcon}>
+            <img className="register-card-image" src={src} alt=""/>
+          </Icon>
+          <Text theme={[TextThemes.SMALL]} propStyle={propStyle.registerCardText}>
+            {text}
+          </Text>
+        </div>
+      </a>
       <style jsx>{`
         .register-card {
           position: relative;

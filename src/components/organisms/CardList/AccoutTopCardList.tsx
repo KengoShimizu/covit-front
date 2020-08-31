@@ -9,7 +9,7 @@ import CommonStyle from '../../../common/CommonStyle';
 import AccountTopCard from '../../molecules/Card/AccoutTopCard';
 import Modal from '../../molecules/Modal/Modal';
 // context
-import { ModalTopContextIsShown, ModalTopContextText } from '../../../context/ModalTopContext';
+import { TopModalContextIsShown, TopModalContextText } from '../../../context/TopModalContext';
 import ModalContext from '../../../context/ModalContext';
 
 
@@ -20,8 +20,8 @@ interface AccoutTopCardListProps {
 
 export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) => {
   const cookies = new Cookies();
-  const modalTop_isShownContext = useContext(ModalTopContextIsShown);
-  const modalTop_textContext = useContext(ModalTopContextText);
+  const TopModal_isShownContext = useContext(TopModalContextIsShown);
+  const TopModal_textContext = useContext(TopModalContextText);
   const modalContext = useContext(ModalContext);
   const [modalState, setModalState] = useState({
     title: '',
@@ -30,36 +30,36 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
     onClick: () => {}
   });
 
-  const handleLogout = (toggleModalTopShown: any, setModalText: any) => {
+  const handleLogout = (toggleTopModalShown: any, setModalText: any) => {
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
         setModalText({
           caption: 'ログアウトしました。'
         });
-        toggleModalTopShown(true);
+        toggleTopModalShown(true);
         history.push('/');
       }).catch(() => {
         setModalText({
           caption: 'ログアウトに失敗しました。'
         });
-        toggleModalTopShown(true);
+        toggleTopModalShown(true);
         history.push('/');
       })
   }
-  const handleDeleteAccount = (toggleModalTopShown: any, setModalText: any) => {
+  const handleDeleteAccount = (toggleTopModalShown: any, setModalText: any) => {
     axios.delete(`/api/v1/user/users/1`)
       .then(() => {
         setModalText({
           caption: 'アカウントの削除が完了しました。', 
           small: '今までご利用ありがとうございました！'
         });
-        toggleModalTopShown(true);
+        toggleTopModalShown(true);
         history.push('/');
       }).catch(() => {
         setModalText({
           caption: 'アカウントの削除に失敗しました。'
         });
-        toggleModalTopShown(true);
+        toggleTopModalShown(true);
         history.push('/');
       })
   }
@@ -74,13 +74,13 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
       title: 'ログアウトしてよろしいですか？',
       subtitle: '',
       btntext: 'ログアウト',
-      onClick: () => handleLogout(modalTop_isShownContext.setIsModalTopShown, modalTop_textContext.setModalText)
+      onClick: () => handleLogout(TopModal_isShownContext.setIsTopModalShown, TopModal_textContext.setModalText)
     },
     {
       title: '本当にアカウントを削除しますか？',
       subtitle: 'アカウントを削除すると、レビューなどの情報が全て削除され復元はできません。',
       btntext: '削除する',
-      onClick: () => handleDeleteAccount(modalTop_isShownContext.setIsModalTopShown, modalTop_textContext.setModalText)
+      onClick: () => handleDeleteAccount(TopModal_isShownContext.setIsTopModalShown, TopModal_textContext.setModalText)
     }
   ];
 
