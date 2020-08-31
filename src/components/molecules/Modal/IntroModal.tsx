@@ -7,11 +7,18 @@ import CommonStyle from '../../../common/CommonStyle';
 import Button, { ButtonThemes } from '../../atoms/Button';
 
 const propStyle = {
-  shopModal: {
+  shopModal1: {
     display: 'flex',
     alignItems: 'center',
-    margin: '0 auto 40px auto'
+    margin: '0 auto 10px',
+    width: '225px'
   },
+  shopModal2: {
+    margin: '0 auto 20px',
+    width: '225px',
+    color: CommonStyle.TextWhite,
+    backgroundColor: CommonStyle.BorderGray,
+  }
 }
 
 interface IntroModalProps {
@@ -24,38 +31,50 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
     <React.Fragment>
       {!initModalIsOpen && <div className='intro-mordal-back' onClick={() => handleInitModal}></div>}
       <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
-        <h1 className="intro-mordal_title">PAND-MEAL<br /> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
-        <img className="intro-mordal_img" src='/charactor.png' alt="" />
+        <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
+        <h1 className="intro-mordal_title">covEAT<br /> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
+        <img className="intro-mordal_img" src='/charactor.svg' alt="" />
         <p className="intro-mordal_text">
-          PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
-          </p>
+          covEAT は感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
+        </p>
         {/* propstyle */}
         <div onClick={handleInitModal}>
-          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopModal}>
+          <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopModal1}>
             <img className="intro-mordal_btn_icon" src='/service-icon.svg' alt="" />
-              さっそく飲食店を探す
+            さっそく飲食店を探す
+          </Button>
+          <Link to='/accounts/register'>
+            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopModal2}>
+              会員登録をして始める
             </Button>
+          </Link>
         </div>
         <Link to=''>
-          <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
+          <p className="intro-mordal_link">covEATについてもっと知りたい！</p>
         </Link>
         <Link to=''>
-          <p className="intro-mordal_link">PAND-MEALにお店を追加したい！</p>
+          <p className="intro-mordal_link">covEATにお店を追加したい！</p>
         </Link>
       </div>
       <style jsx>{`
           .intro-mordal-back{
             height: 100%;
             width: 100%;
-            z-index: 999;
+            z-index: 1100;
             position: absolute;
             top: 0;
+          }
+          .intro-modal-pin{
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
           }
           .intro-mordal{
             visibility: visible;
             top: 144px;
             left: 50%;
-            z-index: 1000;
+            z-index: 1101;
             transform: translateX(-50%);
             -webkit- transform: translateX(-50%);
             position: fixed;
@@ -73,7 +92,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             font-weight: bold;
             font-size: 24px;
             line-height: 24px;
-            margin-bottom: 4px;
+            margin: 11px 0 4px;
           }
           .intro-mordal_title_jp{
             font-weight: bold;
