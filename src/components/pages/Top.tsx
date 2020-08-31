@@ -11,7 +11,7 @@ import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
 import Button, { ButtonThemes } from './../atoms/Button';
 import GenreCardList from '../organisms/CardList/GenreCardList';
-import ModalTop from './../molecules/Modal/ModalTop';
+import TopModal from '../molecules/Modal/TopModal';
 import Icon, { IconThemes } from '../atoms/Icon';
 import FooterActionBar from './../organisms/FooterActionBar';
 
@@ -147,7 +147,7 @@ export const Top: React.FC = (props: any) => {
 
   return (
     <HomeLayout>
-      <ModalTop/>
+      <TopModal/>
       <div className='container'>
         <MapObject
           coordinations={coordinations}

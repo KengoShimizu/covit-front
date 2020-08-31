@@ -4,13 +4,15 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 // provider
 import { CommonProvider } from "./context/CommonProvider";
 import { ModalStateProvider } from './context/ModalContext';
-import { ModalTopStateProvider } from './context/ModalTopContext';
+import { TopModalStateProvider } from './context/TopModalContext';
 import { Authentication } from "./components/common/Authentication";
 import { LoginJudge } from "./components/common/LoginJudge";
 import { OwnerRoute } from './components/common/OwnerRoute';
 import { UserRoute } from './components/common/UserRoute';
+import { RedirectPathProvider } from './context/RedirectContext';
 // components/pages
 import { Top } from './components/pages/Top';
+import { Menu } from './components/pages/Menu';
 import { History } from './components/pages/History';
 // components/pages/user/shop
 import { Shop } from './components/pages/user/shop/Shop';
@@ -43,39 +45,41 @@ function App() {
     <div className="App">
       <CommonProvider>
         <ModalStateProvider>
-          <ModalTopStateProvider>
+          <TopModalStateProvider>
             <BrowserRouter>
-            <LoginJudge>
-              <Switch>
-                <Route exact path='/' component={Top} />
-                <Route exact path='/history' component={History} />
-                <Route exact path='/shops/:id' component={Shop} />
-                <Route exact path='/shops/:id/comments' component={ShopComments} />
-                <Route exact path='/accounts/privacy' component={Privacy} />
-                <Route exact path='/accounts/login' component={Login} />
-                <Route exact path='/accounts/register' component={Register} />
-                <Route exact path='/accounts/emailregister' component={EmailRegister} />
-                <Route exact path='/accounts/send' component={Send} />
-                <Route exact path='/users/:id/comments' component={Comments} />
-                {/* ログインの導線でどうだろ */}
-                <Route exact path='/owners/requesttop' component={OwnerRequestTop} />
-                <Authentication>
-                  <UserRoute exact path='/shops/:id/comments/new' component={CreateComment} />
-                  <OwnerRoute exact path='/owners/shopform' component={OwnerShopForm} />
-                  <Route exact path='/accounts' component={AccountTop} />
-                  <Route exact path='/accounts/comments' component={Comments} />
-                  <Route exact path='/accounts/editlogin' component={EditLogin} />
-                  <Route exact path='/accounts/editprofile' component={EditProfile} />
-                  <Route exact path='/accounts/editemail' component={EditEmail} />
-                  <Route exact path='/accounts/addemail' component={AddEmail} />
-                  <Route exact path='/accounts/delete' component={Delete} />
-                  <Route exact path='/accounts/profileregister' component={ProfileRegister} />
-                  <Route exact path='/users/shopform' component={UserShopForm} />
-                </Authentication>
-              </Switch>
+              <LoginJudge>
+                <RedirectPathProvider>
+                  <Switch>
+                    <Route exact path='/' component={Top} />
+                    <Route exact path='/menu' component={Menu} />
+                    <Route exact path='/shops/:id' component={Shop} />
+                    <Route exact path='/shops/:id/comments' component={ShopComments} />
+                    <Route exact path='/accounts/privacy' component={Privacy} />
+                    <Route exact path='/accounts/login' component={Login} />
+                    <Route exact path='/accounts/register' component={Register} />
+                    <Route exact path='/accounts/emailregister' component={EmailRegister} />
+                    <Route exact path='/accounts/send' component={Send} />
+                    <Route exact path='/users/:id/comments' component={Comments} />
+                    <Route exact path='/owners/requesttop' component={OwnerRequestTop} />
+                    <Authentication>
+                      <UserRoute exact path='/shops/:id/comments/new' component={CreateComment} />
+                      <OwnerRoute exact path='/owners/shopform' component={OwnerShopForm} />
+                      <Route exact path='/history' component={History} />
+                      <Route exact path='/accounts' component={AccountTop} />
+                      <Route exact path='/accounts/comments' component={Comments} />
+                      <Route exact path='/accounts/editlogin' component={EditLogin} />
+                      <Route exact path='/accounts/editprofile' component={EditProfile} />
+                      <Route exact path='/accounts/editemail' component={EditEmail} />
+                      <Route exact path='/accounts/addemail' component={AddEmail} />
+                      <Route exact path='/accounts/delete' component={Delete} />
+                      <Route exact path='/accounts/profileregister' component={ProfileRegister} />
+                      <Route exact path='/users/shopform' component={UserShopForm} />
+                    </Authentication>
+                  </Switch>
+                </RedirectPathProvider>
               </LoginJudge>
             </BrowserRouter>
-          </ModalTopStateProvider>
+          </TopModalStateProvider>
         </ModalStateProvider>
       </CommonProvider>
       <style jsx>{`

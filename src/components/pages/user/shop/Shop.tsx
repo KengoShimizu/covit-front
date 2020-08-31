@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // library
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -6,11 +6,14 @@ import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
+import { RedirectFrom } from './../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
 import InfectionControlList from './../../../organisms/InfectionControlList';
+// context
+import RedirectContext from './../../../../context/RedirectContext';
 
 const propStyle = {
   commentLink: {
@@ -127,7 +130,7 @@ export const Shop: React.FC = (props: any) => {
             </div>
             <hr className="infection-control_hr"/>
             <Link to={`/shops/${match.params.id}/comments/new`}>
-              <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn}>
+              <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={useContext(RedirectContext).setFromPath(RedirectFrom.NEW_COMMENT)}>
                 <Edit size={20} color="#fff" />
                 <span className="infection-control_comment-text">感染対策のレビューを書く</span>
               </Button>

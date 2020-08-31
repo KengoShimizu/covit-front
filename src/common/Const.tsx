@@ -78,3 +78,8 @@ export class OwnerType {
   public static readonly UNAPPROVEDOWNER  = 1
   public static readonly APPROVEDOWNER    = 2
 }
+
+export class RedirectFrom {
+  public static readonly NEW_COMMENT = 'new_comment'
+  public static readonly HISTORY = 'history'
+}

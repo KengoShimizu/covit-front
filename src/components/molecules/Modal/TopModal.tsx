@@ -6,7 +6,7 @@ import CommonStyle from '../../../common/CommonStyle';
 // components
 import Text, { TextThemes } from '../../atoms/Text';
 // context
-import { ModalTopContextIsShown, ModalTopContextText } from '../../../context/ModalTopContext';
+import { TopModalContextIsShown, TopModalContextText } from '../../../context/TopModalContext';
 
 const propStyle = {
   text: {
@@ -14,13 +14,13 @@ const propStyle = {
   }
 }
 
-const ModalTop: React.FC = () => {
-  const renderModal = (isModalTopShown: boolean, setIsModalTopShown: any, modalText: any) => {
+const TopModal: React.FC = () => {
+  const renderModal = (isTopModalShown: boolean, setIsTopModalShown: any, modalText: any) => {
     setTimeout(() => {
-      setIsModalTopShown(false)
+      setIsTopModalShown(false)
     }, 2500)
     return (
-      <div className={isModalTopShown ? 'modal-top-container show' : 'modal-top-container'}>
+      <div className={isTopModalShown ? 'modal-top-container show' : 'modal-top-container'}>
         <div className='modal-top-inner'>
           <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.text}>{modalText.caption}</Text>
           {modalText.small &&
@@ -52,18 +52,18 @@ const ModalTop: React.FC = () => {
   };
 
   // Contextの値を取得して開閉制御
-  const modalTop_isShownContext = useContext(ModalTopContextIsShown);
-  const modalTop_textContext = useContext(ModalTopContextText);
+  const TopModal_isShownContext = useContext(TopModalContextIsShown);
+  const TopModal_textContext = useContext(TopModalContextText);
 
-  const modalTopElement: any = document.getElementById('modal-top');
+  const TopModalElement: any = document.getElementById('modal-top');
   return ReactDOM.createPortal(
     renderModal(
-      modalTop_isShownContext.isModalTopShown,
-      modalTop_isShownContext.setIsModalTopShown, 
-      modalTop_textContext.modalText),
-    modalTopElement
+      TopModal_isShownContext.isTopModalShown,
+      TopModal_isShownContext.setIsTopModalShown, 
+      TopModal_textContext.modalText),
+    TopModalElement
   );
 
 };
 
-export default ModalTop;
+export default TopModal;
