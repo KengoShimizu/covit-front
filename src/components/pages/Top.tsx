@@ -199,6 +199,7 @@ export const Top: React.FC = (props: any) => {
         <style jsx>{`
           .container{
             width: 100%;
+            height: 100%;
           }
           .refinement-btn-wrap{
             width: 100%;
