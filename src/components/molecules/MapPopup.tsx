@@ -82,7 +82,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           left: 50%;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
-          top: 430px;
+          bottom: 20px;
           z-index: 6000;
           border-radius: 24px;
           overflow: hidden;
