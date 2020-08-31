@@ -23,12 +23,13 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, h
       </div>
       <style jsx>{`
         .container{
-          width: 100%
+          width: 100%;
+          height: 100%;
         }
         .wrap{
           padding-top: ${headerText ? '40px' : '0px'};
           width: 100%;
-          height: ${headerText ? 'calc(100vh - 96px)' : 'calc(100vh - 56px)'};
+          height: ${headerText ? 'calc(100% - 96px)' : 'calc(100% - 56px)'};
         }
       `}</style>
     </div>
