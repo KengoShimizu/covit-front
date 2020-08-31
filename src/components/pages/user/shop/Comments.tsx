@@ -10,7 +10,7 @@ import CommnetsCardList from '../../../organisms/CardList/CommentsCardList';
 export const ShopComments: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   return (
-    <HomeLayout subHeaderText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
+    <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
     </HomeLayout>
   );

@@ -41,7 +41,7 @@ export const EmailRegister: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout subHeaderText="メールアドレス登録" prevRef="#" history={props.history}>
+    <HomeLayout headerText="メールアドレス登録" prevRef="#" history={props.history}>
       {/* FIXME リンク先 */}
       <Input theme={InputThemes.REQUIRED} label="メールアドレス" placeholder="sample@sample.com" content={addData.email} handleChange={handleChange} propStyle={{margin: '32px auto'}}/>
       <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{margin: '16px auto'}}>登録する</Button>

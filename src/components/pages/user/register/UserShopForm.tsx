@@ -66,7 +66,7 @@ export const UserShopForm: React.FC = (props: any) => {
 
   return (
     page === 1 ?
-    <HomeLayout subHeaderText="01 お店の情報について" prevRef='#' history={props.history}>
+    <HomeLayout headerText="01 お店の情報について" prevRef='#' history={props.history}>
       <div className="container">
         <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
       </div>
@@ -81,7 +81,7 @@ export const UserShopForm: React.FC = (props: any) => {
       </style>
     </HomeLayout>
     :
-    <HomeLayout subHeaderText="02 お店の情報について" onClick={() => setPage(1)}>
+    <HomeLayout headerText="02 お店の情報について" onClick={() => setPage(1)}>
       <div className="container">
         <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} post={post}/>
       </div>

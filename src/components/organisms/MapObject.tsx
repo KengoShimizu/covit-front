@@ -117,7 +117,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           text-decoration: none;
         }
         .map-container{
-          height: calc(100vh - 56px);
+          height: 100vh;
           background-color: #E8E6E2;
         }
       `}</style>

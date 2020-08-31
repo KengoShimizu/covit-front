@@ -6,7 +6,7 @@ import LoginFlexCard from '../../../../molecules/Card/LoginFlexCard';
 
 export const EditLogin: React.FC = (props: any) => {
   return (
-    <HomeLayout subHeaderText='ログイン情報の編集' prevRef='/accounts' history={props.history}>
+    <HomeLayout headerText='ログイン情報の編集' prevRef='/accounts' history={props.history}>
         <div className='container'>
           <ul>
             <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />

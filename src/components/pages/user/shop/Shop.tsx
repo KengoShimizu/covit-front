@@ -60,7 +60,7 @@ export const Shop: React.FC = (props: any) => {
 
 
   return (
-    <HomeLayout subHeaderText={shopData.name} prevRef={'/'} history={props.history}>
+    <HomeLayout headerText={shopData.name} prevRef={'/'} history={props.history}>
       <div className="content">
         <div className="shop-card">
           {/* ヘッダー画像 */}

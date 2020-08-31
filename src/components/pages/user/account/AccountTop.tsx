@@ -12,7 +12,7 @@ export const AccountTop: React.FC = (props: any) => {
   const [account] = useState(authState.user);
 
   return (
-    <HomeLayout subHeaderText={'ユーザ情報'} prevRef={'/'} history={props.history}>
+    <HomeLayout headerText={'ユーザ情報'} prevRef={'/'} history={props.history}>
       <ProfileIconNameCard src={account.image} name={account.name}/>
       <div className="next-ref-btn">
       <NextRefBtn nextRef='/accounts/editprofile' text='プロフィールを編集'/>
