@@ -175,7 +175,10 @@ export const Top: React.FC = (props: any) => {
                 <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
                 このエリアで再検索
               </Button>
-              <Button propStyle={propStyle.currentPlaceBtn} onClick={() => setMapCenter(curLoc)}>
+              <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
+                setMapCenter(curLoc)
+                setZoom(16)
+              }}>
                 現在地
               </Button>
             </React.Fragment>
