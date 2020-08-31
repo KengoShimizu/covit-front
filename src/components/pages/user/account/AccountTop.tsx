@@ -13,11 +13,11 @@ export const AccountTop: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={'ユーザ情報'} prevRef={'/'} history={props.history}>
-      <ProfileIconNameCard src={account.image} name={account.name}/>
+      <ProfileIconNameCard src={account.image} name={account.name} />
       <div className="next-ref-btn">
-      <NextRefBtn nextRef='/accounts/editprofile' text='プロフィールを編集'/>
+        <NextRefBtn nextRef='/accounts/editprofile' text='プロフィールを編集' />
       </div>
-      <AccountTopCardList history={props.history}/>
+      <AccountTopCardList history={props.history} />
 
       <ul className="privacy_container">
         <li className="privacy_text">プライバシー</li>
@@ -26,7 +26,7 @@ export const AccountTop: React.FC = (props: any) => {
       <style jsx>{`
         .next-ref-btn{
           position: absolute;
-          top: 120px;
+          top: 65px;
           right: 10px;
         }
         //プライバシー

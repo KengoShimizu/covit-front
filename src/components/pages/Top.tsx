@@ -1,43 +1,40 @@
 import React, { useState, useEffect } from 'react';
 // library
-import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import { ChevronDown } from 'react-feather';
 // common
 import CommonStyle from './../../common/CommonStyle';
 // components
+import IntroModal from './../molecules/Modal/IntroModal'
 import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
 import Button, { ButtonThemes } from './../atoms/Button';
 import GenreCardList from '../organisms/CardList/GenreCardList';
 import ModalTop from './../molecules/Modal/ModalTop';
+import Icon, { IconThemes } from '../atoms/Icon';
+import FooterActionBar from './../organisms/FooterActionBar';
 
 // ボタンのCSS
 const propStyle = {
-  shopMordal: {
-    display: 'flex',
-    alignItems: 'center',
-    margin: '0 auto 40px auto'
-  },
   refinementBtn: {
-    position: 'fixed',
-    top: '64px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    WebkitTransform: 'translateX(-50%)',
-    padding: '8px 16px',
-    background: CommonStyle.BgWhite,
+    padding: '4px 16px',
+    height: '28px',
+    backgroundColor: CommonStyle.BgGray,
     borderRadius: '4px',
     color: CommonStyle.TextBlack,
     fontSize: '12px',
     lineHeight: '12px',
     fontWeight: 'bold',
-    zIndex: 1000,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    WebkitTransform: 'translate(-50%, -50%)',
   },
   researchBtn: {
     position: 'fixed',
-    bottom: '32px',
+    top: '54px',
     left: '50%',
     transform: 'translateX(-50%)',
     WebkitTransform: 'translateX(-50%)',
@@ -55,7 +52,7 @@ const propStyle = {
   },
   currentPlaceBtn: {
     position: 'fixed',
-    bottom: '20px',
+    top: '54px',
     right: '24px',
     width: '64px',
     height: '64px',
@@ -166,10 +163,13 @@ export const Top: React.FC = (props: any) => {
           setLastLng={setLastLng}
           setZoom={setZoom}/>
 
-        <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
-          お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
-        </Button>
+        <div className="refinement-btn-wrap">
+          <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
+            お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
+          </Button>
+        </div>
         <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>
+          <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
           このエリアで再検索
         </Button>
         <Button propStyle={propStyle.currentPlaceBtn} onClick={() => setMapCenter(curLoc)}>
@@ -186,92 +186,23 @@ export const Top: React.FC = (props: any) => {
           lastlng={lastlng}/>
 
         {/* 初回モーダル */}
-        {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
-        <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
-          <h1 className="intro-mordal_title">PAND-MEAL<br/> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
-          <img className="intro-mordal_img" src='/charactor.png' alt=""/>
-          <p className="intro-mordal_text">
-            PAND-MEALは感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
-          </p>
-          {/* propstyle */}
-          <div onClick={handleInitModal}>
-            <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopMordal}>
-              <img className="intro-mordal_btn_icon" src='/service-icon.svg' alt=""/>
-              さっそく飲食店を探す
-            </Button>
-          </div>
-          <Link to=''>
-            <p className="intro-mordal_link">PAND-MEALについてもっと知りたい！</p>
-          </Link>
-          <Link to=''>
-            <p className="intro-mordal_link">PAND-MEALにお店を追加したい！</p>
-          </Link>
-        </div>
+        <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
+
+        {/* フッター操作バー */}
+        <FooterActionBar/>
+        
         <style jsx>{`
           .container{
             width: 100%;
           }
-          // 初回のモーダル
-          .intro-mordal-back{
-            height: 100%;
+          .refinement-btn-wrap{
             width: 100%;
-            z-index: 999;
-            position: absolute;
-            top: 0;
-          }
-          .intro-mordal{
-            visibility: visible;
-            top: 144px;
-            left: 50%;
-            z-index: 1000;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
+            background-color: ${CommonStyle.BgWhite};
             position: fixed;
-            background: ${CommonStyle.BgWhite};
-            border-radius: 8px;
-            max-width: 280px;
-            width: 80%;
-            padding: 36px 16px;
-            box-sizing: border-box;
+            top: 0;
+            height: 40px;
             text-align: center;
-            transition-duration: .5s;
-          }
-          .intro-mordal_title{
-            font-family: Century Gothic Pro;
-            font-weight: bold;
-            font-size: 24px;
-            line-height: 24px;
-            margin-bottom: 4px;
-          }
-          .intro-mordal_title_jp{
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 24px;
-          }
-          .intro-mordal_title_img{
-            width: 186px;
-            height: auto;
-            margin-bottom: 8px;
-          }
-          .intro-mordal_text{
-            font-weight: bold;
-            width: 100%;
-            font-size: 14px;
-            line-height: 24px;
-            margin-bottom: 24px;
-          }
-          .intro-mordal_link{
-            color: ${CommonStyle.TextDarkGary};
-            text-align: center;
-            font-size: 12px;
-            line-height: 19px;
-          }
-          .intro-mordal_btn_icon{
-            margin-right: 4px;
-          }
-          .disable{
-            visibility: hidden;
-            opacity: 0;
+            z-index: 400;
           }
         `}</style>
       </div>
