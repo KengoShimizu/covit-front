@@ -81,7 +81,6 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           left: 50%;
           width: 100%;
           margin: 0 auto;
-          margin-top: 50px;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
           background-color: ${CommonStyle.BgWhite};

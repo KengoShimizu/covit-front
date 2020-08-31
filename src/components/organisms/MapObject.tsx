@@ -77,6 +77,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
         center={props.mapCenter} 
         zoom={props.zoom}
         style={{ height: '100%' }} 
+        zoomControl={false}
         onMoveend={(e:any) => {
           const latlng = e.target.getCenter();
           props.setLastLat(latlng.lat);
@@ -101,21 +102,9 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           </Marker>
         ))}
 
-        {popupIsOpen &&
-          <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />
-        }
+        {popupIsOpen && <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />}
       </Map>
       <style jsx>{`
-        *{
-          margin:0;
-          padding:0;
-          border:0;
-          outline:0;
-          list-style:none;
-        }
-        a{
-          text-decoration: none;
-        }
         .map-container{
           height: 100vh;
           background-color: #E8E6E2;
