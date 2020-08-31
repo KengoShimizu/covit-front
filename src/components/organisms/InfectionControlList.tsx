@@ -53,12 +53,15 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
       </ol>
       <style jsx>{`
         .infection-control{
-          margin-bottom: 12px;
+          width: 385px;
+          margin: 0 auto 10px;
         }
         .infection-control_list{
           display: flex;
-          justify-content: center;
+          justify-content: flex-start;
           margin-bottom: 16px;
+          width: 348px;
+          margin: 0 auto 20px;
         }
         .infection-control_option :not(:last-child) {
           margin-right: 12px;
