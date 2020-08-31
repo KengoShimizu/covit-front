@@ -11,7 +11,7 @@ export const OwnerRequestTop: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout subHeaderText="お店の追加" prevRef="/" history={props.history}>
+    <HomeLayout headerText="お店の追加" prevRef="/" history={props.history}>
       <div className="container">
         <div className="img-container">
           <img className="image" src='/register_top.png' /> 

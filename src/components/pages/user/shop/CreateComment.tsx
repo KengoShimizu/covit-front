@@ -74,7 +74,7 @@ export const CreateComment: React.FC = (props: any) => {
 
 
   return (
-    <HomeLayout subHeaderText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
+    <HomeLayout headerText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       <div className='container'>
         <div className="content">
           <h1 className="shop-name">cafe えにしえ</h1>

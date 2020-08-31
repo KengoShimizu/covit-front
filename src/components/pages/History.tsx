@@ -41,7 +41,7 @@ export const History: React.FC = (props: any) => {
     }
 
     return (
-      <HomeLayout subHeaderText='閲覧履歴' prevRef='#' history={props.history}>
+      <HomeLayout headerText='閲覧履歴' prevRef='#' history={props.history}>
         <Modal 
           title='本当に履歴を削除しますか？'
           btntext='削除する'

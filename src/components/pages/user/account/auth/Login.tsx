@@ -51,7 +51,7 @@ export const Login: React.FC = (props: any) => {
   },[addData])
 
   return (
-    <HomeLayout subHeaderText={'ログイン'} prevRef={'/accounts/register'} history={props.history}>
+    <HomeLayout headerText={'ログイン'} prevRef={'/accounts/register'} history={props.history}>
       <div className="form">
         <div className="content">
           <div className="mail-form">

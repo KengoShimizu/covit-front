@@ -15,7 +15,7 @@ export const Comments: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const user_id = match.params.id ? match.params.id : authState.user.id;
   const [pageState, setPageState] = useState({
-    subHeaderText: '',
+    headerText: '',
     prevRef: '#',
     sqlQuery: 'user_id=0',
     update: false
@@ -42,13 +42,13 @@ export const Comments: React.FC = (props: any) => {
   useEffect(() => {
     match.params.id ? 
       setPageState({
-        subHeaderText: `${user.name} さんのレビュー一覧`,
+        headerText: `${user.name} さんのレビュー一覧`,
         prevRef: '#',
         sqlQuery: `user_id=${user_id}`,
         update: true
       }) : 
       setPageState({
-        subHeaderText: 'レビューしたお店',
+        headerText: 'レビューしたお店',
         prevRef: '/accounts',
         sqlQuery: `user_id=${user_id}`,
         update: true
@@ -56,7 +56,7 @@ export const Comments: React.FC = (props: any) => {
   }, [user])
 
   return (
-    <HomeLayout subHeaderText={pageState.subHeaderText} prevRef={pageState.prevRef} history={props.history}>
+    <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef} history={props.history}>
       <div>
         {match.params.id && user &&
           <div className="profile-card">
