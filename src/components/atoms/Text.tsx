@@ -20,7 +20,7 @@ export enum TextThemes {
 }
 
 enum ModifierClassNames {
-  INIT     = 'Text-init',
+  INIT     = 'text-init',
   SMALL    = 'small-text',
   CAPTION  = 'caption-text',
   TEXT     = 'normal-text',
@@ -34,24 +34,15 @@ enum ModifierClassNames {
 const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propStyle = {}}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <p className={["Text", modifierClasses].join(' ')} style={propStyle}>
+    <p className={["text", modifierClasses].join(' ')} style={propStyle}>
       {children}
       <style jsx>
         {`
-          .Text{
+          .text{
             color: ${CommonStyle.TextBlack};
           }
-          .Text-init{
+          .text-init{
 
-          }
-          .subheader_Text{
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
-            color: ${CommonStyle.TextBlack};
-            margin: 9px auto 7px auto;
-            line-height: 1.4em;
           }
           .subtitle-text{
             font-size: ${CommonStyle.SubTitle};

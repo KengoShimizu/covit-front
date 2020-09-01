@@ -7,7 +7,11 @@ import FotterActionItem from '../molecules/Footer/FotterActionItem';
 import AuthContext from './../../context/CommonProvider';
 import RedirectContext from './../../context/RedirectContext';
 
-const FooterActionBar: React.FC = () => {
+interface FooterActionBarProps {
+  propStyle?: any;
+}
+
+const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle }) => {
   const [isHover, setIsHover] = useState(0);
   const { authState } = useContext(AuthContext);
   const setFormPath = useContext(RedirectContext).setFromPath;
@@ -21,7 +25,7 @@ const FooterActionBar: React.FC = () => {
   }
 
   return (
-    <div className="footer-action-bar">
+    <div className='footer-action-bar' style={propStyle}>
       <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} id='1'>
         <FotterActionItem
           icon={<img src={`/search${isHover === 1 ? '_clicked' : ''}.svg`} alt="検索" />}
