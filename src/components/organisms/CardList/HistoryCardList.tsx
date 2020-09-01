@@ -19,23 +19,33 @@ const propStyle = {
 
 const HistoryCardList: React.FC = () => {
   const cookies = new Cookies();
+  const [loading, setLoading] = useState(true);
   const cookie_histories = cookies.get('histories');
   const cookie_histories_date = cookies.get('histories_date');
   const [err, setErr] = useState("");
   const [shopData, setShopData] = useState([]);
   const [historyElements, setHistoryElements] = useState([]);
 
-  const fetchShopData = () => {
-    axios.get(`/api/v1/user/shops?histories=${cookie_histories}`)
-    .then(res => setShopData(res.data))
-    .catch(() => setErr('存在しないお店があります。'));
+  const fetchShopData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/shops?histories=${cookie_histories}`);
+      if (isSubscribed) setShopData(res.data);
+    } catch (error) {
+      setErr('存在しないお店があります。')
+    }
   }
 
   useEffect(() => {
-    if(cookie_histories){
-      fetchShopData();
-    }
-    else{
+    if (cookie_histories) {
+      let isSubscribed = true;
+      setLoading(true);
+      fetchShopData(isSubscribed);
+      setLoading(false);
+      const cleanup = () => {
+        isSubscribed = false;
+      };
+      return cleanup;
+    } else {
       setHistoryElements([]);
     }
   }, [cookies.get('histories')])
@@ -60,6 +70,7 @@ const HistoryCardList: React.FC = () => {
   }, [shopData])
 
   return (
+    loading ? <div></div> :
     <div className="container">
       <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.errorText}>{err}</Text>
       <ol className="card-list">

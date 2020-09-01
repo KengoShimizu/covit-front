@@ -11,6 +11,7 @@ import AuthContext from './../../../../context/CommonProvider';
 import CommonStyle from '../../../../common/CommonStyle';
 
 export const Comments: React.FC = (props: any) => {
+  const [loading, setLoading] = useState(true);
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
   const user_id = match.params.id ? match.params.id : authState.user.id;
@@ -25,28 +26,38 @@ export const Comments: React.FC = (props: any) => {
     image: '',
     name: '',
   });
-  
 
-  const fetchUserData = async () => {
-    let response = await axios
-      .get(`/api/v1/user/users/${user_id}`)
-      .then(result => result.data)
-      .catch(error => console.log(error));
-    setUser(response);
+
+  const fetchUserData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/users/${user_id}`);
+      if (isSubscribed) setUser(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    if(match.params.id) fetchUserData();
+    if (match.params.id) {
+      let isSubscribed = true;
+      setLoading(true);
+      fetchUserData(isSubscribed);
+      setLoading(false);
+      const cleanup = () => {
+        isSubscribed = false;
+      };
+      return cleanup;
+    }
   }, [])
 
   useEffect(() => {
-    match.params.id ? 
+    match.params.id ?
       setPageState({
         headerText: `${user.name} さんのレビュー一覧`,
         prevRef: '#',
         sqlQuery: `user_id=${user_id}`,
         update: true
-      }) : 
+      }) :
       setPageState({
         headerText: 'レビューしたお店',
         prevRef: '/accounts',
@@ -57,18 +68,19 @@ export const Comments: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef} history={props.history}>
+      {loading ? <div></div> :
       <div>
         {match.params.id && user &&
           <div className="profile-card">
-            <ProfileIconNameCard src={user.image} name={user.name}/>
+            <ProfileIconNameCard src={user.image} name={user.name} />
           </div>
         }
-        {pageState.update && 
+        {pageState.update &&
           <div className="comment-card-list">
-            <CommentsCardList sqlQuery={pageState.sqlQuery}/>
+            <CommentsCardList sqlQuery={pageState.sqlQuery} />
           </div>
         }
-      </div>
+      </div>}
       <style jsx>{`
         .profile-card{
           position: fixed;
