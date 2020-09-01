@@ -13,17 +13,17 @@ const propStyle = {
 
 interface AccoutTopCardProps {
   src?: string;
-  children?: React.ReactNode;
+  icon?: React.ReactNode;
   text: string;
   nextRef?: string;
 }
 
-const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, children, nextRef='#'}) => {
+const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef='#'}) => {
   return (
     <Link to={nextRef}>
       <li className="account-function_option">
         <Icon theme={[IconThemes.LERGE]}>
-          {children && children}
+          {icon && icon}
           {src && <img className="account-function_img" src={src} alt=""/>}
         </Icon>
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}> 
