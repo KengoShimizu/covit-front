@@ -71,7 +71,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props }) => {
             good_count={shop.good_count} 
             bad_count={shop.bad_count} 
             browse_date={histories_date[i]} 
-            nextRef={props.match.path === RouteName.SHOP_SEARCH_FOR_COMMENTS ? `/shops/${shop.id}/comments/new`  : `/shops/${shop.id}`}
+            nextRef={props && props.match.path === RouteName.SHOP_SEARCH_FOR_COMMENTS ? `/shops/${shop.id}/comments/new`  : `/shops/${shop.id}`}
             key={`history${i}`}/>
         )})
         setHistoryElements(history_elements);
