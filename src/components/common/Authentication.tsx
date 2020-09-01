@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 // context
 import AuthContext from "../../context/CommonProvider";
 import RedirectContext from './../../context/RedirectContext';
+// common
+import { RouteName } from "../../common/Const";
 
 type AuthProps = {
   children: React.ReactNode;
@@ -15,6 +17,6 @@ export const Authentication: React.FC<AuthProps> = ({ children }) => {
   return (
     authState.isLogin ?
       <div>{children}</div> :
-      <Redirect to={`/accounts/register?from=${fromPath}`} />
+      <Redirect to={`${RouteName.REGISTER}?from=${fromPath}`} />
   )
 };

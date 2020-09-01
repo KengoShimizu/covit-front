@@ -83,3 +83,28 @@ export class RedirectFrom {
   public static readonly NEW_COMMENT = 'new_comment'
   public static readonly HISTORY = 'history'
 }
+
+export class RouteName {
+  public static readonly ROOT                     = '/'
+  public static readonly MENU                     = '/menu'
+  public static readonly SHOP                     = '/shops/:id'
+  public static readonly SHOP_COMMENTS            = '/shops/:id/comments'
+  public static readonly PRIVACY                  = '/accounts/privacy'
+  public static readonly LOGIN                    = '/accounts/login'
+  public static readonly REGISTER                 = '/accounts/register'
+  public static readonly REGISTER_EMAIL           = '/accounts/register/email'
+  public static readonly SEND                     = '/accounts/send'
+  public static readonly USER_COMMENTS            = '/users/:id/comments'
+  public static readonly REQUEST_TOP              = '/owners/request/top'
+  public static readonly COMMENTS_NEW             = '/shops/:id/comments/new'
+  public static readonly SHOP_SEARCH_FOR_COMMENTS = '/comments/shop/search'
+  public static readonly OWNER_SHOP_FORM          = '/owners/request/form'
+  public static readonly HISTORY                  = '/history'
+  public static readonly ACCOUNT_TOP              = '/accounts'
+  public static readonly SELF_COMMENTS            = '/accounts/comments'
+  public static readonly EDIT_LOGIN               = '/accounts/edit/login'
+  public static readonly EDIT_PROFILE             = '/accounts/edit/profile'
+  public static readonly EDIT_EMAIL               = '/accounts/edit/email'
+  public static readonly ADD_EMAIL                = '/accounts/add/email'
+  public static readonly USER_SHOP_FORM           = '/users/request/form'
+}

@@ -6,7 +6,7 @@ import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
-import { RedirectFrom } from './../../../../common/Const';
+import { RedirectFrom, RouteName } from './../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../atoms/Text';
@@ -71,7 +71,7 @@ export const Shop: React.FC = (props: any) => {
 
 
   return (
-    <HomeLayout headerText={shopData.name} prevRef={'/'} history={props.history}>
+    <HomeLayout headerText={shopData.name} prevRef={RouteName.ROOT} history={props.history}>
       {loading ? <div></div> :
         <div className="content">
           <div className="shop-card">
@@ -139,7 +139,7 @@ export const Shop: React.FC = (props: any) => {
               </div>
               <hr className="infection-control_hr" />
               <Link to={`/shops/${match.params.id}/comments/new`}>
-                <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={redirectContext.setFromPath(RedirectFrom.NEW_COMMENT)}>
+                <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={() => redirectContext.setFromPath(RedirectFrom.NEW_COMMENT)}>
                   <Edit size={20} color="#fff" />
                   <span className="infection-control_comment-text">感染対策のレビューを書く</span>
                 </Button>

@@ -9,6 +9,8 @@ import CommentsCardList from '../../../organisms/CardList/CommentsCardList';
 // context
 import AuthContext from './../../../../context/CommonProvider';
 import CommonStyle from '../../../../common/CommonStyle';
+// common
+import { RouteName } from '../../../../common/Const';
 
 export const Comments: React.FC = (props: any) => {
   const [loading, setLoading] = useState(true);
@@ -60,7 +62,7 @@ export const Comments: React.FC = (props: any) => {
       }) :
       setPageState({
         headerText: 'レビューしたお店',
-        prevRef: '/accounts',
+        prevRef: RouteName.ACCOUNT_TOP,
         sqlQuery: `user_id=${user_id}`,
         update: true
       });

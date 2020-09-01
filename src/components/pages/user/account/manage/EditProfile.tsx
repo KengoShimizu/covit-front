@@ -9,6 +9,8 @@ import UserIconSellection from '../../../../organisms/UserIconSellection';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 // context
 import AuthContext from "../../../../../context/CommonProvider";
+// common
+import { RouteName } from '../../../../../common/Const';
 
 interface EditParam {
   image: string;
@@ -37,7 +39,7 @@ export const EditProfile: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout headerText={'プロフィールの編集'} prevRef={'/accounts'} history={props.history}>
+    <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
       <Input theme={InputThemes.EDIT_PROFILE} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto', padding: '1rem'}}/>
       <UserIconSellection data={editData} setData={setEditData} />
       <Button theme={[ButtonThemes.NORMAL]} onClick={putData} propStyle={{margin: '16px auto'}}>登録する</Button>

@@ -4,14 +4,16 @@ import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
 // templates
 import HomeLayout from '../../../templates/HomeLayout';
+// common
+import { RouteName } from '../../../../common/Const';
 
 export const OwnerRequestTop: React.FC = (props: any) => {
   const onClick = () => {
-    window.location.href = '/owners/shopform';
+    window.location.href = RouteName.OWNER_SHOP_FORM;
   }
 
   return (
-    <HomeLayout headerText="お店の追加" prevRef="/" history={props.history}>
+    <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT} history={props.history}>
       <div className="container">
         <div className="img-container">
           <img className="image" src='/register_top.png' /> 
