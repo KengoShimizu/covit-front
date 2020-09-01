@@ -18,6 +18,7 @@ import { History } from './components/pages/History';
 import { Shop } from './components/pages/user/shop/Shop';
 import { ShopComments } from './components/pages/user/shop/Comments';
 import { CreateComment } from './components/pages/user/shop/CreateComment';
+import { CommentPrepare } from './components/pages/user/shop/CommentPrepare';
 // components/pages/user/account
 import { AccountTop } from './components/pages/user/account/AccountTop';
 import { Privacy } from './components/pages/user/account/Privacy';
@@ -63,6 +64,7 @@ function App() {
                     <Route exact path='/owners/requesttop' component={OwnerRequestTop} />
                     <Authentication>
                       <UserRoute exact path='/shops/:id/comments/new' component={CreateComment} />
+                      <UserRoute exact path='/comments/shop_search' component={CommentPrepare} />
                       <OwnerRoute exact path='/owners/shopform' component={OwnerShopForm} />
                       <Route exact path='/history' component={History} />
                       <Route exact path='/accounts' component={AccountTop} />

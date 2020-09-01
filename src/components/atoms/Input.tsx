@@ -16,14 +16,14 @@ interface InputProps {
 }
 
 export enum InputThemes {
-  INIT     = 'INIT',
+  INIT = 'INIT',
   REQUIRED = 'REQUIRED',
   DISABLED = 'DISABLED',
   EDIT_PROFILE = 'EDIT_PROFILE',
 }
 
 enum ModifierClassNames {
-  INIT     = 'input-init',
+  INIT = 'input-init',
   REQUIRED = 'input-required',
   DISABLED = 'input-disabled',
   EDIT_PROFILE = 'input-edit_profile',
@@ -33,8 +33,10 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
-      <span className="input-icon">{icon}</span>
-      <input id={id} defaultValue={content} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name}/>
+      <div className="input-icon-container">
+        <span className="input-icon">{icon}</span>
+        <input id={id} defaultValue={content} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
+      </div>
       <style jsx>
         {`
           .input-init{
@@ -46,14 +48,21 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
             align-items: center;
             margin-bottom: 2rem;
             max-width: 400px;
+          }
+
+          .input-icon-container {
             position: relative;
           }
 
           .input-icon {
             display: inline-block;
             position: absolute;
-            right: 2rem;
-            top: 57px;
+            right: 1rem;
+            top: 0.55rem;
+          }
+
+          .left-icon {
+            left: 1rem;
           }
 
           .input label span {
