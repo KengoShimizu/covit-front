@@ -29,8 +29,9 @@ interface CommentsCardListProps {
   sqlQuery: string;
 }
 
-const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
+const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   const { match }: any = useReactRouter();
+  const [loading, setLoading] = useState(true);
   const isShopPage = match.path.match(/shops/g);
   const isCurrentUser = match.path.match(/accounts/g);
   const [state, setState] = useState('good');
@@ -49,18 +50,20 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
     currentPage: 1
   });
 
-  const fetchGoodData = async () => {
-    let response = await axios
-      .get(`/api/v1/user/comments?page=${1}&limit=${10}&reputation=1&${sqlQuery}`)
-      .then(result => result.data)
-      .catch(error => console.log(error));
-
-    setGoodReputations(response.data);
-    setPagenationForGood({
-      total: response.meta.total,
-      perPage: response.meta.perPage,
-      currentPage: response.meta.currentPage
-    });
+  const fetchGoodData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/comments?page=${1}&limit=${10}&reputation=1&${sqlQuery}`);
+      if (isSubscribed) {
+        setGoodReputations(res.data.data);
+        setPagenationForGood({
+          total: res.data.meta.total,
+          perPage: res.data.meta.perPage,
+          currentPage: res.data.meta.currentPage
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const fetchMoreGoodData = async () => {
@@ -79,18 +82,20 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
     });
   }
 
-  const fetchBadData = async () => {
-    let response = await axios
-      .get(`/api/v1/user/comments?page=${1}&limit=${10}&reputation=2&${sqlQuery}`)
-      .then(result => result.data)
-      .catch(error => console.log(error));
-
-    setBadReputations(response.data);
-    setPagenationForBad({
-      total: response.meta.total,
-      perPage: response.meta.perPage,
-      currentPage: response.meta.currentPage
-    });
+  const fetchBadData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/comments?page=${1}&limit=${10}&reputation=2&${sqlQuery}`);
+      if (isSubscribed) {
+        setBadReputations(res.data.data);
+        setPagenationForBad({
+          total: res.data.meta.total,
+          perPage: res.data.meta.perPage,
+          currentPage: res.data.meta.currentPage
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const fetchMoreBadData = async () => {
@@ -111,24 +116,32 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
 
 
   useEffect(() => {
-    fetchGoodData();
-    fetchBadData();
+    let isSubscribed = true;
+    setLoading(true);
+    fetchGoodData(isSubscribed);
+    fetchBadData(isSubscribed);
+    setLoading(false);
+    const cleanup = () => {
+      isSubscribed = false;
+    };
+    return cleanup;
   }, [])
 
 
   return (
     <div className='container'>
+      {loading ? <div></div> :
         <div className="content">
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
               <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
-              <Smile className="review-icon_unselected" size={24} color="#ED753A" />
+                <Smile className="review-icon_unselected" size={24} color="#ED753A" />
               </Icon>
               <p className="review-switch_num" style={{ color: "#ED753A" }}>{pagenationForGood.total}</p>
             </div>
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'bad' ? "#3A8CED" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('bad')}>
-            <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
-              <Frown className="review-icon_unselected" size={24} color="#3A8CED" />
+              <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
+                <Frown className="review-icon_unselected" size={24} color="#3A8CED" />
               </Icon>
               <p className="review-switch_num" style={{ color: "#3A8CED" }}>{pagenationForBad.total}</p>
             </div>
@@ -151,18 +164,18 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
                   isShopPage ?
                     <ShopCommentCard comment={comment} key={comment.id} />
                     :
-                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser}/>
+                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} />
                 );
               })
             }
           </InfiniteScroll>
           {showLoader &&
             <div style={{ textAlign: "center", paddingBottom: "10px" }}>
-              <CircularProgress style={{ margin: "24px auto" }}/>
+              <CircularProgress style={{ margin: "24px auto" }} />
             </div>
           }
-        </div>
-        <style jsx>{`
+        </div>}
+      <style jsx>{`
           .container{
             width: 100%
           }
@@ -185,7 +198,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({sqlQuery}) => {
             line-height: 19px;
           }
         `}</style>
-      </div>
+    </div>
   );
 }
 

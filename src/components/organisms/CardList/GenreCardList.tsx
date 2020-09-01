@@ -58,7 +58,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
             propStyle={propStyle.btn}
             onClick={() => {
               setSelectedGenre([])
-              fetchCoordinationsData([], lastlat, lastlng);
+              fetchCoordinationsData([], lastlat, lastlng, true);
               setGenreSerchIsOpen(false);
             }}>
             絞り込み解除
@@ -67,7 +67,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
             theme={[ButtonThemes.NORMAL]} 
             propStyle={propStyle.btn}
             onClick={() => {
-              fetchCoordinationsData(selectedGenre, lastlat, lastlng);
+              fetchCoordinationsData(selectedGenre, lastlat, lastlng, true);
               setGenreSerchIsOpen(false);
             }}>
             絞り込み

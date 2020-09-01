@@ -43,12 +43,12 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
       </ol>
       <ol className="infection-control_comment-box">
         {/* 対策内容の初期表示 */}
-        {isInit && stepData.filter((data: any) => data.step_category_id === uniqueCategory[0].id).map((data: any) => 
-          <li className="infection-control_comment"><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
+        {isInit && stepData.filter((data: any) => data.step_category_id === uniqueCategory[0].id).map((data: any, i:number) => 
+          <li className="infection-control_comment" key={`control${i}`}><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
         )}
         {/* 他の対策内容 */}
-        {controllDetail.map((data: any) => 
-          <li className="infection-control_comment"><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
+        {controllDetail.map((data: any, i:number) => 
+          <li className="infection-control_comment" key={`control${i}`}><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
         )}
       </ol>
       <style jsx>{`

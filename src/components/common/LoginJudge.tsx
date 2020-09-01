@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState, useCallback } from "react";
 // library
 import useReactRouter from "use-react-router";
 import axios from "axios";
+import Cookies from 'universal-cookie';
 // context
 import AuthContext from "../../context/CommonProvider";
 
@@ -10,17 +11,17 @@ type AuthProps = {
 };
 
 export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
+  const cookies = new Cookies();
   const { authState, setAuth } = useContext(AuthContext);
   const path = useReactRouter().location.pathname;
   const [loading, setLoading] = useState(true);
   const [login, setLogin] = useState(false);
 
-  const setAuthData = useCallback(async () => {
+  const setAuthData = useCallback(async (TokenInCookie: string) => {
     try {
-      let TokenInCookie = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       axios.defaults.headers.common['Authorization'] = 'Bearer ' + TokenInCookie;
       fetchCurrentUser().then(res => {
-        if(res){
+        if (res) {
           setAuth({
             ...authState,
             isLogin: true,
@@ -31,8 +32,8 @@ export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
           setLogin(false);
         }
       })
-      .catch(error => setLogin(false))
-      .finally(() => setLoading(false));
+        .catch(error => setLogin(false))
+        .finally(() => setLoading(false));
     } catch (error) {
       console.log(error);
       axios.defaults.headers.common['Authorization'] = '';
@@ -53,11 +54,17 @@ export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
   }
 
   useEffect(() => {
-    setLoading(true);
-    setAuthData();
+    const TokenInCookie = cookies.get('token');
+    if (TokenInCookie) {
+      setLoading(true);
+      setAuthData(TokenInCookie);
+    } else {
+      setLoading(false);
+      setLogin(false);
+    }
   }, [path]);
 
-  return(
+  return (
     loading ? <div></div> :
       <div>{children}</div>
   )

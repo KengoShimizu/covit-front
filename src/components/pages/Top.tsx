@@ -100,19 +100,22 @@ export const Top: React.FC = (props: any) => {
       .catch(err => console.log(err));
   }
 
-  const fetchCoordinationsData = (genre_id: number[], lat_: number, lng_: number) => {
+  const fetchCoordinationsData = async (genre_id: number[], lat_: number, lng_: number, isSubscribed: boolean) => {
     const genre_id_str = genre_id.length === 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
-    axios.get('/api/v1/user/coordinations', {
-        params: {
-          genre_ids: genre_id_str,
-          from_lat: lat_ - threshold,
-          to_lat: lat_ + threshold,
-          from_lng: lng_ - threshold,
-          to_lng: lng_ + threshold,
-        }
-      })
-      .then(res => setCoordinations(res.data))
-      .catch(err => console.log(err));
+    try {
+      const res = await axios.get('/api/v1/user/coordinations', {
+          params: {
+            genre_ids: genre_id_str,
+            from_lat: lat_ - threshold,
+            to_lat: lat_ + threshold,
+            from_lng: lng_ - threshold,
+            to_lng: lng_ + threshold,
+          }
+        });
+      if (isSubscribed) setCoordinations(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const getCullentLocation = () => {
@@ -137,11 +140,16 @@ export const Top: React.FC = (props: any) => {
     setInitModalIsOpen(cookies.get('close-modal-once'))
   }
 
-  // モーダルクローズ履歴を参照
   useEffect(() => {
+    // モーダルクローズ履歴を参照
     setInitModalIsOpen(cookies.get('close-modal-once'));
     getCullentLocation();
-    fetchCoordinationsData(genre_id, lastlat, lastlng);
+    let isSubscribed = true;
+    fetchCoordinationsData(genre_id, lastlat, lastlng, isSubscribed);
+    const cleanup = () => {
+      isSubscribed = false;
+    };
+    return cleanup;
   }, [])
 
 
@@ -171,7 +179,7 @@ export const Top: React.FC = (props: any) => {
         {
           initModalIsOpen && 
             <React.Fragment>
-              <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng)}>
+              <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
                 <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
                 このエリアで再検索
               </Button>

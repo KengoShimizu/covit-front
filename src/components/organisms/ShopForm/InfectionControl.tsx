@@ -20,15 +20,18 @@ interface InfectionControlProps {
 
 export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData }) => {
   const { match }: any = useReactRouter();
+  const [loading, setLoading] = useState(true);
   const identifer = match.path.match(/owners/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
   const [stepIDs, setStepIDs] = useState<number[]>([]);
 
-  const fetchStepCategories = async () => {
-    await axios.get(`/api/v1/${identifer}/step_categories`)
-      .then(res => setStepCategories(res.data.data))
-      .catch(err => console.log(err));
-    return;
+  const fetchStepCategories = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/${identifer}/step_categories`);
+      if (isSubscribed) setStepCategories(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleChange = (event: any) => {
@@ -42,7 +45,14 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   }
 
   useEffect(() => {
-    fetchStepCategories();
+    let isSubscribed = true;
+    setLoading(true);
+    fetchStepCategories(isSubscribed);
+    setLoading(false);
+    const cleanup = () => {
+      isSubscribed = false;
+    };
+    return cleanup;
   }, [])
 
   useEffect(() => {
@@ -53,6 +63,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   }, [stepIDs])
 
   return (
+    loading ? <div></div> :
     <div className="container">
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }}>感染対策の内容はユーザーに公開されます。</Text>

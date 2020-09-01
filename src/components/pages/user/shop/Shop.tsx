@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import useReactRouter from "use-react-router";
-import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon} from 'react-feather';
+import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
 import { RedirectFrom } from './../../../../common/Const';
@@ -16,10 +16,6 @@ import InfectionControlList from './../../../organisms/InfectionControlList';
 import RedirectContext from './../../../../context/RedirectContext';
 
 const propStyle = {
-  commentLink: {
-    // marginRight: '0',
-    // marginLeft: 'auto',
-  },
   commentBtn: {
     margin: '0 auto 0 auto'
   },
@@ -29,7 +25,9 @@ const propStyle = {
 };
 
 export const Shop: React.FC = (props: any) => {
+  const redirectContext = useContext(RedirectContext);
   const { match }: any = useReactRouter();
+  const [loading, setLoading] = useState(true);
   const [shopData, setShopData] = useState({
     user_id: 0,
     name: '',
@@ -50,95 +48,106 @@ export const Shop: React.FC = (props: any) => {
       }
     }],
   });
-  
-  const fetchShopData = () => {
-    axios.get(`/api/v1/user/shops/${match.params.id}`)
-    .then(res => setShopData(res.data))
-    .catch(err => console.log(err));
+
+  const fetchShopData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/shops/${match.params.id}`);
+      if (isSubscribed) setShopData(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
-    fetchShopData();
+    let isSubscribed = true;
+    setLoading(true);
+    fetchShopData(isSubscribed);
+    setLoading(false);
+    const cleanup = () => {
+      isSubscribed = false;
+    };
+    return cleanup;
   }, [])
 
 
   return (
     <HomeLayout headerText={shopData.name} prevRef={'/'} history={props.history}>
-      <div className="content">
-        <div className="shop-card">
-          {/* ヘッダー画像 */}
-          <section className="shop-card_section">
-            <div className="shop-img_wrapper">
-              <img className="shop-img" src={shopData.image} alt="shop header"/>
-            </div>
-            <ol className="shop_base-info">
-              <li className="shop_base-info_option">
-                <Text theme={[TextThemes.CAPTION]}>
-                  {shopData.name}
-                </Text>
-              </li>
-              <li className="shop_base-info_option">
-                <ol className="shop_cost-list">
-                  <li className="shop_cost-option">
-                    <span className="shop_cost-icon_day">
-                      <Sun size={10} color="#fff" />
-                    </span>
-                    <Text theme={[TextThemes.SMALL]}>
-                      {shopData.price_day}円
-                    </Text>
-                  </li>
-                  <li className="shop_cost-option">
-                    <span className="shop_cost-icon_night">
-                      <Moon size={10} color="#fff" />
-                    </span>
-                    <Text theme={[TextThemes.SMALL]}>
-                      {shopData.price_night}円
-                    </Text>
-                  </li>
-                </ol>
-              </li>
-            </ol>
-          </section>
-          <hr className="shop_hr"/>
-          {/* 感染対策情報 */}
-          <section className="shop-card_section nfection-control_card">
-            <h2 className="infection-control_title">感染対策</h2>
-            <InfectionControlList stepData={shopData.steps}/>
-            <hr className="infection-control_hr"/>
-            <div className="infection-control_review">
-              <h3 className="infection-control_review-title">対策への評価</h3>
-              <ol className="infection-control_review-list">
-                <li className="infection-control_review-option">
-                  <Smile size={24} color="#ED753A" />
-                  <span className="infection-control_review-num">
-                    {shopData.good_count}<br/>
-                  </span>
+      {loading ? <div></div> :
+        <div className="content">
+          <div className="shop-card">
+            {/* ヘッダー画像 */}
+            <section className="shop-card_section">
+              <div className="shop-img_wrapper">
+                <img className="shop-img" src={shopData.image} alt="shop header" />
+              </div>
+              <ol className="shop_base-info">
+                <li className="shop_base-info_option">
+                  <Text theme={[TextThemes.CAPTION]}>
+                    {shopData.name}
+                  </Text>
                 </li>
-                <li className="infection-control_review-option">
-                  <Frown size={24} color="#3A8CED" />
-                  <span className="infection-control_review-num">
-                    {shopData.bad_count}<br/>
-                  </span>
+                <li className="shop_base-info_option">
+                  <ol className="shop_cost-list">
+                    <li className="shop_cost-option">
+                      <span className="shop_cost-icon_day">
+                        <Sun size={10} color="#fff" />
+                      </span>
+                      <Text theme={[TextThemes.SMALL]}>
+                        {shopData.price_day}円
+                    </Text>
+                    </li>
+                    <li className="shop_cost-option">
+                      <span className="shop_cost-icon_night">
+                        <Moon size={10} color="#fff" />
+                      </span>
+                      <Text theme={[TextThemes.SMALL]}>
+                        {shopData.price_night}円
+                    </Text>
+                    </li>
+                  </ol>
                 </li>
               </ol>
-              <Link to={`/shops/${match.params.id}/comments`}>
-                <Button theme={[ButtonThemes.SUBBTN]} propStyle={propStyle.commentLink}>
-                  コメントを見る
+            </section>
+            <hr className="shop_hr" />
+            {/* 感染対策情報 */}
+            <section className="shop-card_section nfection-control_card">
+              <h2 className="infection-control_title">感染対策</h2>
+              <InfectionControlList stepData={shopData.steps} />
+              <hr className="infection-control_hr" />
+              <div className="infection-control_review">
+                <h3 className="infection-control_review-title">対策への評価</h3>
+                <ol className="infection-control_review-list">
+                  <li className="infection-control_review-option">
+                    <Smile size={24} color="#ED753A" />
+                    <span className="infection-control_review-num">
+                      {shopData.good_count}<br />
+                    </span>
+                  </li>
+                  <li className="infection-control_review-option">
+                    <Frown size={24} color="#3A8CED" />
+                    <span className="infection-control_review-num">
+                      {shopData.bad_count}<br />
+                    </span>
+                  </li>
+                </ol>
+                <Link to={`/shops/${match.params.id}/comments`}>
+                  <Button theme={[ButtonThemes.SUBBTN]}>
+                    コメントを見る
                   <ChevronRight size={14} color="#333" />
+                  </Button>
+                </Link>
+              </div>
+              <hr className="infection-control_hr" />
+              <Link to={`/shops/${match.params.id}/comments/new`}>
+                <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={redirectContext.setFromPath(RedirectFrom.NEW_COMMENT)}>
+                  <Edit size={20} color="#fff" />
+                  <span className="infection-control_comment-text">感染対策のレビューを書く</span>
                 </Button>
               </Link>
-            </div>
-            <hr className="infection-control_hr"/>
-            <Link to={`/shops/${match.params.id}/comments/new`}>
-              <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={useContext(RedirectContext).setFromPath(RedirectFrom.NEW_COMMENT)}>
-                <Edit size={20} color="#fff" />
-                <span className="infection-control_comment-text">感染対策のレビューを書く</span>
-              </Button>
-            </Link>
-          </section>
-          <hr className="shop_hr"/>
-          <section className="shop-card_section">
-            <ul className="shop_info-list">
+            </section>
+            <hr className="shop_hr" />
+            <section className="shop-card_section">
+              <ul className="shop_info-list">
                 <li className="shop_info-option">
                   <Clock size={16} color="#333" />
                   <span className="shop_info-option_content">
@@ -148,7 +157,7 @@ export const Shop: React.FC = (props: any) => {
                 <li className="shop_info-option">
                   <Phone size={16} color="#333" />
                   <span className="shop_info-option_content">
-                  {shopData.contact}
+                    {shopData.contact}
                   </span>
                 </li>
                 <li className="shop_info-option">
@@ -158,45 +167,45 @@ export const Shop: React.FC = (props: any) => {
                   </span>
                 </li>
               </ul>
-            <ul className="shop_sns-list">
-              <li className="shop_sns-option">
-                <Link to=''>
-                  <Button theme={[ButtonThemes.SHOPSNS]}>
-                    <Twitter size={24} color="#333" />
-                  </Button>
-                </Link>
-              </li>
-              <li className="shop_sns-option">
-                <Link to=''>
-                  <Button theme={[ButtonThemes.SHOPSNS]}>
-                    <Monitor size={24} color="#333" />
-                  </Button>
-                </Link>
-              </li>
-              <li className="shop_sns-option">
-                <Link to=''>
-                  <Button theme={[ButtonThemes.SHOPSNS]}>
-                    <Instagram size={24} color="#333" />
-                  </Button>
-                </Link>
-              </li>
-              <li className="shop_sns-option">
-                <Link to=''>
-                  <Button theme={[ButtonThemes.SHOPSNS]}>
-                    <Facebook size={24} color="#333" />
-                  </Button>
-                </Link>
-              </li>
-            </ul>
-          </section>
-          <hr className="shop_hr"/>
-          <section className="shop-card_section">
-            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
-              情報の編集をリクエスト
+              <ul className="shop_sns-list">
+                <li className="shop_sns-option">
+                  <Link to=''>
+                    <Button theme={[ButtonThemes.SHOPSNS]}>
+                      <Twitter size={24} color="#333" />
+                    </Button>
+                  </Link>
+                </li>
+                <li className="shop_sns-option">
+                  <Link to=''>
+                    <Button theme={[ButtonThemes.SHOPSNS]}>
+                      <Monitor size={24} color="#333" />
+                    </Button>
+                  </Link>
+                </li>
+                <li className="shop_sns-option">
+                  <Link to=''>
+                    <Button theme={[ButtonThemes.SHOPSNS]}>
+                      <Instagram size={24} color="#333" />
+                    </Button>
+                  </Link>
+                </li>
+                <li className="shop_sns-option">
+                  <Link to=''>
+                    <Button theme={[ButtonThemes.SHOPSNS]}>
+                      <Facebook size={24} color="#333" />
+                    </Button>
+                  </Link>
+                </li>
+              </ul>
+            </section>
+            <hr className="shop_hr" />
+            <section className="shop-card_section">
+              <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
+                情報の編集をリクエスト
             </Button>
-          </section>
-        </div>
-        <style jsx>{`
+            </section>
+          </div>
+          <style jsx>{`
           .shop-card_section{
             padding: 24px 16px;
           }
@@ -369,7 +378,7 @@ export const Shop: React.FC = (props: any) => {
             margin-right: 4px;
           }
         `}</style>
-      </div>
+        </div>}
     </HomeLayout>
   );
 }
