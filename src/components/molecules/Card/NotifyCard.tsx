@@ -23,6 +23,7 @@ const NotifyCard: React.FC<NotifyCardProps> = ({line_1, line_2}) => {
           text-align: center;
           margin: 0 auto;
           border-radius: 4px;
+          margin-top: -20px;
         }
         .notify-card{
           padding: 14px;

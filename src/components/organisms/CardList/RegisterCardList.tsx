@@ -12,13 +12,14 @@ const RegisterCardList: React.FC<{query: any}> = ({query}) => {
   const qs = queryString.parse(query);
   return (
     <div className="container">
+      <div className="mb40"></div>
       {qs.from === RedirectFrom.NEW_COMMENT && <NotifyCard line_1='会員登録をすると' line_2='お店のレビューを投稿できます！'/>}
       {qs.from === RedirectFrom.HISTORY && <NotifyCard line_1='会員登録をすると' line_2='閲覧履歴を確認できます！'/>}
       <RegisterCard src='/twitter.png' text='Twitterで登録・ログイン' className='twitter' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/twitter`}/>
       <RegisterCard src='/google.png' text='Googleで登録・ログイン' className='google' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/google_oauth2`}/>
       <RegisterCard src='/facebook.png' text='Facebookで登録・ログイン' className='facebook' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/facebook`}/>
       <div className="email-container">
-        <RegisterCard src='/mail.png' text='メールアドレスで登録' className='email' nextRef={`/`}/>
+        <RegisterCard src='/mail.png' text='メールアドレスで登録' className='email' nextRef={`/accounts/emailregister`}/>
       </div>
       <NextRefBtn nextRef='/accounts/login' text='ログインはこちら'/>
       <style jsx>{`
@@ -29,6 +30,9 @@ const RegisterCardList: React.FC<{query: any}> = ({query}) => {
         }
         .email-container{
           margin-top: 50px;
+        }
+        .mb40{
+          margin-bottom: 40px;
         }
       `}</style>
     </div>

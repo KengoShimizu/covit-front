@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 // library
-import { Edit, Mail, LogOut, Trash2 } from 'react-feather';
+import { Edit, Mail, LogOut, Trash2, HelpCircle, AlertCircle } from 'react-feather';
 import axios from "axios";
 import Cookies from 'universal-cookie';
 // common
@@ -92,26 +92,20 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
       <ul className="account-function_list">
-        <AccountTopCard src='/history_black.svg' text='閲覧履歴' nextRef='/history'/>
-        <AccountTopCard text='レビューしたお店' nextRef='/accounts/comments'>
-          <Edit size={20} color="#333" />
-        </AccountTopCard>
+        <AccountTopCard src='/history_accent.svg' text='閲覧履歴' nextRef='/history'/>
+        <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef='/accounts/comments'/>
         <hr className="account-function_hr" />
-        <AccountTopCard text='ログイン情報の編集' nextRef='/accounts/editlogin'>
-          <Mail size={20} color="#333" />
-        </AccountTopCard>
+        <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='ログイン情報の編集' nextRef='/accounts/editlogin'/>
         <hr className="account-function_hr" />
         <div onClick={() => handleModalState(0, modalContext.toggleModalShown)}>
-          <AccountTopCard text='ログアウト'>
-            <LogOut size={20} color="#333"/>
-          </AccountTopCard>
+          <AccountTopCard icon={<LogOut size={20} color={CommonStyle.AccentColor}/>} text='ログアウト'/>
         </div>
         <div onClick={() => handleModalState(1, modalContext.toggleModalShown)}>
-          <AccountTopCard text='アカウントを削除する'>
-            <Trash2 size={20} color="#333" />
-          </AccountTopCard>
+          <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する'/> 
         </div>
-
+        <hr className="account-function_hr" />
+        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='covEATについて'/>
+        <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor}/>} text='口コミ投稿のガイドライン'/>
       </ul>
       <style jsx>{`
         .account-function_list{

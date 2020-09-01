@@ -2,8 +2,7 @@ import React from 'react';
 // library
 import { Link } from 'react-router-dom';
 // components
-import Icon, { IconThemes } from './../atoms/Icon';
-import Text, { TextThemes } from './../atoms/Text';
+import Icon, { IconThemes } from '../../atoms/Icon';
 
 const propStyle = {
   icon: {
@@ -11,7 +10,6 @@ const propStyle = {
     height: 'auto',
   }
 }
-
 
 interface FotterActionItemProps {
   icon: any;

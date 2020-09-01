@@ -15,28 +15,26 @@ interface AddParam {
 }
 
 export const Login: React.FC = (props: any) => {
+  const [err, setErr] = useState("");
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });
-  const [err, setErr] = useState("");
 
-  const send = () => {
-      axios.post('/api/v1/common/sessions/login',{
-          email: addData.email
-        })
-        .then(res => res.data)
-        .catch(err => setErr(err.response.data.errors[0]));
-
-      if (!err) {
-        props.history.push({
-          pathname: "/accounts/send",
-          state: {
-            email: addData.email,
-            text: 'ログイン'
-          }
-        });
-      }
-      return;
+  const send = async () => {
+    try {
+      await axios.post('/api/v1/common/sessions/login', addData)
+      props.history.push({
+        pathname: "/accounts/send",
+        state: {
+          email: addData.email,
+          text: 'ログイン',
+          subTitle: 'ログイン',
+          ref: 'accounts/login'
+        }
+      });
+    } catch (error) {
+      setErr('エラーが発生しました。もう一度お試しください。')
+    }
   }
 
   const handleChange = (event: any) => {
@@ -51,7 +49,7 @@ export const Login: React.FC = (props: any) => {
   },[addData])
 
   return (
-    <HomeLayout headerText={'ログイン'} prevRef={'/accounts/register'} history={props.history}>
+    <HomeLayout headerText={'ログイン'} prevRef={'/accounts/register'}>
       <div className="form">
         <div className="content">
           <div className="mail-form">
@@ -77,7 +75,7 @@ export const Login: React.FC = (props: any) => {
           .mail-form{
             max-width: 324px;
             width: 90%;
-            margin: 0 auto;
+            margin: 40px auto 0;
           }
           .mail-form_btn-container{
             margin: 0 auto 32px auto;
