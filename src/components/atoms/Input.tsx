@@ -7,7 +7,7 @@ interface InputProps {
   theme?: InputThemes;
   propStyle?: {};
   handleChange?: any;
-  label: string;
+  label?: string;
   placeholder: string;
   content: string;
   icon?: React.ReactNode;

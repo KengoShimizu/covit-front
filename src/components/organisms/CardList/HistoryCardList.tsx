@@ -4,6 +4,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { RouteName } from '../../../common/Const';
 // components
 import HistoryCard from '../../molecules/Card/HistoryCard';
 import Text, { TextThemes } from '../../atoms/Text';
@@ -17,7 +18,12 @@ const propStyle = {
   }
 }
 
-const HistoryCardList: React.FC = () => {
+interface HistoryCardListProps {
+  maxRow?: number;
+  props?: any;
+}
+
+const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props }) => {
   const cookies = new Cookies();
   const [loading, setLoading] = useState(true);
   const cookie_histories = cookies.get('histories');
@@ -55,6 +61,9 @@ const HistoryCardList: React.FC = () => {
       const history_elements: any = [];
       const histories_date = cookie_histories_date.split(',')
       cookie_histories.split(',').map((shop_id: string, i: number) => {
+        if (maxRow && i >= maxRow) {
+          return
+        } 
         const shop: any = shopData.find((data: any) => data.id === parseInt(shop_id))
         history_elements.push(
           <HistoryCard 
@@ -62,7 +71,7 @@ const HistoryCardList: React.FC = () => {
             good_count={shop.good_count} 
             bad_count={shop.bad_count} 
             browse_date={histories_date[i]} 
-            nextRef={`/shops/${shop.id}`}
+            nextRef={props.match.path === RouteName.SHOP_SEARCH_FOR_COMMENTS ? `/shops/${shop.id}/comments/new`  : `/shops/${shop.id}`}
             key={`history${i}`}/>
         )})
         setHistoryElements(history_elements);
