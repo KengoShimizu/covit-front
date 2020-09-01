@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { RouteName } from '../../../common/Const';
 // components
 import Button, { ButtonThemes } from '../../atoms/Button';
 
@@ -43,7 +44,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             <img className="intro-mordal_btn_icon" src='/service-icon.svg' alt="" />
             さっそく飲食店を探す
           </Button>
-          <Link to='/accounts/register'>
+          <Link to={RouteName.REGISTER}>
             <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopModal2}>
               会員登録をして始める
             </Button>

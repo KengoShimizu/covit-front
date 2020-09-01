@@ -3,6 +3,7 @@ import React, {  useState, useEffect } from 'react';
 import axios from "axios";
 // common
 import Validation from './../../../../../common/Validate';
+import { RouteName } from '../../../../../common/Const';
 // components
 import NextRefBtn from './../../../../molecules/NextRefBtn';
 import HomeLayout from '../../../../templates/HomeLayout';
@@ -24,7 +25,7 @@ export const Login: React.FC = (props: any) => {
     try {
       await axios.post('/api/v1/common/sessions/login', addData)
       props.history.push({
-        pathname: "/accounts/send",
+        pathname: RouteName.SEND,
         state: {
           email: addData.email,
           text: 'ログイン',
@@ -49,7 +50,7 @@ export const Login: React.FC = (props: any) => {
   },[addData])
 
   return (
-    <HomeLayout headerText={'ログイン'} prevRef={'/accounts/register'}>
+    <HomeLayout headerText={'ログイン'} prevRef={RouteName.REGISTER}>
       <div className="form">
         <div className="content">
           <div className="mail-form">
@@ -68,7 +69,7 @@ export const Login: React.FC = (props: any) => {
                 </Button>
               </div>
             }
-            <NextRefBtn nextRef='/accounts/register' text='会員登録はこちら'/>
+            <NextRefBtn nextRef={RouteName.REGISTER} text='会員登録はこちら'/>
           </div>
         </div>
         <style jsx>{`

@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { RouteName } from './../../../common/Const';
 // components
 import AccountTopCard from '../../molecules/Card/AccoutTopCard';
 import Modal from '../../molecules/Modal/Modal';
@@ -37,13 +38,13 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
           caption: 'ログアウトしました。'
         });
         toggleTopModalShown(true);
-        history.push('/');
+        history.push(RouteName.ROOT);
       }).catch(() => {
         setModalText({
           caption: 'ログアウトに失敗しました。'
         });
         toggleTopModalShown(true);
-        history.push('/');
+        history.push(RouteName.ROOT);
       })
   }
   const handleDeleteAccount = (toggleTopModalShown: any, setModalText: any) => {
@@ -54,13 +55,13 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
           small: '今までご利用ありがとうございました！'
         });
         toggleTopModalShown(true);
-        history.push('/');
+        history.push(RouteName.ROOT);
       }).catch(() => {
         setModalText({
           caption: 'アカウントの削除に失敗しました。'
         });
         toggleTopModalShown(true);
-        history.push('/');
+        history.push(RouteName.ROOT);
       })
   }
 
@@ -92,10 +93,10 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
       <ul className="account-function_list">
-        <AccountTopCard src='/history_accent.svg' text='閲覧履歴' nextRef='/history'/>
-        <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef='/accounts/comments'/>
+        <AccountTopCard src='/history_accent.svg' text='閲覧履歴' nextRef={RouteName.HISTORY}/>
+        <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef={RouteName.SELF_COMMENTS}/>
         <hr className="account-function_hr" />
-        <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='ログイン情報の編集' nextRef='/accounts/editlogin'/>
+        <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='ログイン情報の編集' nextRef={RouteName.EDIT_LOGIN}/>
         <hr className="account-function_hr" />
         <div onClick={() => handleModalState(0, modalContext.toggleModalShown)}>
           <AccountTopCard icon={<LogOut size={20} color={CommonStyle.AccentColor}/>} text='ログアウト'/>

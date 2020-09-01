@@ -2,7 +2,7 @@ import React from 'react';
 // library
 import queryString from 'query-string';
 // common
-import { RedirectFrom } from './../../../common/Const';
+import { RedirectFrom, RouteName } from './../../../common/Const';
 // components
 import RegisterCard from '../../molecules/Card/RegisterCard';
 import NextRefBtn from '../../molecules/NextRefBtn';
@@ -19,9 +19,9 @@ const RegisterCardList: React.FC<{query: any}> = ({query}) => {
       <RegisterCard src='/google.png' text='Googleで登録・ログイン' className='google' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/google_oauth2`}/>
       <RegisterCard src='/facebook.png' text='Facebookで登録・ログイン' className='facebook' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/facebook`}/>
       <div className="email-container">
-        <RegisterCard src='/mail.png' text='メールアドレスで登録' className='email' nextRef={`/accounts/emailregister`}/>
+        <RegisterCard src='/mail.png' text='メールアドレスで登録' className='email' nextRef={RouteName.REGISTER_EMAIL}/>
       </div>
-      <NextRefBtn nextRef='/accounts/login' text='ログインはこちら'/>
+      <NextRefBtn nextRef={RouteName.LOGIN} text='ログインはこちら'/>
       <style jsx>{`
         .container{
           max-width: 324px;

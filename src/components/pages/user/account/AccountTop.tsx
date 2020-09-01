@@ -7,16 +7,18 @@ import NextRefBtn from './../../../molecules/NextRefBtn';
 import { AccountTopCardList } from '../../../organisms/CardList/AccoutTopCardList';
 // context
 import AuthContext from "../../../../context/CommonProvider";
+// common
+import { RouteName } from './../../../../common/Const';
 
 export const AccountTop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const [account] = useState(authState.user);
 
   return (
-    <HomeLayout headerText={'ユーザ情報'} prevRef={'/'} history={props.history}>
+    <HomeLayout headerText={'ユーザ情報'} prevRef={RouteName.ROOT} history={props.history}>
       <ProfileIconNameCard src={account.image} name={account.name} />
       <div className="next-ref-btn">
-        <NextRefBtn nextRef='/accounts/editprofile' text='プロフィールを編集' />
+        <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' />
       </div>
       <AccountTopCardList history={props.history} />
       <PrivacyFotter/>

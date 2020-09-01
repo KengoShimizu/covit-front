@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 // library
-import { Link } from 'react-router-dom';
 import axios from "axios";
 // common
 import Validation from './../../../../../common/Validate';
+import { RouteName } from '../../../../../common/Const';
 // components
 import HomeLayout from '../../../../templates/HomeLayout';
 import NextRefBtn from './../../../../molecules/NextRefBtn';
@@ -25,12 +25,12 @@ export const EmailRegister: React.FC = (props: any) => {
     try {
       await axios.post('/api/v1/common/sessions/sign_up', addData)
       props.history.push({
-        pathname: "/accounts/send",
+        pathname: RouteName.SEND,
         state: {
           email: addData.email,
           text: '登録',
           subTitle: 'メールアドレス登録',
-          ref: '/accounts/emailregister'
+          ref: RouteName.REGISTER_EMAIL
         }
       });
     } catch (error) {
@@ -50,7 +50,7 @@ export const EmailRegister: React.FC = (props: any) => {
   },[addData])
 
   return (
-    <HomeLayout headerText="メールアドレス登録" prevRef='/accounts/register'>
+    <HomeLayout headerText="メールアドレス登録" prevRef={RouteName.REGISTER}>
       {/* FIXME リンク先 */}
       <div className="form">
         <div className="content">
@@ -70,7 +70,7 @@ export const EmailRegister: React.FC = (props: any) => {
                 </Button>
               </div>
             }
-            <NextRefBtn nextRef='/accounts/login' text='ログインはこちら'/>
+            <NextRefBtn nextRef={RouteName.LOGIN} text='ログインはこちら'/>
           </div>
         </div>
       </div>

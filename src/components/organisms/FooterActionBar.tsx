@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 // common
-import { RedirectFrom } from './../../common/Const';
+import { RedirectFrom, RouteName } from './../../common/Const';
 // components
 import FotterActionItem from '../molecules/Footer/FotterActionItem';
 // context
@@ -10,6 +10,7 @@ import RedirectContext from './../../context/RedirectContext';
 const FooterActionBar: React.FC = () => {
   const [isHover, setIsHover] = useState(0);
   const { authState } = useContext(AuthContext);
+  const setFormPath = useContext(RedirectContext).setFromPath;
 
   const handleEnter = (event: any) => {
     setIsHover(parseInt(event.currentTarget.id))
@@ -24,31 +25,31 @@ const FooterActionBar: React.FC = () => {
       <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} id='1'>
         <FotterActionItem
           icon={<img src={`/search${isHover === 1 ? '_clicked' : ''}.svg`} alt="検索" />}
-          nextRef='/'
+          nextRef={RouteName.ROOT}
           style={{ paddingLeft: '35px' }} />
       </div>
-      <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} onClick={useContext(RedirectContext).setFromPath(RedirectFrom.NEW_COMMENT)} id='2'>
+      <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} onClick={() => setFormPath(RedirectFrom.NEW_COMMENT)} id='2'>
         <FotterActionItem
           icon={<img src={`/plus-circle${isHover === 2 ? '_clicked' : ''}.svg`} alt="投稿" />}
-          nextRef='/commnets/shop_search' />
+          nextRef={RouteName.SHOP_SEARCH_FOR_COMMENTS} />
       </div>
-      <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} onClick={useContext(RedirectContext).setFromPath(RedirectFrom.HISTORY)} id='3'>
+      <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} onClick={() => setFormPath(RedirectFrom.HISTORY)} id='3'>
         <FotterActionItem
           icon={<img src={`/Browsing-history${isHover === 3 ? '_clicked' : ''}.svg`} alt="閲覧履歴" />}
-          nextRef='/history' />
+          nextRef={RouteName.HISTORY} />
       </div>
       {
         authState.isLogin ?
           <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} id='4'>
             <FotterActionItem
               icon={<img src={`/person-circle-outline${isHover === 4 ? '_clicked' : ''}.svg`} alt="メニュー" />}
-              nextRef='/accounts'
+              nextRef={RouteName.ACCOUNT_TOP}
               style={{ paddingRight: '35px' }} />
           </div>
           :
           <div onMouseEnter={handleEnter} onMouseLeave={handleLeave} id='4'>
             <FotterActionItem icon={<img src={`/hamburger-outline${isHover === 4 ? '_clicked' : ''}.svg`} alt="メニュー" />}
-              nextRef='/menu'
+              nextRef={RouteName.MENU}
               style={{ paddingRight: '35px' }} />
           </div>
       }

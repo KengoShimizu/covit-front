@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 // library
-import useReactRouter from "use-react-router";
+import { Search } from 'react-feather';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import HistoryCardList from '../../../organisms/CardList/HistoryCardList';
-
 import Input from '../../../atoms/Input';
-import { Search } from 'react-feather';
+// common
+import { RouteName } from './../../../../common/Const';
+
 interface SearchParam {
   name: string;
 }
@@ -25,7 +26,7 @@ export const CommentPrepare: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout headerText='お店のレビューを登録する' prevRef='/'>
+    <HomeLayout headerText='お店のレビューを登録する' prevRef={RouteName.ROOT}>
       <Input handleChange={handleChange} label='name' placeholder='お店名で検索' content={searchData.name} icon={<Search />} />
       sav
       <HistoryCardList />

@@ -3,10 +3,12 @@ import React from 'react';
 import HomeLayout from '../../../../templates/HomeLayout';
 import CommonStyle from '../../../../../common/CommonStyle';
 import LoginFlexCard from '../../../../molecules/Card/LoginFlexCard';
+// common
+import { RouteName } from '../../../../../common/Const';
 
 export const EditLogin: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText='ログイン情報の編集' prevRef='/accounts' history={props.history}>
+    <HomeLayout headerText='ログイン情報の編集' prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
         <div className='container'>
           <ul>
             <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />

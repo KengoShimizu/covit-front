@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
 // context
 import AuthContext from "../../context/CommonProvider";
-// other
-import { OwnerType } from '../../common/Const';
+// common
+import { OwnerType, RouteName } from '../../common/Const';
 
 export const OwnerRoute = ({ component: Component, ...rest }: any) => {
   const { authState } = useContext(AuthContext);
@@ -13,7 +13,7 @@ export const OwnerRoute = ({ component: Component, ...rest }: any) => {
       authState.user.is_owner !== OwnerType.NOTOWNER ? (
         <Component {...props} />
       ) : (
-          <Redirect to='/'/>
+          <Redirect to={RouteName.ROOT}/>
         )
     )} />
   )
