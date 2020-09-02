@@ -12,7 +12,7 @@ interface ShopCardProps {
 
 const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
   return (
-    <Link to={`/shops/${shop.id}`}>
+    <Link to={`/shops/${shop.id}/comments/new`}>
       <li className="shop-card">
         <div className="shop-card_content">
           <h2 className="shop-card_name">{shop.name}</h2>

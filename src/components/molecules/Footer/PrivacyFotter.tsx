@@ -1,10 +1,14 @@
 import React from 'react';
+// library
+import { Link } from 'react-router-dom';
+// common
+import { RouteName } from '../../../common/Const';
 
 const PrivacyFotter: React.FC = () => {
   return (
     <React.Fragment>
       <ul className="privacy_container">
-        <li className="privacy_text">プライバシー</li>
+        <Link to={RouteName.PRIVACY}><li className="privacy_text">プライバシー</li></Link>
         <li className="privacy_text">covEAT © ︎2020</li>
       </ul>
       <style jsx>{`

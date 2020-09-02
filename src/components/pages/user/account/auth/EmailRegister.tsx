@@ -51,25 +51,18 @@ export const EmailRegister: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText="メールアドレス登録" prevRef={RouteName.REGISTER}>
-      {/* FIXME リンク先 */}
       <div className="form">
         <div className="content">
           <div className="mail-form">
             <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
             {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
-            {err ?
-              <div className="mail-form_btn-container">
-                <Button theme={[ButtonThemes.SUBNORMAL]}>
-                  登録する
-                </Button>
-              </div>
-              :
-              <div className="mail-form_btn-container">
-                <Button theme={[ButtonThemes.NORMAL]} onClick={send}>
-                  登録する
-                </Button>
-              </div>
-            }
+            <div className="mail-form_btn-container">
+              <Button 
+                theme={err ? [ButtonThemes.SUBNORMAL] : [ButtonThemes.NORMAL]}
+                onClick={err ? () => {} : send}>
+                登録する
+              </Button>
+            </div>
             <NextRefBtn nextRef={RouteName.LOGIN} text='ログインはこちら'/>
           </div>
         </div>

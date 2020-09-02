@@ -67,6 +67,7 @@ const propStyle = {
 export const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
   const [loading, setLoading] = useState(true);
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
@@ -164,6 +165,7 @@ export const Top: React.FC = (props: any) => {
       <div className='container'>
         
         <MapObject
+          setPopupIsOpen={setPopupIsOpen}
           loading={loading}
           coordinations={coordinations}
           steps={steps}
@@ -212,7 +214,7 @@ export const Top: React.FC = (props: any) => {
         <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
 
         {/* フッター操作バー */}
-        {initModalIsOpen && <FooterActionBar/>}
+        {initModalIsOpen && !popupIsOpen && <FooterActionBar/>}
         
         <style jsx>{`
           .container{
