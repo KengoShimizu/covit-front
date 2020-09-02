@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // library
 import Cookies from 'universal-cookie';
 import axios from "axios";
-import { ChevronDown } from 'react-feather';
+import { ChevronDown,  } from 'react-feather';
 // common
 import CommonStyle from './../../common/CommonStyle';
 // components
@@ -39,7 +39,7 @@ const propStyle = {
     transform: 'translateX(-50%)',
     WebkitTransform: 'translateX(-50%)',
     height: '36px',
-    padding: '8px 20px',
+    padding: '4px 20px',
     background: CommonStyle.BgWhite,
     border: `1.5px solid ${CommonStyle.BorderGray}`,
     boxSizing: 'border-box',
@@ -186,7 +186,8 @@ export const Top: React.FC = (props: any) => {
         {initModalIsOpen && 
           <React.Fragment>
             <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
-              <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
+              <Icon theme={[IconThemes.NORMAL]}>
+                <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/></Icon>
               このエリアで再検索
             </Button>
             <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {

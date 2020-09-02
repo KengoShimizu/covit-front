@@ -1,4 +1,4 @@
-const CommonStyle = {
+ const CommonStyle = {
   // 色
   AccentColor: '#DF6059',
   BaseColor: '#333',
@@ -18,6 +18,7 @@ const CommonStyle = {
   Text: '16px',
   Caption: '14px',
   Smallest: '12px',
+  IconCaption: '8px',
   // snsカラー
   TwitterColor: '#91C4F3',
   GoogleColor: '#D8503F',

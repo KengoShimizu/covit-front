@@ -33,7 +33,11 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
       {!initModalIsOpen && <div className='intro-mordal-back' onClick={() => handleInitModal}></div>}
       <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
         <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
-        <h1 className="intro-mordal_title">covEAT<br /> <span className="intro-mordal_title_jp">へようこそ！</span></h1>
+        <h1 className="intro-mordal_title">
+          <span className="intro-mordal_title_en">covEAT</span>
+          <br />
+          <span className="intro-mordal_title_jp">へようこそ！</span>
+        </h1>
         <img className="intro-mordal_img" src='/charactor.svg' alt="" />
         <p className="intro-mordal_text">
           covEAT は感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
@@ -89,25 +93,32 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             transition-duration: .5s;
           }
           .intro-mordal_title{
-            font-family: Century Gothic Pro;
+            text-align: center;
+            margin-bottom: 8px;
+          }
+          .intro-mordal_title_en{
+            font-family: Century Gothic Pro,Franklin Gothic Medium, sans-serif;
             font-weight: bold;
-            font-size: 24px;
+            font-size: 22px;
             line-height: 24px;
-            margin: 11px 0 4px;
+            margin-bottom: 4px;
           }
           .intro-mordal_title_jp{
+            font-family: 　”Hiragino Kaku Gothic ProN”,　"Hiragino Sans",　Meiryo, sans-serif;
             font-weight: bold;
             font-size: 18px;
             line-height: 24px;
           }
-          .intro-mordal_title_img{
-            width: 186px;
-            height: auto;
-            margin-bottom: 8px;
+          .intro-mordal_img{
+            width: auto;
+            height: 120px;
+            margin-bottom: 16px;
           }
           .intro-mordal_text{
             font-weight: bold;
-            width: 100%;
+            width: 90%;
+            margin: 0 auto;
+            text-align: left;
             font-size: 14px;
             line-height: 24px;
             margin-bottom: 24px;

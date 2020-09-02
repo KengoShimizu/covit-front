@@ -6,26 +6,37 @@ import Icon, { IconThemes } from '../../atoms/Icon';
 
 const propStyle = {
   icon: {
-    width: '100%',
-    height: 'auto',
+    width: '44px',
+    height: '28px',
+    marginBottom: '8px'
   }
 }
 
 interface FotterActionItemProps {
   icon: any;
   nextRef: string;
-  style?: any;
+  caption: string;
 }
 
-const FotterActionItem: React.FC<FotterActionItemProps> = ({ icon, nextRef, style }) => {
+const FotterActionItem: React.FC<FotterActionItemProps> = ({ icon, nextRef, caption }) => {
   return (
-    <div className="footer-action-item" style={style}>
+    <div className="footer-action-item">
       <Link to={nextRef}>
-        <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.icon}>{icon}</Icon>
+        <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.icon}>
+          {icon}
+        </Icon>
+        <p className="footer-action-item_caption"> 
+          {caption}
+        </p>
       </Link>
       <style jsx>{`
         .footer-action-item{
-          padding: 9px 12px;
+          width: 44px;
+          height: 44px;
+        }
+        .footer-action-item_caption{
+          font-size: 8px;
+          text-align: center;
         }
       `}</style>
     </div>
