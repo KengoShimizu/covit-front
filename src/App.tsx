@@ -9,8 +9,9 @@ import { ModalStateProvider } from './context/ModalContext';
 import { TopModalStateProvider } from './context/TopModalContext';
 import { Authentication } from "./components/common/Authentication";
 import { LoginJudge } from "./components/common/LoginJudge";
-import { OwnerRoute } from './components/common/OwnerRoute';
-import { UserRoute } from './components/common/UserRoute';
+import { OwnerRoute } from './components/common/OwnerRoute'; // 店のオーナーのみ
+import { UserRoute } from './components/common/UserRoute'; // 一般ユーザーのみ
+import { NotOwnerRoute } from './components/common/NotOwnerRoute'; // 一般ユーザーとゲストのみ
 import { RedirectPathProvider } from './context/RedirectContext';
 // components/pages
 import { Top } from './components/pages/Top';
@@ -50,7 +51,7 @@ function App() {
               <LoginJudge>
                 <RedirectPathProvider>
                   <Switch>
-                    <Route exact path={RouteName.ROOT} component={Top} />
+                    <NotOwnerRoute exact path={RouteName.ROOT} component={Top} />
                     <Route exact path={RouteName.MENU} component={Menu} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
