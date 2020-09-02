@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
       <label>{label}<span>*</span></label>
       <div className="input-icon-container">
         <span className="input-icon">{icon}</span>
-        <input id={id} defaultValue={content} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
+        <input id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
       </div>
       <style jsx>
         {`
