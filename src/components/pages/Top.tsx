@@ -102,6 +102,7 @@ export const Top: React.FC = (props: any) => {
   }
 
   const fetchCoordinationsData = async (genre_id: number[], lat_: number, lng_: number, isSubscribed: boolean) => {
+    setLoading(true);
     const genre_id_str = genre_id.length === 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
     try {
       const res = await axios.get('/api/v1/user/coordinations', {
@@ -114,8 +115,10 @@ export const Top: React.FC = (props: any) => {
           }
         });
       if (isSubscribed) setCoordinations(res.data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   }
 
@@ -159,7 +162,9 @@ export const Top: React.FC = (props: any) => {
     <HomeLayout>
       <TopModal/>
       <div className='container'>
+        
         <MapObject
+          loading={loading}
           coordinations={coordinations}
           steps={steps}
           zoom={zoom}
@@ -172,9 +177,6 @@ export const Top: React.FC = (props: any) => {
           setLastLat={setLastLat}
           setLastLng={setLastLng}
           setZoom={setZoom}/>
-
-        {/* FIXME ざわちゃんにcssでローディングアニメーション作ってもらう */}
-        {loading && <div className="loading"></div>}
 
         <div className="refinement-btn-wrap">
           <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
@@ -223,17 +225,6 @@ export const Top: React.FC = (props: any) => {
             height: 40px;
             text-align: center;
             z-index: 400;
-          }
-          .loading{
-            height: 100px;
-            width: 100px;
-            background-color: black;
-            z-index: 1000;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            -webkit-transform: translate(-50%, -50%);
           }
         `}</style>
       </div>

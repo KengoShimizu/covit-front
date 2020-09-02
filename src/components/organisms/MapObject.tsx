@@ -8,6 +8,7 @@ import MapPopup from '../molecules/MapPopup';
 
 
 interface MapPopupProps {
+  loading: boolean;
   coordinations: any;
   steps: any;
   zoom: number;
@@ -93,7 +94,9 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           minZoom={5}/>
         <Marker position={props.curLoc} icon={curLocMarker} />
 
-        {props.coordinations.map((data: any, i: number) => (
+        {/* FIXME ざわちゃんにcssでローディングアニメーション作ってもらう */}
+        {props.loading ? <div className="loading"></div> :
+         props.coordinations.map((data: any, i: number) => (
           <Marker
             position={{ lat: data.latitude, lng: data.longitude }}
             icon={shopMarker}
@@ -111,6 +114,17 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           top: 40px;
           position: relative;
           background-color: #E8E6E2;
+        }
+        .loading{
+          height: 100px;
+          width: 100px;
+          background-color: black;
+          z-index: 1000;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          -webkit-transform: translate(-50%, -50%);
         }
       `}</style>
     </div>
