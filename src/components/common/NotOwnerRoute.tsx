@@ -6,14 +6,14 @@ import AuthContext from "../../context/CommonProvider";
 // common
 import { OwnerType, RouteName } from '../../common/Const';
 
-export const UserRoute = ({ component: Component, ...rest }: any) => {
+export const NotOwnerRoute = ({ component: Component, ...rest }: any) => {
   const { authState } = useContext(AuthContext);
   return (
     <Route {...rest} render={props => (
-      authState.user.is_owner === OwnerType.NOT_OWNER ? (
+      !authState.isLogin || authState.user.is_owner === OwnerType.NOT_OWNER ? (
         <Component {...props} />
       ) : (
-          <Redirect to={RouteName.ROOT}/>
+          <Redirect to={RouteName.ACCOUNT_TOP}/>
         )
     )} />
   )

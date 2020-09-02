@@ -74,9 +74,9 @@ export class LinkType {
 }
 
 export class OwnerType {
-  public static readonly NOTOWNER         = 0
-  public static readonly UNAPPROVEDOWNER  = 1
-  public static readonly APPROVEDOWNER    = 2
+  public static readonly NOT_OWNER         = 0
+  public static readonly UNAPPROVED_OWNER  = 1
+  public static readonly APPROVED_OWNER    = 2
 }
 
 export class RedirectFrom {
