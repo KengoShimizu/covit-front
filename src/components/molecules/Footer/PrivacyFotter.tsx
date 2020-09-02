@@ -5,7 +5,7 @@ const PrivacyFotter: React.FC = () => {
     <React.Fragment>
       <ul className="privacy_container">
         <li className="privacy_text">プライバシー</li>
-        <li className="privacy_text">サービス名 © ︎2020</li>
+        <li className="privacy_text">covEAT © ︎2020</li>
       </ul>
       <style jsx>{`
         .privacy_container{

@@ -66,6 +66,7 @@ const propStyle = {
 
 export const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
+  const [loading, setLoading] = useState(true);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
@@ -149,6 +150,7 @@ export const Top: React.FC = (props: any) => {
     const cleanup = () => {
       isSubscribed = false;
     };
+    setLoading(false);
     return cleanup;
   }, [])
 
@@ -171,25 +173,27 @@ export const Top: React.FC = (props: any) => {
           setLastLng={setLastLng}
           setZoom={setZoom}/>
 
+        {/* FIXME ざわちゃんにcssでローディングアニメーション作ってもらう */}
+        {loading && <div className="loading"></div>}
+
         <div className="refinement-btn-wrap">
           <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
             お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
           </Button>
         </div>
-        {
-          initModalIsOpen && 
-            <React.Fragment>
-              <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
-                <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
-                このエリアで再検索
-              </Button>
-              <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
-                setMapCenter(curLoc)
-                setZoom(16)
-              }}>
-                現在地
-              </Button>
-            </React.Fragment>
+        {initModalIsOpen && 
+          <React.Fragment>
+            <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
+              <Icon theme={[IconThemes.NORMAL]}><img src='/reload-outline.svg' alt='reload' style={{paddingRight: '13px'}}/></Icon>
+              このエリアで再検索
+            </Button>
+            <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
+              setMapCenter(curLoc)
+              setZoom(16)
+            }}>
+              現在地
+            </Button>
+          </React.Fragment>
         }
   
         <GenreCardList 
@@ -219,6 +223,17 @@ export const Top: React.FC = (props: any) => {
             height: 40px;
             text-align: center;
             z-index: 400;
+          }
+          .loading{
+            height: 100px;
+            width: 100px;
+            background-color: black;
+            z-index: 1000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
           }
         `}</style>
       </div>

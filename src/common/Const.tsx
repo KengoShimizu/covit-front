@@ -107,4 +107,5 @@ export class RouteName {
   public static readonly EDIT_EMAIL               = '/accounts/edit/email'
   public static readonly ADD_EMAIL                = '/accounts/add/email'
   public static readonly USER_SHOP_FORM           = '/users/request/form'
+  public static readonly LANDING_PAGE             = 'https://coveat-service.studio.design'
 }

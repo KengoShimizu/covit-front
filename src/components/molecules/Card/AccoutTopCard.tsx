@@ -20,7 +20,7 @@ interface AccoutTopCardProps {
 
 const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef='#'}) => {
   return (
-    <Link to={nextRef}>
+    <a href={nextRef}>
       <li className="account-function_option">
         <Icon theme={[IconThemes.LERGE]}>
           {icon && icon}
@@ -41,7 +41,7 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef=
           height: auto;
         }
       `}</style>
-    </Link>
+    </a>
   );
 }
 

@@ -105,7 +105,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({history}) 
           <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する'/> 
         </div>
         <hr className="account-function_hr" />
-        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='covEATについて'/>
+        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='covEATについて' nextRef={RouteName.LANDING_PAGE}/>
         <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor}/>} text='口コミ投稿のガイドライン'/>
       </ul>
       <style jsx>{`
