@@ -10,7 +10,7 @@ export const NotOwnerRoute = ({ component: Component, ...rest }: any) => {
   const { authState } = useContext(AuthContext);
   return (
     <Route {...rest} render={props => (
-      !authState.isLogin || authState.user.is_owner === OwnerType.NOTOWNER ? (
+      !authState.isLogin || authState.user.is_owner === OwnerType.NOT_OWNER ? (
         <Component {...props} />
       ) : (
           <Redirect to={RouteName.ACCOUNT_TOP}/>

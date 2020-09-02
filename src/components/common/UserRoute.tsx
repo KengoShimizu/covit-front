@@ -10,7 +10,7 @@ export const UserRoute = ({ component: Component, ...rest }: any) => {
   const { authState } = useContext(AuthContext);
   return (
     <Route {...rest} render={props => (
-      authState.user.is_owner === OwnerType.NOTOWNER ? (
+      authState.user.is_owner === OwnerType.NOT_OWNER ? (
         <Component {...props} />
       ) : (
           <Redirect to={RouteName.ROOT}/>
