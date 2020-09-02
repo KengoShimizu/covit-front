@@ -107,11 +107,12 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
       <style jsx>{`
         .map-container{
           width: 100%;
-          height: ${window.innerHeight}px;
+          height: calc(${window.innerHeight}px - 40px);
+          top: 40px;
+          position: relative;
           background-color: #E8E6E2;
         }
       `}</style>
-
     </div>
   );
 }
