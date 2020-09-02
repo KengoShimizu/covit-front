@@ -87,22 +87,26 @@ export const OwnerShopForm: React.FC = (props: any) => {
     setErr('');
   }, [addData])
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page])
+
   return (
     <React.Fragment>
       {page === 1 &&
-        <HomeLayout headerText="01 お店の情報について" prevRef='#' history={props.history}>
+        <HomeLayout headerText="お店の情報登録(1/3)" prevRef='#' history={props.history}>
           <div className="container">
             <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
           </div>
         </HomeLayout>}
       {page === 2 &&
-        <HomeLayout headerText="02 お店の情報について" onClick={() => setPage(1)}>
+        <HomeLayout headerText="お店の情報登録(2/3)" onClick={() => setPage(1)}>
           <div className="container">
             <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
           </div>
         </HomeLayout>}
       {page === 3 &&
-        <HomeLayout headerText="03 担当者様について" onClick={() => setPage(2)}>
+        <HomeLayout headerText="お店の情報登録(3/3)" onClick={() => setPage(2)}>
           <div className="container">
             <OwnerInfo post={post} handleChange={handleOwnerChange} addData={addData}/>
           </div>
@@ -112,7 +116,7 @@ export const OwnerShopForm: React.FC = (props: any) => {
           .container {
             width: 100%;
             max-width: 330px;
-            margin: 0 auto;
+            margin: 30px auto 0;
           }
         `}
       </style>

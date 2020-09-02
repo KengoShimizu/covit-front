@@ -11,6 +11,7 @@ import AuthContext from './../../../../context/CommonProvider';
 import CommonStyle from '../../../../common/CommonStyle';
 // common
 import { RouteName } from '../../../../common/Const';
+import Loading from '../../../molecules/Loading';
 
 export const Comments: React.FC = (props: any) => {
   const [loading, setLoading] = useState(true);
@@ -70,7 +71,7 @@ export const Comments: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef} history={props.history}>
-      {loading ? <div></div> :
+      {loading ? <Loading/> :
       <div>
         {match.params.id && user &&
           <div className="profile-card">

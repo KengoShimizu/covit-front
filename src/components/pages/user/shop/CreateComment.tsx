@@ -9,6 +9,7 @@ import { Comment } from '../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import InfectionControlList from './../../../organisms/InfectionControlList';
+import Loading from '../../../molecules/Loading';
 
 export interface AddParam {
   content: string;
@@ -86,7 +87,7 @@ export const CreateComment: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
-      {loading ? <div></div> :
+      {loading ? <Loading/> :
         <div className='container'>
           <div className="content">
             <h1 className="shop-name">cafe えにしえ</h1>

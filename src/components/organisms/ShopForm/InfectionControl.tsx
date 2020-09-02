@@ -11,14 +11,16 @@ import Textarea, { TextareaThemes } from '../../atoms/Textarea'
 import { CheckSectionList } from './CheckSectionList'
 // types
 import StepCategory from '../../../types/StepCategory';
+import Loading from '../../molecules/Loading';
 
 interface InfectionControlProps {
   setPage: any;
   addData: any;
   setAddData: any;
+  post?: any;
 }
 
-export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData }) => {
+export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post }) => {
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
   const identifer = match.path.match(/owners/g) ? 'owner' : 'user';
@@ -63,15 +65,21 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   }, [stepIDs])
 
   return (
-    loading ? <div></div> :
+    loading ? <Loading/> :
     <div className="container">
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }}>感染対策の内容はユーザーに公開されます。</Text>
       <CheckSectionList stepCategories={stepCategories} setStepIDs={setStepIDs} stepIDs={stepIDs}/>
       <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
-      <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(2)}>
-        次へ <ArrowRight />
-      </Button>
+      {identifer === 'user' ?
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => post()}>
+          登録する
+        </Button>
+        :
+        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(2)}>
+          次へ <ArrowRight />
+        </Button>
+      }
       <style jsx>
         {`
         `}

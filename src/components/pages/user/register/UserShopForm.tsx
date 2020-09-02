@@ -64,36 +64,34 @@ export const UserShopForm: React.FC = (props: any) => {
     setErr('');
   }, [addData])
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page])
+
   return (
-    page === 1 ?
-    <HomeLayout headerText="01 お店の情報について" prevRef='#' history={props.history}>
-      <div className="container">
-        <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
-      </div>
+    <React.Fragment>
+      {page === 1 ?
+        <HomeLayout headerText="お店の情報登録(1/2)" prevRef='#' history={props.history}>
+          <div className="container">
+            <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
+          </div>
+        </HomeLayout>
+        :
+        <HomeLayout headerText="お店の情報登録(2/2)" onClick={() => setPage(1)}>
+          <div className="container">
+            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} post={post}/>
+          </div>
+        </HomeLayout>
+      }
       <style jsx>
         {`
           .container {
             width: 100%;
             max-width: 330px;
-            margin: 0 auto;
+            margin: 30px auto 0;
           }
-        `}
+       `}
       </style>
-    </HomeLayout>
-    :
-    <HomeLayout headerText="02 お店の情報について" onClick={() => setPage(1)}>
-      <div className="container">
-        <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} post={post}/>
-      </div>
-      <style jsx>
-        {`
-          .container {
-            width: 100%;
-            max-width: 330px;
-            margin: 0 auto;
-          }
-        `}
-      </style>
-    </HomeLayout>
+    </React.Fragment>
   );
 }

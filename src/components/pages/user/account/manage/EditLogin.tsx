@@ -17,7 +17,7 @@ export const EditLogin: React.FC = (props: any) => {
             <hr className="sub-hr"/>
             <LoginFlexCard src={'/facebook.png'} text={'Facebook'} />
             <hr className="main-hr"/>
-            <LoginFlexCard src={'/mail.png'} text={'メールアドレス'} />
+            <LoginFlexCard src={'/mail.png'} text={'メールアドレス'} nextRef={RouteName.EDIT_EMAIL}/>
           </ul>
           
           <style jsx>{`

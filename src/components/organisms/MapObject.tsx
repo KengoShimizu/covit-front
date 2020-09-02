@@ -5,6 +5,7 @@ import L from 'leaflet';
 import Cookies from 'universal-cookie';
 // components
 import MapPopup from '../molecules/MapPopup';
+import Loading from './../molecules/Loading';
 
 
 interface MapPopupProps {
@@ -94,8 +95,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           minZoom={5}/>
         <Marker position={props.curLoc} icon={curLocMarker} />
 
-        {/* FIXME ざわちゃんにcssでローディングアニメーション作ってもらう */}
-        {props.loading ? <div className="loading"></div> :
+        {props.loading ? <Loading/> :
          props.coordinations.map((data: any, i: number) => (
           <Marker
             position={{ lat: data.latitude, lng: data.longitude }}
@@ -114,17 +114,6 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           top: 40px;
           position: relative;
           background-color: #E8E6E2;
-        }
-        .loading{
-          height: 100px;
-          width: 100px;
-          background-color: black;
-          z-index: 1000;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          -webkit-transform: translate(-50%, -50%);
         }
       `}</style>
     </div>

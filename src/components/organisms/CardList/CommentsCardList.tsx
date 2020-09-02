@@ -11,6 +11,7 @@ import CommonStyle from '../../../common/CommonStyle';
 import ShopCommentCard from '../../molecules/Card/ShopCommentCard';
 import UserCommentCard from '../../molecules/Card/UserCommentCard';
 import Icon, { IconThemes } from '../../atoms/Icon';
+import Loading from '../../molecules/Loading';
 
 const propStyle = {
   reviewIcon: {
@@ -130,7 +131,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
 
   return (
     <div className='container'>
-      {loading ? <div></div> :
+      {loading ? <Loading/> :
         <div className="content">
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
