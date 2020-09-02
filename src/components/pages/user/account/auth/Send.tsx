@@ -1,13 +1,16 @@
 import React, { useRef, useState } from 'react';
 // library
 import axios from "axios";
+import { Link } from 'react-router-dom';
 // common
 import CommonStyle from './../../../../../common/CommonStyle';
+import { RouteName } from '../../../../../common/Const';
 // components
 import HomeLayout from '../../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 
+{/* FIXME 挙動ちゃんと確かめる */}
 export const Send: React.FC = (props: any) => {
   const [resend, setResend] = useState("");
   const [err, setErr] = useState("");
@@ -34,9 +37,11 @@ export const Send: React.FC = (props: any) => {
           <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{margin: '10px auto'}}>
             もう一度メールを送信する
           </Button>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '10px auto'}}>
-            メールアドレスを変更する
-          </Button>
+          <Link to={RouteName.REGISTER_EMAIL}>
+            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '10px auto'}}>
+              メールアドレスを変更する
+            </Button>
+          </Link>
         </div>
       </div>
       <style jsx>{`

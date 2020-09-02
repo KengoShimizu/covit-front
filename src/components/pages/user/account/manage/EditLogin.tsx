@@ -11,7 +11,7 @@ export const EditLogin: React.FC = (props: any) => {
     <HomeLayout headerText='ログイン情報の編集' prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
         <div className='container'>
           <ul>
-            <LoginFlexCard src={'/facebook.png'} text={'Twitter'} />
+            <LoginFlexCard src={'/twitter.png'} text={'Twitter'} />
             <hr className="sub-hr"/>
             <LoginFlexCard src={'/google.png'} text={'Google'} />
             <hr className="sub-hr"/>

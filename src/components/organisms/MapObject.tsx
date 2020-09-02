@@ -9,6 +9,7 @@ import Loading from './../molecules/Loading';
 
 
 interface MapPopupProps {
+  setPopupIsOpen: any;
   loading: boolean;
   coordinations: any;
   steps: any;
@@ -42,21 +43,21 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   });
 
   const createDate = () => {
-      const dd = new Date();
-      const YYYY = dd.getFullYear();
-      const MM = dd.getMonth()+1;
-      const DD = dd.getDate();
-      return YYYY + "/" + MM + "/" + DD;
+    const dd = new Date();
+    const YYYY = dd.getFullYear();
+    const MM = dd.getMonth() + 1;
+    const DD = dd.getDate();
+    return YYYY + "/" + MM + "/" + DD;
   }
 
   const handleMarkerClick = (data: any) => {
     const c = cookies.get('histories');
     const c_d = cookies.get('histories_date');
-    if(c && c_d){
+    if (c && c_d) {
       const cookies_array = c.split(',').map((item: string) => parseInt(item));
       const cookies_date_array = c_d.split(',');
-      if(cookies_array[0] !== data.id){
-        while(cookies_array.length > 99){
+      if (cookies_array[0] !== data.id) {
+        while (cookies_array.length > 99) {
           cookies_array.pop();
           cookies_date_array.pop();
         }
@@ -64,46 +65,53 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
         cookies.set('histories_date', createDate() + ',' + cookies_date_array.join(','));
       }
     }
-    else{
+    else {
       cookies.set('histories', data.id);
       cookies.set('histories_date', createDate());
     }
     props.setMapCenter({ lat: data.latitude, lng: data.longitude });
     props.fetchStepsData(data.shop);
     setPopupIsOpen(true);
+    props.setPopupIsOpen(true);
   }
 
   return (
     <div className="map-container">
-      <Map 
-        center={props.mapCenter} 
+      <Map
+        center={props.mapCenter}
         zoom={props.zoom}
-        style={{ height: '100%' }} 
+        style={{ height: '100%' }}
         zoomControl={false}
-        onMoveend={(e:any) => {
+        onMoveend={(e: any) => {
           const latlng = e.target.getCenter();
           props.setLastLat(latlng.lat);
           props.setLastLng(latlng.lng);
           props.setZoom(e.target.getZoom());
-          props.setMapCenter({lat: latlng.lat, lng: latlng.lng});
+          props.setMapCenter({ lat: latlng.lat, lng: latlng.lng });
         }}
-        onMovestart={() => setPopupIsOpen(false)}
-        onClick={() => setPopupIsOpen(false)}>
+        onMovestart={() => {
+          setPopupIsOpen(false);
+          props.setPopupIsOpen(false);
+        }}
+        onClick={() => {
+          setPopupIsOpen(false);
+          props.setPopupIsOpen(false);
+        }}>
         <TileLayer
           attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          minZoom={5}/>
+          minZoom={5} />
         <Marker position={props.curLoc} icon={curLocMarker} />
 
-        {props.loading ? <Loading/> :
-         props.coordinations.map((data: any, i: number) => (
-          <Marker
-            position={{ lat: data.latitude, lng: data.longitude }}
-            icon={shopMarker}
-            key={`shop${data.id}`}
-            onClick={() => handleMarkerClick(data)} >
-          </Marker>
-        ))}
+        {props.loading ? <Loading /> :
+          props.coordinations.map((data: any, i: number) => (
+            <Marker
+              position={{ lat: data.latitude, lng: data.longitude }}
+              icon={shopMarker}
+              key={`shop${data.id}`}
+              onClick={() => handleMarkerClick(data)} >
+            </Marker>
+          ))}
 
         {popupIsOpen && <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />}
       </Map>

@@ -14,7 +14,7 @@ import { RouteName } from '../../../../common/Const';
 import Loading from '../../../molecules/Loading';
 
 export const Comments: React.FC = (props: any) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
   const user_id = match.params.id ? match.params.id : authState.user.id;
@@ -71,19 +71,19 @@ export const Comments: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef} history={props.history}>
-      {loading ? <Loading/> :
-      <div>
-        {match.params.id && user &&
-          <div className="profile-card">
-            <ProfileIconNameCard src={user.image} name={user.name} />
-          </div>
-        }
-        {pageState.update &&
-          <div className="comment-card-list">
-            <CommentsCardList sqlQuery={pageState.sqlQuery} />
-          </div>
-        }
-      </div>}
+      {loading ? <Loading /> :
+        <div>
+          {match.params.id && user &&
+            <div className="profile-card">
+              <ProfileIconNameCard src={user.image} name={user.name} />
+            </div>
+          }
+          {pageState.update &&
+            <div className="comment-card-list">
+              <CommentsCardList sqlQuery={pageState.sqlQuery} />
+            </div>
+          }
+        </div>}
       <style jsx>{`
         .profile-card{
           position: fixed;

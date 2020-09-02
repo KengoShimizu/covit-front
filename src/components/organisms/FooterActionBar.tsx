@@ -45,7 +45,7 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle }) => {
           setFormPath(RedirectFrom.NEW_COMMENT);
           setIsClicked(2);
         }}>
-        <Link to={RouteName.SELF_COMMENTS}>
+        <Link to={RouteName.SHOP_SEARCH_FOR_COMMENTS}>
           <div className="footer-action-bar_btn">
             <span className="footer-action-bar_icon-wrapper">
               <svg className={`footer-action-bar_icon ${isClicked === 2 && '_clicked'}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

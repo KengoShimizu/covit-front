@@ -18,9 +18,11 @@ interface AccoutTopCardProps {
   nextRef?: string;
 }
 
+// FIXME LPをSPA内にファイル作ればaタグいらん
 const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef='#'}) => {
-  return (
-    <a href={nextRef}>
+  const isHttps = nextRef.match(/https/g);
+  const innerElement = (
+    <React.Fragment>
       <li className="account-function_option">
         <Icon theme={[IconThemes.LERGE]}>
           {icon && icon}
@@ -41,7 +43,18 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef=
           height: auto;
         }
       `}</style>
-    </a>
+    </React.Fragment>
+  )
+
+  return (
+    isHttps ?
+      <a href={nextRef}>
+        {innerElement}
+      </a>
+    :
+      <Link to={nextRef}>
+        {innerElement}
+      </Link>
   );
 }
 

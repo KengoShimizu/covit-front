@@ -30,7 +30,7 @@ interface IntroModalProps {
 const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModal }) => {
   return (
     <React.Fragment>
-      {!initModalIsOpen && <div className='intro-mordal-back' onClick={() => handleInitModal}></div>}
+      {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
       <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
         <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
         <h1 className="intro-mordal_title">
@@ -54,10 +54,10 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             </Button>
           </Link>
         </div>
-        <Link to=''>
+        <a href={RouteName.LANDING_PAGE}>
           <p className="intro-mordal_link">covEATについてもっと知りたい！</p>
-        </Link>
-        <Link to=''>
+        </a>
+        <Link to={RouteName.REGISTER_EMAIL}>
           <p className="intro-mordal_link">covEATにお店を追加したい！</p>
         </Link>
       </div>
@@ -77,11 +77,11 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
           }
           .intro-mordal{
             visibility: visible;
-            top: 144px;
+            top: 50%;
             left: 50%;
             z-index: 1101;
-            transform: translateX(-50%);
-            -webkit- transform: translateX(-50%);
+            transform: translate(-50%, -45%);
+            -webkit- transform: translate(-50%, -45%);
             position: fixed;
             background: ${CommonStyle.BgWhite};
             border-radius: 8px;
