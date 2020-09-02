@@ -17,6 +17,7 @@ import { RedirectPathProvider } from './context/RedirectContext';
 import { Top } from './components/pages/Top';
 import { Menu } from './components/pages/Menu';
 import { History } from './components/pages/History';
+import OwnerAccountTop from './components/pages/owner/account/AccountTop';
 // components/pages/user/shop
 import { Shop } from './components/pages/user/shop/Shop';
 import { ShopComments } from './components/pages/user/shop/Comments';
@@ -52,7 +53,7 @@ function App() {
                 <RedirectPathProvider>
                   <Switch>
                     <NotOwnerRoute exact path={RouteName.ROOT} component={Top} />
-                    <Route exact path={RouteName.MENU} component={Menu} />
+                    <NotOwnerRoute exact path={RouteName.MENU} component={Menu} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
@@ -60,14 +61,15 @@ function App() {
                     <Route exact path={RouteName.REGISTER} component={Register} />
                     <Route exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
-                    <Route exact path={RouteName.USER_COMMENTS} component={Comments} />
+                    <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
                     <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
                     <Authentication>
                       <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
                       <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
                       <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
                       <Route exact path={RouteName.HISTORY} component={History} />
-                      <Route exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
+                      <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
+                      <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
                       <Route exact path={RouteName.SELF_COMMENTS} component={Comments} />
                       <Route exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
                       <Route exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
