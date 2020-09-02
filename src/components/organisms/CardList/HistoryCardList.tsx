@@ -7,7 +7,9 @@ import CommonStyle from '../../../common/CommonStyle';
 import { RouteName } from '../../../common/Const';
 // components
 import HistoryCard from '../../molecules/Card/HistoryCard';
+import SearchHistoryCard from '../../molecules/Card/SearchHistoryCard';
 import Text, { TextThemes } from '../../atoms/Text';
+import Loading from '../../molecules/Loading';
 
 const propStyle = {
   errorText: {
@@ -21,9 +23,10 @@ const propStyle = {
 interface HistoryCardListProps {
   maxRow?: number;
   props?: any;
+  type?: string;
 }
 
-const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props }) => {
+const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }) => {
   const cookies = new Cookies();
   const [loading, setLoading] = useState(true);
   const cookie_histories = cookies.get('histories');
@@ -65,21 +68,31 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props }) => {
           return
         } 
         const shop: any = shopData.find((data: any) => data.id === parseInt(shop_id))
-        history_elements.push(
-          <HistoryCard 
-            name={shop.name} 
-            good_count={shop.good_count} 
-            bad_count={shop.bad_count} 
-            browse_date={histories_date[i]} 
-            nextRef={props && props.match.path === RouteName.SHOP_SEARCH_FOR_COMMENTS ? `/shops/${shop.id}/comments/new`  : `/shops/${shop.id}`}
-            key={`history${i}`}/>
-        )})
+        if (type === 'search'){
+          history_elements.push(
+            <SearchHistoryCard 
+              name={shop.name} 
+              browse_date={histories_date[i]} 
+              nextRef={`/shops/${shop.id}/comments/new`}
+              key={`history${i}`}/>
+          )
+        } else {
+          history_elements.push(
+            <HistoryCard 
+              name={shop.name} 
+              good_count={shop.good_count} 
+              bad_count={shop.bad_count} 
+              browse_date={histories_date[i]} 
+              nextRef={`/shops/${shop.id}`}
+              key={`history${i}`}/>
+          )
+        }})
         setHistoryElements(history_elements);
     }
   }, [shopData])
 
   return (
-    loading ? <div></div> :
+    loading ? <Loading/> :
     <div className="container">
       <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.errorText}>{err}</Text>
       <ol className="card-list">

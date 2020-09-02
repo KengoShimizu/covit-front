@@ -1,6 +1,7 @@
 import React from 'react';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { Link } from 'react-router-dom';
 // components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
@@ -13,25 +14,28 @@ const propStyle = {
 interface LoginFlexCardProps {
   src: string;
   text: string;
+  nextRef?: string;
 }
 
-const LoginFlexCard: React.FC<LoginFlexCardProps> = ({src, text}) => {
+const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#' }) => {
   return (
     <li className="login-card">
-      <div　className="login-card_content">
+      <div className="login-card_content">
         <span className="login-card_check-box">
 
         </span>
         <Icon theme={[IconThemes.SMALL]} propStyle={propStyle.loginIcon}>
-          <img className="login-card_img" src={src} alt=""/>
+          <img className="login-card_img" src={src} alt="" />
         </Icon>
         <Text theme={[TextThemes.CAPTION]}>
           {text}
         </Text>
       </div>
-      <button　className="login-card_btn">
-        変更する
-      </button>
+      <Link to={nextRef}>
+        <button className="login-card_btn">
+          変更する
+        </button>
+      </Link>
       <style jsx>{`
         .login-card{
           display: flex;

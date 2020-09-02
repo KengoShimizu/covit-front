@@ -12,6 +12,7 @@ import HomeLayout from '../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
 import InfectionControlList from './../../../organisms/InfectionControlList';
+import Loading from '../../../molecules/Loading';
 // context
 import RedirectContext from './../../../../context/RedirectContext';
 
@@ -72,7 +73,7 @@ export const Shop: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText={shopData.name} prevRef={RouteName.ROOT} history={props.history}>
-      {loading ? <div></div> :
+      {loading ? <Loading/> :
         <div className="content">
           <div className="shop-card">
             {/* ヘッダー画像 */}

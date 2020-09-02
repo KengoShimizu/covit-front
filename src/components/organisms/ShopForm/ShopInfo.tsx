@@ -23,7 +23,6 @@ interface ShopInfoProps {
   setPage: any;
   addData: any;
   setAddData: any;
-  post?: any;
 }
 // FIXME 汚すぎだけど、どう実装しよう~
 var defaultLinks = {
@@ -49,7 +48,7 @@ var defaultLinks = {
   }
 }
 
-export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, post }) => {
+export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData }) => {
   const { match }: any = useReactRouter();
   const isOwnerPage = match.path.match(/owners/g);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -104,10 +103,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       });
   }
 
-  const request = async () => {
-    post();
-  }
-
   useEffect(() => {
     fetchGenres();
   }, []);
@@ -131,8 +126,8 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
       {!isOwnerPage && 
         <React.Fragment>
-          <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
-            詳細をスキップしてリクエストする
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={() => setPage(2)}>
+            詳細をスキップ<ArrowRight size={24}/>
           </Button>
           {/* 営業時間フォーム */}
           <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
@@ -155,12 +150,12 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
-      {post ?
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={request}>
-          リクエストする
+      {!isOwnerPage ?
+        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={() => setPage(2)}>
+          次へ <ArrowRight />
         </Button>
         :
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => { setPage(3); }}>
+        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(3)}>
           次へ <ArrowRight />
         </Button>
         }
