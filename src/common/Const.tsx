@@ -90,6 +90,7 @@ export class RouteName {
   public static readonly SHOP                     = '/shops/:id'
   public static readonly SHOP_COMMENTS            = '/shops/:id/comments'
   public static readonly PRIVACY                  = '/privacy'
+  public static readonly GUIDE_LINE               = '/guide'
   public static readonly LOGIN                    = '/accounts/login'
   public static readonly REGISTER                 = '/accounts/register'
   public static readonly REGISTER_EMAIL           = '/accounts/register/email'
