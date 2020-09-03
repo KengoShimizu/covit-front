@@ -26,6 +26,7 @@ import { CommentPrepare } from './components/pages/user/shop/CommentPrepare';
 // components/pages/user/account
 import { AccountTop } from './components/pages/user/account/AccountTop';
 import { Privacy } from './components/pages/user/account/Privacy';
+import GuideLine from './components/pages/user/account/GuideLine';
 import { Comments } from './components/pages/user/account/Comments';
 // components/pages/user/account/auth
 import { EmailRegister } from './components/pages/user/account/auth/EmailRegister';
@@ -57,6 +58,7 @@ function App() {
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
+                    <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} />
                     <Route exact path={RouteName.LOGIN} component={Login} />
                     <Route exact path={RouteName.REGISTER} component={Register} />
                     <Route exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />

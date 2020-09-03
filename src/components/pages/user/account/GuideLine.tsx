@@ -7,9 +7,11 @@ import { RouteName } from './../../../../common/Const';
 import HomeLayout from '../../../templates/HomeLayout';
 
 
-export const Privacy: React.FC = (props: any) => {
+const GuideLine: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText="プライバシーポリシー" prevRef='#' history={props.history}>
+    <HomeLayout headerText="口コミ投稿のガイドライン" prevRef='#' history={props.history}>
     </HomeLayout>
   );
 }
+
+export default GuideLine;
