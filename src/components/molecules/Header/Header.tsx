@@ -13,33 +13,38 @@ interface HeaderProps {
   prevRef?: string;
   history?: any;
   onClick?: any;
+  noBtn?: any;
 }
 
-const Header: React.FC<HeaderProps> = ({ headerText, prevRef, history, onClick }) => {
+const Header: React.FC<HeaderProps> = ({ headerText, prevRef, history, onClick, noBtn }) => {
   return (
     <React.Fragment>
       {headerText &&
         <header className="header">
-          {onClick &&
-            <div onClick={onClick}>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </div>
-          }
-          {prevRef === '#' &&
-            <div onClick={() => history.goBack()}>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </div>
-          }
-          {(prevRef && prevRef !== '#') &&
-            <Link to={prevRef}>
-              <Button theme={[ButtonThemes.SUBHEADER]}>
-                <ChevronLeft size={24} color="#333" />
-              </Button>
-            </Link>
+          {!noBtn &&
+            <React.Fragment>
+              {onClick &&
+                <div onClick={onClick}>
+                  <Button theme={[ButtonThemes.SUBHEADER]}>
+                    <ChevronLeft size={24} color="#333" />
+                  </Button>
+                </div>
+              }
+              {prevRef === '#' &&
+                <div onClick={() => history.goBack()}>
+                  <Button theme={[ButtonThemes.SUBHEADER]}>
+                    <ChevronLeft size={24} color="#333" />
+                  </Button>
+                </div>
+              }
+              {(prevRef && prevRef !== '#') &&
+                <Link to={prevRef}>
+                  <Button theme={[ButtonThemes.SUBHEADER]}>
+                    <ChevronLeft size={24} color="#333" />
+                  </Button>
+                </Link>
+              }
+            </React.Fragment>
           }
           <Title theme={[TitleThemes.SUBHEADER]}>
             {headerText}

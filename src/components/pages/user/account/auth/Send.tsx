@@ -27,7 +27,7 @@ export const Send: React.FC = (props: any) => {
   }
 
   return (
-    <HomeLayout headerText={props.location.state.subTitle} prevRef={props.location.state.ref}>
+    <HomeLayout headerText={props.location.state.subTitle} prevRef='#' noBtn={true}>
       <div className="container">
         {resend && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>{resend}</Text>}
         {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>{err}</Text>}

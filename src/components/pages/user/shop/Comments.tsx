@@ -10,7 +10,6 @@ import AuthContext from "./../../../../context/CommonProvider";
 import { OwnerType, RouteName } from '../../../../common/Const';
 import Loading from '../../../molecules/Loading';
 
-
 // ショップのコメント一覧
 export const ShopComments: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
@@ -44,12 +43,11 @@ export const ShopComments: React.FC = (props: any) => {
     loading ?
       <Loading />
       :
-        shopUserID && authState.user.is_owner !== OwnerType.NOT_OWNER && shopUserID !== authState.user.id ?
+      shopUserID && authState.user.is_owner !== OwnerType.NOT_OWNER && shopUserID !== authState.user.id ?
         <Redirect to={RouteName.ACCOUNT_TOP} />
         :
         <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
-
-          <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`} />
+          <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
         </HomeLayout>
   );
 }

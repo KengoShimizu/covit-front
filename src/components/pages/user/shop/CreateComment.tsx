@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // library
 import useReactRouter from "use-react-router";
 import axios from 'axios';
 import { Smile, Frown } from 'react-feather';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
-import { Comment } from '../../../../common/Const';
+import { Comment, RouteName } from '../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import InfectionControlList from './../../../organisms/InfectionControlList';
 import Loading from '../../../molecules/Loading';
+// context
+import TopModalContext from '../../../../context/TopModalContext';
 
 export interface AddParam {
   content: string;
@@ -19,9 +21,10 @@ export interface AddParam {
 }
 
 //レビュー記入
-// FIXME formに来店日追加
+// FIXME 1.formに来店日追加 2.評価に対してvalidationかける
 export const CreateComment: React.FC = (props: any) => {
   const [loading, setLoading] = useState(true);
+  const topModalContext = useContext(TopModalContext);
   const { match }: any = useReactRouter();
   const [addData, setAddData] = useState<AddParam>({
     content: "",
@@ -51,10 +54,19 @@ export const CreateComment: React.FC = (props: any) => {
   });
 
   const postData = async () => {
-    await axios
-      .post(`/api/v1/user/comments`, addData)
-      .then(result => result.data)
-      .catch(error => console.log(error));
+    try{
+      await axios.post(`/api/v1/user/comments`, addData)
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'レビューを投稿しました！',
+          small: 'いつもご利用ありがとうございます。'
+        }
+      });
+      props.history.push(RouteName.ROOT);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleChange = (event: any) => {

@@ -6,7 +6,7 @@ import { RouteName } from './common/Const';
 // provider
 import { CommonProvider } from "./context/CommonProvider";
 import { ModalStateProvider } from './context/ModalContext';
-import { TopModalStateProvider } from './context/TopModalContext';
+import { TopModalProvider } from './context/TopModalContext';
 import { Authentication } from "./components/common/Authentication";
 import { LoginJudge } from "./components/common/LoginJudge";
 import { OwnerRoute } from './components/common/OwnerRoute'; // 店のオーナーのみ
@@ -48,7 +48,7 @@ function App() {
     <div className="App">
       <CommonProvider>
         <ModalStateProvider>
-          <TopModalStateProvider>
+          <TopModalProvider>
             <BrowserRouter>
               <LoginJudge>
                 <RedirectPathProvider>
@@ -83,7 +83,7 @@ function App() {
                 </RedirectPathProvider>
               </LoginJudge>
             </BrowserRouter>
-          </TopModalStateProvider>
+          </TopModalProvider>
         </ModalStateProvider>
       </CommonProvider>
       <style jsx>{`

@@ -15,9 +15,10 @@ import { ShopBusinessDateForm } from '../../organisms/ShopForm/ShopBusinessDateF
 // types
 import Genre from '../../../types/Genre';
 import Link from '../../../types/Link';
-// others
+// common
 import { PriceArray, LinkType } from '../../../common/Const'
 import CommonStyle from '../../../common/CommonStyle';
+import Validate from '../../../common/Validate';
 
 interface ShopInfoProps {
   setPage: any;
@@ -53,6 +54,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   const isOwnerPage = match.path.match(/owners/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState(defaultLinks);
+  const [isOK, setIsOK] = useState(false);
 
   const fetchGenres = async () => {
     await axios.get('/api/v1/user/genres')
@@ -99,8 +101,8 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   const handleGenreChange = (event: any) => {
     setAddData({
       ...addData,
-        [event.target.name]: event.target.value
-      });
+      [event.target.name]: event.target.value
+    });
   }
 
   useEffect(() => {
@@ -114,23 +116,33 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }, [links]);
 
+  useEffect(() => {
+    if (isOwnerPage) {
+      if (Validate.formValidate('owner_shop_form', addData)) setIsOK(false)
+      else setIsOK(true)
+    } else {
+      if (Validate.formValidate('user_shop_form', addData)) setIsOK(false)
+      else setIsOK(true)
+    }
+  }, [addData]);
+
   return (
     <div className="container">
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text>
       <ShopForm handleChange={handleChange} addData={addData} />
-      {isOwnerPage && 
+      {isOwnerPage &&
         /* 営業時間フォーム */
-        <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
+        <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
       }
       {/* ジャンル系 */}
       <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
-      {!isOwnerPage && 
+      {!isOwnerPage &&
         <React.Fragment>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={() => setPage(2)}>
-            詳細をスキップ<ArrowRight size={24}/>
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={isOK ? () => setPage(2) : () => {}}>
+            詳細をスキップ<ArrowRight size={24} />
           </Button>
           {/* 営業時間フォーム */}
-          <ShopBusinessDateForm setAddData={setAddData} addData={addData}/> 
+          <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
         </React.Fragment>
       }
       <label>料理の価格帯</label>
@@ -150,15 +162,15 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
-      {!isOwnerPage ?
-        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={() => setPage(2)}>
+      {isOwnerPage ?
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(3) : () => {}}>
           次へ <ArrowRight />
         </Button>
         :
-        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(3)}>
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(2) : () => {}}>
           次へ <ArrowRight />
         </Button>
-        }
+      }
       <style jsx>
         {`
         label {

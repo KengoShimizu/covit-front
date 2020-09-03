@@ -3,15 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight } from 'react-feather';
 import axios from "axios";
 import useReactRouter from "use-react-router";
-// atoms
-import Button, { ButtonThemes } from '../../atoms/Button'
-import Text, { TextThemes } from '../../atoms/Text'
-import Textarea, { TextareaThemes } from '../../atoms/Textarea'
-// organisms
-import { CheckSectionList } from './CheckSectionList'
+// components
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Text, { TextThemes } from '../../atoms/Text';
+import Textarea, { TextareaThemes } from '../../atoms/Textarea';
+import { CheckSectionList } from './CheckSectionList';
+import Loading from '../../molecules/Loading';
 // types
 import StepCategory from '../../../types/StepCategory';
-import Loading from '../../molecules/Loading';
+// common
+import Validate from '../../../common/Validate';
 
 interface InfectionControlProps {
   setPage: any;
@@ -22,6 +23,7 @@ interface InfectionControlProps {
 
 export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post }) => {
   const { match }: any = useReactRouter();
+  const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
   const identifer = match.path.match(/owners/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
@@ -64,6 +66,11 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
     })
   }, [stepIDs])
 
+  useEffect(() => {
+    if(Validate.formValidate('shop_form_infections', stepIDs)) setIsOK(false);
+    else setIsOK(true);
+  }, [stepIDs]);
+
   return (
     loading ? <Loading/> :
     <div className="container">
@@ -72,11 +79,11 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
       <CheckSectionList stepCategories={stepCategories} setStepIDs={setStepIDs} stepIDs={stepIDs}/>
       <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       {identifer === 'user' ?
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => post()}>
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => post() : () => {}}>
           登録する
         </Button>
         :
-        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={() => setPage(2)}>
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
           次へ <ArrowRight />
         </Button>
       }

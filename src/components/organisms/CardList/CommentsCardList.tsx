@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // library
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
@@ -12,6 +12,11 @@ import ShopCommentCard from '../../molecules/Card/ShopCommentCard';
 import UserCommentCard from '../../molecules/Card/UserCommentCard';
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Loading from '../../molecules/Loading';
+import Modal from '../../molecules/Modal/Modal';
+import TopModal from '../../molecules/Modal/TopModal';
+// context
+import ModalContext from '../../../context/ModalContext';
+import TopModalContext from '../../../context/TopModalContext';
 
 const propStyle = {
   reviewIcon: {
@@ -33,6 +38,9 @@ interface CommentsCardListProps {
 const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
+  const [deletedId, setDeletedId] = useState(0);
+  const topModalContext = useContext(TopModalContext);
+  const modalContext = useContext(ModalContext);
   const isShopPage = match.path.match(/shops/g);
   const isCurrentUser = match.path.match(/accounts/g);
   const [state, setState] = useState('good');
@@ -44,11 +52,15 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     perPage: 10,
     currentPage: 1
   });
-
   const [pagenationForBad, setPagenationForBad] = useState({
     total: 0,
     perPage: 10,
     currentPage: 1
+  });
+  const [modalState, setModalState] = useState({
+    title: '',
+    btntext: '',
+    onClick: () => { }
   });
 
   const fetchGoodData = async (isSubscribed: boolean) => {
@@ -115,6 +127,43 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     });
   }
 
+  const clickReport = (user_id: number, user_name: string) => {
+    setModalState({
+      title: `${user_name} さんを報告しますか？`,
+      btntext: '報告する',
+      onClick: report
+    });
+    modalContext.toggleModalShown(true);
+  }
+
+  const clickDelete = (comment_id: number) => {
+    setModalState({
+      title: 'コメントを削除しますか？',
+      btntext: '削除する',
+      onClick: () => delete_self_comment(comment_id)
+    });
+    modalContext.toggleModalShown(true);
+  }
+
+  // FIXME reportのapi実装
+  const report = () => {
+
+  }
+
+  const delete_self_comment = async (comment_id: number) => {
+    try{
+      await axios.delete(`/api/v1/user/comments/${comment_id}`)
+      setDeletedId(comment_id)
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'コメントを削除しました'
+        }
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     let isSubscribed = true;
@@ -128,11 +177,32 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     return cleanup;
   }, [])
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [state])
+
+  useEffect(() => {
+    if (topModalContext.contents.isShown){
+      setTimeout(() => {
+        topModalContext.setContents({
+          isShown: false,
+          text: {
+            caption: ''
+          }
+        })
+      }, 3000)
+    }
+  }, [topModalContext.contents.isShown]);
 
   return (
     <div className='container'>
       {loading ? <Loading/> :
         <div className="content">
+          <TopModal/>
+          <Modal
+            title={modalState.title}
+            btntext={modalState.btntext}
+            onClick={modalState.onClick} />
           <div className="review-switch_container">
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
               <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
@@ -163,7 +233,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
                 const icon = state === 'good' ? 'smile' : 'frown';
                 return (
                   isShopPage ?
-                    <ShopCommentCard comment={comment} key={comment.id} />
+                    <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />
                     :
                     <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} />
                 );

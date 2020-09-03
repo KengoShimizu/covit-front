@@ -7,9 +7,8 @@ import { RouteName } from '../../../../../common/Const';
 // components
 import HomeLayout from '../../../../templates/HomeLayout';
 import NextRefBtn from './../../../../molecules/NextRefBtn';
-import Input, { InputThemes } from '../../../../atoms/Input';
+import Input from '../../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
-import Text, { TextThemes } from '../../../../atoms/Text';
 
 interface AddParam {
   email: string;
@@ -17,6 +16,7 @@ interface AddParam {
 
 export const EmailRegister: React.FC = (props: any) => {
   const [err, setErr] = useState("");
+  const [isOK, setIsOK] = useState(true);
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });
@@ -45,8 +45,8 @@ export const EmailRegister: React.FC = (props: any) => {
   }
 
   useEffect(()=>{
-    const errText = Validation.formValidate('email', addData.email);
-    errText ? setErr(errText) : setErr('')
+    if(Validation.formValidate('email', addData.email)) setIsOK(false);
+    else setIsOK(true);
   },[addData])
 
   return (
@@ -55,11 +55,11 @@ export const EmailRegister: React.FC = (props: any) => {
         <div className="content">
           <div className="mail-form">
             <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
-            {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
+            {/* {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>} */}
             <div className="mail-form_btn-container">
               <Button 
-                theme={err ? [ButtonThemes.SUBNORMAL] : [ButtonThemes.NORMAL]}
-                onClick={err ? () => {} : send}>
+                theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]}
+                onClick={isOK ? send : () => {}}>
                 登録する
               </Button>
             </div>

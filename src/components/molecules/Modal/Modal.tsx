@@ -56,14 +56,14 @@ const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
         </div>
         <style jsx>{`
           .modal-background{
-            position: absolute;
+            position: fixed;
             width: 100%;
             height: 100%;
             z-index: 9999;
           }
           .modal-container{
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
-            position: absolute;
+            position: fixed;
             z-index: 10000;
             top: 50%;
             left: 50%;
@@ -88,6 +88,13 @@ const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
 
   // Contextの値を取得して開閉制御
   const modalHookState = useContext(ModalContext);
+
+  // スクロールの固定
+  if (modalHookState.isModalShown) {
+    document.body.setAttribute('style', 'overflow: hidden;')
+  } else {
+    document.body.removeAttribute('style')
+  }
 
   const modalElement: any = document.getElementById('modal');
   return ReactDOM.createPortal(

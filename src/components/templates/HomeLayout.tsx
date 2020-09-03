@@ -8,14 +8,16 @@ interface HomeLayoutProps {
   children?: React.ReactNode;
   history?: any;
   onClick?: any;
+  noBtn?: boolean;
 }
 
-const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, history, onClick}) => {
+const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, history, onClick, noBtn}) => {
   return (
     <div className="container">
       {history && <Header headerText={headerText} prevRef={prevRef} history={history}/>}
       {!history && <Header headerText={headerText} prevRef={prevRef}/>}
       {onClick && <Header headerText={headerText} prevRef={prevRef} onClick={onClick}/>}
+      {noBtn && <Header headerText={headerText} prevRef={prevRef} noBtn={noBtn}/>}
       <div className="wrap">
         <main>
           {children}
