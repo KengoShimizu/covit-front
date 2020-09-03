@@ -13,7 +13,7 @@ export const NotOwnerRoute = ({ component: Component, ...rest }: any) => {
       !authState.isLogin || authState.user.is_owner === OwnerType.NOT_OWNER ? (
         <Component {...props} />
       ) : (
-          <Redirect to={RouteName.ACCOUNT_TOP}/>
+          <Redirect to={RouteName.OWNER_ACCOUNT_TOP}/>
         )
     )} />
   )

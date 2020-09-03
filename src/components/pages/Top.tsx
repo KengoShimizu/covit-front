@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 // library
 import Cookies from 'universal-cookie';
 import axios from "axios";
 import { ChevronDown,  } from 'react-feather';
+import queryString from 'query-string';
 // common
 import CommonStyle from './../../common/CommonStyle';
 // components
 import IntroModal from './../molecules/Modal/IntroModal'
 import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
-import Button, { ButtonThemes } from './../atoms/Button';
+import Button from './../atoms/Button';
 import GenreCardList from '../organisms/CardList/GenreCardList';
 import TopModal from '../molecules/Modal/TopModal';
 import Icon, { IconThemes } from '../atoms/Icon';
 import FooterActionBar from './../organisms/FooterActionBar';
+// context
+import TopModalContext from '../../context/TopModalContext';
 
 // ボタンのCSS
 const propStyle = {
@@ -67,6 +70,8 @@ const propStyle = {
 
 export const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
+  const qs = queryString.parse(props.location.search);
+  const topModalContext = useContext(TopModalContext);
   const [loading, setLoading] = useState(true);
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
@@ -156,8 +161,29 @@ export const Top: React.FC = (props: any) => {
       isSubscribed = false;
     };
     setLoading(false);
+    if(qs.state === 'login') {
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'ログインしました！',
+        }
+      });
+    }
     return cleanup;
   }, [])
+
+  useEffect(() => {
+    if (topModalContext.contents.isShown){
+      setTimeout(() => {
+        topModalContext.setContents({
+          isShown: false,
+          text: {
+            caption: ''
+          }
+        })
+      }, 3000)
+    }
+  }, [topModalContext.contents.isShown]);
 
 
   return (

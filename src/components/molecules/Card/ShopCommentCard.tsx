@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // library
-import { Calendar, AlertTriangle } from 'react-feather';
+import { Calendar, AlertTriangle, Trash2 } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
@@ -8,19 +8,25 @@ import { FormatDate_YM } from '../../../common/Function';
 // components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
+// context
+import AuthContext from "../../../context/CommonProvider";
 
 type CardProps = {
   comment: any;
-  onClick?: any;
+  clickReport: any;
+  clickDelete: any;
+  deletedId: number;
 };
 
-const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
-
+const ShopCommentCard: React.FC<CardProps> = ({ comment, clickReport, clickDelete, deletedId }) => {
+  const { authState } = useContext(AuthContext);
+  const bool = authState.user.id === comment.user.id;
+  const delete_bool = deletedId === comment.id;
   return (
-    <div>
-      <li className="card">
+    <React.Fragment>
+      <li className={`card ${delete_bool && 'delete'}`}>
         <Link to={`/users/${comment.user.id}/comments`}>
-          <Icon theme={[IconThemes.LIST]} propStyle={{margin: '6px 6px 0 0'}}>
+          <Icon theme={[IconThemes.LIST]} propStyle={{ margin: '6px 6px 0 0' }}>
             <img className="card_icon" src={comment.user.image} alt="" />
           </Icon>
         </Link>
@@ -31,7 +37,7 @@ const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
               <Icon theme={[IconThemes.SMALL]}>
                 <Calendar size={14} color="#8C8C8C" />
               </Icon>
-              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={{margin: '0 6px 0 3px'}}>来店日</Text>
+              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={{ margin: '0 6px 0 3px' }}>来店日</Text>
               <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YM(new Date(comment.date))}</Text>
             </div>
             <div className="card_comment">
@@ -40,10 +46,16 @@ const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
           </Link>
           <div className="card_report">
             <Icon theme={[IconThemes.SMALL]}>
-              <AlertTriangle size={14} color="#8C8C8C" />
+              {bool ? 
+                <Trash2 size={14} color={CommonStyle.AccentColor} />
+                :
+                <AlertTriangle size={14} color="#8C8C8C" />
+              }
             </Icon>
-            <div onClick={onClick}>
-              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>悪質なユーザーを報告</Text>
+            <div onClick={bool ? () => clickDelete(comment.id) : () => clickReport(comment.user.id, comment.user.name)}>
+              <Text theme={bool ? [TextThemes.SMALL] : [TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={bool ? {color: CommonStyle.AccentColor} : {}}>
+                {bool ? '削除' : '悪質なユーザーを報告'}
+              </Text>
             </div>
           </div>
         </div>
@@ -53,8 +65,12 @@ const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
           .card{
             background: ${CommonStyle.BgWhite};
             width: 100%;
+            max-height: 300px;
             display: flex;
             margin-bottom: 16px;
+            visibility: visible;
+            opacity: 1;
+            transition-duration: .5s;
           }
           .card_icon{
             width: 100%;
@@ -87,9 +103,13 @@ const ShopCommentCard: React.FC<CardProps> = ({comment, onClick}) => {
             margin: 0 0 auto auto;
             width: fit-content;
           }
+          .delete{
+            max-height: 0;
+            opacity: 0;
+          }
         `}
       </style>
-    </div>
+    </React.Fragment>
 
   );
 }

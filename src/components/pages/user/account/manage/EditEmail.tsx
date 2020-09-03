@@ -10,7 +10,7 @@ import Text, { TextThemes } from '../../../../atoms/Text';
 import AuthContext from "../../../../../context/CommonProvider";
 // common
 import { RouteName } from '../../../../../common/Const';
-import Validation from './../../../../../common/Validate';
+import Validate from './../../../../../common/Validate';
 
 interface EditParam {
   email: string;
@@ -18,6 +18,7 @@ interface EditParam {
 
 export const EditEmail: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
+  const [isOK, setIsOK] = useState(false);
   const [err, setErr] = useState("");
   const [editData, setEditData] = useState<EditParam>({
     email: ""
@@ -36,7 +37,7 @@ export const EditEmail: React.FC = (props: any) => {
   // FIXME 終了後ページに飛ばす
   const putData = async () => {
     try {
-      await axios.put(`/api/v1/user/users/update`, editData)
+      await axios.put(`/api/v1/user/users/update_email`, editData)
       props.history.push({
         pathname: RouteName.SEND,
         state: {
@@ -58,8 +59,8 @@ export const EditEmail: React.FC = (props: any) => {
   }
 
   useEffect(() => {
-    const errText = Validation.formValidate('email', editData.email);
-    errText ? setErr(errText) : setErr('')
+    if(Validate.formValidate('email', editData.email)) setIsOK(false);
+    else setIsOK(true);
   }, [editData])
 
   return (
@@ -68,12 +69,12 @@ export const EditEmail: React.FC = (props: any) => {
       <div className="mail-form">
         <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '22px auto', padding: '1rem' }} readonly={true} />
         <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '22px auto', padding: '1rem' }} />
-        {err && <Text theme={[TextThemes.ERROR]} propStyle={{marginLeft: '15px'}}>{err}</Text>}
+        {/* {err && <Text theme={[TextThemes.ERROR]} propStyle={{marginLeft: '15px'}}>{err}</Text>} */}
         <div className="mail-form_btn-container">
           <Button
             propStyle={{ margin: 'auto' }}
-            theme={err ? [ButtonThemes.SUBNORMAL] : [ButtonThemes.NORMAL]}
-            onClick={err ? () => { } : () => { putData(); send() }}>
+            theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]}
+            onClick={isOK ? () => { putData(); send() } : () => {}}>
             登録する
         </Button>
         </div>

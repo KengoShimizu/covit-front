@@ -6,7 +6,7 @@ import CommonStyle from '../../../common/CommonStyle';
 // components
 import Text, { TextThemes } from '../../atoms/Text';
 // context
-import { TopModalContextIsShown, TopModalContextText } from '../../../context/TopModalContext';
+import TopModalContext from '../../../context/TopModalContext';
 
 const propStyle = {
   text: {
@@ -15,21 +15,19 @@ const propStyle = {
 }
 
 const TopModal: React.FC = () => {
-  const renderModal = (isTopModalShown: boolean, setIsTopModalShown: any, modalText: any) => {
-    setTimeout(() => {
-      setIsTopModalShown(false)
-    }, 2500)
+
+  const renderModal = (isShown: boolean, setIsShown: any, text: any) => {
     return (
-      <div className={isTopModalShown ? 'modal-top-container show' : 'modal-top-container'}>
+      <div className={isShown ? 'modal-top-container show' : 'modal-top-container'}>
         <div className='modal-top-inner'>
-          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.text}>{modalText.caption}</Text>
-          {modalText.small &&
-            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.text}>{modalText.small}</Text>
+          <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.text}>{text.caption}</Text>
+          {text.small &&
+            <Text theme={[TextThemes.SMALL]} propStyle={propStyle.text}>{text.small}</Text>
           }
         </div>
         <style jsx>{`
           .modal-top-container{
-            position: absolute;
+            position: fixed;
             top: -100px;
             z-index: 1001;
             left: 50%;
@@ -44,7 +42,7 @@ const TopModal: React.FC = () => {
             padding: 14px;
           }
           .show{
-            top: 66px;
+            top: 35px;
           }
         `}</style>
       </div>
@@ -52,15 +50,14 @@ const TopModal: React.FC = () => {
   };
 
   // Contextの値を取得して開閉制御
-  const TopModal_isShownContext = useContext(TopModalContextIsShown);
-  const TopModal_textContext = useContext(TopModalContextText);
+  const topModalContext = useContext(TopModalContext);
 
   const TopModalElement: any = document.getElementById('modal-top');
   return ReactDOM.createPortal(
     renderModal(
-      TopModal_isShownContext.isTopModalShown,
-      TopModal_isShownContext.setIsTopModalShown, 
-      TopModal_textContext.modalText),
+      topModalContext.contents.isShown,
+      topModalContext.setContents, 
+      topModalContext.contents.text),
     TopModalElement
   );
 

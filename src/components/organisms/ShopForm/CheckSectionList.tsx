@@ -1,6 +1,7 @@
 import React from 'react';
+// components
 import { CheckSection } from '../../molecules/CheckSection';
-import StepCategory from '../../../types/StepCategory'
+import StepCategory from '../../../types/StepCategory';
 
 interface CheckSectionListProps {
   stepCategories: StepCategory[];

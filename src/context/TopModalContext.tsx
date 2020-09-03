@@ -1,44 +1,39 @@
 import React, { useState, useContext } from 'react';
 
-type TopModalStateIsShown = {
-  isTopModalShown: boolean;
-  setIsTopModalShown: any;
-};
 
-type TopModalStateText = {
-  modalText: {
-    caption: string;
-    small?: string;
+type TopModalState = {
+  contents: {
+    isShown: boolean;
+    text: {
+      caption: string;
+      small?: string;
+    }
   };
-  setModalText: any;
+  setContents: any;
 };
 
-export const TopModalContextIsShown = React.createContext<TopModalStateIsShown>({
-  isTopModalShown: false,
-  setIsTopModalShown: () => {}
-});
-
-export const TopModalContextText = React.createContext<TopModalStateText>({
-  modalText: {
-    caption: '',
-    small: ''
+const TopModalContext = React.createContext<TopModalState>({
+  contents: {
+    isShown: false,
+    text: {
+      caption: '',
+      small: '',
+    }
   },
-  setModalText: () => {}
+  setContents: () => {}
 });
+export default TopModalContext;
 
 type ProviderProps = {
   children: React.ReactNode;
 };
 
-export const TopModalStateProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [isTopModalShown, setIsTopModalShown] = useState(useContext(TopModalContextIsShown).isTopModalShown);
-  const [modalText, setModalText] = useState(useContext(TopModalContextText).modalText);
+export const TopModalProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [contents, setContents] = useState(useContext(TopModalContext).contents);
 
   return (
-    <TopModalContextIsShown.Provider value={{isTopModalShown, setIsTopModalShown}}>
-      <TopModalContextText.Provider value={{modalText, setModalText}}>
+    <TopModalContext.Provider value={{contents, setContents}}>
       {children}
-      </TopModalContextText.Provider>
-    </TopModalContextIsShown.Provider>
+    </TopModalContext.Provider>
   );
 };
