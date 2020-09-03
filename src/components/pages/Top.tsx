@@ -214,7 +214,7 @@ export const Top: React.FC = (props: any) => {
         <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
 
         {/* フッター操作バー */}
-        {initModalIsOpen && !popupIsOpen && <FooterActionBar/>}
+        {initModalIsOpen && !popupIsOpen && <FooterActionBar initialAccent={1}/>}
         
         <style jsx>{`
           .container{

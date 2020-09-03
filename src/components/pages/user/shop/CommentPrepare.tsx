@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // library
 import { Search } from 'react-feather';
 import axios from 'axios';
@@ -91,7 +91,7 @@ export const CommentPrepare: React.FC = (props: any) => {
             </div>
           </React.Fragment>
       }
-      <FooterActionBar propStyle={{ boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.25)" }} />
+      <FooterActionBar initialAccent={2} propStyle={{ boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.25)" }} />
       <style jsx>{`
         .mt10{
           margin: 45px 0 130px;
