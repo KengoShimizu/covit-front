@@ -21,7 +21,7 @@ export const Register: React.FC = (props: any) => {
           position: absolute;
           left: 10px;
           -webkit- transform: translateX(-50%);
-          bottom: 18px;
+          bottom: 44px;
         }
       `}</style>
     </HomeLayout>

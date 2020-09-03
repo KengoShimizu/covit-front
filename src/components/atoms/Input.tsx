@@ -35,7 +35,7 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
       <label>{label}<span>*</span></label>
       <div className="input-icon-container">
         <span className="input-icon">{icon}</span>
-        <input id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
+        <input className="input" id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
       </div>
       <style jsx>
         {`
@@ -75,7 +75,7 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
             line-height: 24px;
             color: ${CommonStyle.TextDarkGary};
             display: inline-block;
-            margin-bottom: 7px;
+            margin-bottom: 8px;
           }
 
           .input input {

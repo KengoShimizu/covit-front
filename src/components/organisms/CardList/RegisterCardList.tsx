@@ -26,7 +26,7 @@ const RegisterCardList: React.FC<{query: any}> = ({query}) => {
         .container{
           max-width: 324px;
           width: 90%;
-          margin: 0 auto;
+          margin: 0 auto 40px auto;
         }
         .email-container{
           margin-top: 50px;

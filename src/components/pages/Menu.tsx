@@ -22,7 +22,9 @@ export const Menu: React.FC = (props: any) => {
       <PrivacyFotter/>
       <style jsx>{`
         .about{
-          margin-top: 40px;
+          width: 90%;
+          max-width: 324px;
+          margin: 0 auto 0 auto;
         }
       `}</style>
     </HomeLayout>

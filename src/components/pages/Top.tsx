@@ -56,6 +56,7 @@ const propStyle = {
     right: '24px',
     width: '64px',
     height: '64px',
+    fontSize: '8px',
     background: CommonStyle.BgWhite,
     border: `4px solid ${CommonStyle.AccentColor}`,
     boxSizing: 'border-box',
