@@ -18,7 +18,7 @@ const PrivacyFotter: React.FC = () => {
           left: 50%;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
-          bottom: 48px;
+          bottom: 44px;
           top: auto;
         }
         .privacy_text{

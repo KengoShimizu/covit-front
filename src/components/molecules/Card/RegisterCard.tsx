@@ -7,7 +7,11 @@ import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   registerCardIcon: {
-    //margin: 'auto',
+    position: 'absolute',
+    top: '50%',
+    left: '8px',
+    transform: 'translateY(-50%)',
+    WebkitTransform: 'translateY(-50%)',
   },
   registerCardText: {
     position: 'absolute',
@@ -31,7 +35,7 @@ const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className, nextRe
     <div className={`register-card ${className}`}>
       <a href={nextRef}>
         <div className="register-card-inner">
-          <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.registerCardIcon}>
+          <Icon theme={[IconThemes.LITTLE]} propStyle={propStyle.registerCardIcon}>
             <img className="register-card-image" src={src} alt=""/>
           </Icon>
           <Text theme={[TextThemes.SMALL]} propStyle={propStyle.registerCardText}>
@@ -50,10 +54,9 @@ const RegisterCard: React.FC<RegisterCardProps> = ({src, text, className, nextRe
           box-sizing: border-box;
           margin: 16px auto;
         }
-        .register-card-inner {
-          padding: 5px;
-          display: flex;
-        }
+        // .register-card-inner {
+        //   display: flex;
+        // }
         .register-card-image {
           width: 100%;
           height: auto;

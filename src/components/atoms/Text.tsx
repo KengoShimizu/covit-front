@@ -69,7 +69,7 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
           .error-text {
             font-size: ${CommonStyle.Caption};
             color: ${CommonStyle.AccentColor};
-            margin: -30px 0 30px;
+            margin: -24px 0 30px;
           }
           .dark-gray-text{
             color: ${CommonStyle.TextDarkGary};

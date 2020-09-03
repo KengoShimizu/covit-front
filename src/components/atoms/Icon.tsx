@@ -13,6 +13,7 @@ export enum IconThemes {
   INIT            = 'INIT',
   NORMAL          = 'NORMAL',
   SMALL           = 'SMALL',
+  LITTLE           = 'LITTLE',
   LERGE           = 'LERGE',
   COVIDMEASURE    = 'COVIDMEASURE',
   PROFILE         = 'PROFILE',
@@ -24,6 +25,7 @@ enum ModifierClassNames {
   INIT            = 'icon-init',
   NORMAL          = 'icon-wrapper_normal',
   SMALL           = 'icon-wrapper_small',
+  LITTLE           = 'icon-wrapper_little',
   LERGE           = 'icon-wrapper_lerge',
   COVIDMEASURE    = 'infection-control_icon-wrapper',
   PROFILE         = 'profile-icon-wrapper',
@@ -54,6 +56,10 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
           .icon-wrapper_normal{
             width: 24px;
             height: 24px;
+          }
+          .icon-wrapper_little{
+            width: 20px;
+            height: 2px;
           }
           .icon-wrapper_small{
             width: 16px;
