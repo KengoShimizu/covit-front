@@ -131,7 +131,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     setModalState({
       title: `${user_name} さんを報告しますか？`,
       btntext: '報告する',
-      onClick: report
+      onClick: () => report(user_id, '')
     });
     modalContext.toggleModalShown(true);
   }
@@ -145,9 +145,22 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     modalContext.toggleModalShown(true);
   }
 
-  // FIXME reportのapi実装
-  const report = () => {
-
+  const report = async (user_id: number, content: string) => {
+    try{
+      await axios.post('/api/v1/user/reports', {
+          target_user_id: user_id,
+          content: content
+        })
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'ユーザーを報告しました。',
+          small: '運営へのご協力ありがとうございます。'
+        }
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const delete_self_comment = async (comment_id: number) => {
