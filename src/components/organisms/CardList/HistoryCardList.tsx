@@ -10,6 +10,7 @@ import HistoryCard from '../../molecules/Card/HistoryCard';
 import SearchHistoryCard from '../../molecules/Card/SearchHistoryCard';
 import Text, { TextThemes } from '../../atoms/Text';
 import Loading from '../../molecules/Loading';
+import Shop from '../../../types/Shop';
 
 const propStyle = {
   errorText: {
@@ -62,12 +63,18 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   useEffect(() => {
     if(shopData.length){
       const history_elements: any = [];
-      const histories_date = cookie_histories_date.split(',')
-      cookie_histories.split(',').map((shop_id: string, i: number) => {
+      var histories_date = cookie_histories_date.split(',')
+      var histories_ids = cookie_histories.split(',')
+      histories_ids.map((shop_id: number, index: number) => {
+        if(!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length){
+          histories_date.splice(index, 1, null);
+        }
+      })
+      histories_date = histories_date.filter((history: any) => !!history)
+      shopData.map((shop: Shop, i: number) => {
         if (maxRow && i >= maxRow) {
           return
         } 
-        const shop: any = shopData.find((data: any) => data.id === parseInt(shop_id))
         if (type === 'search'){
           history_elements.push(
             <SearchHistoryCard 
