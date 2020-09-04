@@ -21,34 +21,36 @@ const Header: React.FC<HeaderProps> = ({ headerText, prevRef, history, onClick, 
     <React.Fragment>
       {headerText &&
         <header className="header">
-          {!noBtn &&
+          <div className="header-content">
+            {!noBtn &&
             <React.Fragment>
-              {onClick &&
-                <div onClick={onClick}>
-                  <Button theme={[ButtonThemes.SUBHEADER]}>
-                    <ChevronLeft size={24} color="#333" />
-                  </Button>
-                </div>
-              }
-              {prevRef === '#' &&
-                <div onClick={() => history.goBack()}>
-                  <Button theme={[ButtonThemes.SUBHEADER]}>
-                    <ChevronLeft size={24} color="#333" />
-                  </Button>
-                </div>
-              }
-              {(prevRef && prevRef !== '#') &&
-                <Link to={prevRef}>
-                  <Button theme={[ButtonThemes.SUBHEADER]}>
-                    <ChevronLeft size={24} color="#333" />
-                  </Button>
-                </Link>
-              }
+            {onClick &&
+            <div onClick={onClick}>
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+            </Button>
+            </div>
+            }
+            {prevRef === '#' &&
+            <div onClick={() => history.goBack()}>
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+            </Button>
+            </div>
+            }
+            {(prevRef && prevRef !== '#') &&
+            <Link to={prevRef}>
+            <Button theme={[ButtonThemes.SUBHEADER]}>
+            <ChevronLeft size={24} color="#333" />
+            </Button>
+            </Link>
+            }
             </React.Fragment>
-          }
-          <Title theme={[TitleThemes.SUBHEADER]}>
+            }
+            <Title theme={[TitleThemes.SUBHEADER]}>
             {headerText}
-          </Title>
+            </Title>
+          </div>
           <style jsx>{`
           .header{
             position: fixed;
@@ -58,6 +60,10 @@ const Header: React.FC<HeaderProps> = ({ headerText, prevRef, history, onClick, 
             height: 40px;
             text-align: center;
             margin-bottom: ${headerText === '閲覧履歴' ? '0px' : '24px'};
+          }
+          .header-content{
+            max-width: 1000px;
+            margin: auto;
           }
         `}</style>
         </header>}

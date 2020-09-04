@@ -32,13 +32,15 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
     <React.Fragment>
       {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
       <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
-        <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
+        <span className="intro-modal-pin_wrapper">
+          <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
+        </span>
         <h1 className="intro-mordal_title">
           <span className="intro-mordal_title_en">covEAT</span>
           <br />
           <span className="intro-mordal_title_jp">へようこそ！</span>
         </h1>
-        <img className="intro-mordal_img" src='/charactor.svg' alt="" />
+        <img className="intro-mordal_img" src='/charactor.png' alt="" />
         <p className="intro-mordal_text">
           covEAT は感染対策に取り組む飲食店と感染対策を求めている人のためのグルメサービスです！
         </p>
@@ -69,11 +71,17 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             position: absolute;
             top: 0;
           }
-          .intro-modal-pin{
+          .intro-modal-pin_wrapper{
+            width: 80px;
+            height: auto;
             position: absolute;
-            top: -14px;
+            top: -48px;
             left: 50%;
             transform: translateX(-50%);
+          }
+          .intro-modal-pin{
+            width: 100%;
+            height: 100%;
           }
           .intro-mordal{
             visibility: visible;
@@ -85,9 +93,9 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             position: fixed;
             background: ${CommonStyle.BgWhite};
             border-radius: 8px;
-            max-width: 280px;
+            max-width: 340px;
             width: 80%;
-            padding: 36px 16px;
+            padding: 44px 16px 36px 16px;
             box-sizing: border-box;
             text-align: center;
             transition-duration: .5s;
@@ -110,8 +118,9 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             line-height: 24px;
           }
           .intro-mordal_img{
+            margin-left: 8px;
             width: auto;
-            height: 120px;
+            height: 160px;
             margin-bottom: 16px;
           }
           .intro-mordal_text{

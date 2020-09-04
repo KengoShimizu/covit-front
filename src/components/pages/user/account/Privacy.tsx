@@ -238,9 +238,11 @@ export const Privacy: React.FC = (props: any) => {
             本サービスに関して紛争が生じた場合には，我々の本店所在地を管轄する裁判所を専属的合意管轄とします。
           </Text>
         </section>
-        <Text theme={[TextThemes. TEXT]} propStyle={propStyle.privacy}>
-          以上
-        </Text>
+        <section className="privacy-section">
+          <Text theme={[TextThemes. TEXT]} propStyle={propStyle.privacy}>
+            以上
+          </Text>
+        </section>
         <style jsx>{`
         .content {
           width: 100%;
@@ -248,7 +250,8 @@ export const Privacy: React.FC = (props: any) => {
           box-sizing: border-box;
         }
         .privacy-section{
-          margin-bottom: 40px;
+          max-width: 32em;
+          margin: 0 auto 60px auto;
         }
         .privacy-title{
           font-size: ${CommonStyle.SubTitle};
@@ -258,6 +261,7 @@ export const Privacy: React.FC = (props: any) => {
         }
         .privacy-list{
           width: 100%;
+          line-height: 1.7em;
         }
         .privacy-option{
           font-size: ${CommonStyle.Caption};
