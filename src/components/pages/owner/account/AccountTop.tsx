@@ -10,6 +10,7 @@ import OwnerShopCard from './../../../molecules/Card/OwnerShopCard';
 import HomeLayout from '../../../templates/HomeLayout';
 import OwnerAccountTopCardList from '../../../organisms/CardList/OwnerAccoutTopCardList';
 import TopModal from '../../../molecules/Modal/TopModal';
+import ToggleModal from '../../../molecules/Modal/ToggleModal';
 import Modal from '../../../molecules/Modal/Modal';
 import Button, { ButtonThemes } from './../../../atoms/Button';
 // context
@@ -38,6 +39,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
   const cookies = new Cookies();
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
+  const [showState, setShowState] = useState(false);
   const [shopData, setShopData] = useState<shopData[]>([{
     id: 0,
     name: '',
@@ -195,11 +197,11 @@ const OwnerAccountTop: React.FC = (props: any) => {
         subtitle={modalState.subtitle}
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
-      {/* <ToggleModal/> */}
+      {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} setSelectedShopIndex={setSelectedShopIndex}/>}
       <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>
       
       {!(shopData.length > 1) &&
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn}>お店を切り替え</Button>
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={() => setShowState(true)}>お店を切り替え</Button>
       }
       <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn}>お店を追加する</Button>
 
