@@ -1,11 +1,11 @@
 import React from 'react';
 // atoms
-import Text, { TextThemes } from '../../../atoms/Text';
-import Button, { ButtonThemes } from '../../../atoms/Button';
+import Text, { TextThemes } from '../../../../atoms/Text';
+import Button, { ButtonThemes } from '../../../../atoms/Button';
 // templates
-import HomeLayout from '../../../templates/HomeLayout';
+import HomeLayout from '../../../../templates/HomeLayout';
 // common
-import { RouteName } from '../../../../common/Const';
+import { RouteName } from '../../../../../common/Const';
 
 export const OwnerRequestTop: React.FC = (props: any) => {
   const onClick = () => {

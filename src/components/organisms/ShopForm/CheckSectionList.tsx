@@ -5,17 +5,23 @@ import StepCategory from '../../../types/StepCategory';
 
 interface CheckSectionListProps {
   stepCategories: StepCategory[];
-  setStepIDs: any;
-  stepIDs: number[];
+  setAddData: any;
+  addData: any;
 }
 
-export const CheckSectionList: React.FC<CheckSectionListProps> = ({ stepCategories, setStepIDs, stepIDs }) => {
+export const CheckSectionList: React.FC<CheckSectionListProps> = ({ stepCategories, setAddData, addData }) => {
 
   const handleChange = (event: any) => {
     if(event.target.checked) {
-      setStepIDs(stepIDs.concat([Number(event.target.value)]).filter((n: number)=> n !== event.target.value));
+      setAddData({
+        ...addData,
+        step_ids: addData.step_ids.concat([Number(event.target.value)]).filter((n: number)=> n !== event.target.value)
+      });
     } else {
-      setStepIDs(stepIDs.filter((n: number) => n !== Number(event.target.value)));
+      setAddData({
+        ...addData,
+        step_ids: addData.step_ids.filter((n: number) => n !== Number(event.target.value))
+      });
     }
   }
 
@@ -23,7 +29,7 @@ export const CheckSectionList: React.FC<CheckSectionListProps> = ({ stepCategori
     <div className="container">
       {stepCategories.map((stepCategory: StepCategory, i: number) => {
         return (
-          <CheckSection stepCategory={stepCategory} handleChange={handleChange} key={`check-section${i}`} stepIDs={stepIDs}/>
+          <CheckSection stepCategory={stepCategory} handleChange={handleChange} key={`check-section${i}`} stepIDs={addData.step_ids}/>
         )
       })}
     </div>
