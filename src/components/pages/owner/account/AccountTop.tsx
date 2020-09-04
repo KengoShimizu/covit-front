@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 // library
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 // common
 import { RouteName } from '../../../../common/Const';
@@ -62,11 +63,10 @@ const OwnerAccountTop: React.FC = (props: any) => {
     }
   }
 
-  // FIXME 動作確認必要
   const deleteShop = async (shop_id: number) => {
     try{
-      const res = await axios.delete(`/api/v1/owner/shops/${shop_id}`);
-      // FIXME リダイレクト
+      await axios.delete(`/api/v1/owner/shops/${shop_id}`);
+      window.location.href = '/owner/accounts';
     } catch (error) {
       console.log(error)
     }
@@ -82,11 +82,10 @@ const OwnerAccountTop: React.FC = (props: any) => {
     modalContext.toggleModalShown(true);
   }
 
-  // FIXME 動作確認必要
   const togglePublishShop = async (shop_id: number, status: number) => {
     try{
       const res = await axios.put(`/api/v1/owner/shops/update_status?id=${shop_id}`);
-      // FIXME リダイレクト
+      fetchOwnerShops()
     } catch (error) {
       console.log(error)
     }
@@ -198,12 +197,15 @@ const OwnerAccountTop: React.FC = (props: any) => {
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
       {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} setSelectedShopIndex={setSelectedShopIndex}/>}
-      <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>
+      {shopData.length !== 0 && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
       
+      {/* FIXME お店登録が一つもない時に「登録しましょう！」的なのほしい */}
       {shopData.length > 1 &&
         <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={() => setShowState(true)}>お店を切り替え</Button>
       }
-      <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn}>お店を追加する</Button>
+      <Link to={RouteName.OWNER_SHOP_FORM}>
+        <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn}>お店を追加する</Button>
+      </Link>
 
       <OwnerAccountTopCardList handleModalState={handleModalState} toggleModalShown={modalContext.toggleModalShown}/>
       <PrivacyFotter propStyle={propStyle.privacy}/>
