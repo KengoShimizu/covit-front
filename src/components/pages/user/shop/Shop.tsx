@@ -27,6 +27,12 @@ const propStyle = {
 };
 
 export const Shop: React.FC = (props: any) => {
+  const snsTags = [
+    <Twitter size={24} color="#333" />,
+    <Facebook size={24} color="#333" />,
+    <Instagram size={24} color="#333" />,
+    <Monitor size={24} color="#333" />
+  ]
   const redirectContext = useContext(RedirectContext);
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
@@ -50,6 +56,7 @@ export const Shop: React.FC = (props: any) => {
         content: ''
       }
     }],
+    links: []
   });
 
   const fetchShopData = async (isSubscribed: boolean) => {
@@ -72,7 +79,7 @@ export const Shop: React.FC = (props: any) => {
     return cleanup;
   }, [])
 
-
+  console.log(shopData);
   return (
     <React.Fragment>
       {loading ? <Loading /> :
@@ -119,6 +126,12 @@ export const Shop: React.FC = (props: any) => {
               <section className="shop-card_section nfection-control_card">
                 <h2 className="infection-control_title">感染対策</h2>
                 <InfectionControlList stepData={shopData.steps} />
+                {shopData.other_step &&
+                  <div className="other-step">
+                    <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{marginBottom: '5px'}}>お店からのメッセージ</Text>
+                    <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
+                  </div>
+                }
                 <hr className="infection-control_hr" />
                 <div className="infection-control_review">
                   <h3 className="infection-control_review-title">対策への評価</h3>
@@ -163,45 +176,28 @@ export const Shop: React.FC = (props: any) => {
                   <li className="shop_info-option">
                     <Phone size={16} color="#333" />
                     <span className="shop_info-option_content">
-                      {shopData.contact}
+                      <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
                     </span>
                   </li>
                   <li className="shop_info-option">
                     <MapPin size={16} color="#333" />
                     <span className="shop_info-option_content">
-                      {shopData.address}
+                      <a href="javascript:;" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
+                        {shopData.address}
+                      </a>
                     </span>
                   </li>
                 </ul>
                 <ul className="shop_sns-list">
-                  <li className="shop_sns-option">
-                    <Link to=''>
-                      <Button theme={[ButtonThemes.SHOPSNS]}>
-                        <Twitter size={24} color="#333" />
-                      </Button>
-                    </Link>
-                  </li>
-                  <li className="shop_sns-option">
-                    <Link to=''>
-                      <Button theme={[ButtonThemes.SHOPSNS]}>
-                        <Monitor size={24} color="#333" />
-                      </Button>
-                    </Link>
-                  </li>
-                  <li className="shop_sns-option">
-                    <Link to=''>
-                      <Button theme={[ButtonThemes.SHOPSNS]}>
-                        <Instagram size={24} color="#333" />
-                      </Button>
-                    </Link>
-                  </li>
-                  <li className="shop_sns-option">
-                    <Link to=''>
-                      <Button theme={[ButtonThemes.SHOPSNS]}>
-                        <Facebook size={24} color="#333" />
-                      </Button>
-                    </Link>
-                  </li>
+                  {shopData.links.map((data: any, i: number) => (
+                    <li className="shop_sns-option" key={`sns${i}`}>
+                      <a href={data.url} target="_blank" rel="noopener noreferrer">
+                        <Button theme={[ButtonThemes.SHOPSNS]}>
+                          {snsTags[(data.url_type-1)]}
+                        </Button>
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </section>
               {/* FIXME v2で実装 */}
@@ -284,8 +280,13 @@ export const Shop: React.FC = (props: any) => {
               font-size: 12px;
               color: ${CommonStyle.TextBlack}
             }
-
             // 感染対策
+            .other-step{
+              padding: 10px;
+              border: 1px solid ${CommonStyle.BorderGray};
+              border-radius: 5px;
+              margin-bottom: 25px;
+            }
             .infection-control_hr{
               height: 2px;
               margin: 0 0 16px 0;
