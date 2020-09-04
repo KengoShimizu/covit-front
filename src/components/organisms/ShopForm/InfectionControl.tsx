@@ -66,8 +66,12 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   return (
     loading ? <Loading/> :
     <div className="container">
-      <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
-      <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }}>感染対策の内容はユーザーに公開されます。</Text>
+      {!(identifer !== 'user' && post) &&
+        <React.Fragment>
+          <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
+          <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }}>感染対策の内容はユーザーに公開されます。</Text>
+        </React.Fragment>
+      }
       <CheckSectionList stepCategories={stepCategories} setAddData={setAddData} addData={addData}/>
       {/* ここの書き方めっちゃきもいけど、3項演算使ったらなぜか上手く動かないから仕方ないかも。 */}
       {addData.shop.other_step &&
@@ -81,9 +85,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
           登録する
         </Button>
         : post ? 
-          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? post : () => {}}>
-            変更する
-          </Button>
+          <React.Fragment/>
           :
           <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
             次へ <ArrowRight />

@@ -61,7 +61,7 @@ export const Shop: React.FC = (props: any) => {
 
   const fetchShopData = async (isSubscribed: boolean) => {
     try {
-      const res = await axios.get(`/api/v1/user/shops/${match.params.id}`);
+      const res = await axios.get(`/api/v1/${authState.user.is_owner ? 'owner' : 'user'}/shops/${match.params.id}`);
       if (isSubscribed) setShopData(res.data);
     } catch (error) {
       console.log(error);
@@ -79,7 +79,6 @@ export const Shop: React.FC = (props: any) => {
     return cleanup;
   }, [])
 
-  console.log(shopData);
   return (
     <React.Fragment>
       {loading ? <Loading /> :

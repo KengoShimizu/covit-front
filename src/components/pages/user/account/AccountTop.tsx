@@ -24,7 +24,7 @@ export const AccountTop: React.FC = (props: any) => {
       <div className="next-ref-btn">
         <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' />
       </div>
-      <AccountTopCardList history={props.history} />
+      <AccountTopCardList history={props.history} user_id={account.id} />
       <PrivacyFotter />
       <style jsx>{`
         .profile-head{

@@ -17,9 +17,10 @@ import ModalContext from '../../../context/ModalContext';
 
 interface AccoutTopCardListProps {
   history: any;
+  user_id: number;
 }
 
-export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history }) => {
+export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, user_id }) => {
   const cookies = new Cookies();
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
@@ -51,7 +52,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history }
       })
   }
   const handleDeleteAccount = (setContents: any) => {
-    axios.delete(`/api/v1/user/users/1`)
+    axios.delete(`/api/v1/user/users/${user_id}`)
       .then(() => {
         setContents({
           isShown: true,
@@ -73,24 +74,24 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history }
   }
 
   const handleModalState = (i: number, toggleModalShown: any) => {
-    setModalState(states[i]);
+    if (i === 0){
+      setModalState({
+        title: 'ログアウトしてよろしいですか？',
+        subtitle: '',
+        btntext: 'ログアウト',
+        onClick: () => handleLogout(topModalContext.setContents)
+      });
+    } else {
+      setModalState({
+        title: '本当にアカウントを削除しますか？',
+        subtitle: 'アカウントを削除すると、レビューなどの情報が全て削除され復元はできません。',
+        btntext: '削除する',
+        onClick: () => handleDeleteAccount(topModalContext.setContents)
+      });
+    }
     toggleModalShown(true);
   }
 
-  const states = [
-    {
-      title: 'ログアウトしてよろしいですか？',
-      subtitle: '',
-      btntext: 'ログアウト',
-      onClick: () => handleLogout(topModalContext.setContents)
-    },
-    {
-      title: '本当にアカウントを削除しますか？',
-      subtitle: 'アカウントを削除すると、レビューなどの情報が全て削除され復元はできません。',
-      btntext: '削除する',
-      onClick: () => handleDeleteAccount(topModalContext.setContents)
-    }
-  ];
 
   return (
     <div className="container">
@@ -105,12 +106,8 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history }
         <hr className="account-function_hr" />
         <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='ログイン情報の編集' nextRef={RouteName.EDIT_LOGIN} />
         <hr className="account-function_hr" />
-        <div onClick={() => handleModalState(0, modalContext.toggleModalShown)}>
-          <AccountTopCard icon={<LogOut size={20} color={CommonStyle.AccentColor} />} text='ログアウト' />
-        </div>
-        <div onClick={() => handleModalState(1, modalContext.toggleModalShown)}>
-          <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する' />
-        </div>
+        <AccountTopCard icon={<LogOut size={20} color={CommonStyle.AccentColor} />} text='ログアウト' onClick={() => handleModalState(0, modalContext.toggleModalShown)}/>
+        <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する' onClick={() => handleModalState(1, modalContext.toggleModalShown)}/>
         <hr className="account-function_hr" />
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor} />} text='covEATについて' nextRef={RouteName.LANDING_PAGE} />
         <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor} />} text='口コミ投稿のガイドライン' nextRef={RouteName.GUIDE_LINE} />

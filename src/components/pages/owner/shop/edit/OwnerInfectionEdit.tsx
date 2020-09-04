@@ -11,9 +11,15 @@ import Button, { ButtonThemes } from './../../../../atoms/Button';
 // context
 import TopModalContext from '../../../../../context/TopModalContext';
 // types
-import Link from '../../../../../types/Link'
+import Link from '../../../../../types/Link';
 
-
+const propStyle = {
+  changeBtn: {
+    position: 'fixed',
+    right: '45px',
+    top: '75px',
+  }
+}
 interface EditParam {
   owner: {
     name: string;
@@ -110,8 +116,8 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText="感染対策の内容" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
+      <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn}>変更する</Button>
       <div className="container">
-        <Button theme={[ButtonThemes.SUBBTN]}>変更する</Button>
         <InfectionControl setAddData={setEditData} addData={editData} post={update}/>
       </div>
       <style jsx>
@@ -119,7 +125,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
           .container {
             width: 100%;
             max-width: 330px;
-            margin: 30px auto 0;
+            margin: 90px auto 30px;
           }
         `}
       </style>
