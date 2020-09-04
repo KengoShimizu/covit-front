@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 // library
 import axios from "axios";
-import queryString from 'query-string';
+import useReactRouter from "use-react-router";
 // common
 import { RouteName } from '../../../../../common/Const';
 // components
@@ -42,7 +42,7 @@ interface EditParam {
 }
 
 const OwnerInfectionEdit: React.FC = (props: any) => {
-  const qs = queryString.parse(props.location.search);
+  const { match }: any = useReactRouter();
   const topModalContext = useContext(TopModalContext);
   const [err, setErr] = useState<string>('');
   const [editData, setEditData] = useState<EditParam>({
@@ -68,8 +68,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   const fetchInfections = async () => {
     try{
-      // FIXME match.params.id、
-      const res = await axios.get(`/api/v1/owner/shops/${1}`);
+      const res = await axios.get(`/api/v1/owner/shops/${match.params.id}`);
       setEditData({
         ...editData,
         shop: {
@@ -92,8 +91,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   const update = async () => {
     try{
-      // FIXME match.params.id
-      await axios.patch(`/api/v1/owner/shops/${1}`, editData)
+      await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
       topModalContext.setContents({
         isShown: true,
         text: {
@@ -116,7 +114,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText="感染対策の内容" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
-      <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn}>変更する</Button>
+      <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn} onClick={update}>変更する</Button>
       <div className="container">
         <InfectionControl setAddData={setEditData} addData={editData} post={update}/>
       </div>
