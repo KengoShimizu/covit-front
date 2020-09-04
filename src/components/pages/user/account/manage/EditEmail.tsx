@@ -24,26 +24,16 @@ export const EditEmail: React.FC = (props: any) => {
     email: ""
   });
 
-  const send = async () => {
-    try {
-      await axios.post('/api/v1/common/sessions/sign_up', {
-        email: props.location.state.email
-      })
-    } catch (error) {
-      setErr('エラーが発生しました。もう一度お試しください。')
-    }
-  }
-
   // FIXME 終了後ページに飛ばす
-  const putData = async () => {
+  const send = async () => {
     try {
       await axios.put(`/api/v1/user/users/update_email`, editData)
       props.history.push({
         pathname: RouteName.SEND,
         state: {
           email: editData.email,
-          text: '登録',
-          subTitle: 'メールアドレス登録',
+          text: 'メールアドレスの変更',
+          subTitle: 'メールアドレス変更',
           ref: RouteName.EDIT_EMAIL
         }
       });
@@ -64,7 +54,7 @@ export const EditEmail: React.FC = (props: any) => {
   }, [editData])
 
   return (
-    <HomeLayout headerText="メールアドレスの編集" prevRef={RouteName.EDIT_LOGIN}>
+    <HomeLayout headerText="メールアドレスの変更" prevRef={RouteName.EDIT_LOGIN}>
       {/* FIXME リンク先 */}
       <div className="mail-form">
         <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '22px auto', padding: '1rem' }} readonly={true} />
@@ -74,7 +64,7 @@ export const EditEmail: React.FC = (props: any) => {
           <Button
             propStyle={{ margin: 'auto' }}
             theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]}
-            onClick={isOK ? () => { putData(); send() } : () => {}}>
+            onClick={isOK ? send : () => {}}>
             登録する
         </Button>
         </div>
