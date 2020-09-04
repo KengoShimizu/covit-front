@@ -200,7 +200,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
       {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} setSelectedShopIndex={setSelectedShopIndex}/>}
       <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>
       
-      {!(shopData.length > 1) &&
+      {shopData.length > 1 &&
         <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={() => setShowState(true)}>お店を切り替え</Button>
       }
       <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn}>お店を追加する</Button>
