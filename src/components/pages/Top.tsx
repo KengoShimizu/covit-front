@@ -169,6 +169,14 @@ export const Top: React.FC = (props: any) => {
         }
       });
     }
+    else if(qs.state === 'update_email') {
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'メールアドレスの変更が完了しました！',
+        }
+      });
+    }
     return cleanup;
   }, [])
 

@@ -10,16 +10,22 @@ import HomeLayout from '../../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 
-{/* FIXME 挙動ちゃんと確かめる */}
+{/* FIXME 挙動ちゃんと確かめる */ }
 export const Send: React.FC = (props: any) => {
   const [resend, setResend] = useState("");
   const [err, setErr] = useState("");
+  const resendPath =
+    props.location.state.text === 'ログイン' ?
+      'resend_login_email' :
+      props.location.state.text === '登録' ?
+        'resend_activation_email' :
+        'resend_update_email'
 
   const send = async () => {
     try {
-      await axios.post('/api/v1/common/sessions/sign_up', {
-          email: props.location.state.email
-        })
+      await axios.post(`/api/v1/user/users/${resendPath}`, {
+        email: props.location.state.email
+      })
       setResend('メールを再送しました。')
     } catch (error) {
       setErr('エラーが発生しました。もう一度お試しください。')
@@ -34,11 +40,11 @@ export const Send: React.FC = (props: any) => {
         <Text theme={[TextThemes.CAPTION]}>{props.location.state.email} <span className="text">宛に認証メールを送信しました。</span></Text>
         <Text theme={[TextThemes.TEXT]}>メール内に記載されているリンクをクリックして{props.location.state.text}を完了してください。</Text>
         <div className="btns-container">
-          <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{margin: '10px auto'}}>
+          <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{ margin: '10px auto' }}>
             もう一度メールを送信する
           </Button>
           <Link to={RouteName.REGISTER_EMAIL}>
-            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{margin: '10px auto'}}>
+            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '10px auto' }}>
               メールアドレスを変更する
             </Button>
           </Link>

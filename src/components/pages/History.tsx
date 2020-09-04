@@ -4,6 +4,7 @@ import { Trash2 } from 'react-feather';
 import Cookies from 'universal-cookie';
 // common
 import CommonStyle from './../../common/CommonStyle';
+import { RouteName } from '../../common/Const';
 // components
 import HomeLayout from '../templates/HomeLayout';
 import HistoryCardList from '../organisms/CardList/HistoryCardList';
@@ -41,7 +42,7 @@ export const History: React.FC = (props: any) => {
     }
 
     return (
-      <HomeLayout headerText='閲覧履歴' prevRef='#' history={props.history}>
+      <HomeLayout headerText='閲覧履歴' prevRef={RouteName.ROOT}>
         <Modal 
           title='本当に履歴を削除しますか？'
           btntext='削除する'
