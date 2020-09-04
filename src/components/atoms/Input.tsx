@@ -13,6 +13,7 @@ interface InputProps {
   icon?: React.ReactNode;
   readonly?: boolean;
   name?: string;
+  type?: string; //phone or time
 }
 
 export enum InputThemes {
@@ -29,13 +30,13 @@ enum ModifierClassNames {
   EDIT_PROFILE = 'input-edit_profile',
 }
 
-const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name }) => {
+const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type }) => {
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>{label}<span>*</span></label>
       <div className="input-icon-container">
         <span className="input-icon">{icon}</span>
-        <input className="input" id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
+        <input type={type} className="input" id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} />
       </div>
       <style jsx>
         {`
@@ -98,6 +99,11 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
           .input-edit_profile label{
             display: flex;
             justify-content: center;
+          }
+
+          input[type="time"]::-webkit-calendar-picker-indicator {
+            display: none;
+            background: none;
           }
         `}
       </style>

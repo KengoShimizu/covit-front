@@ -13,9 +13,9 @@ export const BusinessDateInput: React.FC<BusinessDateInputProps> = ({ handleChan
     <div className="container">
       <label>{dateInfo.label}</label>
       <input id={dateInfo.enLabel} type="checkbox" name='is_close' value={dateInfo.is_close} onChange={handleChange} style={{ marginRight: '4px' }} /><label style={{ verticalAlign: 'text-bottom' }}>定休</label>
-      <Input id={dateInfo.enLabel} name='opening' label='' placeholder='00:00' content={dateInfo.opening} handleChange={handleChange} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} /> 
+      <Input id={dateInfo.enLabel} name='opening' label='' placeholder='00:00' content={dateInfo.opening} handleChange={handleChange} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} type="time" /> 
       <span style={{margin: '0 4px', display: 'inline-block'}}>〜</span>
-      <Input id={dateInfo.enLabel} name='closing' label='' placeholder='00:00' content={dateInfo.closing} handleChange={handleChange} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} />
+      <Input id={dateInfo.enLabel} name='closing' label='' placeholder='00:00' content={dateInfo.closing} handleChange={handleChange} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} type="time" />
       <style jsx>
         {`
           .container {

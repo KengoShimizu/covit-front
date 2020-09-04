@@ -86,9 +86,6 @@ function App() {
           </TopModalProvider>
         </ModalStateProvider>
       </CommonProvider>
-      <style jsx>{`
-        
-      `}</style>
     </div>
   );
 
