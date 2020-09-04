@@ -30,7 +30,7 @@ export const ownerShopForm = (data: any): string => {
   return returnStr;
 }
 
-export const infectionsValidation= (data: any): string => {
+export const infectionsValidation = (data: any): string => {
   if (!data.length) return '1つ以上選択してください';
   return '';
 }
@@ -40,6 +40,13 @@ export const ownerInfoValidation = (data: any): string => {
   if (!data.owner.name) returnStr = returnStr + 'お名前を入力してください';
   if (!data.owner.kana_name) returnStr = returnStr + 'ふりがなを入力してください';
   return returnStr;
+}
+
+export const phoneValidation = (value: any): string => {
+  const reg = /^[0-9]*$/;
+  let err = '';
+  if (!reg.test(value)) err = '数字で入力してください';
+  return err;
 }
 
 export default class Validation {
@@ -59,6 +66,8 @@ export default class Validation {
         return infectionsValidation(value);
       case 'owner_info':
         return ownerInfoValidation(value);
+      case 'owner_phone':
+        return phoneValidation(value);
     }
   };
 }
