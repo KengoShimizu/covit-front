@@ -53,7 +53,7 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
       </ol>
       <style jsx>{`
         .infection-control{
-          width: 385px;
+          width: 100%;
           margin: 0 auto 10px;
         }
         .infection-control_list{
@@ -84,8 +84,8 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
           position: relative;
           padding: 16px 20px;
           border-radius: 8px;
-          max-width: 344px;
-          width: 80%;
+          width: 100%;
+          box-sizing: border-box;
           margin: 0 auto;
           font-weight: bold;
           font-size: 12px;
