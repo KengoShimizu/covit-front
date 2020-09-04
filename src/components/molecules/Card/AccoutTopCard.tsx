@@ -16,14 +16,16 @@ interface AccoutTopCardProps {
   icon?: React.ReactNode;
   text: string;
   nextRef?: string;
+  onClick?: any;
+  listStyle?: any;
 }
 
 // FIXME LPをSPA内にファイル作ればaタグいらん
-const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef='#'}) => {
+const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, text, icon, nextRef='#', onClick, listStyle}) => {
   const isHttps = nextRef.match(/https/g);
   const innerElement = (
     <React.Fragment>
-      <li className="account-function_option">
+      <li className="account-function_option" onClick={onClick} style={listStyle}>
         <Icon theme={[IconThemes.LERGE]}>
           {icon && icon}
           {src && <img className="account-function_img" src={src} alt=""/>}

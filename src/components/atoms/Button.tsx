@@ -77,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             padding: 4px 12px;
             font-size: 12px;
             font-weight: bold;
-            line-height: 19px;
+            line-height: 18px;
           }
           .shop_sns-btn{
             width:44px;
