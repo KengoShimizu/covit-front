@@ -126,9 +126,9 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
         <label>営業時間</label>
       </p>
       <div style={{ marginBottom: '16px' }}>
-        <Input name='opening' label='' handleChange={handleAllChange} placeholder='00:00' content={openingAll} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} />
+        <Input name='opening' label='' handleChange={handleAllChange} placeholder='09:00' content={openingAll} propStyle={{ width: '65px', display: 'inline-block', margin: '0' }} type="time" />
         <span style={{ margin: '0 4px', display: 'inline-block' }}>〜</span>
-        <Input name='closing' label='' handleChange={handleAllChange} placeholder='00:00' content={closingAll} propStyle={{ width: '65px', display: 'inline-block', margin: '0', marginRight: '16px' }} />
+        <Input name='closing' label='' handleChange={handleAllChange} placeholder='21:00' content={closingAll} propStyle={{ width: '65px', display: 'inline-block', margin: '0', marginRight: '16px' }} type="time" />
         <Button theme={[ButtonThemes.NORMAL]} onClick={allBusinessTimeChanged} propStyle={{ display: 'inline-block' }} >一括で変更する</Button>
       </div>
       {
