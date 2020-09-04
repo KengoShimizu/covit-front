@@ -12,7 +12,7 @@ interface ShopFormProps {
 
 export const ShopForm: React.FC<ShopFormProps> = ({ handleChange, addData }) => {
   const { match }: any = useReactRouter();
-  const isOwnerPage = match.path.match(/owners/g);
+  const isOwnerPage = match.path.match(/owner/g);
 
   const phoneHandleChange = (e: any) => {
     if(!Validation.formValidate('owner_phone', e.target.value)){

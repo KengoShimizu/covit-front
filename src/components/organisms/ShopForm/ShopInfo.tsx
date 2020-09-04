@@ -51,7 +51,7 @@ var defaultLinks = {
 
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData }) => {
   const { match }: any = useReactRouter();
-  const isOwnerPage = match.path.match(/owners/g);
+  const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState(defaultLinks);
   const [isOK, setIsOK] = useState(false);

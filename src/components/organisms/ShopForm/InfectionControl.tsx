@@ -15,7 +15,7 @@ import StepCategory from '../../../types/StepCategory';
 import Validate from '../../../common/Validate';
 
 interface InfectionControlProps {
-  setPage: any;
+  setPage?: any;
   addData: any;
   setAddData: any;
   post?: any;
@@ -25,9 +25,8 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   const { match }: any = useReactRouter();
   const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
-  const identifer = match.path.match(/owners/g) ? 'owner' : 'user';
+  const identifer = match.path.match(/owner/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
-  const [stepIDs, setStepIDs] = useState<number[]>([]);
 
   const fetchStepCategories = async (isSubscribed: boolean) => {
     try {
@@ -60,32 +59,35 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   }, [])
 
   useEffect(() => {
-    setAddData({
-      ...addData,
-      'step_ids': stepIDs
-    })
-  }, [stepIDs])
-
-  useEffect(() => {
-    if(Validate.formValidate('shop_form_infections', stepIDs)) setIsOK(false);
+    if(Validate.formValidate('shop_form_infections', addData.step_ids)) setIsOK(false);
     else setIsOK(true);
-  }, [stepIDs]);
+  }, [addData.step_ids]);
 
   return (
     loading ? <Loading/> :
     <div className="container">
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
       <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }}>感染対策の内容はユーザーに公開されます。</Text>
-      <CheckSectionList stepCategories={stepCategories} setStepIDs={setStepIDs} stepIDs={stepIDs}/>
-      <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
+      <CheckSectionList stepCategories={stepCategories} setAddData={setAddData} addData={addData}/>
+      {/* ここの書き方めっちゃきもいけど、3項演算使ったらなぜか上手く動かないから仕方ないかも。 */}
+      {addData.shop.other_step &&
+        <Textarea content={addData.shop.other_step} theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
+      }
+      {!addData.shop.other_step &&
+        <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
+      }
       {identifer === 'user' ?
-        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => post() : () => {}}>
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? post : () => {}}>
           登録する
         </Button>
-        :
-        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
-          次へ <ArrowRight />
-        </Button>
+        : post ? 
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? post : () => {}}>
+            変更する
+          </Button>
+          :
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
+            次へ <ArrowRight />
+          </Button>
       }
       <style jsx>
         {`

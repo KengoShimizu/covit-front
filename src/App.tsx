@@ -40,8 +40,10 @@ import { EditEmail } from './components/pages/user/account/manage/EditEmail';
 import { AddEmail } from './components/pages/user/account/manage/AddEmail';
 // components/pages/owner/register
 import { UserShopForm } from './components/pages/user/register/UserShopForm';
-import { OwnerRequestTop } from './components/pages/owner/register/OwnerRequestTop';
-import { OwnerShopForm } from './components/pages/owner/register/OwnerShopForm';
+import { OwnerRequestTop } from './components/pages/owner/shop/register/OwnerRequestTop';
+import { OwnerShopForm } from './components/pages/owner/shop/register/OwnerShopForm';
+import OwnerInfectionEdit from './components/pages/owner/shop/edit/OwnerInfectionEdit';
+import OwnerShopInfoEdit from './components/pages/owner/shop/edit/OwnerShopInfoEdit';
 
 function App() {
   return (
@@ -72,6 +74,8 @@ function App() {
                       <Route exact path={RouteName.HISTORY} component={History} />
                       <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
                       <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
+                      <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
+                      <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
                       <Route exact path={RouteName.SELF_COMMENTS} component={Comments} />
                       <Route exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
                       <Route exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
