@@ -12,7 +12,7 @@ import Modal from '../../molecules/Modal/Modal';
 // context
 import TopModalContext from '../../../context/TopModalContext';
 import ModalContext from '../../../context/ModalContext';
-
+import AuthContext from "../../../context/CommonProvider";
 
 
 interface AccoutTopCardListProps {
@@ -22,6 +22,7 @@ interface AccoutTopCardListProps {
 
 export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, user_id }) => {
   const cookies = new Cookies();
+  const { setAuth } = useContext(AuthContext);
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
   const [modalState, setModalState] = useState({
@@ -34,6 +35,20 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
   const handleLogout = (setContents: any) => {
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
+        setAuth({
+          isLogin: false,
+          user: {
+            id: 0,
+            name: "",
+            kana_name: "",
+            email: "",
+            image: "",
+            token: "",
+            is_owner: 0,
+            created_at: "",
+            updated_at: ""
+          }
+        })
         setContents({
           isShown: true,
           text: {
@@ -54,6 +69,20 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
   const handleDeleteAccount = (setContents: any) => {
     axios.delete(`/api/v1/user/users/${user_id}`)
       .then(() => {
+        setAuth({
+          isLogin: false,
+          user: {
+            id: 0,
+            name: "",
+            kana_name: "",
+            email: "",
+            image: "",
+            token: "",
+            is_owner: 0,
+            created_at: "",
+            updated_at: ""
+          }
+        })
         setContents({
           isShown: true,
           text: {

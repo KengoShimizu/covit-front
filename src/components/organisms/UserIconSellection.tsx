@@ -22,7 +22,7 @@ const UserIconSellection: React.FC<UserIconSellectionProps> = ({data, setData}) 
     <div className="container">
       <Text theme={[TextThemes.CAPTION]} propStyle={{color: CommonStyle.TextDarkGary}}>アイコン</Text>
       <div className="selected-icon">
-        <Icon theme={[IconThemes.SELECTEDPROFILE]} ><img src={data.image ? data.image : "/profile-icon1.png"} width="80px" height="80px" style={{borderRadius: '50%'}} alt='selected profile icon'/></Icon>
+        <Icon theme={[IconThemes.SELECTEDPROFILE]} ><img src={data.image} width="80px" height="80px" style={{borderRadius: '50%'}} alt='selected profile icon'/></Icon>
       </div>
       <ul className="icons-container">
         {Array.from(Array(8).keys(), x => x+1).map(num => <li key={`icon${num}}`}><Icon key={`icon_${num}`} theme={[IconThemes.PROFILE]} onClick={handleChange} ><img src={`/profile-icon${num}.png`} width="56px" height="56px" style={{borderRadius: '50%'}} id={`/profile-icon${num}.png`} alt='profile icon'/></Icon></li>)}
