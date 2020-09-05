@@ -19,22 +19,26 @@ const AccountTop: React.FC = (props: any) => {
   return (
     <HomeLayout headerText={'ユーザ情報'} prevRef={RouteName.ROOT} history={props.history}>
       <TopModal />
-      <div className="profile-head">
-        <ProfileIconNameCard src={account.image} name={account.name} />
+      <div className="profile-head_container">
+        <div className="profile-head_name">
+          <ProfileIconNameCard src={account.image} name={account.name} />
+        </div>
+        <div className="profile-head-btn">
+          <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' />
+        </div>
       </div>
-      <div className="next-ref-btn">
-        <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' />
-      </div>
+      
       <AccountTopCardList history={props.history} user_id={account.id} />
       <PrivacyFotter />
       <style jsx>{`
-        .profile-head{
-          margin-top: 50px;
-        }
-        .next-ref-btn{
-          position: absolute;
-          top: 105px;
-          right: 10px;
+        .profile-head_container{
+          max-width: 600px;
+          width: 100%;
+          margin: 0 auto 40px auto;
+          padding-left: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
         }
       `}</style>
     </HomeLayout>

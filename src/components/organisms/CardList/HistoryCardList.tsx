@@ -101,11 +101,16 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   return (
     loading ? <Loading/> :
     <div className="container">
+      <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '4px' }}>閲覧履歴</Text>
       <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.errorText}>{err}</Text>
       <ol className="card-list">
         {historyElements}
       </ol>
       <style jsx>{`
+        .container{
+          max-width: 600px;
+          margin: 0 auto;
+        }
         .account-function_list{
           padding: 0 16px;
         }

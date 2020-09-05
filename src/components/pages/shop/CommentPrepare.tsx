@@ -69,14 +69,14 @@ const CommentPrepare: React.FC = (props: any) => {
   return (
     <HomeLayout headerText='お店のレビューを登録する' prevRef='/'>
       <div onKeyPress={onKeyPressEnter}>
-      <Input
-        handleChange={handleChange}
-        name='name'
-        placeholder='お店名で検索'
-        content={searchData.name}
-        icon={<Search onClick={fetchShopsData}/>}
-        propStyle={{ margin: '16px auto', maxWidth: '330px', width: '90%' }}
-      />
+        <Input
+          handleChange={handleChange}
+          name='name'
+          placeholder='お店名で検索'
+          content={searchData.name}
+          icon={<Search onClick={fetchShopsData}/>}
+          propStyle={{ margin: '16px auto', maxWidth: '400px', width: '90%' }}
+        />
       </div>
 
       {
@@ -84,7 +84,7 @@ const CommentPrepare: React.FC = (props: any) => {
           loading ? <Loading /> : <ShopCardList shops={shops} />
           :
           <React.Fragment>
-            <Text theme={[TextThemes.CAPTION]} propStyle={{ margin: '4px 10px' }}>閲覧履歴</Text>
+            
             <HistoryCardList maxRow={4} props={props} type='search' />
             <div className='mt10'>
               <RequestTextSection />

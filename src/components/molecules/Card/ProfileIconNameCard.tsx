@@ -31,8 +31,6 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name}) => {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 0 22px;
-          margin: 9px 0 40px;
         }
         .account-info_profile{
           display: flex;

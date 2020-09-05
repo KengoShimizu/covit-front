@@ -59,6 +59,7 @@ const Header: React.FC<HeaderProps> = ({ headerText, prevRef, history, onClick, 
             width: 100%;
             height: 40px;
             text-align: center;
+            border-bottom: .5px solid ${CommonStyle.BorderGray};
             margin-bottom: ${headerText === '閲覧履歴' ? '0px' : '24px'};
           }
           .header-content{
