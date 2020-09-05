@@ -64,8 +64,9 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
             width: 100%;
             height: 100%;
             z-index: 9999;
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background-color: rgba(0,0,0,.15);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
           }
           .modal-container{
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};

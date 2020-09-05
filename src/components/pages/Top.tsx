@@ -60,6 +60,7 @@ const propStyle = {
     width: '64px',
     height: '64px',
     fontSize: '8px',
+    flexDirection: 'column',
     background: CommonStyle.BgWhite,
     border: `4px solid ${CommonStyle.AccentColor}`,
     boxSizing: 'border-box',
@@ -224,13 +225,19 @@ export const Top: React.FC = (props: any) => {
           <React.Fragment>
             <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
               <Icon theme={[IconThemes.NORMAL]}>
-                <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/></Icon>
-              このエリアで再検索
+                <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/>
+              </Icon>
+              <span className="research-btn_text">
+              	このエリアで再検索
+              </span>
             </Button>
             <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
               setMapCenter(curLoc)
               setZoom(16)
             }}>
+              <span>
+                <svg id="" data-name="" xmlns="" fill="#DF6059" width="16px" viewBox="0 0 9.6 9.85"><path d="M4.21,5.77,5.74,9.7a.22.22,0,0,0,.42,0L9.58.56a.23.23,0,0,0-.29-.3L.15,3.68a.23.23,0,0,0,0,.43L4.08,5.64A.21.21,0,0,1,4.21,5.77Z"/></svg>
+              </span>
               現在地
             </Button>
           </React.Fragment>
@@ -263,6 +270,9 @@ export const Top: React.FC = (props: any) => {
             height: 40px;
             text-align: center;
             z-index: 400;
+          }
+          .research-btn_text{
+            margin-top: 2px;
           }
         `}</style>
       </div>
