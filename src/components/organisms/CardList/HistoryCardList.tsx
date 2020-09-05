@@ -114,6 +114,12 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
           margin: 0 0 12px 0;
           background: ${CommonStyle.BgGray}
         }
+        .card-list{
+          background: ${CommonStyle.BgGray};
+          width: 100%;
+          padding: 18px 16px;
+          box-sizing: border-box;
+        }
       `}</style>
     </div>
   );

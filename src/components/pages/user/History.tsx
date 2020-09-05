@@ -16,12 +16,10 @@ import ModalContext from '../../../context/ModalContext';
 
 const propStyle = {
   deleteBtn: {
-    marginRight: '24px',
-    marginLeft: 'auto',
     display: 'flex',
     alignItems: 'center',
     background: 'none',
-    marginBottom: '20px',
+    margin: '0 0 24px auto'
   },
   deleteBtnIcon: {
     width: '24px',

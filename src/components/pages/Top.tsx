@@ -235,10 +235,12 @@ const Top: React.FC = (props: any) => {
               setMapCenter(curLoc)
               setZoom(16)
             }}>
-              <span>
+              <span className="research-btn_icon">
                 <svg id="" data-name="" xmlns="" fill="#DF6059" width="16px" viewBox="0 0 9.6 9.85"><path d="M4.21,5.77,5.74,9.7a.22.22,0,0,0,.42,0L9.58.56a.23.23,0,0,0-.29-.3L.15,3.68a.23.23,0,0,0,0,.43L4.08,5.64A.21.21,0,0,1,4.21,5.77Z"/></svg>
               </span>
-              現在地
+              <p>
+                現在地
+              </p>
             </Button>
           </React.Fragment>
         }
@@ -272,7 +274,7 @@ const Top: React.FC = (props: any) => {
             z-index: 400;
           }
           .research-btn_text{
-            margin-top: 2px;
+            margin: 4px 0 2px 0;
           }
         `}</style>
       </div>
