@@ -35,8 +35,8 @@ const History: React.FC = (props: any) => {
     const cookies = new Cookies();
 
     const handleCookie = () => {
-      cookies.set('histories', '');
-      cookies.set('histories_date', '');
+      cookies.set('histories', '', { path: '/' });
+      cookies.set('histories_date', '', { path: '/' });
     }
 
     return (
