@@ -119,7 +119,7 @@ const Shop: React.FC = (props: any) => {
                           <Sun size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {dayPriceObj.name}円
+                          {dayPriceObj ? dayPriceObj.name : '- '}円
                     </Text>
                       </li>
                       <li className="shop_cost-option">
@@ -127,7 +127,7 @@ const Shop: React.FC = (props: any) => {
                           <Moon size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {nightPriceObj.name}円
+                          {nightPriceObj ? nightPriceObj.name : '- '}円
                     </Text>
                       </li>
                     </ol>

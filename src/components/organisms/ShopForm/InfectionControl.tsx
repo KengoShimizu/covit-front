@@ -87,7 +87,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
         : post ? 
           <React.Fragment/>
           :
-          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(3) : () => {}}>
             次へ <ArrowRight />
           </Button>
       }
