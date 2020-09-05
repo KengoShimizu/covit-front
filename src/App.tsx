@@ -68,6 +68,7 @@ function App() {
                   <Switch>
                     <NotOwnerRoute exact path={RouteName.ROOT} component={Top} />
                     <NotOwnerRoute exact path={RouteName.MENU} component={Menu} />
+                    <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
@@ -78,7 +79,6 @@ function App() {
                     <Route exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
                     <Route exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
-                    <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
                     <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
                     <Authentication>
                       <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
