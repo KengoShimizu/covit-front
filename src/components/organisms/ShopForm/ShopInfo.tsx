@@ -8,6 +8,7 @@ import Button, { ButtonThemes } from '../../atoms/Button'
 import Text, { TextThemes } from '../../atoms/Text'
 import Select, { SelectThemes } from '../../atoms/Select'
 import InputFile, { InputFileThemes } from '../../atoms/InputFile';
+import Input, { InputThemes } from '../../atoms/Input'
 // organisms
 import { ShopForm } from '../../organisms/ShopForm/ShopForm';
 import { ShopLinkForm } from '../../organisms/ShopForm/ShopLinkForm';
@@ -19,6 +20,7 @@ import Link from '../../../types/Link';
 import { PriceArray, LinkType } from '../../../common/Const'
 import CommonStyle from '../../../common/CommonStyle';
 import Validate from '../../../common/Validate';
+import Validation from '../../../common/Validate';
 
 interface ShopInfoProps {
   setPage?: any;
@@ -104,6 +106,12 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }
 
+  const phoneHandleChange = (e: any) => {
+    if(!Validation.formValidate('owner_phone', e.target.value)){
+      handleChange(e);
+    }
+  }
+
   useEffect(() => {
     fetchGenres();
   }, []);
@@ -155,9 +163,20 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   return (
     <div className="container">
       {setPage ?
-        <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text> : <React.Fragment></React.Fragment>
+        isOwnerPage ? 
+          <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text> 
+          : 
+          <React.Fragment>
+            <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >感染対策をしているお店の推薦していただくとお店の情報が追加されるかもしれません！</Text> 
+            <div style={{display: 'flex'}}>
+              <div style={{color: CommonStyle.TextDarkGary}}>※</div>
+              <Text theme={[TextThemes.CAPTION, TextThemes.SMALL]} propStyle={{ marginBottom: '32px', color: CommonStyle.TextDarkGary }} >感染対策の内容についてチェックを行うため、登録はリクエストの許可制となっております。</Text> 
+            </div>
+          </React.Fragment>
+          :
+          <React.Fragment></React.Fragment>
       }
-      <ShopForm handleChange={handleChange} addData={addData} />
+      <ShopForm handleChange={handleChange} addData={addData} phoneHandleChange={phoneHandleChange}/>
       {isOwnerPage &&
         /* 営業時間フォーム */
         <ShopBusinessDateForm setAddData={setAddData} addData={addData} defaultBusinessDate={addData.shop.business_date ? addData.shop.business_date : ""}/>
@@ -170,6 +189,8 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
             <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={isOK ? () => setPage(2) : () => {}}>
               詳細をスキップ<ArrowRight size={24} />
             </Button>
+            {/* 電話番号 */}
+            <Input handleChange={phoneHandleChange} label='電話番号(半角数字のみ)' placeholder='02019228888' content={addData.shop.contact} name='contact' />
             {/* 営業時間フォーム */}
             <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
           </React.Fragment> : <React.Fragment></React.Fragment>

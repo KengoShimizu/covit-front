@@ -6,11 +6,13 @@ import queryString from 'query-string';
 import HomeLayout from '../../../../templates/HomeLayout';
 // context
 import AuthContext from '../../../../../context/CommonProvider';
+import TopModalContext from '../../../../../context/TopModalContext';
 // types
 import Link from '../../../../../types/Link'
 // others
 import { InfectionControl } from '../../../../organisms/ShopForm/InfectionControl';
 import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
+import { RouteName } from '../../../../../common/Const';
 
 interface AddParam {
   shop: {
@@ -34,6 +36,7 @@ const UserShopForm: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
+  const topModalContext = useContext(TopModalContext);
   const [err, setErr] = useState<string>('');
   const [addData, setAddData] = useState<AddParam>({
     shop: {
@@ -54,10 +57,19 @@ const UserShopForm: React.FC = (props: any) => {
   });
 
   const post = async () => {
-    await axios.post('/api/v1/user/shops', addData)
-      .catch(err => console.log(err))
-      .finally(() => console.log('FIXME 遷移先'));
-    return;
+    try{
+      await axios.post('/api/v1/user/shops', addData)
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'お店の登録をリクエストしました！',
+          small: 'お店の承認には数日かかる可能性があります。'
+        }
+      });
+      props.history.push(RouteName.ROOT);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
