@@ -25,6 +25,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   const { match }: any = useReactRouter();
   const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
+  const isEdit = match.path.match(/edit/g);
   const identifer = match.path.match(/owner/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
 
@@ -73,11 +74,10 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
         </React.Fragment>
       }
       <CheckSectionList stepCategories={stepCategories} setAddData={setAddData} addData={addData}/>
-      {/* ここの書き方めっちゃきもいけど、3項演算使ったらなぜか上手く動かないから仕方ないかも。 */}
-      {addData.shop.other_step &&
+      {addData.shop.other_step && isEdit &&
         <Textarea content={addData.shop.other_step} theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
-      {!addData.shop.other_step &&
+      {!isEdit &&
         <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
       {identifer === 'user' ?

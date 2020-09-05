@@ -6,7 +6,7 @@ import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RedirectFrom, RouteName, OwnerType } from '../../../common/Const';
+import { RedirectFrom, RouteName, OwnerType, PriceArray } from '../../../common/Const';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import Text, { TextThemes } from '../../atoms/Text';
@@ -37,6 +37,15 @@ const Shop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
+  const [businessDate, setBusinessDate] = useState([]);
+  const [dayPriceObj, setDayPriceObj] = useState({
+    id: 0,
+    name: ''
+  });
+  const [nightPriceObj, setNightPriceObj] = useState({
+    id: 0,
+    name: ''
+  });
   const [shopData, setShopData] = useState({
     user_id: 0,
     name: '',
@@ -62,7 +71,12 @@ const Shop: React.FC = (props: any) => {
   const fetchShopData = async (isSubscribed: boolean) => {
     try {
       const res = await axios.get(`/api/v1/${authState.user.is_owner ? 'owner' : 'user'}/shops/${match.params.id}`);
-      if (isSubscribed) setShopData(res.data);
+      if (isSubscribed) {
+        setShopData(res.data);
+        setDayPriceObj(PriceArray.find((data: any) => data.id === res.data.price_day))
+        setNightPriceObj(PriceArray.find((data: any) => data.id === res.data.price_night))
+        setBusinessDate(JSON.parse(res.data.business_date))
+      }
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +119,7 @@ const Shop: React.FC = (props: any) => {
                           <Sun size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {shopData.price_day}円
+                          {dayPriceObj.name}円
                     </Text>
                       </li>
                       <li className="shop_cost-option">
@@ -113,7 +127,7 @@ const Shop: React.FC = (props: any) => {
                           <Moon size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {shopData.price_night}円
+                          {nightPriceObj.name}円
                     </Text>
                       </li>
                     </ol>
@@ -175,7 +189,14 @@ const Shop: React.FC = (props: any) => {
                   <li className="shop_info-option">
                     <Clock size={16} color="#333" />
                     <span className="shop_info-option_content">
-                      {shopData.business_date}
+                      {businessDate.map((data: any, i: number) => (
+                        <React.Fragment key={`business_date${i}`}>
+                          {`曜日: ${data.label}`}<br/>
+                          {`開店時間: ${data.opening}`}<br/>
+                          {`閉店時間: ${data.closing}`}<br/>
+                          {data.is_close ? '定休日' : '営業日'}<br/><br/>
+                        </React.Fragment>
+                      ))}
                     </span>
                   </li>
                   <li className="shop_info-option">
@@ -187,7 +208,7 @@ const Shop: React.FC = (props: any) => {
                   <li className="shop_info-option">
                     <MapPin size={16} color="#333" />
                     <span className="shop_info-option_content">
-                      <a href="javascript:;" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
+                      <a href="#" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
                         {shopData.address}
                       </a>
                     </span>

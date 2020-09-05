@@ -126,7 +126,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   }, [addData]);
 
   useEffect(() => {
-    if (defaultLinks.length) {
+    if (defaultLinks && defaultLinks.length) {
       setLinks({
         homepage: {
           name: 'ホームページ',
@@ -150,7 +150,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         }
       })
     }
-   }, [defaultLinks])
+  }, [defaultLinks])
 
   return (
     <div className="container">

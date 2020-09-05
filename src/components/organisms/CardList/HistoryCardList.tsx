@@ -29,7 +29,7 @@ interface HistoryCardListProps {
 
 const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }) => {
   const cookies = new Cookies();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const cookie_histories = cookies.get('histories');
   const cookie_histories_date = cookies.get('histories_date');
   const [err, setErr] = useState("");

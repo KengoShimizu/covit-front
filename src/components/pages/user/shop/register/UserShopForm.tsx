@@ -13,8 +13,8 @@ import { InfectionControl } from '../../../../organisms/ShopForm/InfectionContro
 import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
 
 interface AddParam {
-  user_id: number;
   shop: {
+    user_id: number;
     name: string;
     kana_name: string;
     address: string;
@@ -36,8 +36,8 @@ const UserShopForm: React.FC = (props: any) => {
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
   const [err, setErr] = useState<string>('');
   const [addData, setAddData] = useState<AddParam>({
-    user_id: authState.user.id,
     shop: {
+      user_id: authState.user.id,
       name: "",
       kana_name: "",
       address: "",
