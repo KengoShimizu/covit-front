@@ -36,7 +36,7 @@ interface shopData {
 };
 
 const OwnerAccountTop: React.FC = (props: any) => {
-  const { authState } = useContext(AuthContext);
+  const { authState, setAuth } = useContext(AuthContext);
   const cookies = new Cookies();
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
@@ -113,6 +113,20 @@ const OwnerAccountTop: React.FC = (props: any) => {
   const handleLogout = (setContents: any) => {
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
+        setAuth({
+          isLogin: false,
+          user: {
+            id: 0,
+            name: "",
+            kana_name: "",
+            email: "",
+            image: "",
+            token: "",
+            is_owner: 0,
+            created_at: "",
+            updated_at: ""
+          }
+        })
         setContents({
           isShown: true,
           text: {
@@ -133,6 +147,20 @@ const OwnerAccountTop: React.FC = (props: any) => {
   const handleDeleteAccount = (setContents: any) => {
     axios.delete(`/api/v1/user/users/${authState.user.id}`)
       .then(() => {
+        setAuth({
+          isLogin: false,
+          user: {
+            id: 0,
+            name: "",
+            kana_name: "",
+            email: "",
+            image: "",
+            token: "",
+            is_owner: 0,
+            created_at: "",
+            updated_at: ""
+          }
+        })
         setContents({
           isShown: true,
           text: {
