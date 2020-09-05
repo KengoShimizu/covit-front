@@ -87,11 +87,12 @@ const Comments: React.FC = (props: any) => {
       <style jsx>{`
         .profile-card{
           position: fixed;
+          padding: 16px;
           width: 100%;
           background-color: ${CommonStyle.BgWhite};
         }
         .comment-card-list{
-          ${match.params.id && 'padding-top: 100px;'}
+          ${match.params.id && 'padding-top: 88px;'}
         }
       `}</style>
     </HomeLayout>
