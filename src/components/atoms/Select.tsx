@@ -53,11 +53,12 @@ const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = 
           }
 
           .select label {
-            font-size: ${CommonStyle.Caption};
             font-weight: bold;
-            text-align: left;
-            display: block;
-            margin-bottom: 0.25rem;
+            font-size: 14px;
+            line-height: 24px;
+            color: ${CommonStyle.TextDarkGary};
+            display: inline-block;
+            margin-bottom: 8px;
           }
 
           .select select {

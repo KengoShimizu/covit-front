@@ -2,23 +2,17 @@ import React from 'react';
 // library
 import useReactRouter from "use-react-router";
 // atoms
-import Input, { InputThemes } from '../../atoms/Input'
-import Validation from '../../../common/Validate';
+import Input, { InputThemes } from '../../atoms/Input';
 
 interface ShopFormProps {
   handleChange: any;
+  phoneHandleChange: any;
   addData: any;
 }
 
-export const ShopForm: React.FC<ShopFormProps> = ({ handleChange, addData }) => {
+export const ShopForm: React.FC<ShopFormProps> = ({ handleChange, addData, phoneHandleChange }) => {
   const { match }: any = useReactRouter();
   const isOwnerPage = match.path.match(/owner/g);
-
-  const phoneHandleChange = (e: any) => {
-    if(!Validation.formValidate('owner_phone', e.target.value)){
-      handleChange(e);
-    }
-  }
   
   return (
     <div className="container">

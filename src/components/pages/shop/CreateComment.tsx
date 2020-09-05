@@ -116,14 +116,14 @@ const CreateComment: React.FC = (props: any) => {
                         <Smile size={24} color="#ED753A" />
                         <p className="review-form_switch-label_text">バッチリ</p>
                       </label>
-                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_GOOD} />
+                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_GOOD} />
                     </li>
                     <li className="review-form_switch-option">
                       <label className="review-form_switch-label" htmlFor="">
                         <Frown size={24} color="#3A8CED" />
                         <p className="review-form_switch-label_text">いまいち</p>
                       </label>
-                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_BAD} />
+                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_BAD} />
                     </li>
                   </ul>
                 </li>
