@@ -33,7 +33,6 @@ interface ShopInfoProps {
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks}) => {
   const { match }: any = useReactRouter();
   const compress = new Compress()
-  const [image, setImage] = useState<string | ArrayBuffer | null>();
   const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState({
@@ -102,20 +101,20 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }
 
-  const handleImageChange = async (event: any) => {
-    const resizedImage = await compress.compress([event.target.files[0]], {
+  const handleImageChange = (event: any) => {
+    compress.compress([event.target.files[0]], {
       size: .2, // 200kbに圧縮
       maxWidth: 800,
       maxHeight: 300,
       quality: 1, // 画像の品質(画質？)1が最大値
-    })
-    console.log(resizedImage )
-    setAddData({
-      ...addData,
-      shop: {
-        ...addData.shop,
-        image: resizedImage[0].prefix+resizedImage[0].data
-      }
+    }).then((res) => {
+      setAddData({
+        ...addData,
+        shop: {
+          ...addData.shop,
+          image: res[0].prefix+res[0].data
+        }
+      });
     });
   }
 
