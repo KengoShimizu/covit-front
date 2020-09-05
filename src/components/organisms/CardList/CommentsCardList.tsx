@@ -248,7 +248,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
                   isShopPage ?
                     <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />
                     :
-                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} />
+                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} onClick={clickDelete} deletedId={deletedId} />
                 );
               })
             }
