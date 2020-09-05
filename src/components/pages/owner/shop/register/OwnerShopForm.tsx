@@ -34,7 +34,7 @@ interface AddParam {
   links: Link[];
 }
 
-export const OwnerShopForm: React.FC = (props: any) => {
+const OwnerShopForm: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
   const [err, setErr] = useState<string>('');
@@ -123,3 +123,5 @@ export const OwnerShopForm: React.FC = (props: any) => {
     </React.Fragment>
   );
 }
+
+export default OwnerShopForm;

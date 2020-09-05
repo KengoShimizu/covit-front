@@ -4,24 +4,24 @@ import { Edit2 } from 'react-feather';
 import axios from 'axios';
 import queryString from 'query-string';
 // components
-import HomeLayout from '../../../../templates/HomeLayout';
-import Input, { InputThemes } from '../../../../atoms/Input'
-import UserIconSellection from '../../../../organisms/UserIconSellection';
-import Button, { ButtonThemes } from '../../../../atoms/Button';
-import TopModal from '../../../../molecules/Modal/TopModal';
+import HomeLayout from '../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../atoms/Input'
+import UserIconSellection from '../../../organisms/UserIconSellection';
+import Button, { ButtonThemes } from '../../../atoms/Button';
+import TopModal from '../../../molecules/Modal/TopModal';
 // context
-import AuthContext from "../../../../../context/CommonProvider";
-import TopModalContext from '../../../../../context/TopModalContext';
+import AuthContext from "../../../../context/CommonProvider";
+import TopModalContext from '../../../../context/TopModalContext';
 // common
-import { RouteName } from '../../../../../common/Const';
-import Validate from '../../../../../common/Validate';
+import { RouteName } from '../../../../common/Const';
+import Validate from '../../../../common/Validate';
 
 interface EditParam {
   image: string;
   name: string;
 }
 
-export const EditProfile: React.FC = (props: any) => {
+const EditProfile: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [isOK, setIsOK] = useState(true);
@@ -103,3 +103,5 @@ export const EditProfile: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default EditProfile;

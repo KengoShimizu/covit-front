@@ -94,6 +94,7 @@ export class RouteName {
   public static readonly LOGIN                    = '/accounts/login'
   public static readonly REGISTER                 = '/accounts/register'
   public static readonly REGISTER_EMAIL           = '/accounts/register/email'
+  public static readonly OWNER_REGISTER_EMAIL     = '/accounts/owner/register/email'
   public static readonly SEND                     = '/accounts/send'
   public static readonly USER_COMMENTS            = '/users/:id/comments'
   public static readonly REQUEST_TOP              = '/owners/request/top'
@@ -111,5 +112,5 @@ export class RouteName {
   public static readonly EDIT_EMAIL               = '/accounts/edit/email'
   public static readonly ADD_EMAIL                = '/accounts/add/email'
   public static readonly USER_SHOP_FORM           = '/users/request/form'
-  public static readonly LANDING_PAGE             = 'https://coveat-service.studio.design'
+  public static readonly LANDING_PAGE             = '/about'
 }

@@ -5,17 +5,17 @@ import axios from 'axios';
 import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
-import CommonStyle from '../../../../common/CommonStyle';
-import { RedirectFrom, RouteName, OwnerType } from './../../../../common/Const';
+import CommonStyle from '../../../common/CommonStyle';
+import { RedirectFrom, RouteName, OwnerType } from '../../../common/Const';
 // components
-import HomeLayout from '../../../templates/HomeLayout';
-import Text, { TextThemes } from '../../../atoms/Text';
-import Button, { ButtonThemes } from '../../../atoms/Button';
-import InfectionControlList from './../../../organisms/InfectionControlList';
-import Loading from '../../../molecules/Loading';
+import HomeLayout from '../../templates/HomeLayout';
+import Text, { TextThemes } from '../../atoms/Text';
+import Button, { ButtonThemes } from '../../atoms/Button';
+import InfectionControlList from '../../organisms/InfectionControlList';
+import Loading from '../../molecules/Loading';
 // context
-import RedirectContext from './../../../../context/RedirectContext';
-import AuthContext from "./../../../../context/CommonProvider";
+import RedirectContext from '../../../context/RedirectContext';
+import AuthContext from "../../../context/CommonProvider";
 
 const propStyle = {
   commentBtn: {
@@ -26,7 +26,7 @@ const propStyle = {
   }
 };
 
-export const Shop: React.FC = (props: any) => {
+const Shop: React.FC = (props: any) => {
   const snsTags = [
     <Twitter size={24} color="#333" />,
     <Facebook size={24} color="#333" />,
@@ -391,3 +391,5 @@ export const Shop: React.FC = (props: any) => {
     </React.Fragment>
   );
 }
+
+export default Shop;

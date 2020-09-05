@@ -3,16 +3,16 @@ import React, { useContext } from 'react';
 import { Trash2 } from 'react-feather';
 import Cookies from 'universal-cookie';
 // common
-import CommonStyle from './../../common/CommonStyle';
-import { RouteName } from '../../common/Const';
+import CommonStyle from '../../../common/CommonStyle';
+import { RouteName } from '../../../common/Const';
 // components
-import HomeLayout from '../templates/HomeLayout';
-import HistoryCardList from '../organisms/CardList/HistoryCardList';
-import Button, { ButtonThemes } from './../atoms/Button';
-import Icon, { IconThemes } from './../atoms/Icon';
-import Modal from '../molecules/Modal/Modal';
+import HomeLayout from '../../templates/HomeLayout';
+import HistoryCardList from '../../organisms/CardList/HistoryCardList';
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Icon, { IconThemes } from '../../atoms/Icon';
+import Modal from '../../molecules/Modal/Modal';
 // context
-import ModalContext from './../../context/ModalContext';
+import ModalContext from '../../../context/ModalContext';
 
 const propStyle = {
   deleteBtn: {
@@ -33,7 +33,7 @@ const propStyle = {
   }
 }
 
-export const History: React.FC = (props: any) => {
+const History: React.FC = (props: any) => {
     const cookies = new Cookies();
 
     const handleCookie = () => {
@@ -71,3 +71,5 @@ export const History: React.FC = (props: any) => {
     );
 
 }
+
+export default History;

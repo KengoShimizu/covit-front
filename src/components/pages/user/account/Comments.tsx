@@ -13,7 +13,7 @@ import CommonStyle from '../../../../common/CommonStyle';
 import { RouteName } from '../../../../common/Const';
 import Loading from '../../../molecules/Loading';
 
-export const Comments: React.FC = (props: any) => {
+const Comments: React.FC = (props: any) => {
   const [loading, setLoading] = useState(false);
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
@@ -97,3 +97,5 @@ export const Comments: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Comments;

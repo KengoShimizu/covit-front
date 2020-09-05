@@ -14,7 +14,7 @@ interface AddParam {
   email: string;
 }
 
-const EmailRegister: React.FC = (props: any) => {
+const OwnerEmailRegister: React.FC = (props: any) => {
   const [err, setErr] = useState("");
   const [isOK, setIsOK] = useState(true);
   const [addData, setAddData] = useState<AddParam>({
@@ -82,4 +82,4 @@ const EmailRegister: React.FC = (props: any) => {
   );
 }
 
-export default EmailRegister;
+export default OwnerEmailRegister;

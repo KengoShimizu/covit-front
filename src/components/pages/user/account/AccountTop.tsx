@@ -10,8 +10,9 @@ import TopModal from '../../../molecules/Modal/TopModal';
 import AuthContext from "../../../../context/CommonProvider";
 // common
 import { RouteName } from './../../../../common/Const';
+import AccountTopCard from './../../../molecules/Card/ProfileIconNameCard';
 
-export const AccountTop: React.FC = (props: any) => {
+const AccountTop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const [account] = useState(authState.user);
 
@@ -39,3 +40,5 @@ export const AccountTop: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default AccountTop;

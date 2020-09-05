@@ -8,7 +8,7 @@ interface AddParam {
   email: string;
 }
 
-export const AddEmail: React.FC = (props: any) => {
+const AddEmail: React.FC = (props: any) => {
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });
@@ -35,3 +35,5 @@ export const AddEmail: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default AddEmail;

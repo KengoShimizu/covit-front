@@ -9,9 +9,8 @@ import PrivacyFotter from './../molecules/Footer/PrivacyFotter';
 import HomeLayout from './../templates/HomeLayout';
 import RegisterCardList from './../organisms/CardList/RegisterCardList';
 import AccountTopCard from './../molecules/Card/AccoutTopCard';
-import { Route } from 'react-router-dom';
 
-export const Menu: React.FC = (props: any) => {
+const Menu: React.FC = (props: any) => {
   return (
     <HomeLayout headerText='メニュー' prevRef={RouteName.ROOT} history={props.history}>
       <RegisterCardList query={props.location.search}/>
@@ -30,3 +29,5 @@ export const Menu: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Menu;

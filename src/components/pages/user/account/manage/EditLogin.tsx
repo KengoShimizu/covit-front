@@ -6,7 +6,7 @@ import LoginFlexCard from '../../../../molecules/Card/LoginFlexCard';
 // common
 import { RouteName } from '../../../../../common/Const';
 
-export const EditLogin: React.FC = (props: any) => {
+const EditLogin: React.FC = (props: any) => {
   return (
     <HomeLayout headerText='ログイン情報の編集' prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
         <div className='container'>
@@ -42,3 +42,5 @@ export const EditLogin: React.FC = (props: any) => {
       </HomeLayout>
   );
 }
+
+export default EditLogin;

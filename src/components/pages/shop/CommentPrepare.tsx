@@ -3,24 +3,24 @@ import React, { useState } from 'react';
 import { Search } from 'react-feather';
 import axios from 'axios';
 // components
-import HomeLayout from '../../../templates/HomeLayout';
-import HistoryCardList from '../../../organisms/CardList/HistoryCardList';
-import ShopCardList from '../../../organisms/CardList/ShopCardList';
-import Input from '../../../atoms/Input';
-import Text, { TextThemes } from '../../../atoms/Text';
-import Loading from '../../../molecules/Loading';
+import HomeLayout from '../../templates/HomeLayout';
+import HistoryCardList from '../../organisms/CardList/HistoryCardList';
+import ShopCardList from '../../organisms/CardList/ShopCardList';
+import Input from '../../atoms/Input';
+import Text, { TextThemes } from '../../atoms/Text';
+import Loading from '../../molecules/Loading';
 // common
-import { RequestTextSection } from '../../../molecules/RequestTextSection';
-import FooterActionBar from '../../../organisms/FooterActionBar';
+import { RequestTextSection } from '../../molecules/RequestTextSection';
+import FooterActionBar from '../../organisms/FooterActionBar';
 // types
-import Shop from '../../../../types/Shop';
+import Shop from '../../../types/Shop';
 
 interface SearchParam {
   name: string;
 }
 
 // コメント投稿のためのショップの検索
-export const CommentPrepare: React.FC = (props: any) => {
+const CommentPrepare: React.FC = (props: any) => {
   const [shops, setShops] = useState<Shop[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchData, setSearchData] = useState<SearchParam>({
@@ -100,3 +100,5 @@ export const CommentPrepare: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default CommentPrepare;
