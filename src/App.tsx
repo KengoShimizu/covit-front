@@ -83,19 +83,19 @@ function App() {
                     <Authentication>
                       <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
                       <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
-                      <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
-                      <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />
-                      <Route exact path={RouteName.HISTORY} component={History} />
+                      <UserRoute exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
                       <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
+                      <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
+                      <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
+                      <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
+                      <UserRoute exact path={RouteName.ADD_EMAIL} component={AddEmail} />
+                      <UserRoute exact path={RouteName.HISTORY} component={History} />
+                      <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
+                      <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />                      
                       <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
                       <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
                       <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
-                      <Route exact path={RouteName.SELF_COMMENTS} component={Comments} />
-                      <Route exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
-                      <Route exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
                       <Route exact path={RouteName.EDIT_EMAIL} component={EditEmail} />
-                      <Route exact path={RouteName.ADD_EMAIL} component={AddEmail} />
-                      <Route exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
                     </Authentication>
                     <Route component={NotFound} />
                   </Switch>
