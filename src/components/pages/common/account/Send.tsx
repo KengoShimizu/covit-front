@@ -3,15 +3,15 @@ import React, { useRef, useState } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 // common
-import CommonStyle from './../../../../../common/CommonStyle';
-import { RouteName } from '../../../../../common/Const';
+import CommonStyle from '../../../../common/CommonStyle';
+import { RouteName } from '../../../../common/Const';
 // components
-import HomeLayout from '../../../../templates/HomeLayout';
-import Text, { TextThemes } from '../../../../atoms/Text';
-import Button, { ButtonThemes } from '../../../../atoms/Button';
+import HomeLayout from '../../../templates/HomeLayout';
+import Text, { TextThemes } from '../../../atoms/Text';
+import Button, { ButtonThemes } from '../../../atoms/Button';
 
 {/* FIXME 挙動ちゃんと確かめる */ }
-export const Send: React.FC = (props: any) => {
+const Send: React.FC = (props: any) => {
   const [resend, setResend] = useState("");
   const [err, setErr] = useState("");
   const resendPath =
@@ -68,3 +68,5 @@ export const Send: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Send;

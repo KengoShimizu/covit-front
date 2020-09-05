@@ -4,14 +4,14 @@ import useReactRouter from "use-react-router";
 import axios from 'axios';
 import { Smile, Frown } from 'react-feather';
 // common
-import CommonStyle from '../../../../common/CommonStyle';
-import { Comment, RouteName } from '../../../../common/Const';
+import CommonStyle from '../../../common/CommonStyle';
+import { Comment, RouteName } from '../../../common/Const';
 // components
-import HomeLayout from '../../../templates/HomeLayout';
-import InfectionControlList from './../../../organisms/InfectionControlList';
-import Loading from '../../../molecules/Loading';
+import HomeLayout from '../../templates/HomeLayout';
+import InfectionControlList from '../../organisms/InfectionControlList';
+import Loading from '../../molecules/Loading';
 // context
-import TopModalContext from '../../../../context/TopModalContext';
+import TopModalContext from '../../../context/TopModalContext';
 
 export interface AddParam {
   content: string;
@@ -22,7 +22,7 @@ export interface AddParam {
 
 //レビュー記入
 // FIXME 1.formに来店日追加 2.評価に対してvalidationかける
-export const CreateComment: React.FC = (props: any) => {
+const CreateComment: React.FC = (props: any) => {
   const [loading, setLoading] = useState(true);
   const topModalContext = useContext(TopModalContext);
   const { match }: any = useReactRouter();
@@ -275,3 +275,5 @@ export const CreateComment: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default CreateComment;

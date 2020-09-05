@@ -69,7 +69,7 @@ const propStyle = {
   }
 };
 
-export const Top: React.FC = (props: any) => {
+const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
   const qs = queryString.parse(props.location.search);
   const topModalContext = useContext(TopModalContext);
@@ -228,7 +228,7 @@ export const Top: React.FC = (props: any) => {
                 <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/>
               </Icon>
               <span className="research-btn_text">
-              	このエリアで再検索
+                このエリアで再検索
               </span>
             </Button>
             <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
@@ -279,3 +279,5 @@ export const Top: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Top;

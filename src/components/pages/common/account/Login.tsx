@@ -2,20 +2,20 @@ import React, {  useState, useEffect } from 'react';
 // library
 import axios from "axios";
 // common
-import Validation from './../../../../../common/Validate';
-import { RouteName } from '../../../../../common/Const';
+import Validation from '../../../../common/Validate';
+import { RouteName } from '../../../../common/Const';
 // components
-import NextRefBtn from './../../../../molecules/NextRefBtn';
-import HomeLayout from '../../../../templates/HomeLayout';
-import Button, { ButtonThemes } from '../../../../atoms/Button';
-import Text, { TextThemes } from '../../../../atoms/Text';
-import Input from './../../../../atoms/Input';
+import NextRefBtn from '../../../molecules/NextRefBtn';
+import HomeLayout from '../../../templates/HomeLayout';
+import Button, { ButtonThemes } from '../../../atoms/Button';
+import Text, { TextThemes } from '../../../atoms/Text';
+import Input from '../../../atoms/Input';
 
 interface AddParam {
   email: string;
 }
 
-export const Login: React.FC = (props: any) => {
+const Login: React.FC = (props: any) => {
   const [err, setErr] = useState("");
   const [addData, setAddData] = useState<AddParam>({
     email: ""
@@ -87,3 +87,5 @@ export const Login: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Login;

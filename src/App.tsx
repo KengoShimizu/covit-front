@@ -1,7 +1,7 @@
 import React from 'react';
 // library
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// const
+// common
 import { RouteName } from './common/Const';
 // provider
 import { CommonProvider } from "./context/CommonProvider";
@@ -13,37 +13,39 @@ import { OwnerRoute } from './components/common/OwnerRoute'; // 店のオーナ�
 import { UserRoute } from './components/common/UserRoute'; // 一般ユーザーのみ
 import { NotOwnerRoute } from './components/common/NotOwnerRoute'; // 一般ユーザーとゲストのみ
 import { RedirectPathProvider } from './context/RedirectContext';
-// components/pages
-import { Top } from './components/pages/Top';
-import { Menu } from './components/pages/Menu';
-import { History } from './components/pages/History';
+// pages
+import Top from './components/pages/Top';
+import Menu from './components/pages/Menu';
+import History from './components/pages/user/History';
 import OwnerAccountTop from './components/pages/owner/account/AccountTop';
-// components/pages/user/shop
-import { Shop } from './components/pages/user/shop/Shop';
-import { ShopComments } from './components/pages/user/shop/Comments';
-import { CreateComment } from './components/pages/user/shop/CreateComment';
-import { CommentPrepare } from './components/pages/user/shop/CommentPrepare';
+// pages/user/shop
+import Shop from './components/pages/shop/Shop';
+import ShopComments from './components/pages/shop/Comments';
+import CreateComment from './components/pages/shop/CreateComment';
+import CommentPrepare from './components/pages/shop/CommentPrepare';
 // components/pages/user/account
-import { AccountTop } from './components/pages/user/account/AccountTop';
-import { Privacy } from './components/pages/user/account/Privacy';
-import GuideLine from './components/pages/user/account/GuideLine';
-import { Comments } from './components/pages/user/account/Comments';
+import AccountTop from './components/pages/user/account/AccountTop';
+import GuideLine from './components/pages/common/document/GuideLine';
+import About from './components/pages/common/document/About';
+import Privacy from './components/pages/common/document/Privacy';
+import Comments from './components/pages/user/account/Comments';
 // components/pages/user/account/auth
-import { EmailRegister } from './components/pages/user/account/auth/EmailRegister';
-import { Login } from './components/pages/user/account/auth/Login';
-import { Send } from './components/pages/user/account/auth/Send';
-import { Register } from './components/pages/user/account/auth/Register';
+import EmailRegister from './components/pages/user/account/auth/EmailRegister';
+import Login from './components/pages/common/account/Login';
+import Send from './components/pages/common/account/Send';
+import Register from './components/pages/common/account/Register';
 // components/pages/user/account/manage
-import { EditLogin } from './components/pages/user/account/manage/EditLogin';
-import { EditProfile } from './components/pages/user/account/manage/EditProfile';
-import { EditEmail } from './components/pages/user/account/manage/EditEmail';
-import { AddEmail } from './components/pages/user/account/manage/AddEmail';
+import EditLogin from './components/pages/user/account/manage/EditLogin';
+import EditProfile from './components/pages/common/account/EditProfile';
+import EditEmail from './components/pages/common/account/EditEmail';
+import AddEmail from './components/pages/user/account/manage/AddEmail';
 // components/pages/owner/register
-import { UserShopForm } from './components/pages/user/register/UserShopForm';
-import { OwnerRequestTop } from './components/pages/owner/shop/register/OwnerRequestTop';
-import { OwnerShopForm } from './components/pages/owner/shop/register/OwnerShopForm';
+import UserShopForm from './components/pages/user/shop/register/UserShopForm';
+import OwnerRequestTop from './components/pages/owner/shop/register/OwnerRequestTop';
+import OwnerShopForm from './components/pages/owner/shop/register/OwnerShopForm';
 import OwnerInfectionEdit from './components/pages/owner/shop/edit/OwnerInfectionEdit';
 import OwnerShopInfoEdit from './components/pages/owner/shop/edit/OwnerShopInfoEdit';
+import OwnerEmailRegister from './components/pages/owner/account/auth/EmailRegister';
 
 function App() {
   return (
@@ -60,10 +62,12 @@ function App() {
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
+                    <Route exact path={RouteName.LANDING_PAGE} component={About} />
                     <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} />
                     <Route exact path={RouteName.LOGIN} component={Login} />
                     <Route exact path={RouteName.REGISTER} component={Register} />
                     <Route exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
+                    <Route exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
                     <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
                     <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />

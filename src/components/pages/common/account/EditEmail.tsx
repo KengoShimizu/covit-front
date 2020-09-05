@@ -2,21 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 // library
 import axios from "axios";
 // components
-import HomeLayout from '../../../../templates/HomeLayout';
-import Input, { InputThemes } from '../../../../atoms/Input';
-import Button, { ButtonThemes } from '../../../../atoms/Button';
-import Text, { TextThemes } from '../../../../atoms/Text';
+import HomeLayout from '../../../templates/HomeLayout';
+import Input, { InputThemes } from '../../../atoms/Input';
+import Button, { ButtonThemes } from '../../../atoms/Button';
 // context
-import AuthContext from "../../../../../context/CommonProvider";
+import AuthContext from "../../../../context/CommonProvider";
 // common
-import { RouteName } from '../../../../../common/Const';
-import Validate from './../../../../../common/Validate';
+import { RouteName } from '../../../../common/Const';
+import Validate from '../../../../common/Validate';
 
 interface EditParam {
   email: string;
 }
 
-export const EditEmail: React.FC = (props: any) => {
+const EditEmail: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const [isOK, setIsOK] = useState(false);
   const [err, setErr] = useState("");
@@ -54,11 +53,11 @@ export const EditEmail: React.FC = (props: any) => {
   }, [editData])
 
   return (
-    <HomeLayout headerText="メールアドレスの変更" prevRef={RouteName.EDIT_LOGIN}>
+    <HomeLayout headerText="メールアドレスの変更" prevRef={authState.user.is_owner ? RouteName.OWNER_ACCOUNT_TOP : RouteName.EDIT_LOGIN}>
       {/* FIXME リンク先 */}
       <div className="mail-form">
-        <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '22px auto', padding: '1rem' }} readonly={true} />
-        <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '22px auto', padding: '1rem' }} />
+        <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '16px auto'}} readonly={true} />
+        <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '16px auto'}} />
         {/* {err && <Text theme={[TextThemes.ERROR]} propStyle={{marginLeft: '15px'}}>{err}</Text>} */}
         <div className="mail-form_btn-container">
           <Button
@@ -66,7 +65,7 @@ export const EditEmail: React.FC = (props: any) => {
             theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]}
             onClick={isOK ? send : () => {}}>
             登録する
-        </Button>
+          </Button>
         </div>
       </div>
       <style jsx>{`
@@ -79,3 +78,5 @@ export const EditEmail: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default EditEmail;

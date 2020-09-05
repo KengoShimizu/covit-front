@@ -4,14 +4,14 @@ import useReactRouter from "use-react-router";
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 // components
-import HomeLayout from '../../../templates/HomeLayout';
-import CommnetsCardList from '../../../organisms/CardList/CommentsCardList';
-import AuthContext from "./../../../../context/CommonProvider";
-import { OwnerType, RouteName } from '../../../../common/Const';
-import Loading from '../../../molecules/Loading';
+import HomeLayout from '../../templates/HomeLayout';
+import CommnetsCardList from '../../organisms/CardList/CommentsCardList';
+import AuthContext from "../../../context/CommonProvider";
+import { OwnerType, RouteName } from '../../../common/Const';
+import Loading from '../../molecules/Loading';
 
 // ショップのコメント一覧
-export const ShopComments: React.FC = (props: any) => {
+const ShopComments: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const { authState } = useContext(AuthContext);
   const [shopUserID, setShopUserID] = useState<number>(0);
@@ -51,3 +51,5 @@ export const ShopComments: React.FC = (props: any) => {
         </HomeLayout>
   );
 }
+
+export default ShopComments;

@@ -3,14 +3,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from "axios";
 import queryString from 'query-string';
 // template
-import HomeLayout from '../../../templates/HomeLayout';
+import HomeLayout from '../../../../templates/HomeLayout';
 // context
-import AuthContext from './../../../../context/CommonProvider';
+import AuthContext from '../../../../../context/CommonProvider';
 // types
-import Link from './../../../../types/Link'
+import Link from '../../../../../types/Link'
 // others
-import { InfectionControl } from '../../../organisms/ShopForm/InfectionControl';
-import { ShopInfo } from './../../../organisms/ShopForm/ShopInfo';
+import { InfectionControl } from '../../../../organisms/ShopForm/InfectionControl';
+import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
 
 interface AddParam {
   user_id: number;
@@ -30,7 +30,7 @@ interface AddParam {
   links: Link[];
 }
 
-export const UserShopForm: React.FC = (props: any) => {
+const UserShopForm: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
@@ -90,8 +90,10 @@ export const UserShopForm: React.FC = (props: any) => {
             max-width: 330px;
             margin: 30px auto 0;
           }
-       `}
+        `}
       </style>
     </React.Fragment>
   );
 }
+
+export default UserShopForm;

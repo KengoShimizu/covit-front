@@ -1,12 +1,8 @@
 import React from 'react';
-// library
-// import { Link } from 'react-router-dom';
-// common
-// import { RouteName } from './../../../../common/Const';
 // components
 import HomeLayout from '../../../templates/HomeLayout';
 import CommonStyle from '../../../../common/CommonStyle';
-import Text, { TextThemes } from './../../../atoms/Text';
+import Text, { TextThemes } from '../../../atoms/Text';
 
 const propStyle = {
   privacy: {
@@ -16,7 +12,7 @@ const propStyle = {
   }
 };
 
-export const Privacy: React.FC = (props: any) => {
+const Privacy: React.FC = (props: any) => {
   return (
     <HomeLayout headerText="プライバシーポリシー" prevRef='#' history={props.history}>
       <div className="content">
@@ -276,3 +272,5 @@ export const Privacy: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default Privacy;

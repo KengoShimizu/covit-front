@@ -7,7 +7,7 @@ import HomeLayout from '../../../../templates/HomeLayout';
 // common
 import { RouteName } from '../../../../../common/Const';
 
-export const OwnerRequestTop: React.FC = (props: any) => {
+const OwnerRequestTop: React.FC = (props: any) => {
   const onClick = () => {
     window.location.href = RouteName.OWNER_SHOP_FORM;
   }
@@ -48,3 +48,5 @@ export const OwnerRequestTop: React.FC = (props: any) => {
     </HomeLayout>
   );
 }
+
+export default OwnerRequestTop;
