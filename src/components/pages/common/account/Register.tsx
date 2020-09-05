@@ -14,7 +14,7 @@ const Register: React.FC = (props: any) => {
     <HomeLayout headerText='会員登録・ログイン' prevRef={RouteName.ROOT} history={props.history}>
       <RegisterCardList query={props.location.search}/>
       <div className="about">
-        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら'/>
+        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら' nextRef={RouteName.REQUEST_TOP}/>
       </div>
       <style jsx>{`
         .about{

@@ -16,7 +16,7 @@ const Menu: React.FC = (props: any) => {
       <RegisterCardList query={props.location.search}/>
       <div className="about">
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='covEATについて' nextRef={RouteName.LANDING_PAGE}/>
-        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら'/>
+        <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら' nextRef={RouteName.REQUEST_TOP}/>
       </div>
       <PrivacyFotter/>
       <style jsx>{`

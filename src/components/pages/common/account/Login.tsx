@@ -8,7 +8,6 @@ import { RouteName } from '../../../../common/Const';
 import NextRefBtn from '../../../molecules/NextRefBtn';
 import HomeLayout from '../../../templates/HomeLayout';
 import Button, { ButtonThemes } from '../../../atoms/Button';
-import Text, { TextThemes } from '../../../atoms/Text';
 import Input from '../../../atoms/Input';
 
 interface AddParam {
@@ -55,7 +54,7 @@ const Login: React.FC = (props: any) => {
         <div className="content">
           <div className="mail-form">
             <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
-            {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
+            {/* {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>} */}
             {err ?
               <div className="mail-form_btn-container">
                 <Button theme={[ButtonThemes.SUBNORMAL]}>
