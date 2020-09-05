@@ -119,8 +119,9 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           visibility: visible;
           transition-duration: .5s;
           z-index: 1000;
-          backdrop-filter: blur(3px);
-          -webkit-backdrop-filter: blur(3px);
+          background-color: rgba(0,0,0,.15);
+          backdrop-filter: blur(6px);
+          -webkit-backdrop-filter: blur(6px);
         }
       `}</style>
     </React.Fragment>
