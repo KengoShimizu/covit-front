@@ -26,7 +26,7 @@ const EditEmail: React.FC = (props: any) => {
   // FIXME 終了後ページに飛ばす
   const send = async () => {
     try {
-      await axios.put(`/api/v1/user/users/update_email`, editData)
+      await axios.put(`/api/v1/common/users/update_email`, editData)
       props.history.push({
         pathname: RouteName.SEND,
         state: {
