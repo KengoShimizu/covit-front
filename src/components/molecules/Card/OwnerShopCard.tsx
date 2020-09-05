@@ -55,7 +55,7 @@ const OwnerShopCard: React.FC<OwnerShopCardProps> = ({ shop, deleteModal, publis
         <AccoutTopCard src='/cutlery.svg' text="お店の基本情報を編集" nextRef={`/owner/shop/${shop.id}/edit/detail`} listStyle={propStyle.listStyle}/>
         <AccoutTopCard src='/infection.svg' text="感染対策の内容を編集" nextRef={`/owner/shop/${shop.id}/edit/infections`} listStyle={propStyle.listStyle}/>
         <hr className="shop-card-hr" />
-        <AccoutTopCard src='/trash2.svg' text="お店の情報を削除する" onClick={() => deleteModal(shop.id)} />
+        <AccoutTopCard src='/trash2.svg' text="お店の情報を削除する" onClick={() => deleteModal(shop.id, shop.name)} />
         <hr className="shop-card-hr" />
         <NextRefBtn text='公開ページを確認する' nextRef={`/shops/${shop.id}`} />
       </div>
