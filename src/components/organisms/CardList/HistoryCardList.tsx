@@ -56,6 +56,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
       };
       return cleanup;
     } else {
+      setErr('閲覧履歴が存在しません')
       setHistoryElements([]);
     }
   }, [cookies.get('histories')])

@@ -57,6 +57,7 @@ const History: React.FC = (props: any) => {
             min-height: 100vh;
             background-color: ${CommonStyle.BgGray};
             padding-top: 8px;
+            margin-top: -24px;
           }
           .delete-btn_text{
             color: ${CommonStyle.TextDarkGary};
