@@ -27,13 +27,13 @@ const InputFile: React.FC<InputFileProps> = ({ theme = InputFileThemes.INIT, pro
         <div>
           <Image /><span style={{verticalAlign: 'super', marginLeft: '8px'}}>{label}</span>
         </div>
-        <input type="file" onChange={handleChange} name='image' accept="image/png,image/jpeg,image/gif" />
+        <input type="file" onChange={handleChange} name='image' accept="image/png,image/jpeg,image/gif"/>
       </label>
       <style jsx>
         {`
           .input-file-init{
           }
-
+          
           .input-file {
             display: block;
             justify-content: center;
