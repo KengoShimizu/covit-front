@@ -48,8 +48,8 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
         {/* propstyle */}
         <div onClick={handleInitModal}>
           <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopModal1}>
-            <Search />
-            さっそく飲食店を探す
+            <span className="search-btn_icon"><Search color="#fff" size={20} /></span>
+            <span>さっそく飲食店を探す</span>
           </Button>
           <Link to={RouteName.REGISTER}>
             <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopModal2}>
@@ -69,7 +69,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             height: 100%;
             width: 100%;
             z-index: 1100;
-            position: absolute;
+            position: fixed;
             top: 0;
             background-color: rgba(0,0,0,.15);
             backdrop-filter: blur(6px);
@@ -142,8 +142,9 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             font-size: 12px;
             line-height: 19px;
           }
-          .intro-mordal_btn_icon{
-            margin-right: 4px;
+          .search-btn_icon{
+            margin-right: 8px;
+            height: 20px;
           }
           .disable{
             visibility: hidden;
