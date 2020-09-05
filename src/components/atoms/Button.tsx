@@ -45,7 +45,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
           .button-init{
           }
           .normal-btn {
-            padding: 4px 16px;
+            padding: 6px 20px;
             background: ${CommonStyle.AccentColor};
             border-radius: 4px;
             font-weight: bold;
@@ -54,7 +54,7 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
             color: ${CommonStyle.TextWhite};
           }
           .normal-btn_gray {
-            padding: 8px 24px;
+            padding: 6px 20px;
             background: ${CommonStyle.BgGray};
             border-radius: 4px;
             font-weight: bold;
