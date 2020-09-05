@@ -10,7 +10,6 @@ import TopModal from '../../../molecules/Modal/TopModal';
 import AuthContext from "../../../../context/CommonProvider";
 // common
 import { RouteName } from './../../../../common/Const';
-import AccountTopCard from './../../../molecules/Card/ProfileIconNameCard';
 
 const AccountTop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);

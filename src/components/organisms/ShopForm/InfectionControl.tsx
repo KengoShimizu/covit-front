@@ -42,12 +42,12 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
     setAddData({
       ...addData,
       shop: {
-        ...addData.shops,
+        ...addData.shop,
         [event.target.name]: event.target.value
       }
     })
   }
-
+  
   useEffect(() => {
     let isSubscribed = true;
     setLoading(true);

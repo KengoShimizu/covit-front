@@ -118,7 +118,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }
 
-
   const handleGenreChange = (event: any) => {
     const defaultImage = genres.find((data: any) => data.id === parseInt(event.target.value))?.image
     setAddData({
