@@ -6,6 +6,7 @@ import CommonStyle from '../../../common/CommonStyle';
 import { RouteName } from '../../../common/Const';
 // components
 import Button, { ButtonThemes } from '../../atoms/Button';
+import { Search  } from 'react-feather';
 
 const propStyle = {
   shopModal1: {
@@ -47,7 +48,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
         {/* propstyle */}
         <div onClick={handleInitModal}>
           <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.shopModal1}>
-            <img className="intro-mordal_btn_icon" src='/service-icon.svg' alt="" />
+            <Search />
             さっそく飲食店を探す
           </Button>
           <Link to={RouteName.REGISTER}>
@@ -70,6 +71,9 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
             z-index: 1100;
             position: absolute;
             top: 0;
+            background-color: rgba(0,0,0,.15);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
           }
           .intro-modal-pin_wrapper{
             width: 80px;
