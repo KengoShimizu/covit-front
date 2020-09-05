@@ -18,7 +18,7 @@ import Top from './components/pages/Top';
 import Menu from './components/pages/Menu';
 import NotFound from './components/pages/NotFound';
 // common/account
-import EditProfile from './components/pages/common/account/EditProfile';
+import EditProfile from './components/pages/user/account/auth/EditProfile';
 import EditEmail from './components/pages/common/account/EditEmail';
 import Login from './components/pages/common/account/Login';
 import Send from './components/pages/common/account/Send';
@@ -29,6 +29,7 @@ import About from './components/pages/common/document/About';
 import Privacy from './components/pages/common/document/Privacy';
 // owner/account
 import OwnerAccountTop from './components/pages/owner/account/AccountTop';
+import OwnerEditProfile from './components/pages/owner/account/auth/EditProfile';
 // owner/account/auth
 import OwnerEmailRegister from './components/pages/owner/account/auth/EmailRegister';
 // owner/shop/edit
@@ -37,7 +38,7 @@ import OwnerShopInfoEdit from './components/pages/owner/shop/edit/OwnerShopInfoE
 // owner/shop/register
 import OwnerRequestTop from './components/pages/owner/shop/register/OwnerRequestTop';
 import OwnerShopForm from './components/pages/owner/shop/register/OwnerShopForm';
-// user
+// userprofile-icon1.png
 import History from './components/pages/user/History';
 // user/account
 import AccountTop from './components/pages/user/account/AccountTop';
@@ -83,6 +84,7 @@ function App() {
                       <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
                       <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
                       <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
+                      <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />
                       <Route exact path={RouteName.HISTORY} component={History} />
                       <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
                       <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />

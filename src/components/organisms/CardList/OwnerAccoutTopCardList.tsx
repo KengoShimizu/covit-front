@@ -18,7 +18,7 @@ const OwnerAccountTopCardList: React.FC<OwnerAccoutTopCardListProps> = ({ handle
       <ul className="account-function_list">
         <hr className="account-function_hr" />
         {/* FIXME 導線 */}
-        <AccountTopCard icon={<User size={20} color={CommonStyle.AccentColor} />} text='プロフィール'/>
+        <AccountTopCard icon={<User size={20} color={CommonStyle.AccentColor} />} text='プロフィール' nextRef={RouteName.OWNER_EDIT_PROFILE}/>
         <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='メールアドレス' nextRef={RouteName.EDIT_EMAIL}/>
         <AccountTopCard icon={<LogOut size={20} color={CommonStyle.AccentColor} />} text='ログアウト' onClick={() => handleModalState(0, toggleModalShown)} />
         <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する' onClick={() => handleModalState(1, toggleModalShown)} />
