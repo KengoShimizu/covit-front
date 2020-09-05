@@ -61,13 +61,13 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           cookies_array.pop();
           cookies_date_array.pop();
         }
-        cookies.set('histories', `${data.id},` + cookies_array.join(','));
-        cookies.set('histories_date', createDate() + ',' + cookies_date_array.join(','));
+        cookies.set('histories', `${data.id},` + cookies_array.join(','), { path: '/' });
+        cookies.set('histories_date', createDate() + ',' + cookies_date_array.join(','), { path: '/' });
       }
     }
     else {
-      cookies.set('histories', data.id);
-      cookies.set('histories_date', createDate());
+      cookies.set('histories', data.id, { path: '/' });
+      cookies.set('histories_date', createDate(), { path: '/' });
     }
     props.setMapCenter({ lat: data.latitude, lng: data.longitude });
     props.fetchStepsData(data.shop);

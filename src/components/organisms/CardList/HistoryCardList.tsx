@@ -46,6 +46,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   }
 
   useEffect(() => {
+    console.log(cookie_histories)
     if (cookie_histories) {
       let isSubscribed = true;
       setLoading(true);
@@ -62,12 +63,12 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   }, [cookies.get('histories')])
 
   useEffect(() => {
-    if(shopData.length){
+    if (shopData.length) {
       const history_elements: any = [];
       var histories_date = cookie_histories_date.split(',')
       var histories_ids = cookie_histories.split(',')
       histories_ids.map((shop_id: number, index: number) => {
-        if(!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length){
+        if (!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length) {
           histories_date.splice(index, 1, null);
         }
       })
@@ -75,39 +76,40 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
       shopData.map((shop: Shop, i: number) => {
         if (maxRow && i >= maxRow) {
           return
-        } 
-        if (type === 'search'){
+        }
+        if (type === 'search') {
           history_elements.push(
-            <SearchHistoryCard 
-              name={shop.name} 
-              browse_date={histories_date[i]} 
+            <SearchHistoryCard
+              name={shop.name}
+              browse_date={histories_date[i]}
               nextRef={`/shops/${shop.id}/comments/new`}
-              key={`history${i}`}/>
+              key={`history${i}`} />
           )
         } else {
           history_elements.push(
-            <HistoryCard 
-              name={shop.name} 
-              good_count={shop.good_count} 
-              bad_count={shop.bad_count} 
-              browse_date={histories_date[i]} 
+            <HistoryCard
+              name={shop.name}
+              good_count={shop.good_count}
+              bad_count={shop.bad_count}
+              browse_date={histories_date[i]}
               nextRef={`/shops/${shop.id}`}
-              key={`history${i}`}/>
+              key={`history${i}`} />
           )
-        }})
-        setHistoryElements(history_elements);
+        }
+      })
+      setHistoryElements(history_elements);
     }
   }, [shopData])
 
   return (
-    loading ? <Loading/> :
-    <div className="container">
-      <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '4px' }}>閲覧履歴</Text>
-      <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.errorText}>{err}</Text>
-      <ol className="card-list">
-        {historyElements}
-      </ol>
-      <style jsx>{`
+    loading ? <Loading /> :
+      <div className="container">
+        <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '4px' }}>閲覧履歴</Text>
+        <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.errorText}>{err}</Text>
+        <ol className="card-list">
+          {historyElements}
+        </ol>
+        <style jsx>{`
         .container{
           max-width: 600px;
           margin: 0 auto;
@@ -127,7 +129,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
           box-sizing: border-box;
         }
       `}</style>
-    </div>
+      </div>
   );
 }
 
