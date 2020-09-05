@@ -1,24 +1,20 @@
 import React, { useEffect, useState, useContext } from 'react';
 // library
 import axios from "axios";
-import queryString from 'query-string';
+import useReactRouter from "use-react-router";
+// common
+import { RouteName } from '../../../../../common/Const';
+// component
+import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
+import Button, { ButtonThemes } from './../../../../atoms/Button';
 // template
 import HomeLayout from '../../../../templates/HomeLayout';
-// context
-import AuthContext from '../../../../../context/CommonProvider';
 // types
 import Link from '../../../../../types/Link'
-// others
-import { InfectionControl } from '../../../../organisms/ShopForm/InfectionControl';
-import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
-import OwnerInfo from '../../../../organisms/ShopForm/OwnerInfo';
-import OwnerInfectionEdit from './OwnerInfectionEdit';
+// context
+import TopModalContext from '../../../../../context/TopModalContext';
 
-interface AddParam {
-  owner: {
-    name: string;
-    kana_name: string;
-  },
+interface EditParam {
   shop: {
     name: string;
     kana_name: string;
@@ -30,20 +26,25 @@ interface AddParam {
     price_night: number;
     other_step: string;
   };
-  step_ids: number[];
   genre_id: number;
   links: Link[];
 }
 
+const propStyle = {
+  changeBtn: {
+    position: 'fixed',
+    right: '45px',
+    top: '75px',
+  }
+}
+
 const OwnerShopInfoEdit: React.FC = (props: any) => {
-  const qs = queryString.parse(props.location.search);
-  const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
+  // linksだけ切り分けてるのは無限ループに陥ってしまうから
+  const [defaultLinks, setDefaultLinks] = useState<Link[]>([]);
+  const { match }: any = useReactRouter();
+  const topModalContext = useContext(TopModalContext);
   const [err, setErr] = useState<string>('');
-  const [addData, setAddData] = useState<AddParam>({
-    owner: {
-      name: "",
-      kana_name: "",
-    },
+  const [editData, setEditData] = useState<EditParam>({
     shop: {
       name: "",
       kana_name: "",
@@ -55,72 +56,83 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
       price_night: 0,
       other_step: ""
     },
-    step_ids: [],
     genre_id: 0,
     links: []
   });
 
   const handleChange = (event: any) => {
-    setAddData({
-      ...addData,
+    setEditData({
+      ...editData,
       [event.target.name]: event.target.value
     });
   }
 
-  const handleOwnerChange = (event: any) => {
-    setAddData({
-      ...addData,
-      owner: {
-        ...addData.owner,
-        [event.target.name]: event.target.value
-      }
-    });
+  const fetchData = async () => {
+    try{
+      const res = await axios.get(`/api/v1/owner/shops/${match.params.id}`);
+      setEditData({
+        ...editData,
+        shop: {
+          name: res.data.name,
+          kana_name: res.data.kana_name,
+          address: res.data.address,
+          contact: res.data.contact,
+          image: res.data.image,
+          business_date: res.data.business_date,
+          price_day: res.data.price_day,
+          price_night: res.data.price_night,
+          other_step: res.data.other_step
+        },
+        genre_id: res.data.coordination.genre_id,
+        links: res.data.links
+      });
+      setDefaultLinks(res.data.links);
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const post = async () => {
-    await axios.post('/api/v1/owner/shops', addData)
-      .catch(err => console.log(err))
-      .finally(() => console.log('FIXME 遷移先'));
-    return;
+  const update = async () => {
+    console.log(editData);
+    try{
+      await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: 'お店情報を更新しました！'
+        }
+      });
+      props.history.push(RouteName.OWNER_ACCOUNT_TOP);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
     setErr('');
-  }, [addData])
+  }, [editData])
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page])
+    fetchData();
+  }, [])
 
   return (
     <React.Fragment>
-      {page === 1 &&
-        <HomeLayout headerText="お店の情報登録(1/3)" prevRef='#' history={props.history}>
-          <div className="container">
-            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
-          </div>
-        </HomeLayout>}
-      {page === 2 &&
-        <HomeLayout headerText="お店の情報登録(2/3)" onClick={() => setPage(1)}>
-          <div className="container">
-            <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
-          </div>
-        </HomeLayout>}
-      {page === 3 &&
-        <HomeLayout headerText="お店の情報登録(3/3)" onClick={() => setPage(2)}>
-          <div className="container">
-            <OwnerInfo post={post} handleChange={handleOwnerChange} addData={addData}/>
-          </div>
-        </HomeLayout>}
-      <style jsx>
-        {`
-          .container {
-            width: 100%;
-            max-width: 330px;
-            margin: 30px auto 0;
-          }
-        `}
-      </style>
+      {
+      <HomeLayout headerText="お店の情報登録" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
+        <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn} onClick={update}>変更する</Button>
+        <div className="container">
+          <ShopInfo setAddData={setEditData} addData={editData} defaultLinks={defaultLinks}/>
+        </div>
+      </HomeLayout>
+      }
+      <style jsx>{`
+        .container {
+          width: 100%;
+          max-width: 330px;
+          margin: 30px auto 0;
+        }
+      `}</style>
     </React.Fragment>
   );
 }

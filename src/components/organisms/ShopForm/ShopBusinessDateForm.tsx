@@ -10,9 +10,10 @@ import CommonStyle from '../../../common/CommonStyle';
 interface ShopBusinessDateFormProps {
   setAddData: any;
   addData: any;
+  defaultBusinessDate?: any;
 }
 
-export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setAddData, addData }) => {
+export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setAddData, addData, defaultBusinessDate }) => {
   // FIXME ここはしょうがない気がする.ちゃんとDB直した方が良かった説
   const [businessDate, setBusinessDate] = useState([
     {
@@ -120,6 +121,12 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
     })
   }, [businessDate])
 
+  useEffect(() => {
+   if(defaultBusinessDate){
+    setBusinessDate(JSON.parse(defaultBusinessDate));
+   }
+  }, [defaultBusinessDate])
+
   return (
     <div className="container">
       <p>
@@ -138,15 +145,13 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
           )
         })
       }
-      <style jsx>
-        {`
-          label {
-            font-size: ${CommonStyle.Caption};
-            font-weight: bold;
-            margin-right: 8px;
-          }
-        `}
-      </style>
+      <style jsx>{`
+        label {
+          font-size: ${CommonStyle.Caption};
+          font-weight: bold;
+          margin-right: 8px;
+        }
+      `}</style>
     </div>
   );
 }

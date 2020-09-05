@@ -21,39 +21,38 @@ import CommonStyle from '../../../common/CommonStyle';
 import Validate from '../../../common/Validate';
 
 interface ShopInfoProps {
-  setPage: any;
+  setPage?: any;
   addData: any;
   setAddData: any;
-}
-// FIXME 汚すぎだけど、どう実装しよう~
-var defaultLinks = {
-  homepage: {
-    name: 'ホームページ',
-    url: '',
-    url_type: LinkType.OTHER
-  },
-  instagram: {
-    name: 'Instagram',
-    url: '',
-    url_type: LinkType.INSTAGRAM
-  },
-  twitter: {
-    name: 'Twitter',
-    url: '',
-    url_type: LinkType.TWITTER
-  },
-  facebook: {
-    name: 'Facebook',
-    url: '',
-    url_type: LinkType.FACEBOOK
-  }
+  defaultLinks?: any;
 }
 
-export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData }) => {
+export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks}) => {
   const { match }: any = useReactRouter();
   const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
-  const [links, setLinks] = useState(defaultLinks);
+  const [links, setLinks] = useState({
+    homepage: {
+      name: 'ホームページ',
+      url: '',
+      url_type: LinkType.OTHER
+    },
+    instagram: {
+      name: 'Instagram',
+      url: '',
+      url_type: LinkType.INSTAGRAM
+    },
+    twitter: {
+      name: 'Twitter',
+      url: '',
+      url_type: LinkType.TWITTER
+    },
+    facebook: {
+      name: 'Facebook',
+      url: '',
+      url_type: LinkType.FACEBOOK
+    }
+  });
   const [isOK, setIsOK] = useState(false);
 
   const fetchGenres = async () => {
@@ -112,7 +111,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   useEffect(() => {
     setAddData({
       ...addData,
-      links: Object.values(links).filter((link: Link) => link.url !== '')
+      links: Object.values(links).filter((link: Link) => link.url && link.url !== '')
     });
   }, [links]);
 
@@ -126,33 +125,63 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     }
   }, [addData]);
 
+  useEffect(() => {
+    if (defaultLinks.length) {
+      setLinks({
+        homepage: {
+          name: 'ホームページ',
+          url: defaultLinks.filter((link: Link) => link.url_type === LinkType.OTHER)[0]?.url,
+          url_type: LinkType.OTHER
+        },
+        instagram: {
+          name: 'Instagram',
+          url: defaultLinks.filter((link: Link) => link.url_type === LinkType.INSTAGRAM)[0]?.url,
+          url_type: LinkType.INSTAGRAM
+        },
+        twitter: {
+          name: 'Twitter',
+          url: defaultLinks.filter((link: Link) => link.url_type === LinkType.TWITTER)[0]?.url,
+          url_type: LinkType.TWITTER
+        },
+        facebook: {
+          name: 'Facebook',
+          url: defaultLinks.filter((link: Link) => link.url_type === LinkType.FACEBOOK)[0]?.url,
+          url_type: LinkType.FACEBOOK
+        }
+      })
+    }
+   }, [defaultLinks])
+
   return (
     <div className="container">
-      <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text>
+      {setPage ?
+        <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text> : <React.Fragment></React.Fragment>
+      }
       <ShopForm handleChange={handleChange} addData={addData} />
       {isOwnerPage &&
         /* 営業時間フォーム */
-        <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
+        <ShopBusinessDateForm setAddData={setAddData} addData={addData} defaultBusinessDate={addData.shop.business_date ? addData.shop.business_date : ""}/>
       }
       {/* ジャンル系 */}
-      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" />
-      {!isOwnerPage &&
-        <React.Fragment>
-          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={isOK ? () => setPage(2) : () => {}}>
-            詳細をスキップ<ArrowRight size={24} />
-          </Button>
-          {/* 営業時間フォーム */}
-          <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
-        </React.Fragment>
+      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id}/>
+      {setPage ?
+        !isOwnerPage &&
+          <React.Fragment>
+            <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={isOK ? () => setPage(2) : () => {}}>
+              詳細をスキップ<ArrowRight size={24} />
+            </Button>
+            {/* 営業時間フォーム */}
+            <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
+          </React.Fragment> : <React.Fragment></React.Fragment>
       }
       <label>料理の価格帯</label>
       <div>
         <Sun color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
-        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_day" propStyle={{ marginBottom: '8px', width: '75%', display: 'inline-block' }} />
+        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_day" propStyle={{ marginBottom: '8px', width: '75%', display: 'inline-block' }} defaultValue={addData.shop.price_day} />
       </div>
       <div>
         <Moon color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
-        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_night" propStyle={{ width: '75%', display: 'inline-block' }} />
+        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_night" propStyle={{ width: '75%', display: 'inline-block' }} defaultValue={addData.shop.price_night} />
       </div>
       {/* FIXME ImageUploaderみたいなAPI作った方が良い */}
       <label>ヘッダー画像</label>
@@ -162,14 +191,15 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
-      {isOwnerPage ?
-        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(3) : () => {}}>
-          次へ <ArrowRight />
-        </Button>
-        :
-        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(2) : () => {}}>
-          次へ <ArrowRight />
-        </Button>
+      {setPage ?
+        isOwnerPage ?
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(3) : () => {}}>
+            次へ <ArrowRight />
+          </Button>
+          :
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? () => setPage(2) : () => {}}>
+            次へ <ArrowRight />
+          </Button> : <React.Fragment></React.Fragment>
       }
       <style jsx>
         {`

@@ -18,9 +18,7 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
   const GetUniqueImgs = () => {
     const uniqueArray = stepData.map((data: any) => data.step_category.id);
     const categoryData = stepData.map((data: any) => data.step_category);
-    return categoryData.filter(function (x: any, i: number) {
-      return uniqueArray.indexOf(x.id) === i;
-    });
+    return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
   }
   const uniqueCategory = GetUniqueImgs();
   
