@@ -57,6 +57,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
         .history-card_content{
           width: calc(100% - 60px);
           margin-right: 16px;
+          color: #333;
         }
         .history-card_name{
           font-weight: bold;

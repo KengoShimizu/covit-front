@@ -51,7 +51,6 @@ const FotterActionItem: React.FC<FotterActionItemProps> = ({ svg, svgSize, svgSi
           margin-bottom: 4px;
         }
         .footer-action-bar_icon{
-          height: 20px;
           width: auto;
           stroke: #8C8C8C;
         }
@@ -61,17 +60,12 @@ const FotterActionItem: React.FC<FotterActionItemProps> = ({ svg, svgSize, svgSi
           font-weight: bold;
           color: #8C8C8C;
         }
-        .option_fill{
-          fill: #8C8C8C;
-        }
+        
         .footer-action-bar_icon._clicked{
           stroke: #DF6059;
         }
         .footer-action-bar_caption._clicked{
           color: #DF6059;
-        }
-        .option_fill._clicked{
-          fill: #DF6059;
         }
         
       `}</style>
