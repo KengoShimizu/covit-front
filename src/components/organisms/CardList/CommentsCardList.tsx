@@ -23,10 +23,10 @@ const propStyle = {
     marginRight: '4px',
   },
   isShopPage: {
-    padding: '50px 20px 0',
+    padding: '64px 20px 0',
   },
   isUserPage: {
-    padding: '35px 0 1px',
+    padding: '64px 0 1px',
     backgroundColor: CommonStyle.BgGray,
   }
 };
@@ -264,6 +264,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             width: 100%
           }
           .review-switch_container{
+            padding-top: 24px;
             width: 100%;
             display: flex;
             position: fixed;
