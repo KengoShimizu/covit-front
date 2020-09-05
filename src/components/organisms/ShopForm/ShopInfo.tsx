@@ -8,7 +8,7 @@ import Button, { ButtonThemes } from '../../atoms/Button'
 import Text, { TextThemes } from '../../atoms/Text'
 import Select, { SelectThemes } from '../../atoms/Select'
 import InputFile, { InputFileThemes } from '../../atoms/InputFile';
-import Input, { InputThemes } from '../../atoms/Input'
+import Input from '../../atoms/Input'
 // organisms
 import { ShopForm } from '../../organisms/ShopForm/ShopForm';
 import { ShopLinkForm } from '../../organisms/ShopForm/ShopLinkForm';
@@ -31,6 +31,7 @@ interface ShopInfoProps {
 
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks}) => {
   const { match }: any = useReactRouter();
+  const [image, setImage] = useState<string | ArrayBuffer | null>();
   const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState({
@@ -99,12 +100,92 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }
 
+  const handleImageChange = (event: any) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(event.target.files[0]);
+    reader.onload = () => {
+      setAddData({
+        ...addData,
+        shop: {
+          ...addData.shop,
+          image: reader.result
+        }
+      });
+      // imgResize(reader.result)
+    }
+  }
+
+
   const handleGenreChange = (event: any) => {
+    const defaultImage = genres.find((data: any) => data.id === parseInt(event.target.value))?.image
     setAddData({
       ...addData,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      shop: {
+        ...addData.shop,
+        image: defaultImage
+      }
     });
   }
+
+//   const imgResize = (img: any) => {
+//     //加工後の横幅を400pxに設定
+//     var processingWidth = 400;            
+//     //加工後の容量を100KB以下に設定
+//     var processingCapacity = 100000;                               
+
+//     //imgタグに表示した画像をimageオブジェクトとして取得
+//     var image = new Image();
+//     image.src = img;
+
+//     let h;
+//     let w;
+
+//     //原寸横幅が加工後横幅より大きければ、縦横比を維持した縮小サイズを取得
+//     if(processingWidth < image.width) {
+//         w = processingWidth;
+//         h = image.height * (processingWidth / image.width);
+
+//     //原寸横幅が加工後横幅以下なら、原寸サイズのまま
+//     } else {
+//         w = image.width;
+//         h = image.height;
+//     }
+
+//     //取得したサイズでcanvasに描画
+//     var canvas = document.getElementById('canvas');
+//     var ctx = canvas?.getContext("2d");
+//     $("#canvas").attr("width", w);
+//     $("#canvas").attr("height", h);
+//     ctx.drawImage(image, 0, 0, w, h);                          
+
+//     //canvasに描画したデータを取得
+//     var canvasImage = $("#canvas").get(0);
+
+//     //オリジナル容量(画質落としてない場合の容量)を取得
+//     var originalBinary = canvasImage.toDataURL("image/jpeg"); //画質落とさずバイナリ化
+//     var originalBlob = base64ToBlob(originalBinary); //画質落としてないblobデータをアップロード用blobに設定
+//     console.log(originalBlob["size"]);
+
+//     //オリジナル容量blobデータをアップロード用blobに設定
+//     var uploadBlob = originalBlob;                    
+
+//     //オリジナル容量が加工後容量以上かチェック
+//     if(processingCapacity <= originalBlob["size"]) {
+//         //加工後容量以下に落とす
+//         var capacityRatio = processingCapacity / originalBlob["size"];
+//         var processingBinary = canvasImage.toDataURL("image/jpeg", capacityRatio); //画質落としてバイナリ化
+//         uploadBlob = base64ToBlob(processingBinary); //画質落としたblobデータをアップロード用blobに設定
+//         console.log(capacityRatio);                        
+//         console.log(uploadBlob["size"]);
+//     }
+
+//     //アップロード用blobをformDataに設定
+//     var form = $("#imageForm").get(0);
+//     var formData = new FormData(form);                    
+//     formData.append("selectImage", uploadBlob);
+
+// }
 
   const phoneHandleChange = (e: any) => {
     if(!Validation.formValidate('owner_phone', e.target.value)){
@@ -207,9 +288,17 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       {/* FIXME ImageUploaderみたいなAPI作った方が良い */}
       <label>ヘッダー画像</label>
       <div className="shop-img_wrapper">
-        <img className="shop-img" src={addData.shop.image ? addData.shop.image : ""} alt="shop header" />
+        <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
       </div>
-      <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" />
+      <canvas
+        id="canvas"
+        style={{
+          display: "none"
+        }}
+        width="64"
+        height="64"
+      />
+      <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange}/>
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
       {setPage ?
@@ -239,8 +328,10 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           background: ${CommonStyle.BgGray}
         }
         .shop-img{
-          width: 100%;
-          height: auto;
+          width: auto;
+          height: 100%;
+          margin: 0 auto;
+          display: block;
         }
         `}
       </style>
