@@ -14,6 +14,7 @@ import TopModal from '../../../molecules/Modal/TopModal';
 import ToggleModal from '../../../molecules/Modal/ToggleModal';
 import Modal from '../../../molecules/Modal/Modal';
 import Button, { ButtonThemes } from './../../../atoms/Button';
+import Text, { TextThemes } from './../../../atoms/Text';
 // context
 import AuthContext from "../../../../context/CommonProvider";
 import TopModalContext from '../../../../context/TopModalContext';
@@ -27,6 +28,10 @@ const propStyle = {
   privacy: {
     position: 'relative',
     padding: '50px 0 0',
+  },
+  registerText: {
+    textAlign: 'center',
+    padding: '24px 0 8px',
   }
 }
 interface shopData {
@@ -41,12 +46,12 @@ const OwnerAccountTop: React.FC = (props: any) => {
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
   const [showState, setShowState] = useState(false);
+  const [selectedShopIndex, setSelectedShopIndex] = useState(cookies.get('array_index') ? parseInt(cookies.get('array_index')) : 0);
   const [shopData, setShopData] = useState<shopData[]>([{
     id: 0,
     name: '',
     status: 0,
   }]);
-  const [selectedShopIndex, setSelectedShopIndex] = useState(0);
   const [modalState, setModalState] = useState({
     title: '',
     subtitle: '',
@@ -63,21 +68,32 @@ const OwnerAccountTop: React.FC = (props: any) => {
     }
   }
 
-  const deleteShop = async (shop_id: number) => {
+  const deleteShop = async (shop_id: number, shop_name: string) => {
     try{
       await axios.delete(`/api/v1/owner/shops/${shop_id}`);
-      window.location.href = '/owner/accounts';
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: `${shop_name}を削除しました。`
+        }
+      }); 
+      cookies.set('array_index', 0, { path: '/' })
+      document.body.setAttribute('style', 'pointer-events: none; overflow: hidden;')
+      setTimeout(() => {
+        document.body.removeAttribute('style')
+        window.location.reload(false);
+      }, 2000)
     } catch (error) {
       console.log(error)
     }
   }
 
-  const deleteModal = (shop_id: number) => {
+  const deleteModal = (shop_id: number, shop_name: string) => {
     setModalState({
       title: '本当にお店を削除しますか？',
       subtitle: '一度お店を削除すると、運営に直接連絡して頂かない限り、復元することはできません。',
       btntext: '削除する',
-      onClick: () => deleteShop(shop_id)
+      onClick: () => deleteShop(shop_id, shop_name)
     });
     modalContext.toggleModalShown(true);
   }
@@ -199,6 +215,12 @@ const OwnerAccountTop: React.FC = (props: any) => {
     toggleModalShown(true);
   }
 
+  const handleSelect = (i: number) => {
+    setSelectedShopIndex(i); 
+    setShowState(false)
+    cookies.set('array_index', i, { path: '/' });
+  }
+
   useEffect(() => {
     fetchOwnerShops();
   }, [])
@@ -224,12 +246,13 @@ const OwnerAccountTop: React.FC = (props: any) => {
         subtitle={modalState.subtitle}
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
-      {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} setSelectedShopIndex={setSelectedShopIndex}/>}
-      {shopData.length !== 0 && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
+      {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} onClick={handleSelect}/>}
+      {shopData.length !== 0 && shopData[selectedShopIndex] && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
       
-      {/* FIXME お店登録が一つもない時に「登録しましょう！」的なのほしい */}
-      {shopData.length > 1 &&
+      {shopData.length > 1 ?
         <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={() => setShowState(true)}>お店を切り替え</Button>
+        :
+        <Text theme={[TextThemes.CAPTION, TextThemes.SUBTITLE]} propStyle={propStyle.registerText}>あなたのお店を登録しましょう！</Text>
       }
       <Link to={RouteName.OWNER_SHOP_FORM}>
         <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn}>お店を追加する</Button>
