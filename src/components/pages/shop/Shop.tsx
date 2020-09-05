@@ -157,7 +157,13 @@ const Shop: React.FC = (props: any) => {
                 </div>
                 <hr className="infection-control_hr" />
                 <Link to={`/shops/${match.params.id}/comments/new`}>
-                  <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.commentBtn} onClick={() => redirectContext.setFromPath(RedirectFrom.NEW_COMMENT)}>
+                  <Button 
+                    theme={[ButtonThemes.NORMAL]} 
+                    propStyle={propStyle.commentBtn} 
+                    onClick={() => redirectContext.setUri({
+                      fromPath: RedirectFrom.NEW_COMMENT,
+                      shop: match.params.id
+                    })}>
                     <Edit size={20} color="#fff" />
                     <span className="infection-control_comment-text">感染対策のレビューを書く</span>
                   </Button>

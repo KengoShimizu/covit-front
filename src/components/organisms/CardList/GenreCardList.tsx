@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// library
+import axios from "axios";
 // components
 import CommonStyle from '../../../common/CommonStyle';
 import GenreCard from '../../molecules/Card/GenreCard';
 import Text, { TextThemes } from '../../atoms/Text';
 import Button, { ButtonThemes } from '../../atoms/Button';
-
-// FIXME
-const genres = ['カフェ', 'ラーメン', '和食', '洋食', '中華', 'イタリアン', 'カレー', '焼肉', '寿司', '居酒屋', 'バー', 'その他'];
+// types
+import Genre from '../../../types/Genre';
 
 const propStyle = {
   title: {
@@ -28,9 +29,19 @@ interface GenreCardListProps {
 }
 
 const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelectedGenre, genreSerchIsOpen, setGenreSerchIsOpen, fetchCoordinationsData, lastlat, lastlng}) => {
+  const [genres, setGenres] = useState<Genre[]>([]);
+
+  const fetchGenres = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get('/api/v1/user/genres');
+      if (isSubscribed) setGenres(res.data.data);
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleChange = (event: any) => {
-    const selectedId = genres.findIndex(data => data === event.currentTarget.id) + 1;
+    const selectedId = genres.findIndex(data => data.name === event.currentTarget.id) + 1;
     // 既に選択されていたら除去
     if(selectedGenre.find(data => data === selectedId)){
       setSelectedGenre(selectedGenre.filter(data => data !== selectedId));
@@ -43,6 +54,15 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
       ]);
     }
   }
+  
+  useEffect(() => {
+    let isSubscribed = true;
+    fetchGenres(isSubscribed);
+    const cleanup = () => {
+      isSubscribed = false;
+    };
+    return cleanup;
+  }, []);
 
   return (
     <React.Fragment>
@@ -50,7 +70,11 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
       <div className={genreSerchIsOpen ? 'container' : 'container close'}>
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
         <ul className="genres-container">
-          {Array.from(Array(12).keys(), x => x+1).map(num => <li className="genre-card-wrap" onClick={handleChange} id={genres[num-1]} key={`genre${num}`}><GenreCard src={`genre-icon${num}`} text={genres[num-1]} className={selectedGenre.find(data => data === num) ? 'selected' : ''}/></li>)}
+          {genres.map((data: any, i: number) => (
+            <li className="genre-card-wrap" onClick={handleChange} id={data.name} key={`genre${i}`}>
+              <GenreCard src={data.image} text={data.name} className={selectedGenre.find(data => data === i+1) ? 'selected' : ''}/>
+            </li>
+          ))}
         </ul>
         <div className="genre-btns">
           <Button 
