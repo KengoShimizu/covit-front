@@ -1,13 +1,19 @@
 import React, { useState, useContext } from 'react';
 
 type ModalState = {
-  fromPath: string;
-  setFromPath: any;
+  uri: {
+    fromPath: string;
+    shop?: number;
+  }
+  setUri: any;
 };
 
 const RedirectContext = React.createContext<ModalState>({
-  fromPath: '',
-  setFromPath: () => {},
+  uri: {
+    fromPath: '',
+    shop: 0,
+  },
+  setUri: () => {},
 });
 export default RedirectContext;
 
@@ -16,10 +22,10 @@ type ProviderProps = {
 };
 
 export const RedirectPathProvider: React.FC<ProviderProps> = ({ children }) => {
-  const [fromPath, setFromPath] = useState(useContext(RedirectContext).fromPath);
+  const [uri, setUri] = useState(useContext(RedirectContext).uri);
 
   return (
-    <RedirectContext.Provider value={{fromPath, setFromPath}}>
+    <RedirectContext.Provider value={{ uri, setUri }}>
       {children}
     </RedirectContext.Provider>
   );

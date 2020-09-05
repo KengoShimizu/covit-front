@@ -16,7 +16,7 @@ interface FooterActionBarProps {
 const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAccent }) => {
   const [isClicked, setIsClicked] = useState(initialAccent);
   const { authState } = useContext(AuthContext);
-  const setFormPath = useContext(RedirectContext).setFromPath;
+  const setUri = useContext(RedirectContext).setUri;
 
   return (
     <ul className='footer-action-bar' style={propStyle}>
@@ -45,7 +45,10 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
           </React.Fragment>}
         svgSize={24}
         onClick={() => {
-          setFormPath(RedirectFrom.NEW_COMMENT);
+          setUri({
+            fromPath: RedirectFrom.NEW_COMMENT,
+            shop: 0,
+          });
           setIsClicked(2);
         }}
         isFocus={isClicked === 2 ? '_clicked' : ''}/>
@@ -62,7 +65,10 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
           </React.Fragment>}
         svgSize={22}
         onClick={() => {
-          setFormPath(RedirectFrom.HISTORY);
+          setUri({
+            fromPath: RedirectFrom.HISTORY,
+            shop: 0,
+          });
           setIsClicked(3);
         }}
         isFocus={isClicked === 3 ? '_clicked' : ''}/>

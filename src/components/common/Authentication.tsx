@@ -12,11 +12,13 @@ type AuthProps = {
 };
 
 export const Authentication: React.FC<AuthProps> = ({ children }) => {
-  const { fromPath } = useContext(RedirectContext);
+  const { uri } = useContext(RedirectContext);
   const { authState } = useContext(AuthContext);
   return (
     authState.isLogin ?
       <div>{children}</div> :
-      <Redirect to={`${RouteName.REGISTER}?from=${fromPath}`} />
+        uri.shop !== 0 ? 
+        <Redirect to={`${RouteName.REGISTER}?from=${uri.fromPath}&shop=${uri.shop}`} />:
+          <Redirect to={`${RouteName.REGISTER}?from=${uri.fromPath}`} />
   )
 };
