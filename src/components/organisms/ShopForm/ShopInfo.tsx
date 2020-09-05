@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Sun, Moon, ArrowRight } from 'react-feather';
 import axios from "axios";
 import useReactRouter from "use-react-router";
+import Compress from 'compress.js';
 // atoms
 import Button, { ButtonThemes } from '../../atoms/Button'
 import Text, { TextThemes } from '../../atoms/Text'
@@ -31,6 +32,7 @@ interface ShopInfoProps {
 
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks}) => {
   const { match }: any = useReactRouter();
+  const compress = new Compress()
   const [image, setImage] = useState<string | ArrayBuffer | null>();
   const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -100,19 +102,21 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     });
   }
 
-  const handleImageChange = (event: any) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(event.target.files[0]);
-    reader.onload = () => {
-      setAddData({
-        ...addData,
-        shop: {
-          ...addData.shop,
-          image: reader.result
-        }
-      });
-      // imgResize(reader.result)
-    }
+  const handleImageChange = async (event: any) => {
+    const resizedImage = await compress.compress([event.target.files[0]], {
+      size: .2, // 200kbに圧縮
+      maxWidth: 800,
+      maxHeight: 300,
+      quality: 1, // 画像の品質(画質？)1が最大値
+    })
+    console.log(resizedImage )
+    setAddData({
+      ...addData,
+      shop: {
+        ...addData.shop,
+        image: resizedImage[0].prefix+resizedImage[0].data
+      }
+    });
   }
 
 
@@ -127,65 +131,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       }
     });
   }
-
-//   const imgResize = (img: any) => {
-//     //加工後の横幅を400pxに設定
-//     var processingWidth = 400;            
-//     //加工後の容量を100KB以下に設定
-//     var processingCapacity = 100000;                               
-
-//     //imgタグに表示した画像をimageオブジェクトとして取得
-//     var image = new Image();
-//     image.src = img;
-
-//     let h;
-//     let w;
-
-//     //原寸横幅が加工後横幅より大きければ、縦横比を維持した縮小サイズを取得
-//     if(processingWidth < image.width) {
-//         w = processingWidth;
-//         h = image.height * (processingWidth / image.width);
-
-//     //原寸横幅が加工後横幅以下なら、原寸サイズのまま
-//     } else {
-//         w = image.width;
-//         h = image.height;
-//     }
-
-//     //取得したサイズでcanvasに描画
-//     var canvas = document.getElementById('canvas');
-//     var ctx = canvas?.getContext("2d");
-//     $("#canvas").attr("width", w);
-//     $("#canvas").attr("height", h);
-//     ctx.drawImage(image, 0, 0, w, h);                          
-
-//     //canvasに描画したデータを取得
-//     var canvasImage = $("#canvas").get(0);
-
-//     //オリジナル容量(画質落としてない場合の容量)を取得
-//     var originalBinary = canvasImage.toDataURL("image/jpeg"); //画質落とさずバイナリ化
-//     var originalBlob = base64ToBlob(originalBinary); //画質落としてないblobデータをアップロード用blobに設定
-//     console.log(originalBlob["size"]);
-
-//     //オリジナル容量blobデータをアップロード用blobに設定
-//     var uploadBlob = originalBlob;                    
-
-//     //オリジナル容量が加工後容量以上かチェック
-//     if(processingCapacity <= originalBlob["size"]) {
-//         //加工後容量以下に落とす
-//         var capacityRatio = processingCapacity / originalBlob["size"];
-//         var processingBinary = canvasImage.toDataURL("image/jpeg", capacityRatio); //画質落としてバイナリ化
-//         uploadBlob = base64ToBlob(processingBinary); //画質落としたblobデータをアップロード用blobに設定
-//         console.log(capacityRatio);                        
-//         console.log(uploadBlob["size"]);
-//     }
-
-//     //アップロード用blobをformDataに設定
-//     var form = $("#imageForm").get(0);
-//     var formData = new FormData(form);                    
-//     formData.append("selectImage", uploadBlob);
-
-// }
 
   const phoneHandleChange = (e: any) => {
     if(!Validation.formValidate('owner_phone', e.target.value)){

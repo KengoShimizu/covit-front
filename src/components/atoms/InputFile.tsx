@@ -27,7 +27,7 @@ const InputFile: React.FC<InputFileProps> = ({ theme = InputFileThemes.INIT, pro
         <div>
           <Image /><span style={{verticalAlign: 'super', marginLeft: '8px'}}>{label}</span>
         </div>
-        <input type="file" onChange={handleChange} name='image' accept="image/*" />
+        <input type="file" onChange={handleChange} name='image' accept="image/png,image/jpeg,image/gif" />
       </label>
       <style jsx>
         {`
