@@ -12,13 +12,15 @@ import Button, { ButtonThemes } from '../../../../atoms/Button';
 
 interface AddParam {
   email: string;
+  is_owner: number;
 }
 
 const OwnerEmailRegister: React.FC = (props: any) => {
   const [err, setErr] = useState("");
   const [isOK, setIsOK] = useState(true);
   const [addData, setAddData] = useState<AddParam>({
-    email: ""
+    email: "",
+    is_owner: 1,
   });
 
   const send = async () => {
@@ -40,6 +42,7 @@ const OwnerEmailRegister: React.FC = (props: any) => {
 
   const handleChange = (event: any) => {
     setAddData({
+      ...addData,
       email: event.target.value
     });
   }
@@ -50,7 +53,7 @@ const OwnerEmailRegister: React.FC = (props: any) => {
   },[addData])
 
   return (
-    <HomeLayout headerText="メールアドレス登録" prevRef={RouteName.REGISTER}>
+    <HomeLayout headerText="オーナー様会員登録" prevRef={RouteName.REQUEST_TOP}>
       <div className="form">
         <div className="content">
           <div className="mail-form">

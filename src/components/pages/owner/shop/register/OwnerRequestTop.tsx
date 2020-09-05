@@ -1,17 +1,22 @@
 import React from 'react';
-// atoms
+// library 
+import { Link } from 'react-router-dom';
+// components
 import Text, { TextThemes } from '../../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
-// templates
 import HomeLayout from '../../../../templates/HomeLayout';
+import NextRefBtn from '../../../../molecules/NextRefBtn';
 // common
 import { RouteName } from '../../../../../common/Const';
 
-const OwnerRequestTop: React.FC = (props: any) => {
-  const onClick = () => {
-    window.location.href = RouteName.OWNER_SHOP_FORM;
+const propStyle = {
+  login: {
+    padding: '32px 0',
+    margin: '24px 0 0',
   }
+}
 
+const OwnerRequestTop: React.FC = (props: any) => {
   return (
     <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT} history={props.history}>
       <div className="container">
@@ -24,7 +29,10 @@ const OwnerRequestTop: React.FC = (props: any) => {
         <div className="img-container">
           <img className="icon" src='/arrow-down.png' /> 
         </div>
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '0 auto'}} onClick={onClick}>登録をリクエストする</Button>
+        <Link to={RouteName.OWNER_REGISTER_EMAIL}>
+          <Button theme={[ButtonThemes.NORMAL]} propStyle={{margin: '0 auto'}}>登録をリクエストする</Button>
+        </Link>
+        <NextRefBtn nextRef={RouteName.LOGIN} text='ログインはこちら' style={propStyle.login}/>
       </div>
       <style jsx>
         {`

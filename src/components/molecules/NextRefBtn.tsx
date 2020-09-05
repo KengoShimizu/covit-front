@@ -15,12 +15,13 @@ const propStyle = {
 interface NextRefBtnProps {
   nextRef: string;
   text: string;
+  style?: any;
 }
 
-const NextRefBtn: React.FC<NextRefBtnProps> = ({nextRef, text}) => {
+const NextRefBtn: React.FC<NextRefBtnProps> = ({nextRef, text, style}) => {
   return (
     <Link to={nextRef}>
-      <div className="next-ref-btn">
+      <div className="next-ref-btn" style={style}>
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.nextRefBtnText}>{text}</Text>
         <Icon theme={[IconThemes.NORMAL]}>
           <ChevronRight size={24} color="#333" />
