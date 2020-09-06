@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 // library
 import axios from "axios";
-import queryString from 'query-string';
 // template
 import HomeLayout from '../../../../templates/HomeLayout';
 // context
 import TopModalContext from '../../../../../context/TopModalContext';
+import AuthContext from "../../../../../context/CommonProvider";
 // types
 import Link from '../../../../../types/Link'
 // others
@@ -36,8 +36,8 @@ interface AddParam {
 }
 
 const OwnerShopForm: React.FC = (props: any) => {
-  const qs = queryString.parse(props.location.search);
-  const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
+  const { authState } = useContext(AuthContext);
+  const [page, setPage] = useState(1);
   const [err, setErr] = useState<string>('');
   const topModalContext = useContext(TopModalContext);
   const [addData, setAddData] = useState<AddParam>({
@@ -60,13 +60,8 @@ const OwnerShopForm: React.FC = (props: any) => {
     genre_id: 0,
     links: []
   });
-
-  const handleChange = (event: any) => {
-    setAddData({
-      ...addData,
-      [event.target.name]: event.target.value
-    });
-  }
+  const noKanaName = !authState.user.kana_name;
+  const totalPage = noKanaName ? 3 : 2;
 
   const handleOwnerChange = (event: any) => {
     setAddData({
@@ -105,18 +100,18 @@ const OwnerShopForm: React.FC = (props: any) => {
   return (
     <React.Fragment>
       {page === 1 &&
-        <HomeLayout headerText="お店の情報登録(1/3)" prevRef='#' history={props.history}>
+        <HomeLayout headerText={`お店の情報登録(1/${totalPage})`} prevRef='#' history={props.history}>
         <div className="container">
           <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
         </div>
       </HomeLayout>}
       {page === 2 &&
-        <HomeLayout headerText="お店の情報登録(2/3)" onClick={() => setPage(1)}>
+        <HomeLayout headerText={`お店の情報登録(2/${totalPage})`} onClick={() => setPage(1)}>
           <div className="container">
-            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData}/>
+            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} noKanaName={noKanaName} post={noKanaName? undefined : post}/>
           </div>
         </HomeLayout>}
-      {page === 3 &&
+      {page === 3 && noKanaName &&
         <HomeLayout headerText="お店の情報登録(3/3)" onClick={() => setPage(2)}>
           <div className="container">
             <OwnerInfo post={post} handleChange={handleOwnerChange} addData={addData}/>

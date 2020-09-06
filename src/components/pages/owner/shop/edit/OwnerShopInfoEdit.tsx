@@ -93,7 +93,6 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
   }
 
   const update = async () => {
-    console.log(editData);
     try{
       await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
       topModalContext.setContents({

@@ -19,9 +19,10 @@ interface InfectionControlProps {
   addData: any;
   setAddData: any;
   post?: any;
+  noKanaName?: boolean;
 }
 
-export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post }) => {
+export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, noKanaName }) => {
   const { match }: any = useReactRouter();
   const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -80,7 +81,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
       {!isEdit &&
         <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
-      {identifer === 'user' ?
+      {identifer === 'user' || !noKanaName ?
         <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? post : () => {}}>
           登録する
         </Button>

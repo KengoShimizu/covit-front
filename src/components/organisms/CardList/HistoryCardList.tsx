@@ -46,7 +46,6 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   }
 
   useEffect(() => {
-    console.log(cookie_histories)
     if (cookie_histories) {
       let isSubscribed = true;
       setLoading(true);
