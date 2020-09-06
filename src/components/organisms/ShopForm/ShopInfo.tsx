@@ -206,7 +206,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         <ShopBusinessDateForm setAddData={setAddData} addData={addData} defaultBusinessDate={addData.shop.business_date ? addData.shop.business_date : ""}/>
       }
       {/* ジャンル系 */}
-      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id}/>
+      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id} labelColor={{color: CommonStyle.TextBlack}}/>
       {setPage ?
         !isOwnerPage &&
           <React.Fragment>
@@ -214,7 +214,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
               詳細をスキップ<ArrowRight size={24} />
             </Button>
             {/* 電話番号 */}
-            <Input handleChange={phoneHandleChange} label='電話番号(半角数字のみ)' placeholder='02019228888' content={addData.shop.contact} name='contact' />
+            <Input handleChange={phoneHandleChange} label='電話番号(半角数字のみ)' placeholder='02019228888' content={addData.shop.contact} name='contact' labelColor={{color: CommonStyle.TextBlack}}/>
             {/* 営業時間フォーム */}
             <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
           </React.Fragment> : <React.Fragment></React.Fragment>
@@ -241,7 +241,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         width="64"
         height="64"
       />
-      <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange}/>
+      <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
       {setPage ?

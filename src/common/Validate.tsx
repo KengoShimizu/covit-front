@@ -37,8 +37,8 @@ export const infectionsValidation = (data: any): string => {
 
 export const ownerInfoValidation = (data: any): string => {
   let returnStr = '';
-  if (!data.owner.name) returnStr = returnStr + 'お名前を入力してください';
-  if (!data.owner.kana_name) returnStr = returnStr + 'ふりがなを入力してください';
+  if (!data.owner.name) returnStr = returnStr + 'お名前を入力してください\n';
+  if (!data.owner.kana_name) returnStr = returnStr + 'ふりがなを入力してください\n';
   return returnStr;
 }
 
@@ -49,6 +49,13 @@ export const phoneValidation = (value: any): string => {
   return err;
 }
 
+export const commentValidation = (data: any): string => {
+  let returnStr = '';
+  if (data.reputation === 0) return returnStr = returnStr +　'評価を選択してください\n';
+  if (data.date === '' || data.date === '0') return returnStr = returnStr +　'来店月を選択してください\n';
+  return returnStr;
+}
+
 export default class Validation {
   static formValidate = (type: string, value: any) => {
     switch (type) {
@@ -56,6 +63,8 @@ export default class Validation {
         return emailValidation(value);
       case 'edit_profile':
         return profileValidation(value);
+      case 'comment':
+        return commentValidation(value);
 
       // shop form
       case 'user_shop_form':
