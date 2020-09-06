@@ -43,10 +43,12 @@ const OwnerShopForm: React.FC = (props: any) => {
   const [page, setPage] = useState(1);
   const [err, setErr] = useState<string>('');
   const topModalContext = useContext(TopModalContext);
+  const noKanaName = !authState.user.kana_name;
+  const totalPage = noKanaName ? 3 : 2;
   const [addData, setAddData] = useState<AddParam>({
     owner: {
-      name: "",
-      kana_name: "",
+      name: authState.user.name ? authState.user.name : "",
+      kana_name: authState.user.kana_name ? authState.user.kana_name : "",
     },
     shop: {
       name: "",
@@ -63,8 +65,6 @@ const OwnerShopForm: React.FC = (props: any) => {
     genre_id: 0,
     links: []
   });
-  const noKanaName = !authState.user.kana_name;
-  const totalPage = noKanaName ? 3 : 2;
 
   const handleOwnerChange = (event: any) => {
     setAddData({
