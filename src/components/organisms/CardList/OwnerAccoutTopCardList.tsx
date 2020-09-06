@@ -26,6 +26,10 @@ const OwnerAccountTopCardList: React.FC<OwnerAccoutTopCardListProps> = ({ handle
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor} />} text='covEATについて' nextRef={RouteName.LANDING_PAGE} />
       </ul>
       <style jsx>{`
+        .container{
+          max-width: 550px;
+          margin: 0 auto;
+        }
         .account-function_list{
           padding: 0 16px;
           margin: 40px 0;
