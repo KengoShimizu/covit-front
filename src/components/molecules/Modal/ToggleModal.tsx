@@ -1,7 +1,6 @@
 import React from 'react';
 // library
 import { Check } from 'react-feather';
-import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 // components
@@ -70,6 +69,8 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
             -webkit-backdrop-filter: blur(6px);
           }
           .modal-container{
+            overflow-y: scroll;
+            max-height: 300px;
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
             position: fixed;
             z-index: 10000;
