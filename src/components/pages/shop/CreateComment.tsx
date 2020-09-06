@@ -5,25 +5,35 @@ import axios from 'axios';
 import { Smile, Frown } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { Comment, RouteName } from '../../../common/Const';
+import { Comment, RouteName, VisitMonthArray } from '../../../common/Const';
+import Validate from '../../../common/Validate';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import InfectionControlList from '../../organisms/InfectionControlList';
 import Loading from '../../molecules/Loading';
+import Button, { ButtonThemes } from '../../atoms/Button';
+import Select from './../../atoms/Select'
 // context
 import TopModalContext from '../../../context/TopModalContext';
 
-export interface AddParam {
+const propStyle = {
+  formBtn: {
+    margin: '0 auto',
+    padding: '8px 40px',
+  }
+}
+
+interface AddParam {
   content: string;
   shop_id: number;
   reputation: number;
   date: string;
 }
 
-//レビュー記入
-// FIXME 1.formに来店日追加 2.評価に対してvalidationかける
+// レビュー記入
 const CreateComment: React.FC = (props: any) => {
   const [loading, setLoading] = useState(true);
+  const [isOK, setIsOK] = useState(false);
   const topModalContext = useContext(TopModalContext);
   const { match }: any = useReactRouter();
   const [addData, setAddData] = useState<AddParam>({
@@ -55,7 +65,10 @@ const CreateComment: React.FC = (props: any) => {
 
   const postData = async () => {
     try{
-      await axios.post(`/api/v1/user/comments`, addData)
+      await axios.post(`/api/v1/user/comments`, {
+          ...addData,
+          date: new Date(parseInt(addData.date.substr(0,4)), parseInt(addData.date.substr(5,2))-1)
+        })
       topModalContext.setContents({
         isShown: true,
         text: {
@@ -96,6 +109,10 @@ const CreateComment: React.FC = (props: any) => {
     return cleanup;
   }, [])
 
+  useEffect(() => {
+    if(Validate.formValidate('comment', addData)) setIsOK(false);
+    else setIsOK(true);
+  }, [addData])
 
   return (
     <HomeLayout headerText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
@@ -127,18 +144,26 @@ const CreateComment: React.FC = (props: any) => {
                     </li>
                   </ul>
                 </li>
+                <li className="review-form_selector_container">
+                  <Select handleChange={handleChange} label='来店月を選択してください' defaultLabel={'来店月を選択してください'} defaultValue={0} items={VisitMonthArray} name={'date'} labelColor={{color: CommonStyle.TextBlack}}/>
+                </li>
                 <li className="review-form_comment_container">
                   <label className="review-form_comment-label" htmlFor="">感染対策についての感想や評価を記入しよう！</label>
                   <textarea className="review-form_comment-input" placeholder="換気や消毒を徹底していてよかった。" name="content" id="comment" onChange={handleChange} />
                 </li>
                 <li className="review-form_btn_container">
-                  <button className="review-form_btn" onClick={postData}>投稿する</button>
+                  <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={propStyle.formBtn} onClick={isOK ? postData : () => {}}>
+                    投稿する
+                  </Button>
                 </li>
               </ul>
             </div>
           </div>
         </div>}
       <style jsx>{`
+          .shop-name{
+            padding-top: 16px;
+          }
           .icon-list{
             display: flex;
             padding: 0;
@@ -184,8 +209,8 @@ const CreateComment: React.FC = (props: any) => {
           // 感染対策
           .infection-control_card{
             padding: 16px 0;
-            border-top: 2px solid ${CommonStyle.BorderGray};
-            border-bottom: 2px solid ${CommonStyle.BorderGray};
+            border-top: 8px solid ${CommonStyle.BgGray};
+            border-bottom: 8px solid ${CommonStyle.BgGray};
           }
           .infection-control_title{
             font-weight: bold;
@@ -261,15 +286,6 @@ const CreateComment: React.FC = (props: any) => {
           }
           .review-form_btn_container{
             text-align: center;
-          }
-          .review-form_btn{
-            background: ${CommonStyle.AccentColor};
-            border-radius: 4px;
-            padding: 8px 32px;
-            color: white;
-            font-weight: bold;
-            font-size: 14px;
-            line-height: 24px;
           }
         `}</style>
     </HomeLayout>

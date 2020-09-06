@@ -1,4 +1,5 @@
 /* コメントタイプ */
+import { FormatDate_YM, CalcBeforeMonth_YM } from './Function';
 export class Comment {
   public static readonly REPUTATION_GOOD = 1 // 良い評価
   public static readonly REPUTATION_BAD  = 2 // 悪い評価
@@ -63,6 +64,34 @@ export const PriceArray: Array<any> = [
   {
     id: Price.MORE_THAN_TEN_THOUSAND,
     name: '￥10,000~'
+  }
+]
+
+const thisMonth = FormatDate_YM(new Date())
+export const VisitMonthArray: Array<any> = [
+  {
+    id: thisMonth,
+    name: thisMonth
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 1),
+    name: CalcBeforeMonth_YM(thisMonth, 1)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 2),
+    name: CalcBeforeMonth_YM(thisMonth, 2)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 3),
+    name: CalcBeforeMonth_YM(thisMonth, 3)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 4),
+    name: CalcBeforeMonth_YM(thisMonth, 4)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 5),
+    name: CalcBeforeMonth_YM(thisMonth, 5)
   }
 ]
 

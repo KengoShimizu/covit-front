@@ -11,6 +11,7 @@ interface SelectProps {
   items: any[];
   name: string;
   defaultValue: number;
+  labelColor?: any;
 }
 
 export enum SelectThemes {
@@ -23,10 +24,10 @@ enum ModifierClassNames {
   REQUIRED = 'select-required',
 }
 
-const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = {}, handleChange, label, items, name, defaultLabel, defaultValue }) => {
+const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = {}, handleChange, label, items, name, defaultLabel, defaultValue, labelColor }) => {
   return (
     <div className={["select", ModifierClassNames[theme]].join(' ')} style={propStyle}>
-      <label>{label}<span>*</span></label>
+      <label style={labelColor}>{label}<span>*</span></label>
       <select onChange={handleChange} name={name}>
         {defaultLabel ? <option value={0}>{defaultLabel}</option> : ""}
         {items.map((item: any, i: number) => {

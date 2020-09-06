@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// common
+import CommonStyle from './../../../common/CommonStyle';
 // atoms
 import Input, { InputThemes } from '../../atoms/Input';
 import Button, { ButtonThemes } from '../../atoms/Button';
@@ -21,8 +23,8 @@ const OwnerInfo: React.FC<OwnerInfoProps> = ({ handleChange, addData, post }) =>
 
   return (
     <div className="container">
-      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='お名前' placeholder='名前太郎' content={addData.owner.name} name='name' />
-      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='ふりがな' placeholder='なまえたろう' content={addData.owner.kana_name} name='kana_name' />
+      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='お名前' placeholder='名前太郎' content={addData.owner.name} name='name' labelColor={{color: CommonStyle.TextBlack}}/>
+      <Input theme={InputThemes.REQUIRED} handleChange={handleChange} label='ふりがな' placeholder='なまえたろう' content={addData.owner.kana_name} name='kana_name' labelColor={{color: CommonStyle.TextBlack}}/>
       <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '150px' }} onClick={isOK ? post : () => {}}>
         リクエストする
       </Button>
