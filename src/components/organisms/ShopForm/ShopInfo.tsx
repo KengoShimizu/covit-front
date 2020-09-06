@@ -119,15 +119,17 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
   }
 
   const handleGenreChange = (event: any) => {
-    const defaultImage = genres.find((data: any) => data.id === parseInt(event.target.value))?.image
-    setAddData({
-      ...addData,
-      [event.target.name]: event.target.value,
-      shop: {
-        ...addData.shop,
-        image: defaultImage
-      }
-    });
+    if (!(addData.shop.image.length > 100)) {
+      const defaultImage = genres.find((data: any) => data.id === parseInt(event.target.value))?.image
+      setAddData({
+        ...addData,
+        [event.target.name]: event.target.value,
+        shop: {
+          ...addData.shop,
+          image: defaultImage
+        }
+      });
+    }
   }
 
   const phoneHandleChange = (e: any) => {
