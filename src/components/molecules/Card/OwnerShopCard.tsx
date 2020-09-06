@@ -63,6 +63,9 @@ const OwnerShopCard: React.FC<OwnerShopCardProps> = ({ shop, deleteModal, publis
         .shop-card-container{
           margin-top: 20px;
           padding: 8px;
+          max-width: 550px;
+          margin: 0 auto;
+          margin-top: 24px;
         }
         .shop-card{
           padding: 16px;

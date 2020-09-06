@@ -15,6 +15,7 @@ import ToggleModal from '../../../molecules/Modal/ToggleModal';
 import Modal from '../../../molecules/Modal/Modal';
 import Button, { ButtonThemes } from './../../../atoms/Button';
 import Text, { TextThemes } from './../../../atoms/Text';
+import Loading from './../../../molecules/Loading';
 // context
 import AuthContext from "../../../../context/CommonProvider";
 import TopModalContext from '../../../../context/TopModalContext';
@@ -42,6 +43,7 @@ interface shopData {
 
 const OwnerAccountTop: React.FC = (props: any) => {
   const { authState, setAuth } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const cookies = new Cookies();
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
@@ -222,7 +224,9 @@ const OwnerAccountTop: React.FC = (props: any) => {
   }
 
   useEffect(() => {
+    setLoading(true);
     fetchOwnerShops();
+    setLoading(false);
   }, [])
 
   useEffect(() => {
@@ -246,9 +250,13 @@ const OwnerAccountTop: React.FC = (props: any) => {
         subtitle={modalState.subtitle}
         btntext={modalState.btntext}
         onClick={modalState.onClick}/>
-      {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} onClick={handleSelect}/>}
-      {shopData.length !== 0 && shopData[selectedShopIndex] && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
       
+      {loading ? <Loading/> :
+        <React.Fragment>
+          {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} onClick={handleSelect}/>}
+          {shopData.length !== 0 && shopData[selectedShopIndex] && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
+        </React.Fragment>
+      }
       {shopData.length > 1 ?
         <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={() => setShowState(true)}>お店を切り替え</Button>
         :
