@@ -27,7 +27,7 @@ const propStyle = {
     padding: '64px 20px 0',
   },
   isUserPage: {
-    padding: '162px 0 1px',
+    padding: '68px 0 1px',
     backgroundColor: CommonStyle.BgGray,
   }
 };
@@ -245,7 +245,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             hasMore={!showLoader && (state === 'good' ? pagenationForGood.total > goodReputations.length : pagenationForBad.total > badReputations.length)}
             loadMore={state === 'good' ? fetchMoreGoodData : fetchMoreBadData}
             initialLoad={false}
-            style={isShopPage ? propStyle.isShopPage : propStyle.isUserPage}
+            style={isShopPage ? propStyle.isShopPage : isCurrentUser ? propStyle.isUserPage : { padding: '162px 0 1px', backgroundColor: CommonStyle.BgGray,}}
           >
             {
               (state === 'good' ? goodReputations : badReputations).map((comment: any) => {
