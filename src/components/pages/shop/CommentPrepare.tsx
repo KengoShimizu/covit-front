@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // library
 import { Search } from 'react-feather';
 import axios from 'axios';
@@ -7,7 +7,6 @@ import HomeLayout from '../../templates/HomeLayout';
 import HistoryCardList from '../../organisms/CardList/HistoryCardList';
 import ShopCardList from '../../organisms/CardList/ShopCardList';
 import Input from '../../atoms/Input';
-import Text, { TextThemes } from '../../atoms/Text';
 import Loading from '../../molecules/Loading';
 // common
 import { RequestTextSection } from '../../molecules/RequestTextSection';
@@ -48,23 +47,19 @@ const CommentPrepare: React.FC = (props: any) => {
       fetchShopsData()
     }
   }
-
-  // リアルタイム検索したかったけど今回なぜかうまくいかないので一旦削除
-  // 検索アイコン押された時に検索するようにした
-
-  // useEffect(() => {
-  //   if (searchData.name !== '') {
-  //     let isSubscribed = true;
-  //     const cleanup = () => {
-  //       console.log("clean:"+searchData.name)
-  //       isSubscribed = false;
-  //     };
-  //     if(isSubscribed){
-  //       fetchShopsData();
-  //     }
-  //     return cleanup;
-  //   }
-  // }, [searchData.name])
+  
+  useEffect(() => {
+    if (searchData.name !== '') {
+      let isSubscribed = true;
+      const cleanup = () => {
+        isSubscribed = false;
+      };
+      if(isSubscribed){
+        fetchShopsData();
+      }
+      return cleanup;
+    }
+  }, [searchData.name])
 
   return (
     <HomeLayout headerText='お店のレビューを登録する' prevRef='/'>

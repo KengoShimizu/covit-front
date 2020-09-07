@@ -12,6 +12,7 @@ import { OwnerRoute } from './components/common/OwnerRoute'; // 店のオーナ�
 import { UserRoute } from './components/common/UserRoute'; // 一般ユーザーのみ
 import { NotOwnerRoute } from './components/common/NotOwnerRoute'; // 一般ユーザーとゲストのみ
 import { AuthRoute } from './components/common/AuthRoute'; // ログイン状態のみ
+import { GuestRoute } from './components/common/GuestRoute'; // ゲストのみ
 import { RedirectPathProvider } from './context/RedirectContext';
 // pages
 import Top from './components/pages/Top';
@@ -69,14 +70,14 @@ function App() {
                     <NotOwnerRoute exact path={RouteName.ROOT} component={Top} />
                     <NotOwnerRoute exact path={RouteName.MENU} component={Menu} />
                     <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
+                    <GuestRoute exact path={RouteName.REGISTER} component={Register} />
+                    <GuestRoute exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
+                    <GuestRoute exact path={RouteName.LOGIN} component={Login} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
                     <Route exact path={RouteName.LANDING_PAGE} component={About} />
                     <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} />
-                    <Route exact path={RouteName.LOGIN} component={Login} />
-                    <Route exact path={RouteName.REGISTER} component={Register} />
-                    <Route exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
                     <Route exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
                     <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
