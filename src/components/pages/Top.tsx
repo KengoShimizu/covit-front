@@ -19,6 +19,7 @@ import FooterActionBar from './../organisms/FooterActionBar';
 import TopModalContext from '../../context/TopModalContext';
 // types
 import Genre from '../../types/Genre';
+import Loading from '../molecules/Loading';
 
 // ボタンのCSS
 const propStyle = {
@@ -201,7 +202,7 @@ const Top: React.FC = (props: any) => {
     <HomeLayout>
       <TopModal/>
       <div className='container'>
-        
+        {loading && <Loading/>}
         <MapObject
           setPopupIsOpen={setPopupIsOpen}
           loading={loading}
