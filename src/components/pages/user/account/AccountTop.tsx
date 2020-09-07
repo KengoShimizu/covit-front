@@ -33,7 +33,7 @@ const AccountTop: React.FC = (props: any) => {
         .profile-head_container{
           max-width: 400px;
           width: 100%;
-          margin: 16px auto 40px auto;
+          margin: 16px auto 20px auto;
           padding-left: 12px;
           box-sizing: border-box;
           display: flex;

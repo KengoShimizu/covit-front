@@ -13,11 +13,12 @@ const propStyle = {
 interface AccoutTopCardProps {
   src: string;
   name: string;
+  style?: any;
 }
 
-const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name}) => {
+const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name, style}) => {
   return (
-    <div className="account-info_card">
+    <div className="account-info_card" style={style}>
       {/* FIXME IconThemes.COVIDMEASURE*/}
       <Icon theme={[IconThemes.PROFILE]} propStyle={propStyle.accountIcon}>
         <img className="account-info_profile-icon" src={src} alt=""/>
@@ -32,9 +33,7 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name}) => {
           width: 100%;
           box-sizing: border-box;
           padding: 24px 0 24px 16px;
-          position: fixed;
-          z-index: 100;
-          background: ${CommonStyle.BgWhite}
+          background: ${CommonStyle.BgWhite};
         }
         .account-info_profile-icon{
           width: 100%;

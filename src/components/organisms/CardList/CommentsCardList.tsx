@@ -27,7 +27,7 @@ const propStyle = {
     padding: '64px 20px 0',
   },
   isUserPage: {
-    padding: '64px 0 1px',
+    padding: '162px 0 1px',
     backgroundColor: CommonStyle.BgGray,
   }
 };
@@ -267,16 +267,15 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
         </div>}
       <style jsx>{`
           .container{
-            width: 100%;    
-            position: absolute;
-            top: 144px;
-            z-index: 10;
+            width: 100%;
           }
           .review-switch_container{
             width: 100%;
             display: flex;
+            background-color: ${CommonStyle.BgWhite};
+            padding-top: 1.5rem;
             position: fixed;
-            background-color: ${CommonStyle.BgWhite}
+            top: ${!isShopPage && !isCurrentUser ? '128px' : ''};
           }
           .review-switch{
             width: 50%;
@@ -284,6 +283,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             align-items:center;
             justify-content: center;
             padding-bottom: 6px;
+            cursor: pointer;
           }
           .review-switch_num{
             font-weight: bold;

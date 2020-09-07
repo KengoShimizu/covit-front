@@ -240,14 +240,14 @@ const Shop: React.FC = (props: any) => {
                   </ul>
                 </section>
                 {/* FIXME v2で実装 */}
-                <div style={{ display: 'none' }}>
+                {/* <div style={{ display: 'none' }}>
                   <hr className="shop_hr" />
                   <section className="shop-card_section">
                     <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
                       情報の編集をリクエスト
                   </Button>
                   </section>
-                </div>
+                </div> */}
                 {/* ここまで */}
               </div>
               <style jsx>{`
