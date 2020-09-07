@@ -19,12 +19,15 @@ interface InfectionControlProps {
   addData: any;
   setAddData: any;
   post?: any;
+  noKanaName?: boolean;
+  load2?: boolean;
 }
 
-export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post }) => {
+export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, noKanaName, load2 }) => {
   const { match }: any = useReactRouter();
   const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
+  const isEdit = match.path.match(/edit/g);
   const identifer = match.path.match(/owner/g) ? 'owner' : 'user';
   const [stepCategories, setStepCategories] = useState<StepCategory[]>([]);
 
@@ -41,12 +44,12 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
     setAddData({
       ...addData,
       shop: {
-        ...addData.shops,
+        ...addData.shop,
         [event.target.name]: event.target.value
       }
     })
   }
-
+  
   useEffect(() => {
     let isSubscribed = true;
     setLoading(true);
@@ -63,9 +66,14 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
     else setIsOK(true);
   }, [addData.step_ids]);
 
+  useEffect(() => {
+    setIsOK(false)
+  }, [load2])
+
   return (
     loading ? <Loading/> :
     <div className="container">
+      {load2 && <Loading/>}
       {!(identifer !== 'user' && post) &&
         <React.Fragment>
           <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} >現在お店でおこなっている感染対策に当てはまるものをチェックしてください。</Text>
@@ -73,28 +81,23 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
         </React.Fragment>
       }
       <CheckSectionList stepCategories={stepCategories} setAddData={setAddData} addData={addData}/>
-      {/* ここの書き方めっちゃきもいけど、3項演算使ったらなぜか上手く動かないから仕方ないかも。 */}
-      {addData.shop.other_step &&
+      {addData.shop.other_step && isEdit &&
         <Textarea content={addData.shop.other_step} theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
-      {!addData.shop.other_step &&
+      {!isEdit &&
         <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
-      {identifer === 'user' ?
-        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? post : () => {}}>
-          登録する
+      {identifer === 'user' || !noKanaName ?
+        <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => post(2) : () => {}}>
+          リクエストする
         </Button>
         : post ? 
           <React.Fragment/>
           :
-          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(2) : () => {}}>
+          <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => setPage(3) : () => {}}>
             次へ <ArrowRight />
           </Button>
       }
-      <style jsx>
-        {`
-        `}
-      </style>
     </div>
   );
 }

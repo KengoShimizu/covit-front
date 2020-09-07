@@ -102,6 +102,7 @@ const ShopCommentCard: React.FC<CardProps> = ({ comment, clickReport, clickDelet
             line-height: 19px;
             margin: 0 0 auto auto;
             width: fit-content;
+            cursor: pointer;
           }
           .delete{
             max-height: 0;

@@ -93,7 +93,6 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
   }
 
   const update = async () => {
-    console.log(editData);
     try{
       await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
       topModalContext.setContents({
@@ -118,14 +117,12 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
 
   return (
     <React.Fragment>
-      {
       <HomeLayout headerText="お店の情報登録" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
         <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn} onClick={update}>変更する</Button>
         <div className="container">
           <ShopInfo setAddData={setEditData} addData={editData} defaultLinks={defaultLinks}/>
         </div>
       </HomeLayout>
-      }
       <style jsx>{`
         .container {
           width: 100%;

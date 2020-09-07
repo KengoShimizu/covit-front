@@ -14,7 +14,7 @@ const Loading: React.FC = () => {
         .loading {
           // margin: 60px auto;
           font-size: 14px;
-          position: absolute;
+          position: fixed;
           z-index: 10000;
           left: calc(50% - 14px);
           top: 60px;

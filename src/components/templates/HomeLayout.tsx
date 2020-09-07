@@ -29,7 +29,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, h
           height: 100%;
         }
         .wrap{
-          padding-top: ${headerText ? '64px' : '0px'};
+          padding-top: ${headerText ? '40px' : '0px'};
           width: 100%;
           height: ${headerText ? 'calc(100% - 96px)' : 'calc(100% - 56px)'};
         }

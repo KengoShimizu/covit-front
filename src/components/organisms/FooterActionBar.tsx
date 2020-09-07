@@ -62,7 +62,7 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
         svg={
           <React.Fragment>
             <rect/>
-            <path d="M19.6233 7.03847L18.6079 5.85722C17.747 4.95297 16.711 4.23335 15.5632 3.74215C14.4153 3.25096 13.1795 2.99845 11.931 3.00001C6.83481 3.00001 2.7002 7.13462 2.7002 12.2308C2.7002 17.3269 6.83481 21.4615 11.931 21.4615C13.8401 21.4614 15.7023 20.8696 17.2612 19.7676C18.8202 18.6655 19.9993 17.1074 20.6363 15.3077"  strokeWidth="3" stroke-miterlimit="10" strokeLinecap="round"/>
+            <path d="M19.6233 7.03847L18.6079 5.85722C17.747 4.95297 16.711 4.23335 15.5632 3.74215C14.4153 3.25096 13.1795 2.99845 11.931 3.00001C6.83481 3.00001 2.7002 7.13462 2.7002 12.2308C2.7002 17.3269 6.83481 21.4615 11.931 21.4615C13.8401 21.4614 15.7023 20.8696 17.2612 19.7676C18.8202 18.6655 19.9993 17.1074 20.6363 15.3077"  strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round"/>
             <path d="M22.7004 4.60682V9.92317C22.7004 10.1272 22.6194 10.3228 22.4751 10.4671C22.3308 10.6114 22.1352 10.6924 21.9312 10.6924H16.6148C15.9292 10.6924 15.586 9.86404 16.0706 9.37942L21.3874 4.06259C21.872 3.57702 22.7004 3.92125 22.7004 4.60682Z" className="option_fill"/>
             <path d="M10.7002 9.15381V14.1538H13.7002"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
           </React.Fragment>}
@@ -99,12 +99,11 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
               nextRef={RouteName.MENU}
               svg={
                 <React.Fragment>
-                  <path d="M4.5 2.5 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-                  <path d="M4.5 9 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
-                  <path d="M4.5 15.5 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+                  <path d="M4.5 5.5H19.8572"  strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round"/>
+                  <path d="M4.5 12H19.8572"  strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round"/>
+                  <path d="M4.5 18.5H19.8572"  strokeWidth="3" strokeMiterlimit="10" strokeLinecap="round"/>
                 </React.Fragment>}
               svgSize={24}
-              svgSizeHeight={18}
               onClick={() => setIsClicked(4)}
               isFocus={isClicked === 4 ? '_clicked' : ''}/>
       }

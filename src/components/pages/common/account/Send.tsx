@@ -23,12 +23,13 @@ const Send: React.FC = (props: any) => {
 
   const send = async () => {
     try {
-      await axios.post(`/api/v1/user/users/${resendPath}`, {
+      await axios.post(`/api/v1/common/users/${resendPath}`, {
         email: props.location.state.email
-      })
-      setResend('メールを再送しました。')
+      });
+      setResend('メールを再送しました。');
+      setErr('');
     } catch (error) {
-      setErr('エラーが発生しました。もう一度お試しください。')
+      setErr('エラーが発生しました。もう一度お試しください。');
     }
   }
 

@@ -122,9 +122,9 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
   }, [businessDate])
 
   useEffect(() => {
-   if(defaultBusinessDate){
-    setBusinessDate(JSON.parse(defaultBusinessDate));
-   }
+    if(defaultBusinessDate){
+      setBusinessDate(JSON.parse(defaultBusinessDate));
+    }
   }, [defaultBusinessDate])
 
   return (

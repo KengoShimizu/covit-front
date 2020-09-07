@@ -25,12 +25,14 @@ type CardProps = {
   comment: any;
   isCurrentUser: boolean;
   onClick?: any;
+  deletedId?: number;
 };
 
-const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick}) => {
+const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId}) => {
+  const delete_bool = deletedId === comment.id;
   return (
     <React.Fragment>
-      <li className="card">
+      <li className={`card ${delete_bool && 'delete'}`}>
         <div className="card_content">
           <Link to={`/shops/${comment.shop.id}`}>
             <div className="card_content-head">
@@ -54,7 +56,7 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
             </div>
           </Link>
           { isCurrentUser &&
-            <div className="card_trash" onClick={onClick}>
+            <div className="card_trash" onClick={() => onClick(comment.id)}>
               <Icon theme={[IconThemes.SMALL]}>
                 <Trash2 size={14} color="#8C8C8C" />
               </Icon>
@@ -70,9 +72,13 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
         {`
           .card{
             background: ${CommonStyle.BgWhite};
+            max-height: 300px;
             width: 100%;
             display: flex;
             margin-bottom: 16px;
+            visibility: visible;
+            opacity: 1;
+            transition-duration: .5s;
           }
           .card_content{
             width: 100%;
@@ -111,6 +117,10 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
             line-height: 19px;
             margin: 0 0 auto auto;
             width: fit-content;
+          }
+          .delete{
+            max-height: 0;
+            opacity: 0;
           }
         `}
       </style>

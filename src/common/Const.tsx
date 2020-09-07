@@ -1,4 +1,5 @@
 /* コメントタイプ */
+import { FormatDate_YM, CalcBeforeMonth_YM } from './Function';
 export class Comment {
   public static readonly REPUTATION_GOOD = 1 // 良い評価
   public static readonly REPUTATION_BAD  = 2 // 悪い評価
@@ -66,6 +67,34 @@ export const PriceArray: Array<any> = [
   }
 ]
 
+const thisMonth = FormatDate_YM(new Date())
+export const VisitMonthArray: Array<any> = [
+  {
+    id: thisMonth,
+    name: thisMonth
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 1),
+    name: CalcBeforeMonth_YM(thisMonth, 1)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 2),
+    name: CalcBeforeMonth_YM(thisMonth, 2)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 3),
+    name: CalcBeforeMonth_YM(thisMonth, 3)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 4),
+    name: CalcBeforeMonth_YM(thisMonth, 4)
+  },
+  {
+    id: CalcBeforeMonth_YM(thisMonth, 5),
+    name: CalcBeforeMonth_YM(thisMonth, 5)
+  }
+]
+
 export class LinkType {
   public static readonly TWITTER   = 1
   public static readonly FACEBOOK  = 2
@@ -106,6 +135,7 @@ export class RouteName {
   public static readonly OWNER_ACCOUNT_TOP        = '/owner/accounts'
   public static readonly OWNER_INFECTION_EDIT     = '/owner/shop/:id/edit/infections'
   public static readonly OWNER_SHOP_INFO_EDIT     = '/owner/shop/:id/edit/detail'
+  public static readonly OWNER_EDIT_PROFILE       = '/owner/accounts/edit/profile'
   public static readonly SELF_COMMENTS            = '/accounts/comments'
   public static readonly EDIT_LOGIN               = '/accounts/edit/login'
   public static readonly EDIT_PROFILE             = '/accounts/edit/profile'

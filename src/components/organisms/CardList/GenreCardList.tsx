@@ -6,8 +6,6 @@ import CommonStyle from '../../../common/CommonStyle';
 import GenreCard from '../../molecules/Card/GenreCard';
 import Text, { TextThemes } from '../../atoms/Text';
 import Button, { ButtonThemes } from '../../atoms/Button';
-// types
-import Genre from '../../../types/Genre';
 
 const propStyle = {
   title: {
@@ -26,10 +24,11 @@ interface GenreCardListProps {
   fetchCoordinationsData: any;
   lastlat: number;
   lastlng: number;
+  genres: any;
+  setGenres: any
 }
 
-const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelectedGenre, genreSerchIsOpen, setGenreSerchIsOpen, fetchCoordinationsData, lastlat, lastlng}) => {
-  const [genres, setGenres] = useState<Genre[]>([]);
+const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelectedGenre, genreSerchIsOpen, setGenreSerchIsOpen, fetchCoordinationsData, lastlat, lastlng, genres, setGenres}) => {
 
   const fetchGenres = async (isSubscribed: boolean) => {
     try {
@@ -41,7 +40,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
   }
 
   const handleChange = (event: any) => {
-    const selectedId = genres.findIndex(data => data.name === event.currentTarget.id) + 1;
+    const selectedId = genres.findIndex((data: any) => data.name === event.currentTarget.id) + 1;
     // 既に選択されていたら除去
     if(selectedGenre.find(data => data === selectedId)){
       setSelectedGenre(selectedGenre.filter(data => data !== selectedId));

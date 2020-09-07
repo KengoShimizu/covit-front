@@ -35,8 +35,8 @@ const History: React.FC = (props: any) => {
     const cookies = new Cookies();
 
     const handleCookie = () => {
-      cookies.set('histories', '');
-      cookies.set('histories_date', '');
+      cookies.set('histories', '', { path: '/' });
+      cookies.set('histories_date', '', { path: '/' });
     }
 
     return (
@@ -54,7 +54,7 @@ const History: React.FC = (props: any) => {
         <style jsx>{`
           .container{
             width: 100%;
-            min-height: 100vh;
+            min-height: calc(100vh - 40px);
             background-color: ${CommonStyle.BgGray};
             padding-top: 8px;
           }

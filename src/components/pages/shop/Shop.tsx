@@ -6,7 +6,7 @@ import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RedirectFrom, RouteName, OwnerType } from '../../../common/Const';
+import { RedirectFrom, RouteName, OwnerType, PriceArray } from '../../../common/Const';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import Text, { TextThemes } from '../../atoms/Text';
@@ -16,6 +16,7 @@ import Loading from '../../molecules/Loading';
 // context
 import RedirectContext from '../../../context/RedirectContext';
 import AuthContext from "../../../context/CommonProvider";
+import { InputThemes } from '../../atoms/Input';
 
 const propStyle = {
   commentBtn: {
@@ -37,6 +38,15 @@ const Shop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
+  const [businessDate, setBusinessDate] = useState([]);
+  const [dayPriceObj, setDayPriceObj] = useState({
+    id: 0,
+    name: ''
+  });
+  const [nightPriceObj, setNightPriceObj] = useState({
+    id: 0,
+    name: ''
+  });
   const [shopData, setShopData] = useState({
     user_id: 0,
     name: '',
@@ -62,7 +72,12 @@ const Shop: React.FC = (props: any) => {
   const fetchShopData = async (isSubscribed: boolean) => {
     try {
       const res = await axios.get(`/api/v1/${authState.user.is_owner ? 'owner' : 'user'}/shops/${match.params.id}`);
-      if (isSubscribed) setShopData(res.data);
+      if (isSubscribed) {
+        setShopData(res.data);
+        setDayPriceObj(PriceArray.find((data: any) => data.id === res.data.price_day))
+        setNightPriceObj(PriceArray.find((data: any) => data.id === res.data.price_night))
+        setBusinessDate(JSON.parse(res.data.business_date))
+      }
     } catch (error) {
       console.log(error);
     }
@@ -105,7 +120,7 @@ const Shop: React.FC = (props: any) => {
                           <Sun size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {shopData.price_day}円
+                          {dayPriceObj ? dayPriceObj.name : '- '}円
                     </Text>
                       </li>
                       <li className="shop_cost-option">
@@ -113,7 +128,7 @@ const Shop: React.FC = (props: any) => {
                           <Moon size={10} color="#fff" />
                         </span>
                         <Text theme={[TextThemes.SMALL]}>
-                          {shopData.price_night}円
+                          {nightPriceObj ? nightPriceObj.name : '- '}円
                     </Text>
                       </li>
                     </ol>
@@ -173,21 +188,26 @@ const Shop: React.FC = (props: any) => {
               <section className="shop-card_section">
                 <ul className="shop_info-list">
                   <li className="shop_info-option">
-                    <Clock size={16} color="#333" />
+                    <Clock size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
-                      {shopData.business_date}
+                      {businessDate.map((data: any, i: number) => (
+                        <React.Fragment key={`business_date${i}`}>
+                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block'}} >{`${data.label}曜日`}</Text>
+                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block', marginLeft: '24px'}} >{data.is_close ? '定休日' : `${data.opening}〜${data.closing}`}</Text><br />
+                        </React.Fragment>
+                      ))}
                     </span>
                   </li>
                   <li className="shop_info-option">
-                    <Phone size={16} color="#333" />
+                    <Phone size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
                       <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
                     </span>
                   </li>
                   <li className="shop_info-option">
-                    <MapPin size={16} color="#333" />
+                    <MapPin size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
-                      <a href="javascript:;" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
+                      <a href="#" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
                         {shopData.address}
                       </a>
                     </span>
@@ -206,14 +226,14 @@ const Shop: React.FC = (props: any) => {
                 </ul>
               </section>
               {/* FIXME v2で実装 */}
-              <div style={{ display: 'none' }}>
+              {/* <div style={{ display: 'none' }}>
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
                   <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
                     情報の編集をリクエスト
                   </Button>
                 </section>
-              </div>
+              </div> */}
               {/* ここまで */}
             </div>
           <style jsx>{`

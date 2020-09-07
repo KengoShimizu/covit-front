@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import { Smile, Frown } from 'react-feather';
+import { Redirect } from "react-router-dom";
 import useReactRouter from "use-react-router";
 import axios from 'axios';
 // common
@@ -17,16 +18,17 @@ import TopModal from '../../molecules/Modal/TopModal';
 // context
 import ModalContext from '../../../context/ModalContext';
 import TopModalContext from '../../../context/TopModalContext';
-
+import AuthContext from "../../../context/CommonProvider";
+import { RouteName } from '../../../common/Const';
 const propStyle = {
   reviewIcon: {
     marginRight: '4px',
   },
   isShopPage: {
-    padding: '50px 20px 0',
+    padding: '64px 20px 0',
   },
   isUserPage: {
-    padding: '35px 0 1px',
+    padding: '64px 0 1px',
     backgroundColor: CommonStyle.BgGray,
   }
 };
@@ -41,6 +43,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   const [deletedId, setDeletedId] = useState(0);
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
+  const { authState } = useContext(AuthContext);
   const isShopPage = match.path.match(/shops/g);
   const isCurrentUser = match.path.match(/accounts/g);
   const [state, setState] = useState('good');
@@ -128,12 +131,16 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   }
 
   const clickReport = (user_id: number, user_name: string) => {
-    setModalState({
-      title: `${user_name} さんを報告しますか？`,
-      btntext: '報告する',
-      onClick: () => report(user_id, '')
-    });
-    modalContext.toggleModalShown(true);
+    if (authState.isLogin) {
+      setModalState({
+        title: `${user_name} さんを報告しますか？`,
+        btntext: '報告する',
+        onClick: () => report(user_id, '')
+      });
+      modalContext.toggleModalShown(true);
+    } else {
+      return window.location.href = RouteName.REGISTER;
+    }
   }
 
   const clickDelete = (comment_id: number) => {
@@ -248,7 +255,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
                   isShopPage ?
                     <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />
                     :
-                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} />
+                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} onClick={clickDelete} deletedId={deletedId} />
                 );
               })
             }
@@ -264,6 +271,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             width: 100%
           }
           .review-switch_container{
+            padding-top: 24px;
             width: 100%;
             display: flex;
             position: fixed;

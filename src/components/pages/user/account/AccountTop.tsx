@@ -10,7 +10,6 @@ import TopModal from '../../../molecules/Modal/TopModal';
 import AuthContext from "../../../../context/CommonProvider";
 // common
 import { RouteName } from './../../../../common/Const';
-import AccountTopCard from './../../../molecules/Card/ProfileIconNameCard';
 
 const AccountTop: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
@@ -33,8 +32,8 @@ const AccountTop: React.FC = (props: any) => {
       <style jsx>{`
         .profile-head_container{
           max-width: 600px;
-          width: calc(100% - 32px);
-          margin: 0 auto 40px auto;
+          width: 100%;
+          margin: 16px auto 40px auto;
           padding-left: 12px;
           box-sizing: border-box;
           display: flex;

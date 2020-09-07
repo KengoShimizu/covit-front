@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 // library
 import { Check } from 'react-feather';
 // common
@@ -21,10 +21,10 @@ interface ToggleModalProps {
   setShowState: any;
   showState: boolean;
   selectedShopIndex: number; 
-  setSelectedShopIndex: any;
+  onClick: any;
 }
 
-const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, showState, selectedShopIndex, setSelectedShopIndex }) => {
+const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, showState, selectedShopIndex, onClick }) => {  
   // スクロールの固定
   if (showState) {
     document.body.setAttribute('style', 'overflow: hidden;')
@@ -41,7 +41,7 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
           {shop_names.map((item: string, i: number) => (
             <React.Fragment key={`shop_name${i}`}>
               <hr className="modal-inner-hr" />
-              <div className="modal-inner-item" onClick={() => {setSelectedShopIndex(i); setShowState(false)}}>
+              <div className="modal-inner-item" onClick={() => {onClick(i)}}>
                 {i === selectedShopIndex ?
                   <Check size={24} color={CommonStyle.AccentColor} style={{margin: 'auto 12px auto 8px'}}/>
                   :
@@ -69,6 +69,8 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
             -webkit-backdrop-filter: blur(6px);
           }
           .modal-container{
+            overflow-y: scroll;
+            max-height: 300px;
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
             position: fixed;
             z-index: 10000;
