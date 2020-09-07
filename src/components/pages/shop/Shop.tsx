@@ -192,24 +192,30 @@ const Shop: React.FC = (props: any) => {
                 <section className="shop-card_section">
                   <ul className="shop_info-list">
                     <li className="shop_info-option">
-                      <Clock size={16} color="#333" />
+                      <Clock size={16} color="#333" style={{marginBottom: 'auto'}}/>
                       <span className="shop_info-option_content">
-                        {businessDate.map((data: any, i: number) => (
+                        {businessDate.filter((data: any) => (data.opening !== data.closing) || data.is_close).map((data: any, i: number) => (
                           <React.Fragment key={`business_date${i}`}>
-                            {`曜日: ${data.label}`}<br />
-                            {`開店時間: ${data.opening}`}<br />
-                            {`閉店時間: ${data.closing}`}<br />
-                            {data.is_close ? '定休日' : '営業日'}<br /><br />
+                            <div className="shop-business">
+                              <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
+                                {`${data.label}曜日`}
+                              </Text>
+                              <Text theme={[TextThemes.SMALL]}>
+                                {data.is_close ? '定休日' : `${data.opening} 〜 ${data.closing}`}
+                              </Text>
+                            </div>
                           </React.Fragment>
                         ))}
                       </span>
                     </li>
+                    <hr className="infection-control_hr" />
                     <li className="shop_info-option">
                       <Phone size={16} color="#333" />
                       <span className="shop_info-option_content">
                         <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
                       </span>
                     </li>
+                    <hr className="infection-control_hr" />
                     <li className="shop_info-option">
                       <MapPin size={16} color="#333" />
                       <span className="shop_info-option_content">
@@ -319,8 +325,9 @@ const Shop: React.FC = (props: any) => {
               margin-bottom: 25px;
             }
             .infection-control_hr{
-              height: 2px;
-              margin: 0 0 16px 0;
+              height: 1px;
+              margin: 0 0 24px -16px;
+              width: calc(100% + 32px);
               background: ${CommonStyle.BgGray}
             }
             .infection-control_card{
@@ -394,7 +401,7 @@ const Shop: React.FC = (props: any) => {
 
             // 基本情報
             .shop_info-list{
-              margin-bottom: 16px;
+              margin-bottom: 24px;
             }
             .shop_info-option{
               display: flex;
@@ -404,10 +411,14 @@ const Shop: React.FC = (props: any) => {
               color: ${CommonStyle.TextBlack}
             }
             .shop_info-option:not(:last-child){
-              margin-bottom: 16px;
+              margin-bottom: 24px;
             }
             .shop_info-option_content{
-              margin-left: 8px;
+              margin-left: 24px;
+            }
+            .shop-business{
+              display: flex;
+              margin-bottom: 12px;
             }
             //sns
             .shop_sns-list{
