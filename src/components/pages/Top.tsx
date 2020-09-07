@@ -134,19 +134,17 @@ const Top: React.FC = (props: any) => {
   }
 
   const getCullentLocation = () => {
-    ///* FIXME 現在地座標取得（デバッグのためコメントアウト）
     navigator.geolocation.getCurrentPosition(
       pos => {
-        //const pos_lat = pos.coords.latitude;
-        //const pos_lng = pos.coords.longitude;
-        //setMapCenter({ lat: pos_lat, lng: pos_lng });
-        //setCurLoc({ lat: pos_lat, lng: pos_lng });
-        setMapCenter({ lat: lastlat, lng: lastlng });
-        setCurLoc({ lat: lastlat, lng: lastlng });
+        const pos_lat = pos.coords.latitude;
+        const pos_lng = pos.coords.longitude;
+        setMapCenter({ lat: pos_lat, lng: pos_lng });
+        setCurLoc({ lat: pos_lat, lng: pos_lng });
+        // setMapCenter({ lat: lastlat, lng: lastlng });
+        // setCurLoc({ lat: lastlat, lng: lastlng });
       },
       err => console.log(err)
     );
-    //*/
   }
 
   // 初回モーダルクローズ
