@@ -99,6 +99,8 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         .shop-card_header-img{
           width: 100%;
           height: auto;
+          position: relative;
+          top: -24px;
         }
         .shop-card_content{
           top: 98px;
