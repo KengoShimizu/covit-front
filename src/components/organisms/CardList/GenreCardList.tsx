@@ -11,7 +11,7 @@ import Genre from '../../../types/Genre';
 
 const propStyle = {
   title: {
-    paddingTop: '25px'
+    marginBottom: '32px'
   },
   btn: {
     width: '140px'
@@ -104,6 +104,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           top: 0;
           left: 50%;
           width: 100%;
+          padding: 32px 20px;
           margin: 0 auto;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
@@ -116,6 +117,8 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           top: -200vh;
         }
         .genres-container {
+          max-width: 570px;
+          margin: 0 auto;
           padding: 1rem 0;
         }
         .genres-container li {
@@ -127,6 +130,8 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           display: flex;
           justify-content: space-evenly;
           padding: 30px 0;
+          max-width: 340px;
+          margin: 0 auto;
         }
         .blur-range{
           height: 500px;

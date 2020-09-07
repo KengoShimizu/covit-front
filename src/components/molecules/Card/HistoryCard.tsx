@@ -15,8 +15,8 @@ interface HistoryCardProps {
 
 const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, browse_date, nextRef}) => {
   return (
-    <Link to={nextRef}>
-      <li className="history-card">
+    <li className="history-card">
+      <Link to={nextRef} style={{display: 'flex', alignItems: 'center'}}>
         <div className="history-card_content">
           <h2 className="history-card_name">{name}</h2>
           <div className="history-card_info">
@@ -42,7 +42,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
           </div>
         </div>
         <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
-      </li>
+      </Link>
       <style jsx>{`
         //カード
         .history-card{
@@ -50,8 +50,6 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
           width: 100%;
           padding: 12px 16px;
           box-sizing: border-box;
-          display: flex;
-          align-items: center;
           margin-bottom: 16px;
         }
         .history-card_content{
@@ -115,7 +113,7 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
         }
       `}</style>
     
-    </Link>
+    </li>
   );
 }
 

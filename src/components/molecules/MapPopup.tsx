@@ -86,7 +86,9 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           z-index: 6000;
           border-radius: 24px;
           overflow: hidden;
-          background: ${CommonStyle.BgWhite}
+          background: ${CommonStyle.BgWhite};
+          transition: opacity 0.5s, transform 0s 0.5s;
+          transition-delay: .5s;
         }
         .shop-card_header-img_wrapper{
           width: 100%;

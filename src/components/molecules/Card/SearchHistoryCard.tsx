@@ -16,22 +16,21 @@ interface SearchHistoryCardProps {
 const SearchHistoryCard: React.FC<SearchHistoryCardProps> = ({name, browse_date, nextRef}) => {
   return (
     <li className="history-card">
-      <Link to={nextRef}>
-        <div className="history-card_inner-container">
-          <div className="history-card_content">
-            <Text theme={[TextThemes.CAPTION]} propStyle={{fontSize: '1em'}}>{name}</Text>
-            <div className="history-card_info">
-              <div className="history-card_date">
-                <span className="history-card_review-icon">
-                  <Calendar size="16" color="#8C8C8C" style={{marginBottom: '1px'}}/>
-                </span>
-                <Text theme={[TextThemes.DARKGRAY, TextThemes.SMALL]} propStyle={{marginRight: '4px'}}>閲覧日</Text>
-                <Text theme={[TextThemes.DARKGRAY, TextThemes.SMALL]}>{browse_date}</Text>
-              </div>
+      <Link to={nextRef} style={{display:'flex', paddingBottom: '6px',
+          boxSizing: 'border-box', alignItems: 'center'}}>
+        <div className="history-card_content">
+          <Text theme={[TextThemes.CAPTION]} propStyle={{fontSize: '1em'}}>{name}</Text>
+          <div className="history-card_info">
+            <div className="history-card_date">
+              <span className="history-card_review-icon">
+                <Calendar size="16" color="#8C8C8C" style={{marginBottom: '1px'}}/>
+              </span>
+              <Text theme={[TextThemes.DARKGRAY, TextThemes.SMALL]} propStyle={{marginRight: '4px'}}>閲覧日</Text>
+              <Text theme={[TextThemes.DARKGRAY, TextThemes.SMALL]}>{browse_date}</Text>
             </div>
           </div>
-          <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
         </div>
+        <button className="history-card_btn"><ChevronRight size="20" color="#333" /></button>
       </Link>
       <style jsx>{`
 
@@ -39,15 +38,6 @@ const SearchHistoryCard: React.FC<SearchHistoryCardProps> = ({name, browse_date,
           border-bottom: 2px solid ${CommonStyle.BorderGray};
           margin-bottom: 8px;
         }
-        .history-card_inner-container{
-          background: ${CommonStyle.BgGray};
-          width: 100%;
-          padding-bottom: 6px;
-          box-sizing: border-box;
-          display: flex;
-          align-items: center;
-        }
-        
         .history-card_content{
           display: flex;
           justify-content: space-between;

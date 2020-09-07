@@ -99,10 +99,9 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
               nextRef={RouteName.MENU}
               svg={
                 <React.Fragment>
-                  <rect/>
-                  <path d="M4.5 5.5H19.8572"  strokeWidth="3" stroke-miterlimit="10" strokeLinecap="round"/>
-                  <path d="M4.5 12H19.8572"  strokeWidth="3" stroke-miterlimit="10" strokeLinecap="round"/>
-                  <path d="M4.5 18.5H19.8572"  strokeWidth="3" stroke-miterlimit="10" strokeLinecap="round"/>
+                  <path d="M4.5 2.5 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+                  <path d="M4.5 9 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
+                  <path d="M4.5 15.5 H19.8572" stroke="#8C8C8C" stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"/>
                 </React.Fragment>}
               svgSize={24}
               svgSizeHeight={18}

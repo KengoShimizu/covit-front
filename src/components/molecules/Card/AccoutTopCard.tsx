@@ -23,8 +23,9 @@ interface AccoutTopCardProps {
 const AccountTopCard: React.FC<AccoutTopCardProps> = ({ src, text, icon, nextRef = '#', onClick, listStyle }) => {
 
   return (
-    <Link to={nextRef}>
-      <li className="account-function_option" onClick={onClick} style={listStyle}>
+    
+    <li className="account-function_option" onClick={onClick} style={listStyle}>
+      <Link to={nextRef} style={{display:'flex', alignItems:'center'}}>
         <Icon theme={[IconThemes.LERGE]}>
           {icon && icon}
           {src && <img className="account-function_img" src={src} alt="" />}
@@ -32,7 +33,7 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({ src, text, icon, nextRef
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.profileText}>
           {text}
         </Text>
-      </li>
+      </Link>
       <style jsx>{`
         .account-function_option{
           display: flex;
@@ -44,7 +45,7 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({ src, text, icon, nextRef
           height: auto;
         }
       `}</style>
-    </Link>
+    </li>
   );
 }
 
