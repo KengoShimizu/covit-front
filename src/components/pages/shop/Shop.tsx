@@ -188,7 +188,7 @@ const Shop: React.FC = (props: any) => {
               <section className="shop-card_section">
                 <ul className="shop_info-list">
                   <li className="shop_info-option">
-                    <Clock size={16} color="#333" />
+                    <Clock size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
                       {businessDate.map((data: any, i: number) => (
                         <React.Fragment key={`business_date${i}`}>
@@ -199,13 +199,13 @@ const Shop: React.FC = (props: any) => {
                     </span>
                   </li>
                   <li className="shop_info-option">
-                    <Phone size={16} color="#333" />
+                    <Phone size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
                       <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
                     </span>
                   </li>
                   <li className="shop_info-option">
-                    <MapPin size={16} color="#333" />
+                    <MapPin size={16} color="#DF6059" />
                     <span className="shop_info-option_content">
                       <a href="#" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
                         {shopData.address}
