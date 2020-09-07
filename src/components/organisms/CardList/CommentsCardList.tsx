@@ -3,7 +3,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
 import { Smile, Frown } from 'react-feather';
-import { Redirect } from "react-router-dom";
 import useReactRouter from "use-react-router";
 import axios from 'axios';
 // common

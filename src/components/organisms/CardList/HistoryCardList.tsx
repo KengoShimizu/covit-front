@@ -4,7 +4,6 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RouteName } from '../../../common/Const';
 // components
 import HistoryCard from '../../molecules/Card/HistoryCard';
 import SearchHistoryCard from '../../molecules/Card/SearchHistoryCard';
@@ -28,17 +27,19 @@ interface HistoryCardListProps {
 }
 
 const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }) => {
-  const cookies = new Cookies();
   const [loading, setLoading] = useState(false);
-  const cookie_histories = cookies.get('histories');
-  const cookie_histories_date = cookies.get('histories_date');
+  const histories = localStorage.getItem('histories');
+  const histories_date = localStorage.getItem('histories_date');
   const [err, setErr] = useState("");
   const [shopData, setShopData] = useState([]);
   const [historyElements, setHistoryElements] = useState([]);
+  let arr: number[], arr_date: string[];
+  if(histories) arr = JSON.parse(histories)
+  if(histories_date) arr_date = JSON.parse(histories_date)
 
-  const fetchShopData = async (isSubscribed: boolean) => {
+  const fetchShopData = async (isSubscribed: boolean, arr: number[]) => {
     try {
-      const res = await axios.get(`/api/v1/user/shops?histories=${cookie_histories}`);
+      const res = await axios.get(`/api/v1/user/shops?histories=${arr}`);
       if (isSubscribed) setShopData(res.data);
     } catch (error) {
       setErr('存在しないお店があります。')
@@ -46,10 +47,10 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
   }
 
   useEffect(() => {
-    if (cookie_histories) {
+    if (histories && histories_date) {
       let isSubscribed = true;
       setLoading(true);
-      fetchShopData(isSubscribed);
+      fetchShopData(isSubscribed, arr);
       setLoading(false);
       const cleanup = () => {
         isSubscribed = false;
@@ -59,44 +60,44 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
       setErr('閲覧履歴が存在しません')
       setHistoryElements([]);
     }
-  }, [cookies.get('histories')])
+  }, [])
 
   useEffect(() => {
-    if (shopData.length) {
-      const history_elements: any = [];
-      var histories_date = cookie_histories_date.split(',')
-      var histories_ids = cookie_histories.split(',')
-      histories_ids.map((shop_id: number, index: number) => {
-        if (!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length) {
-          histories_date.splice(index, 1, null);
-        }
-      })
-      histories_date = histories_date.filter((history: any) => !!history)
-      shopData.map((shop: Shop, i: number) => {
-        if (maxRow && i >= maxRow) {
-          return
-        }
-        if (type === 'search') {
-          history_elements.push(
-            <SearchHistoryCard
-              name={shop.name}
-              browse_date={histories_date[i]}
-              nextRef={`/shops/${shop.id}/comments/new`}
-              key={`history${i}`} />
-          )
-        } else {
-          history_elements.push(
-            <HistoryCard
-              name={shop.name}
-              good_count={shop.good_count}
-              bad_count={shop.bad_count}
-              browse_date={histories_date[i]}
-              nextRef={`/shops/${shop.id}`}
-              key={`history${i}`} />
-          )
-        }
-      })
-      setHistoryElements(history_elements);
+    if (arr && arr_date && shopData.length !== 0) {
+      if (shopData.length) {
+        const history_elements: any = [];
+        arr.map((shop_id: number, index: number) => {
+          if (!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length) {
+            arr.splice(index, 1);
+            arr_date.splice(index, 1);
+          }
+        })
+        shopData.map((shop: Shop, i: number) => {
+          if (maxRow && i >= maxRow) {
+            return
+          }
+          if (type === 'search') {
+            history_elements.push(
+              <SearchHistoryCard
+                name={shop.name}
+                browse_date={arr_date[i]}
+                nextRef={`/shops/${shop.id}/comments/new`}
+                key={`history${i}`} />
+            )
+          } else {
+            history_elements.push(
+              <HistoryCard
+                name={shop.name}
+                good_count={shop.good_count}
+                bad_count={shop.bad_count}
+                browse_date={arr_date[i]}
+                nextRef={`/shops/${shop.id}`}
+                key={`history${i}`} />
+            )
+          }
+        })
+        setHistoryElements(history_elements);
+      }
     }
   }, [shopData])
 
