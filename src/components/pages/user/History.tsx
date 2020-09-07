@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 // library
 import { Trash2 } from 'react-feather';
-import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { RouteName } from '../../../common/Const';
@@ -32,11 +31,12 @@ const propStyle = {
 }
 
 const History: React.FC = (props: any) => {
-    const cookies = new Cookies();
+    const modalContext = useContext(ModalContext);
 
     const handleCookie = () => {
-      cookies.set('histories', '', { path: '/' });
-      cookies.set('histories_date', '', { path: '/' });
+      localStorage.setItem('histories', '');
+      localStorage.setItem('histories_date', '');
+      window.location.reload();
     }
 
     return (
@@ -46,7 +46,7 @@ const History: React.FC = (props: any) => {
           btntext='削除する'
           onClick={handleCookie}/>
         <div className='container'>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={useContext(ModalContext).toggleModalShown}>
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={localStorage.getItem('histories') ? modalContext.toggleModalShown : () => {}}>
             <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.deleteBtnIcon}><Trash2 size="18" color="#8C8C8C" /></Icon>
             <span className="delete-btn_text">履歴を削除</span>
           </Button>

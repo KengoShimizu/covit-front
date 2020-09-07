@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // library
 import { Calendar, Trash2 } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { Smile, Frown, Clock, ChevronRight } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { RedirectFrom } from './../../../common/Const';
 import { FormatDate_YM, FormatDate_YMD } from '../../../common/Function';
 // components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
+// context
+import RedirectContext from './../../../context/RedirectContext';
 
 const propStyle = {
   headIcon: {
@@ -30,9 +33,17 @@ type CardProps = {
 
 const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId}) => {
   const delete_bool = deletedId === comment.id;
+  const setUri = useContext(RedirectContext).setUri;
+
+  const handleClick = () => {
+    setUri({
+      fromPath: RedirectFrom.USER_COMMENT,
+      shop: 0,
+    });
+  }
   return (
     <React.Fragment>
-      <li className={`card ${delete_bool && 'delete'}`}>
+      <li className={`card ${delete_bool && 'delete'}`} onClick={handleClick}>
         <div className="card_content">
           <Link to={`/shops/${comment.shop.id}`}>
             <div className="card_content-head">

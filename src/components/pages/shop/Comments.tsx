@@ -9,6 +9,7 @@ import CommnetsCardList from '../../organisms/CardList/CommentsCardList';
 import AuthContext from "../../../context/CommonProvider";
 import { OwnerType, RouteName } from '../../../common/Const';
 import Loading from '../../molecules/Loading';
+import FooterActionBar from './../../organisms/FooterActionBar';
 
 // ショップのコメント一覧
 const ShopComments: React.FC = (props: any) => {
@@ -48,6 +49,7 @@ const ShopComments: React.FC = (props: any) => {
         :
         <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
           <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
+          <FooterActionBar initialAccent={0}/>
         </HomeLayout>
   );
 }

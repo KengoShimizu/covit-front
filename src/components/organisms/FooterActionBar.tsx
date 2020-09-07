@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 // common
 import { RedirectFrom, RouteName } from './../../common/Const';
 // components

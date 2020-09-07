@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 // library
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import L from 'leaflet';
-import Cookies from 'universal-cookie';
 // components
 import MapPopup from '../molecules/MapPopup';
 import Loading from './../molecules/Loading';
@@ -27,7 +26,6 @@ interface MapPopupProps {
 
 
 const MapObject: React.FC<MapPopupProps> = (props: any) => {
-  const cookies = new Cookies();
   const [popupIsOpen, setPopupIsOpen] = useState(false);
 
   const curLocMarker = L.icon({
@@ -51,23 +49,20 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   }
 
   const handleMarkerClick = (data: any) => {
-    const c = cookies.get('histories');
-    const c_d = cookies.get('histories_date');
-    if (c && c_d) {
-      const cookies_array = c.split(',').map((item: string) => parseInt(item));
-      const cookies_date_array = c_d.split(',');
-      if (cookies_array[0] !== data.id) {
-        while (cookies_array.length > 99) {
-          cookies_array.pop();
-          cookies_date_array.pop();
-        }
-        cookies.set('histories', `${data.id},` + cookies_array.join(','), { path: '/' });
-        cookies.set('histories_date', createDate() + ',' + cookies_date_array.join(','), { path: '/' });
+    const strage = localStorage.getItem('histories');
+    const strage_date = localStorage.getItem('histories_date');
+    if (strage && strage_date){
+      const arr = JSON.parse(strage)
+      const arr_date = JSON.parse(strage_date)
+      if (arr[0] !== data.id) {
+        arr.unshift(data.id)
+        arr_date.unshift(createDate())
+        localStorage.setItem('histories', JSON.stringify(arr));
+        localStorage.setItem('histories_date', JSON.stringify(arr_date));
       }
-    }
-    else {
-      cookies.set('histories', data.id, { path: '/' });
-      cookies.set('histories_date', createDate(), { path: '/' });
+    } else {
+      localStorage.setItem('histories', JSON.stringify([data.id]));
+      localStorage.setItem('histories_date', JSON.stringify([createDate()]));
     }
     props.setMapCenter({ lat: data.latitude, lng: data.longitude });
     props.fetchStepsData(data.shop);
