@@ -9,7 +9,7 @@ import { OwnerType, RouteName } from '../../common/Const';
 export const NotOwnerRoute = ({ component: Component, ...rest }: any) => {
   const { authState } = useContext(AuthContext);
   return (
-    !authState.isLogin && authState.user.is_owner === OwnerType.NOT_OWNER ?
+    authState.user.is_owner === OwnerType.NOT_OWNER ?
       <Route {...rest} component={Component}/>
       : 
       <Redirect to={RouteName.OWNER_ACCOUNT_TOP}/>
