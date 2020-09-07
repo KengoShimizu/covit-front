@@ -31,7 +31,7 @@ const AccountTop: React.FC = (props: any) => {
       <PrivacyFotter />
       <style jsx>{`
         .profile-head_container{
-          max-width: 600px;
+          max-width: 400px;
           width: 100%;
           margin: 16px auto 40px auto;
           padding-left: 12px;

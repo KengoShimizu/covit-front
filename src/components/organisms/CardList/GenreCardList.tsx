@@ -70,8 +70,15 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
         <ul className="genres-container">
           {genres.map((data: any, i: number) => (
-            <li className="genre-card-wrap" onClick={handleChange} id={data.name} key={`genre${i}`}>
-              <GenreCard src={data.icon} text={data.name} className={selectedGenre.find(data => data === i+1) ? 'selected' : ''}/>
+            <li 
+              className={selectedGenre.find(data => data === i+1) ? 'selected genre-card' : 'genre-card'}
+              onClick={handleChange}
+              id={data.name}
+              key={`genre${i}`}>
+              <GenreCard 
+                src={data.icon}
+                text={data.name}
+              />
             </li>
           ))}
         </ul>
@@ -115,22 +122,45 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
         .close {
           top: -200vh;
         }
+
         .genres-container {
-          max-width: 570px;
-          margin: 0 auto;
-          padding: 1rem 0;
+          width: fit-content;
+          margin: 0 auto 40px auto;
+          display: grid;
+          grid-template-columns: repeat(4, 72px);
+          grid-auto-rows: 72px;
+          column-gap: 16px;
+          row-gap: 16px;
+          transition-duration: 1s;
+          transition-timing-function: ease;
         }
-        .genres-container li {
+        @media screen and (min-width: 720px) {
+          .genres-container {
+            grid-template-columns: repeat(6, 72px);
+          }
+        }
+
+        .genre-card {
           display: inline-block;
-          margin: 0.3rem;
-          height: 85px;
+          background: ${CommonStyle.BgWhite};
+          border: 2px solid ${CommonStyle.BorderGray};
+          border-radius: 4px;
+          text-align: center;
+          z-index: 1000;
+          height: 72px;
+          width: 72px;
+          box-sizing: border-box;
+          padding: 6px 0;
         }
+        .genre-card.selected {
+          border: 2px solid ${CommonStyle.AccentColor};
+        } 
+
         .genre-btns {
           display: flex;
           justify-content: space-evenly;
-          padding: 30px 0;
           max-width: 340px;
-          margin: 0 auto;
+          margin: 0 auto 40px auto;
         }
         .blur-range{
           height: 500px;

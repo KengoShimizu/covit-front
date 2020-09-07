@@ -144,7 +144,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
       <style jsx>{`
         .account-function_list{
           padding: 0 16px;
-          max-width: 600px;
+          max-width: 400px;
           margin: 0 auto;
         }
         .account-function_hr{

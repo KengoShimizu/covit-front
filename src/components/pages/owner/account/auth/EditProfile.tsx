@@ -63,7 +63,7 @@ const OwnerEditProfile: React.FC = (props: any) => {
             caption: ''
           }
         })
-      }, 3000)
+      }, 1000)
     }
   }, [topModalContext.contents.isShown]);
 
