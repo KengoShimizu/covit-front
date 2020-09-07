@@ -210,7 +210,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             caption: ''
           }
         })
-      }, 3000)
+      }, 1000)
     }
   }, [topModalContext.contents.isShown]);
 
@@ -268,10 +268,12 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
         </div>}
       <style jsx>{`
           .container{
-            width: 100%
+            width: 100%;    
+            position: absolute;
+            top: 144px;
+            z-index: 10;
           }
           .review-switch_container{
-            padding-top: 24px;
             width: 100%;
             display: flex;
             position: fixed;

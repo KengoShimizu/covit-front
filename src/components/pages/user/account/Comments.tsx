@@ -6,6 +6,7 @@ import axios from 'axios';
 import HomeLayout from '../../../templates/HomeLayout';
 import ProfileIconNameCard from './../../../molecules/Card/ProfileIconNameCard';
 import CommentsCardList from '../../../organisms/CardList/CommentsCardList';
+import FooterActionBar from '../../../organisms/FooterActionBar';
 // context
 import AuthContext from './../../../../context/CommonProvider';
 import CommonStyle from '../../../../common/CommonStyle';
@@ -74,25 +75,24 @@ const Comments: React.FC = (props: any) => {
       {loading ? <Loading /> :
         <div>
           {match.params.id && user &&
-            <div className="profile-card">
-              <ProfileIconNameCard src={user.image} name={user.name} />
-            </div>
+            <ProfileIconNameCard src={user.image} name={user.name} />
           }
           {pageState.update &&
-            <div className="comment-card-list">
-              <CommentsCardList sqlQuery={pageState.sqlQuery} />
-            </div>
+            <CommentsCardList sqlQuery={pageState.sqlQuery} />
           }
-        </div>}
+        </div>
+      }
+      <FooterActionBar initialAccent={0} />
+      
       <style jsx>{`
+        .container{
+          background-color: ${CommonStyle.BgWhite}
+        }
         .profile-card{
           position: fixed;
           padding: 16px;
           width: 100%;
           background-color: ${CommonStyle.BgWhite};
-        }
-        .comment-card-list{
-          ${match.params.id && 'padding-top: 88px;'}
         }
       `}</style>
     </HomeLayout>
