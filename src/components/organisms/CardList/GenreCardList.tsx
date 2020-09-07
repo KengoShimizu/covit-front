@@ -71,7 +71,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
         <ul className="genres-container">
           {genres.map((data: any, i: number) => (
             <li className="genre-card-wrap" onClick={handleChange} id={data.name} key={`genre${i}`}>
-              <GenreCard src={data.image} text={data.name} className={selectedGenre.find(data => data === i+1) ? 'selected' : ''}/>
+              <GenreCard src={data.icon} text={data.name} className={selectedGenre.find(data => data === i+1) ? 'selected' : ''}/>
             </li>
           ))}
         </ul>

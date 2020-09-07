@@ -96,8 +96,8 @@ function App() {
                       <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
                       <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
                       <Route exact path={RouteName.EDIT_EMAIL} component={EditEmail} />
+                      <Route component={NotFound} />
                     </Authentication>
-                    <Route component={NotFound} />
                   </Switch>
                 </RedirectPathProvider>
               </LoginJudge>

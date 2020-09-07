@@ -143,4 +143,5 @@ export class RouteName {
   public static readonly ADD_EMAIL                = '/accounts/add/email'
   public static readonly USER_SHOP_FORM           = '/users/request/form'
   public static readonly LANDING_PAGE             = '/about'
+  public static readonly NOT_FOUND                = '/404'
 }

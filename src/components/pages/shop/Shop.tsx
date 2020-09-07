@@ -79,7 +79,7 @@ const Shop: React.FC = (props: any) => {
         setBusinessDate(JSON.parse(res.data.business_date))
       }
     } catch (error) {
-      console.log(error);
+      if (error.message.match(/404/g)) props.history.push(RouteName.NOT_FOUND)
     }
   }
 
@@ -98,145 +98,151 @@ const Shop: React.FC = (props: any) => {
     <React.Fragment>
       {loading ? <Loading /> :
         shopData.user_id && authState.user.is_owner !== OwnerType.NOT_OWNER && shopData.user_id !== authState.user.id ?
-        <Redirect to='' /> :
-        <HomeLayout headerText={shopData.name} prevRef={RouteName.ROOT} history={props.history}>
-          <div className="content">
-            <div className="shop-card">
-              {/* ヘッダー画像 */}
-              <section className="shop-card_section">
-                <div className="shop-img_wrapper">
-                  <img className="shop-img" src={shopData.image} alt="shop header" />
-                </div>
-                <ol className="shop_base-info">
-                  <li className="shop_base-info_option">
-                    <Text theme={[TextThemes.CAPTION]}>
-                      {shopData.name}
-                    </Text>
-                  </li>
-                  <li className="shop_base-info_option">
-                    <ol className="shop_cost-list">
-                      <li className="shop_cost-option">
-                        <span className="shop_cost-icon_day">
-                          <Sun size={10} color="#fff" />
-                        </span>
-                        <Text theme={[TextThemes.SMALL]}>
-                          {dayPriceObj ? dayPriceObj.name : '- '}円
-                    </Text>
-                      </li>
-                      <li className="shop_cost-option">
-                        <span className="shop_cost-icon_night">
-                          <Moon size={10} color="#fff" />
-                        </span>
-                        <Text theme={[TextThemes.SMALL]}>
-                          {nightPriceObj ? nightPriceObj.name : '- '}円
-                    </Text>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </section>
-              <hr className="shop_hr" />
-              {/* 感染対策情報 */}
-              <section className="shop-card_section nfection-control_card">
-                <h2 className="infection-control_title">感染対策</h2>
-                <InfectionControlList stepData={shopData.steps} />
-                {shopData.other_step &&
-                  <div className="other-step">
-                    <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{marginBottom: '5px'}}>お店からのメッセージ</Text>
-                    <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
+          <Redirect to='' /> :
+          <HomeLayout headerText={shopData.name} prevRef={RouteName.ROOT} history={props.history}>
+            <div className="content">
+              <div className="shop-card">
+                {/* ヘッダー画像 */}
+                <section className="shop-card_section">
+                  <div className="shop-img_wrapper">
+                    <img className="shop-img" src={shopData.image} alt="shop header" />
                   </div>
-                }
-                <hr className="infection-control_hr" />
-                <div className="infection-control_review">
-                  <h3 className="infection-control_review-title">対策への評価</h3>
-                  <ol className="infection-control_review-list">
-                    <li className="infection-control_review-option">
-                      <Smile size={24} color="#ED753A" />
-                      <span className="infection-control_review-num">
-                        {shopData.good_count}<br />
-                      </span>
+                  <ol className="shop_base-info">
+                    <li className="shop_base-info_option">
+                      <Text theme={[TextThemes.CAPTION]}>
+                        {shopData.name}
+                      </Text>
                     </li>
-                    <li className="infection-control_review-option">
-                      <Frown size={24} color="#3A8CED" />
-                      <span className="infection-control_review-num">
-                        {shopData.bad_count}<br />
-                      </span>
+                    <li className="shop_base-info_option">
+                      <ol className="shop_cost-list">
+                        <li className="shop_cost-option">
+                          <span className="shop_cost-icon_day">
+                            <Sun size={10} color="#fff" />
+                          </span>
+                          <Text theme={[TextThemes.SMALL]}>
+                            {dayPriceObj ? dayPriceObj.name : '- '}円
+                    </Text>
+                        </li>
+                        <li className="shop_cost-option">
+                          <span className="shop_cost-icon_night">
+                            <Moon size={10} color="#fff" />
+                          </span>
+                          <Text theme={[TextThemes.SMALL]}>
+                            {nightPriceObj ? nightPriceObj.name : '- '}円
+                    </Text>
+                        </li>
+                      </ol>
                     </li>
                   </ol>
-                  <Link to={`/shops/${match.params.id}/comments`}>
-                    <Button theme={[ButtonThemes.SUBBTN]}>
-                      コメントを見る
+                </section>
+                <hr className="shop_hr" />
+                {/* 感染対策情報 */}
+                <section className="shop-card_section nfection-control_card">
+                  <h2 className="infection-control_title">感染対策</h2>
+                  <InfectionControlList stepData={shopData.steps} />
+                  {shopData.other_step &&
+                    <div className="other-step">
+                      <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{ marginBottom: '5px' }}>お店からのメッセージ</Text>
+                      <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
+                    </div>
+                  }
+                  <hr className="infection-control_hr" />
+                  <div className="infection-control_review">
+                    <h3 className="infection-control_review-title">対策への評価</h3>
+                    <ol className="infection-control_review-list">
+                      <li className="infection-control_review-option">
+                        <Smile size={24} color="#ED753A" />
+                        <span className="infection-control_review-num">
+                          {shopData.good_count}<br />
+                        </span>
+                      </li>
+                      <li className="infection-control_review-option">
+                        <Frown size={24} color="#3A8CED" />
+                        <span className="infection-control_review-num">
+                          {shopData.bad_count}<br />
+                        </span>
+                      </li>
+                    </ol>
+                    <Link to={`/shops/${match.params.id}/comments`}>
+                      <Button theme={[ButtonThemes.SUBBTN]}>
+                        コメントを見る
                   <ChevronRight size={14} color="#333" />
-                    </Button>
-                  </Link>
-                </div>
-                <hr className="infection-control_hr" />
-                <Link to={`/shops/${match.params.id}/comments/new`}>
-                  <Button 
-                    theme={[ButtonThemes.NORMAL]} 
-                    propStyle={propStyle.commentBtn} 
-                    onClick={() => redirectContext.setUri({
-                      fromPath: RedirectFrom.NEW_COMMENT,
-                      shop: match.params.id
-                    })}>
-                    <Edit size={20} color="#fff" />
-                    <span className="infection-control_comment-text">感染対策のレビューを書く</span>
-                  </Button>
-                </Link>
-              </section>
-              <hr className="shop_hr" />
-              <section className="shop-card_section">
-                <ul className="shop_info-list">
-                  <li className="shop_info-option">
-                    <Clock size={16} color="#DF6059" />
-                    <span className="shop_info-option_content">
-                      {businessDate.map((data: any, i: number) => (
-                        <React.Fragment key={`business_date${i}`}>
-                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block'}} >{`${data.label}曜日`}</Text>
-                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block', marginLeft: '24px'}} >{data.is_close ? '定休日' : `${data.opening}〜${data.closing}`}</Text><br />
-                        </React.Fragment>
-                      ))}
-                    </span>
-                  </li>
-                  <li className="shop_info-option">
-                    <Phone size={16} color="#DF6059" />
-                    <span className="shop_info-option_content">
-                      <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
-                    </span>
-                  </li>
-                  <li className="shop_info-option">
-                    <MapPin size={16} color="#DF6059" />
-                    <span className="shop_info-option_content">
-                      <a href="#" onClick={() => {window.open('http://maps.google.co.jp/maps?q='+encodeURI(shopData.address)); return false;}}>
-                        {shopData.address}
-                      </a>
-                    </span>
-                  </li>
-                </ul>
-                <ul className="shop_sns-list">
-                  {shopData.links.map((data: any, i: number) => (
-                    <li className="shop_sns-option" key={`sns${i}`}>
-                      <a href={data.url} target="_blank" rel="noopener noreferrer">
-                        <Button theme={[ButtonThemes.SHOPSNS]}>
-                          {snsTags[(data.url_type-1)]}
+                      </Button>
+                    </Link>
+                  </div>
+                  {!authState.user.is_owner &&
+                    <React.Fragment>
+                      <hr className="infection-control_hr" />
+                      <Link to={`/shops/${match.params.id}/comments/new`}>
+                        <Button
+                          theme={[ButtonThemes.NORMAL]}
+                          propStyle={propStyle.commentBtn}
+                          onClick={() => redirectContext.setUri({
+                            fromPath: RedirectFrom.NEW_COMMENT,
+                            shop: match.params.id
+                          })}>
+                          <Edit size={20} color="#fff" />
+                          <span className="infection-control_comment-text">感染対策のレビューを書く</span>
                         </Button>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-              {/* FIXME v2で実装 */}
-              {/* <div style={{ display: 'none' }}>
+                      </Link>
+                    </React.Fragment>
+                  }
+                </section>
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
-                  <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
-                    情報の編集をリクエスト
-                  </Button>
+                  <ul className="shop_info-list">
+                    <li className="shop_info-option">
+                      <Clock size={16} color="#333" />
+                      <span className="shop_info-option_content">
+                        {businessDate.map((data: any, i: number) => (
+                          <React.Fragment key={`business_date${i}`}>
+                            {`曜日: ${data.label}`}<br />
+                            {`開店時間: ${data.opening}`}<br />
+                            {`閉店時間: ${data.closing}`}<br />
+                            {data.is_close ? '定休日' : '営業日'}<br /><br />
+                          </React.Fragment>
+                        ))}
+                      </span>
+                    </li>
+                    <li className="shop_info-option">
+                      <Phone size={16} color="#333" />
+                      <span className="shop_info-option_content">
+                        <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
+                      </span>
+                    </li>
+                    <li className="shop_info-option">
+                      <MapPin size={16} color="#333" />
+                      <span className="shop_info-option_content">
+                        <a href="#" onClick={() => { window.open('http://maps.google.co.jp/maps?q=' + encodeURI(shopData.address)); return false; }}>
+                          {shopData.address}
+                        </a>
+                      </span>
+                    </li>
+                  </ul>
+                  <ul className="shop_sns-list">
+                    {shopData.links.map((data: any, i: number) => (
+                      <li className="shop_sns-option" key={`sns${i}`}>
+                        <a href={data.url} target="_blank" rel="noopener noreferrer">
+                          <Button theme={[ButtonThemes.SHOPSNS]}>
+                            {snsTags[(data.url_type - 1)]}
+                          </Button>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </section>
-              </div> */}
-              {/* ここまで */}
-            </div>
-          <style jsx>{`
+                {/* FIXME v2で実装 */}
+                <div style={{ display: 'none' }}>
+                  <hr className="shop_hr" />
+                  <section className="shop-card_section">
+                    <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
+                      情報の編集をリクエスト
+                  </Button>
+                  </section>
+                </div>
+                {/* ここまで */}
+              </div>
+              <style jsx>{`
             .shop-card_section{
               padding: 24px 16px;
             }
@@ -412,8 +418,8 @@ const Shop: React.FC = (props: any) => {
               margin-right: 4px;
             }
           `}</style>
-        </div>
-      </HomeLayout>}
+            </div>
+          </HomeLayout>}
     </React.Fragment>
   );
 }

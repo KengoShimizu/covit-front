@@ -70,7 +70,8 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
           }
           .modal-container{
             overflow-y: scroll;
-            max-height: 300px;
+            max-height: 400px;
+            max-width: 500px;
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
             position: fixed;
             z-index: 10000;
@@ -91,6 +92,7 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
             margin: 4px 0 4px -1em;
           }
           .modal-inner-item{
+            cursor: pointer;
             padding: 4px 0;
             display: flex;
           }
