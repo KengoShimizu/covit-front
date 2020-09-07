@@ -16,6 +16,7 @@ import Loading from '../../molecules/Loading';
 // context
 import RedirectContext from '../../../context/RedirectContext';
 import AuthContext from "../../../context/CommonProvider";
+import { InputThemes } from '../../atoms/Input';
 
 const propStyle = {
   commentBtn: {
@@ -191,10 +192,8 @@ const Shop: React.FC = (props: any) => {
                     <span className="shop_info-option_content">
                       {businessDate.map((data: any, i: number) => (
                         <React.Fragment key={`business_date${i}`}>
-                          {`曜日: ${data.label}`}<br/>
-                          {`開店時間: ${data.opening}`}<br/>
-                          {`閉店時間: ${data.closing}`}<br/>
-                          {data.is_close ? '定休日' : '営業日'}<br/><br/>
+                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block'}} >{`${data.label}曜日`}</Text>
+                          <Text theme={[TextThemes.CAPTION]} propStyle={{display: 'inline-block', marginLeft: '24px'}} >{data.is_close ? '定休日' : `${data.opening}〜${data.closing}`}</Text><br />
                         </React.Fragment>
                       ))}
                     </span>
@@ -227,14 +226,14 @@ const Shop: React.FC = (props: any) => {
                 </ul>
               </section>
               {/* FIXME v2で実装 */}
-              <div style={{ display: 'none' }}>
+              {/* <div style={{ display: 'none' }}>
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
                   <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.shopedit}>
                     情報の編集をリクエスト
                   </Button>
                 </section>
-              </div>
+              </div> */}
               {/* ここまで */}
             </div>
           <style jsx>{`
