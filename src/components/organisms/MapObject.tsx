@@ -33,13 +33,13 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const curLocMarker = L.icon({
     iconUrl: '/current_location_pin.svg',
     iconSize: [55, 61],
-    iconAnchor: [27, 30]
+    iconAnchor: [27, 61]
   });
 
   const shopMarker = L.icon({
     iconUrl: '/shop_pin.svg',
     iconSize: [55, 61],
-    iconAnchor: [27, 30]
+    iconAnchor: [27, 61]
   });
 
   const createDate = () => {

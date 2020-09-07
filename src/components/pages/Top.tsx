@@ -17,6 +17,8 @@ import Icon, { IconThemes } from '../atoms/Icon';
 import FooterActionBar from './../organisms/FooterActionBar';
 // context
 import TopModalContext from '../../context/TopModalContext';
+// types
+import Genre from '../../types/Genre';
 
 // ボタンのCSS
 const propStyle = {
@@ -86,9 +88,9 @@ const Top: React.FC = (props: any) => {
   const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng });
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   const threshold = 0.015;
-  const genre_id = Array.from(new Array(12)).map((v,i)=> i + 1);
 
   const GetUniqueImgs = (steps: any) => {
     const images = steps.map((data: any) => data.image);
@@ -109,13 +111,13 @@ const Top: React.FC = (props: any) => {
       .catch(err => console.log(err));
   }
 
-  const fetchCoordinationsData = async (genre_id: number[], lat_: number, lng_: number, isSubscribed: boolean) => {
+  const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number, isSubscribed: boolean) => {
     setLoading(true);
-    const genre_id_str = genre_id.length === 0 ? Array.from(new Array(12)).map((v,i)=> i + 1) : genre_id.join(',')
+    const selectedGenre_str = selectedGenre.length === 0 ? genres.map((data: any) => data.id) : selectedGenre.join(',')
     try {
       const res = await axios.get('/api/v1/user/coordinations', {
           params: {
-            genre_ids: genre_id_str,
+            genre_ids: selectedGenre_str,
             from_lat: lat_ - threshold,
             to_lat: lat_ + threshold,
             from_lng: lng_ - threshold,
@@ -157,7 +159,7 @@ const Top: React.FC = (props: any) => {
     setInitModalIsOpen(cookies.get('close-modal-once'));
     getCullentLocation();
     let isSubscribed = true;
-    fetchCoordinationsData(genre_id, lastlat, lastlng, isSubscribed);
+    fetchCoordinationsData(selectedGenre, lastlat, lastlng, isSubscribed);
     const cleanup = () => {
       isSubscribed = false;
     };
@@ -223,7 +225,7 @@ const Top: React.FC = (props: any) => {
         </div>
         {initModalIsOpen && 
           <React.Fragment>
-            <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(genre_id, lastlat, lastlng, true)}>
+            <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(selectedGenre, lastlat, lastlng, true)}>
               <Icon theme={[IconThemes.NORMAL]}>
                 <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/>
               </Icon>
@@ -252,7 +254,9 @@ const Top: React.FC = (props: any) => {
           setGenreSerchIsOpen={setGenreSerchIsOpen}
           fetchCoordinationsData={fetchCoordinationsData}
           lastlat={lastlat} 
-          lastlng={lastlng}/>
+          lastlng={lastlng}
+          genres={genres}
+          setGenres={setGenres}/>
 
         {/* 初回モーダル */}
         <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
