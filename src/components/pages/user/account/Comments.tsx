@@ -58,7 +58,7 @@ const Comments: React.FC = (props: any) => {
     match.params.id ?
       setPageState({
         headerText: `${user.name} さんのレビュー一覧`,
-        prevRef: '#',
+        prevRef: `/shops/${match.params.id}/comments`,
         sqlQuery: `user_id=${user_id}`,
         update: true
       }) :
@@ -71,7 +71,7 @@ const Comments: React.FC = (props: any) => {
   }, [user])
 
   return (
-    <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef} history={props.history}>
+    <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef}>
       {loading ? <Loading /> :
         <div>
           {match.params.id && user &&

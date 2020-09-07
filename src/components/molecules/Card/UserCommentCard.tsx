@@ -33,19 +33,19 @@ type CardProps = {
 
 const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId}) => {
   const delete_bool = deletedId === comment.id;
-  const setUri = useContext(RedirectContext).setUri;
+  const {uri, setUri} = useContext(RedirectContext);
 
   const handleClick = () => {
     setUri({
       fromPath: RedirectFrom.USER_COMMENT,
-      shop: 0,
+      shop: comment.shop.id,
     });
   }
+  console.log(uri)
   return (
     <React.Fragment>
       <li className={`card ${delete_bool && 'delete'}`} onClick={handleClick}>
         <div className="card_content">
-          <Link to={`/shops/${comment.shop.id}`}>
             <div className="card_content-head">
               {icon === 'smile' && <Smile size={24} color="#ED753A" style={propStyle.headIcon}/>}
               {icon === 'frown' && <Frown size={24} color="#3A8CED" style={propStyle.headIcon}/>}
@@ -65,7 +65,6 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
                 <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YMD(new Date(comment.created_at))}</Text>
               </div>
             </div>
-          </Link>
           { isCurrentUser &&
             <div className="card_trash" onClick={() => onClick(comment.id)}>
               <Icon theme={[IconThemes.SMALL]}>
@@ -75,9 +74,9 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
             </div>
           }
         </div>
-        <Link to={`/shops/${comment.shop.id}`} style={{margin: 'auto 10px auto 0'}}>
+        <div onClick={handleClick} style={{margin: 'auto 10px auto 0'}}>
           <ChevronRight size={24} color="#000"/>
-        </Link>
+        </div>
       </li>
       <style jsx>
         {`

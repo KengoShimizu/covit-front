@@ -11,11 +11,11 @@ export const NotOwnerRoute = ({ component: Component, ...rest }: any) => {
   const { uri } = useContext(RedirectContext);
   const { authState } = useContext(AuthContext);
   return (
-    authState.user.is_owner === OwnerType.NOT_OWNER ?
-      <Route {...rest} component={Component}/>
-      : uri.fromPath ? 
-        <Redirect to={`${RouteName.SHOP}?from=${uri.fromPath}`} />
-        :
+    uri.fromPath && uri.shop ? 
+      <Redirect to={`/shops/${uri.shop}?from=${uri.fromPath}`} />
+      : authState.user.is_owner === OwnerType.NOT_OWNER ?
+        <Route {...rest} component={Component}/>
+        : 
         <Redirect to={RouteName.OWNER_ACCOUNT_TOP}/>
   )
 };
