@@ -16,7 +16,7 @@ const propStyle = {
 
 const TopModal: React.FC = () => {
 
-  const renderModal = (isShown: boolean, setIsShown: any, text: any) => {
+  const renderModal = (isShown: boolean, text: any) => {
     return (
       <div className={isShown ? 'modal-top-container show' : 'modal-top-container'}>
         <div className='modal-top-inner'>
@@ -56,7 +56,6 @@ const TopModal: React.FC = () => {
   return ReactDOM.createPortal(
     renderModal(
       topModalContext.contents.isShown,
-      topModalContext.setContents, 
       topModalContext.contents.text),
     TopModalElement
   );

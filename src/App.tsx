@@ -7,11 +7,11 @@ import { RouteName } from './common/Const';
 import { CommonProvider } from "./context/CommonProvider";
 import { ModalStateProvider } from './context/ModalContext';
 import { TopModalProvider } from './context/TopModalContext';
-import { Authentication } from "./components/common/Authentication";
 import { LoginJudge } from "./components/common/LoginJudge";
 import { OwnerRoute } from './components/common/OwnerRoute'; // 店のオーナーのみ
 import { UserRoute } from './components/common/UserRoute'; // 一般ユーザーのみ
 import { NotOwnerRoute } from './components/common/NotOwnerRoute'; // 一般ユーザーとゲストのみ
+import { AuthRoute } from './components/common/AuthRoute'; // ログイン状態のみ
 import { RedirectPathProvider } from './context/RedirectContext';
 // pages
 import Top from './components/pages/Top';
@@ -80,24 +80,24 @@ function App() {
                     <Route exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
                     <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
-                    <Authentication>
-                      <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
-                      <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
-                      <UserRoute exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
-                      <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
-                      <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
-                      <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
-                      <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
-                      <UserRoute exact path={RouteName.ADD_EMAIL} component={AddEmail} />
-                      <UserRoute exact path={RouteName.HISTORY} component={History} />
-                      <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
-                      <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />                      
-                      <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
-                      <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
-                      <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
-                      <Route exact path={RouteName.EDIT_EMAIL} component={EditEmail} />
-                      <Route component={NotFound} />
-                    </Authentication>
+                    {/* ログインユーザー */}
+                    <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
+                    <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
+                    <UserRoute exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
+                    <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
+                    <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
+                    <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
+                    <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
+                    <UserRoute exact path={RouteName.ADD_EMAIL} component={AddEmail} />
+                    <UserRoute exact path={RouteName.HISTORY} component={History} />
+                    <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
+                    <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />                      
+                    <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
+                    <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
+                    <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
+                    <AuthRoute exact path={RouteName.EDIT_EMAIL} component={EditEmail} />
+                    {/* ログインユーザー */}
+                    <Route component={NotFound} />
                   </Switch>
                 </RedirectPathProvider>
               </LoginJudge>
