@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // library
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
+import queryString from 'query-string';
 import useReactRouter from "use-react-router";
 import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
@@ -34,6 +35,7 @@ const Shop: React.FC = (props: any) => {
     <Instagram size={24} color="#333" />,
     <Monitor size={24} color="#333" />
   ]
+  const qs = queryString.parse(props.location.search);
   const redirectContext = useContext(RedirectContext);
   const { authState } = useContext(AuthContext);
   const { match }: any = useReactRouter();
@@ -99,7 +101,7 @@ const Shop: React.FC = (props: any) => {
       {loading ? <Loading /> :
         shopData.user_id && authState.user.is_owner !== OwnerType.NOT_OWNER && shopData.user_id !== authState.user.id ?
           <Redirect to='' /> :
-          <HomeLayout headerText={shopData.name} prevRef={RouteName.ROOT} history={props.history}>
+          <HomeLayout headerText={shopData.name} prevRef={qs.from ? `/users/${match.params.id}/comments` : RouteName.ROOT}>
             <div className="content">
               <div className="shop-card">
                 {/* ヘッダー画像 */}
