@@ -266,7 +266,7 @@ const Shop: React.FC = (props: any) => {
             .shop-img_wrapper{
               width: 240px;
               max-width: 80%;
-              height: 120px;
+              height: 112px;
               overflow: hidden;
               margin: 0 auto;
               margin-bottom: 32px;
