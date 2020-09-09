@@ -102,7 +102,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
 
   const togglePublishShop = async (shop_id: number, status: number) => {
     try{
-      const res = await axios.put(`/api/v1/owner/shops/update_status?id=${shop_id}`);
+      await axios.put(`/api/v1/owner/shops/update_status?id=${shop_id}`);
       fetchOwnerShops()
     } catch (error) {
       console.log(error)

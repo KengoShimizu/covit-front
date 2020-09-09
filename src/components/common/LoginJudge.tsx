@@ -15,7 +15,6 @@ export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
   const { authState, setAuth } = useContext(AuthContext);
   const path = useReactRouter().location.pathname;
   const [loading, setLoading] = useState(true);
-  const [login, setLogin] = useState(false);
 
   const setAuthData = useCallback(async (TokenInCookie: string) => {
     try {
@@ -27,17 +26,13 @@ export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
             isLogin: true,
             user: res
           });
-          setLogin(true);
-        } else {
-          setLogin(false);
         }
       })
-        .catch(error => setLogin(false))
+        .catch(error => console.log(error))
         .finally(() => setLoading(false));
     } catch (error) {
       console.log(error);
       axios.defaults.headers.common['Authorization'] = '';
-      setLogin(false);
       setLoading(false);
     }
   }, []);
@@ -60,7 +55,6 @@ export const LoginJudge: React.FC<AuthProps> = ({ children }) => {
       setAuthData(TokenInCookie);
     } else {
       setLoading(false);
-      setLogin(false);
     }
   }, [path]);
 

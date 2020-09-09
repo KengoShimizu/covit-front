@@ -40,6 +40,7 @@ interface AddParam {
 
 const OwnerShopForm: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
+  const [isOK, setIsOK] = useState(false);
   const { authState } = useContext(AuthContext);
   const [load2, setLoad2] = useState(false);
   const [load3, setLoad3] = useState(false);
@@ -142,7 +143,7 @@ const OwnerShopForm: React.FC = (props: any) => {
       {page === 2 &&
         <HomeLayout headerText={`お店の情報登録(2/${totalPage})`} onClick={() => setPage(1)}>
           <div className="container">
-            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} noKanaName={noKanaName} post={noKanaName? undefined : post} load2={load2}/>
+            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} noKanaName={noKanaName} post={noKanaName? undefined : post} load2={load2} setIsOK={setIsOK} isOK={isOK}/>
           </div>
         </HomeLayout>}
       {page === 3 && noKanaName &&
