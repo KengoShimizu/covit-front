@@ -236,12 +236,14 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         <Moon color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
         <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_night" propStyle={{ width: '75%', display: 'inline-block' }} defaultValue={addData.shop.price_night} />
       </div>
-      {/* FIXME ImageUploaderみたいなAPI作った方が良い */}
       <label>ヘッダー画像</label>
       <div className="shop-img_wrapper">
         <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
       </div>
-      <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} />
+      {/* 一般ユーザーには画像を投稿させない */}
+      {
+        isOwnerPage ?  <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} /> : <React.Fragment />
+      }
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
       {setPage ?

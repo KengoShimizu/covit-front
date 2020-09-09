@@ -93,7 +93,7 @@ function App() {
                     <UserRoute exact path={RouteName.ADD_EMAIL} component={AddEmail} />
                     <UserRoute exact path={RouteName.HISTORY} component={History} />
                     <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
-                    <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />                      
+                    <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />
                     <OwnerRoute exact path={RouteName.OWNER_ACCOUNT_TOP} component={OwnerAccountTop} />
                     <OwnerRoute exact path={RouteName.OWNER_INFECTION_EDIT} component={OwnerInfectionEdit} />
                     <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
