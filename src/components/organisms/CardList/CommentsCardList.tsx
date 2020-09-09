@@ -251,7 +251,6 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             {
               (state === 'good' ? goodReputations : badReputations).map((comment: any) => {
                 const icon = state === 'good' ? 'smile' : 'frown';
-                console.log(comment)
                 return (
                   isShopPage ?
                     <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />

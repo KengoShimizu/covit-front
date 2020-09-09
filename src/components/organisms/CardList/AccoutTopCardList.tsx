@@ -5,7 +5,7 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RouteName } from './../../../common/Const';
+import { RouteName, RedirectFrom } from './../../../common/Const';
 // components
 import AccountTopCard from '../../molecules/Card/AccoutTopCard';
 import Modal from '../../molecules/Modal/Modal';
@@ -13,6 +13,7 @@ import Modal from '../../molecules/Modal/Modal';
 import TopModalContext from '../../../context/TopModalContext';
 import ModalContext from '../../../context/ModalContext';
 import AuthContext from "../../../context/CommonProvider";
+import RedirectContext from './../../../context/RedirectContext';
 
 
 interface AccoutTopCardListProps {
@@ -22,6 +23,7 @@ interface AccoutTopCardListProps {
 
 export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, user_id }) => {
   const cookies = new Cookies();
+  const { setUri } = useContext(RedirectContext);
   const { setAuth } = useContext(AuthContext);
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
@@ -127,6 +129,12 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
     toggleModalShown(true);
   }
 
+  const handleClick = () => {
+    setUri({
+      fromPath: RedirectFrom.ACCOUNTS,
+      shop: 0,
+    });
+  }
 
   return (
     <div className="container">
@@ -136,7 +144,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
         btntext={modalState.btntext}
         onClick={modalState.onClick} />
       <ul className="account-function_list">
-        <AccountTopCard src='/history_accent.svg' text='閲覧履歴' nextRef={RouteName.HISTORY} />
+        <AccountTopCard src='/history_accent.svg' text='閲覧履歴' onClick={handleClick} />
         <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef={RouteName.SELF_COMMENTS} />
         <hr className="account-function_hr" />
         <AccountTopCard icon={<Mail size={20} color={CommonStyle.AccentColor} />} text='ログイン情報の編集' nextRef={RouteName.EDIT_LOGIN} />
