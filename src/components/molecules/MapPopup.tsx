@@ -50,25 +50,13 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
               </ul>
             </li>
           </ul>
+          <ol className="infection-control_list" >
           {props.uniqueImgs.map((data: any) => (
-            <ol className="infection-control_list" key={`images${data}`}>
               <li className="infection-control_option">
-                <img className="infection-control_icon" src={'/covid-icon_alcohol.svg'} alt="sample" />
+                <img className="infection-control_icon" src={data.image} alt="sample" />
               </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={'/covid-icon_airing.svg'} alt="sample" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={'/covid-icon_mask.svg'} alt="sample" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={'covid-icon_health-care.svg'} alt="sample" />
-              </li>
-              <li className="infection-control_option">
-                <img className="infection-control_icon" src={'/covid-icon_distance.svg'} alt="sample" />
-              </li>
-            </ol>
           ))}
+          </ol>
         </div>
         <div　className="shop-card_header-img_wrapper">
           <img className="shop-card_header-img" src={props.data.image} alt="shop" />

@@ -5,6 +5,7 @@ import axios from "axios";
 import HomeLayout from '../../../templates/HomeLayout';
 import Input, { InputThemes } from '../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../atoms/Button';
+import Text, { TextThemes } from './../../../atoms/Text';
 // context
 import AuthContext from "../../../../context/CommonProvider";
 // common
@@ -23,9 +24,9 @@ const EditEmail: React.FC = (props: any) => {
     email: ""
   });
 
-  // FIXME 終了後ページに飛ばす
   const send = async () => {
     try {
+      setIsOK(false)
       await axios.put(`/api/v1/common/users/update_email`, editData)
       props.history.push({
         pathname: RouteName.SEND,
@@ -37,7 +38,11 @@ const EditEmail: React.FC = (props: any) => {
         }
       });
     } catch (error) {
-      console.log(error)
+      if (error.message.match(/400/g)) {
+        setErr('既に登録されたメールアドレスです。')
+      } else {
+        setErr('エラーが発生しました。もう一度お試しください。')
+      }
     }
   }
 
@@ -52,13 +57,21 @@ const EditEmail: React.FC = (props: any) => {
     else setIsOK(true);
   }, [editData])
 
+  useEffect(() => {
+    if (props.location.state) {
+      setEditData({
+        email: props.location.state.email,
+      });
+    }
+  }, [])
+
   return (
     <HomeLayout headerText="メールアドレスの変更" prevRef={authState.user.is_owner ? RouteName.OWNER_ACCOUNT_TOP : RouteName.EDIT_LOGIN}>
       {/* FIXME リンク先 */}
       <div className="mail-form">
         <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '16px auto'}} readonly={true} />
         <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '16px auto'}} />
-        {/* {err && <Text theme={[TextThemes.ERROR]} propStyle={{marginLeft: '15px'}}>{err}</Text>} */}
+        {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
         <div className="mail-form_btn-container">
           <Button
             propStyle={{ margin: 'auto' }}
