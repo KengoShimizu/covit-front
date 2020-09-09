@@ -227,7 +227,7 @@ const Shop: React.FC = (props: any) => {
                     <li className="shop_info-option">
                       <Phone size={16} color="#333" />
                       <span className="shop_info-option_content">
-                        <a href={`tel:${shopData.contact}`}>{shopData.contact}</a>
+                        {shopData.contact ? <a href={`tel:${shopData.contact}`}>{shopData.contact}</a> : '-'}
                       </span>
                     </li>
                     <hr className="infection-control_hr" />
