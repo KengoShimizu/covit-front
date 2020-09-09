@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // atoms
-import Input, { InputThemes } from '../../atoms/Input'
+import Input from '../../atoms/Input'
 import Button, { ButtonThemes } from '../../atoms/Button'
 // molecules
 import { BusinessDateInput } from '../../molecules/BusinessDateInput'

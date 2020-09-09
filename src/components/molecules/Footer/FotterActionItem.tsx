@@ -2,14 +2,6 @@ import React from 'react';
 // library
 import { Link } from 'react-router-dom';
 
-const propStyle = {
-  icon: {
-    width: '44px',
-    height: '28px',
-    marginBottom: '8px'
-  }
-}
-
 interface FotterActionItemProps {
   id: string;
   text: string;

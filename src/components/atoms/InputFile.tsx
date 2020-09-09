@@ -9,7 +9,6 @@ interface InputFileProps {
   propStyle?: {};
   handleChange?: any;
   label: string;
-  icon?: React.ReactNode;
 }
 
 export enum InputFileThemes {
@@ -20,7 +19,7 @@ enum ModifierClassNames {
   INIT = 'input-file-init',
 }
 
-const InputFile: React.FC<InputFileProps> = ({ theme = InputFileThemes.INIT, propStyle = {}, handleChange, label, icon }) => {
+const InputFile: React.FC<InputFileProps> = ({ theme = InputFileThemes.INIT, propStyle = {}, handleChange, label }) => {
   return (
     <div className={["input-file", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label>
