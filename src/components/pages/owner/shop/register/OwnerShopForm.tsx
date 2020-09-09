@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useContext } from 'react';
 // library
 import axios from "axios";
+import queryString from 'query-string';
 // template
 import HomeLayout from '../../../../templates/HomeLayout';
 // context
 import TopModalContext from '../../../../../context/TopModalContext';
 import AuthContext from "../../../../../context/CommonProvider";
 // common
-import { RouteName } from '../../../../../common/Const';
+import { RouteName, TopModalTime } from '../../../../../common/Const';
 // types
 import Link from '../../../../../types/Link';
 // components
 import { InfectionControl } from '../../../../organisms/ShopForm/InfectionControl';
 import { ShopInfo } from '../../../../organisms/ShopForm/ShopInfo';
 import OwnerInfo from '../../../../organisms/ShopForm/OwnerInfo';
+import TopModal from '../../../../molecules/Modal/TopModal';
 
 interface AddParam {
   owner: {
@@ -37,6 +39,7 @@ interface AddParam {
 }
 
 const OwnerShopForm: React.FC = (props: any) => {
+  const qs = queryString.parse(props.location.search);
   const { authState } = useContext(AuthContext);
   const [load2, setLoad2] = useState(false);
   const [load3, setLoad3] = useState(false);
@@ -102,10 +105,36 @@ const OwnerShopForm: React.FC = (props: any) => {
     window.scrollTo(0, 0);
   }, [page])
 
+  useEffect(() => {
+    if (topModalContext.contents.isShown){
+      setTimeout(() => {
+        topModalContext.setContents({
+          isShown: false,
+          text: {
+            caption: ''
+          }
+        })
+      }, TopModalTime)
+    }
+  }, [topModalContext.contents.isShown]);
+
+  useEffect(() => {
+    if(qs.state === 'new'){
+      topModalContext.setContents({
+        isShown: true,
+        text: {
+          caption: '登録が完了いたしました！',
+          small: 'お店の情報の入力をお願いします。'
+        }
+      });
+    }
+  }, [])
+
   return (
     <React.Fragment>
       {page === 1 &&
-        <HomeLayout headerText={`お店の情報登録(1/${totalPage})`} prevRef='#' history={props.history}>
+        <HomeLayout headerText={`お店の情報登録(1/${totalPage})`} prevRef={RouteName.OWNER_ACCOUNT_TOP}>
+          <TopModal/>
           <div className="container">
             <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
           </div>

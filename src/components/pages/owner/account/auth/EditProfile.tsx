@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 // library
 import axios from 'axios';
+import useReactRouter from "use-react-router";
 // components
 import HomeLayout from '../../../../templates/HomeLayout';
 import Input, { InputThemes } from '../../../../atoms/Input'
@@ -10,7 +11,7 @@ import TopModal from '../../../../molecules/Modal/TopModal';
 import AuthContext from "../../../../../context/CommonProvider";
 import TopModalContext from '../../../../../context/TopModalContext';
 // common
-import { RouteName } from '../../../../../common/Const';
+import { RouteName, TopModalTime } from '../../../../../common/Const';
 
 interface EditParam {
   name: string;
@@ -19,6 +20,8 @@ interface EditParam {
 
 const OwnerEditProfile: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
+  const { match }: any = useReactRouter();
+  const isEdit = match.path.match(/edit/g);
   const [isOK, setIsOK] = useState(!!(authState.user.name && authState.user.kana_name));
   const topModalContext = useContext(TopModalContext);
   const [editData, setEditData] = useState<EditParam>({
@@ -63,16 +66,16 @@ const OwnerEditProfile: React.FC = (props: any) => {
             caption: ''
           }
         })
-      }, 1000)
+      }, TopModalTime)
     }
   }, [topModalContext.contents.isShown]);
 
   return (
-    <HomeLayout headerText='担当者情報' prevRef={RouteName.OWNER_ACCOUNT_TOP} history={props.history}>
+    <HomeLayout headerText='担当者情報' prevRef={RouteName.OWNER_ACCOUNT_TOP}>
       <TopModal/>
       <Input theme={InputThemes.REQUIRED} label="お名前" placeholder="田中太郎" name="name" content={editData.name} handleChange={handleChange} propStyle={{margin: '0 auto', padding: '0.5rem'}}/>
       <Input theme={InputThemes.REQUIRED} label="ふりがな" placeholder="たなかたろう" name="kana_name" content={editData.kana_name} handleChange={handleChange} propStyle={{margin: '0 auto', padding: '0.5rem'}}/>
-      <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>登録する</Button>
+      <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>{isEdit ? '変更する' : '登録する'}</Button>
     </HomeLayout>
   );
 }

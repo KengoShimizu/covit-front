@@ -13,7 +13,7 @@ import TopModal from '../../../../molecules/Modal/TopModal';
 import AuthContext from "../../../../../context/CommonProvider";
 import TopModalContext from '../../../../../context/TopModalContext';
 // common
-import { RouteName } from '../../../../../common/Const';
+import { RouteName, TopModalTime } from '../../../../../common/Const';
 import Validate from '../../../../../common/Validate';
 
 interface EditParam {
@@ -90,12 +90,12 @@ const EditProfile: React.FC = (props: any) => {
             caption: ''
           }
         })
-      }, 1000)
+      }, TopModalTime)
     }
   }, [topModalContext.contents.isShown]);
 
   return (
-    <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
+    <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} noBtn={qs.state === 'new' ? true : false}>
       <TopModal/>
       <Input theme={InputThemes.EDIT_PROFILE} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto', padding: '1rem'}}/>
       <UserIconSellection data={editData} setData={setEditData} />

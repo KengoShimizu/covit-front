@@ -21,9 +21,10 @@ interface InfectionControlProps {
   post?: any;
   noKanaName?: boolean;
   load2?: boolean;
+  setEditIsOK?: any;
 }
 
-export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, noKanaName, load2 }) => {
+export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, load2, setEditIsOK }) => {
   const { match }: any = useReactRouter();
   const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -62,8 +63,13 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
   }, [])
 
   useEffect(() => {
-    if(Validate.formValidate('shop_form_infections', addData.step_ids)) setIsOK(false);
-    else setIsOK(true);
+    if(Validate.formValidate('shop_form_infections', addData.step_ids)) {
+      setIsOK(false);
+      setEditIsOK(false);
+    } else {
+      setIsOK(true);
+      setEditIsOK(true);
+    }
   }, [addData.step_ids]);
 
   useEffect(() => {
@@ -87,7 +93,7 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
       {!isEdit &&
         <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
       }
-      {identifer === 'user' || !noKanaName ?
+      {identifer === 'user' || !isEdit ?
         <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => post(2) : () => {}}>
           リクエストする
         </Button>

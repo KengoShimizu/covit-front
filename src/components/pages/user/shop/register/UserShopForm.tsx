@@ -83,7 +83,7 @@ const UserShopForm: React.FC = (props: any) => {
   return (
     <React.Fragment>
       {page === 1 ?
-        <HomeLayout headerText="お店の情報登録(1/2)" prevRef='#' history={props.history}>
+        <HomeLayout headerText="お店の情報登録(1/2)" prevRef={RouteName.SHOP_SEARCH_FOR_COMMENTS}>
           <div className="container">
             <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
           </div>

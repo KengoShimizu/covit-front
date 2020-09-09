@@ -47,7 +47,7 @@ const ShopComments: React.FC = (props: any) => {
       shopUserID && authState.user.is_owner !== OwnerType.NOT_OWNER && shopUserID !== authState.user.id ?
         <Redirect to={RouteName.ACCOUNT_TOP} />
         :
-        <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`} history={props.history}>
+        <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`}>
           <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
           <FooterActionBar initialAccent={0}/>
         </HomeLayout>

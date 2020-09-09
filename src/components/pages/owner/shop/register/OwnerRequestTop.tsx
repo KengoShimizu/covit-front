@@ -18,7 +18,7 @@ const propStyle = {
 
 const OwnerRequestTop: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT} history={props.history}>
+    <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT}>
       <div className="container">
         <div className="img-container">
           <img className="image" src='/register_top.png' /> 
