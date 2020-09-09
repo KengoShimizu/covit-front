@@ -19,7 +19,7 @@ const ServerError: React.FC = (props: any) => {
 
   useEffect(() => {
     if (qs.state === 'sns-error') setMessage('指定したSNSアカウントには、メールアドレスが登録されていません。もしくは他のログイン方法で使われているメールアドレスです。');
-    else setMessage('')
+    else setMessage('サーバーの問題でお探しのページを表示できません。時間をおいて再度お試しください。')
   }, [])
 
   return (
@@ -27,11 +27,11 @@ const ServerError: React.FC = (props: any) => {
       <div className="container">
         <div className="server-error-wrap">
           <div className="server-error-img-wrap">
-            <img className="server-error-img" src='/404.png' alt="500" />
+            <img className="server-error-img" src='/500.png' alt="500" />
           </div>
           <div className="server-error-text">
             <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={propStyle.textHead}>
-              申し訳ございません。サーバーエラーが発生しました。
+              申し訳ございません。<br />サーバーエラーが発生しました。
             </Text>
             <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>
               {message}
