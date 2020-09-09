@@ -106,6 +106,11 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
           input[type="time"]::-webkit-calendar-picker-indicator {
             display: none;
             background: none;
+            -webkit-appearance: none;
+          }
+
+          input[type="time"]::-webkit-date-and-time-value { 
+            margin-right: 1px;
           }
         `}
       </style>
