@@ -65,6 +65,7 @@ const CreateComment: React.FC = (props: any) => {
 
   const postData = async () => {
     try{
+      setIsOK(false)
       await axios.post(`/api/v1/user/comments`, {
           ...addData,
           date: new Date(parseInt(addData.date.substr(0,4)), parseInt(addData.date.substr(5,2))-1)

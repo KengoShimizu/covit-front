@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 // library
 import { Trash2 } from 'react-feather';
+import queryString from 'query-string';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RouteName } from '../../../common/Const';
+import { RouteName, RedirectFrom } from '../../../common/Const';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import HistoryCardList from '../../organisms/CardList/HistoryCardList';
@@ -32,6 +33,7 @@ const propStyle = {
 
 const History: React.FC = (props: any) => {
     const modalContext = useContext(ModalContext);
+    const qs = queryString.parse(props.location.search);
 
     const handleCookie = () => {
       localStorage.setItem('histories', '');
@@ -40,7 +42,7 @@ const History: React.FC = (props: any) => {
     }
 
     return (
-      <HomeLayout headerText='閲覧履歴' prevRef={RouteName.ROOT}>
+      <HomeLayout headerText='閲覧履歴' prevRef={qs.from === RedirectFrom.ACCOUNTS ? RouteName.ACCOUNT_TOP : RouteName.ROOT}>
         <Modal 
           title='本当に履歴を削除しますか？'
           btntext='削除する'

@@ -120,6 +120,7 @@ export class RedirectFrom {
   public static readonly NEW_COMMENT = 'new_comment'
   public static readonly HISTORY = 'history'
   public static readonly USER_COMMENT = 'user_comment'
+  public static readonly ACCOUNTS = 'accounts'
 }
 
 export class RouteName {
