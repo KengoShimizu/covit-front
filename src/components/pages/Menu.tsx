@@ -12,7 +12,7 @@ import AccountTopCard from './../molecules/Card/AccoutTopCard';
 
 const Menu: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText='メニュー' prevRef={RouteName.ROOT} history={props.history}>
+    <HomeLayout headerText='メニュー' prevRef={RouteName.ROOT}>
       <RegisterCardList query={props.location.search}/>
       <div className="about">
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='covEATについて' nextRef={RouteName.LANDING_PAGE}/>

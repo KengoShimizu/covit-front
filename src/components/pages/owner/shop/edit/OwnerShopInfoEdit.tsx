@@ -33,8 +33,9 @@ interface EditParam {
 const propStyle = {
   changeBtn: {
     position: 'fixed',
-    right: '45px',
-    top: '75px',
+    right: '44px',
+    top: '76px',
+    zIndex: '1000',
   }
 }
 
@@ -42,6 +43,7 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
   // linksだけ切り分けてるのは無限ループに陥ってしまうから
   const [defaultLinks, setDefaultLinks] = useState<Link[]>([]);
   const { match }: any = useReactRouter();
+  const [editIsOK, setEditIsOK] = useState(false);
   const topModalContext = useContext(TopModalContext);
   const [err, setErr] = useState<string>('');
   const [editData, setEditData] = useState<EditParam>({
@@ -59,13 +61,6 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
     genre_id: 0,
     links: []
   });
-
-  const handleChange = (event: any) => {
-    setEditData({
-      ...editData,
-      [event.target.name]: event.target.value
-    });
-  }
 
   const fetchData = async () => {
     try{
@@ -94,6 +89,7 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
 
   const update = async () => {
     try{
+      setEditIsOK(false)
       await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
       topModalContext.setContents({
         isShown: true,
@@ -118,16 +114,16 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
   return (
     <React.Fragment>
       <HomeLayout headerText="お店の情報登録" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
-        <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn} onClick={update}>変更する</Button>
+        <Button theme={editIsOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={propStyle.changeBtn} onClick={editIsOK ? update : () => {}}>変更する</Button>
         <div className="container">
-          <ShopInfo setAddData={setEditData} addData={editData} defaultLinks={defaultLinks}/>
+          <ShopInfo setAddData={setEditData} addData={editData} defaultLinks={defaultLinks} setEditIsOK={setEditIsOK}/>
         </div>
       </HomeLayout>
       <style jsx>{`
         .container {
           width: 100%;
           max-width: 330px;
-          margin: 30px auto 0;
+          margin: 90px auto 30px;
         }
       `}</style>
     </React.Fragment>

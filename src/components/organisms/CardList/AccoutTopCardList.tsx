@@ -33,6 +33,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
   });
 
   const handleLogout = (setContents: any) => {
+    document.body.setAttribute('style', 'pointer-events: none; overflow: hidden;')
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
         setAuth({
@@ -55,6 +56,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
             caption: 'ログアウトしました。'
           }
         });
+        document.body.removeAttribute('style');
         history.push(RouteName.ROOT);
       }).catch(() => {
         setContents({
@@ -63,10 +65,12 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
             caption: 'ログアウトに失敗しました。'
           }
         });
+        document.body.removeAttribute('style');
         history.push(RouteName.ROOT);
       })
   }
   const handleDeleteAccount = (setContents: any) => {
+    document.body.setAttribute('style', 'pointer-events: none; overflow: hidden;')
     axios.delete(`/api/v1/user/users/${user_id}`)
       .then(() => {
         setAuth({
@@ -90,6 +94,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
             small: '今までご利用ありがとうございました！'
           }
         });
+        document.body.removeAttribute('style');
         history.push(RouteName.ROOT);
       }).catch(() => {
         setContents({
@@ -98,6 +103,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
             caption: 'アカウントの削除に失敗しました。'
           }
         });
+        document.body.removeAttribute('style');
         history.push(RouteName.ROOT);
       })
   }

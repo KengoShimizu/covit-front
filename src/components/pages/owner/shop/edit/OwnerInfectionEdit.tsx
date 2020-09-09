@@ -16,8 +16,8 @@ import Link from '../../../../../types/Link';
 const propStyle = {
   changeBtn: {
     position: 'fixed',
-    right: '45px',
-    top: '75px',
+    right: '44px',
+    top: '76px',
   }
 }
 interface EditParam {
@@ -43,6 +43,7 @@ interface EditParam {
 
 const OwnerInfectionEdit: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
+  const [editIsOK, setEditIsOK] = useState(false);
   const topModalContext = useContext(TopModalContext);
   const [err, setErr] = useState<string>('');
   const [editData, setEditData] = useState<EditParam>({
@@ -91,6 +92,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   const update = async () => {
     try{
+      setEditIsOK(false);
       await axios.patch(`/api/v1/owner/shops/${match.params.id}`, editData)
       topModalContext.setContents({
         isShown: true,
@@ -114,9 +116,9 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText="感染対策の内容" prevRef={RouteName.OWNER_ACCOUNT_TOP}>
-      <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.changeBtn} onClick={update}>変更する</Button>
+      <Button theme={editIsOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={propStyle.changeBtn} onClick={editIsOK ? update : () => {}}>変更する</Button>
       <div className="container">
-        <InfectionControl setAddData={setEditData} addData={editData} post={update}/>
+        <InfectionControl setAddData={setEditData} addData={editData} post={update} setEditIsOK={setEditIsOK}/>
       </div>
       <style jsx>
         {`

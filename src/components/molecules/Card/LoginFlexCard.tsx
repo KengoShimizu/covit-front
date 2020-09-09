@@ -31,11 +31,13 @@ const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#' 
           {text}
         </Text>
       </div>
-      <Link to={nextRef}>
-        <button className="login-card_btn">
-          変更する
-        </button>
-      </Link>
+      {text === 'メールアドレス' &&
+        <Link to={nextRef}>
+          <button className="login-card_btn">
+            変更する
+          </button>
+        </Link>
+      }
       <style jsx>{`
         .login-card{
           display: flex;

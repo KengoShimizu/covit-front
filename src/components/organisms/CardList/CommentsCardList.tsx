@@ -7,6 +7,7 @@ import useReactRouter from "use-react-router";
 import axios from 'axios';
 // common
 import CommonStyle from '../../../common/CommonStyle';
+import { TopModalTime } from './../../../common/Const';
 // components
 import ShopCommentCard from '../../molecules/Card/ShopCommentCard';
 import UserCommentCard from '../../molecules/Card/UserCommentCard';
@@ -209,7 +210,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             caption: ''
           }
         })
-      }, 1000)
+      }, TopModalTime)
     }
   }, [topModalContext.contents.isShown]);
 

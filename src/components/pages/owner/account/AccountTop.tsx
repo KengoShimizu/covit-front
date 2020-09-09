@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 // common
-import { RouteName } from '../../../../common/Const';
+import { RouteName, TopModalTime } from '../../../../common/Const';
 // components
 import PrivacyFotter from './../../../molecules/Footer/PrivacyFotter';
 import OwnerShopCard from './../../../molecules/Card/OwnerShopCard';
@@ -129,6 +129,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
   }
 
   const handleLogout = (setContents: any) => {
+    document.body.setAttribute('style', 'pointer-events: none; overflow: hidden;')
     axios.post(`/api/v1/common/sessions/logout?token=${cookies.get('token')}`)
       .then(() => {
         setAuth({
@@ -151,6 +152,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
             caption: 'ログアウトしました。'
           }
         });
+        document.body.removeAttribute('style');
         props.history.push(RouteName.ROOT);
       }).catch(() => {
         setContents({
@@ -159,10 +161,12 @@ const OwnerAccountTop: React.FC = (props: any) => {
             caption: 'ログアウトに失敗しました。'
           }
         });
+        document.body.removeAttribute('style');
         props.history.push(RouteName.OWNER_ACCOUNT_TOP);
       })
   }
   const handleDeleteAccount = (setContents: any) => {
+    document.body.setAttribute('style', 'pointer-events: none; overflow: hidden;')
     axios.delete(`/api/v1/user/users/${authState.user.id}`)
       .then(() => {
         setAuth({
@@ -186,6 +190,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
             small: '今までご利用ありがとうございました！'
           }
         });
+        document.body.removeAttribute('style');
         props.history.push(RouteName.ROOT);
       }).catch(() => {
         setContents({
@@ -194,6 +199,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
             caption: 'アカウントの削除に失敗しました。'
           }
         });
+        document.body.removeAttribute('style');
         props.history.push(RouteName.OWNER_ACCOUNT_TOP);
       })
   }
@@ -238,7 +244,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
             caption: ''
           }
         })
-      }, 1000)
+      }, TopModalTime)
     }
   }, [topModalContext.contents.isShown]);
 

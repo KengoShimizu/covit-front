@@ -9,6 +9,7 @@ import HomeLayout from '../../../../templates/HomeLayout';
 import NextRefBtn from './../../../../molecules/NextRefBtn';
 import Input from '../../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
+import Text, { TextThemes } from '../../../../atoms/Text';
 
 interface AddParam {
   email: string;
@@ -23,6 +24,7 @@ const EmailRegister: React.FC = (props: any) => {
 
   const send = async () => {
     try {
+      setIsOK(false)
       await axios.post('/api/v1/common/sessions/sign_up', addData)
       props.history.push({
         pathname: RouteName.SEND,
@@ -34,7 +36,11 @@ const EmailRegister: React.FC = (props: any) => {
         }
       });
     } catch (error) {
-      setErr('エラーが発生しました。もう一度お試しください。')
+      if (error.message.match(/400/g)) {
+        setErr('既に登録されたメールアドレスです。')
+      } else {
+        setErr('エラーが発生しました。もう一度お試しください。')
+      }
     }
   }
 
@@ -55,7 +61,7 @@ const EmailRegister: React.FC = (props: any) => {
         <div className="content">
           <div className="mail-form">
             <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
-            {/* {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>} */}
+            {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
             <div className="mail-form_btn-container">
               <Button 
                 theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]}
