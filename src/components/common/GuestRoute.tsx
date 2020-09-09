@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 // context
 import AuthContext from "../../context/CommonProvider";
-import RedirectContext from './../../context/RedirectContext';
 // common
 import { OwnerType, RouteName } from '../../common/Const';
 

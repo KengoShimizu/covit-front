@@ -6,15 +6,6 @@ import ShopCard from '../../molecules/Card/ShopCard';
 // types
 import Shop from '../../../types/Shop';
 
-const propStyle = {
-  errorText: {
-    color: CommonStyle.AccentColor,
-    marginLeft: '50%',
-    transform: 'translateX(-50%)',
-    textAlign: 'center',
-  }
-}
-
 interface ShopCardListProps {
   shops: Shop[];
 }
