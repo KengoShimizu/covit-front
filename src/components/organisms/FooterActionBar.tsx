@@ -104,7 +104,6 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
                   <path d="M4.5 18.5H19.8572"  strokeWidth="3" stroke-miterlimit="10" strokeLinecap="round"/>
                 </React.Fragment>}
               svgSize={24}
-              svgSizeHeight={18}
               onClick={() => setIsClicked(4)}
               isFocus={isClicked === 4 ? '_clicked' : ''}/>
       }

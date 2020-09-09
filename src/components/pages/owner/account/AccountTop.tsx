@@ -249,7 +249,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
   }, [topModalContext.contents.isShown]);
 
   return (
-    <HomeLayout headerText={'マイページ'} prevRef='#' noBtn={true}>
+    <HomeLayout headerText={'マイページ'} noBtn={true}>
       <TopModal/>
       <Modal
         title={modalState.title}

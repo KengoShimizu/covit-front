@@ -14,6 +14,7 @@ const AuthContext = React.createContext<AuthState>({
     isLogin: false,
     user: {
       id: 0,
+      authorizations: [],
       name: "",
       kana_name: "",
       email: "",
