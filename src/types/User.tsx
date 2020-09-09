@@ -1,5 +1,6 @@
 export default interface User {
   id: number;
+  authorizations: any;
   name: string;
   kana_name?: string;
   image: string;

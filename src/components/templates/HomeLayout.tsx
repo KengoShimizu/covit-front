@@ -17,7 +17,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, h
       {history && <Header headerText={headerText} prevRef={prevRef} history={history}/>}
       {!history && <Header headerText={headerText} prevRef={prevRef}/>}
       {onClick && <Header headerText={headerText} prevRef={prevRef} onClick={onClick}/>}
-      {noBtn && <Header headerText={headerText} prevRef={prevRef} noBtn={noBtn}/>}
+      {noBtn && <Header headerText={headerText} noBtn={noBtn}/>}
       <div className="wrap">
         <main>
           {children}

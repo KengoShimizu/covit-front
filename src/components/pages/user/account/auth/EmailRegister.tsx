@@ -17,7 +17,7 @@ interface AddParam {
 
 const EmailRegister: React.FC = (props: any) => {
   const [err, setErr] = useState("");
-  const [isOK, setIsOK] = useState(true);
+  const [isOK, setIsOK] = useState(false);
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });
@@ -54,6 +54,14 @@ const EmailRegister: React.FC = (props: any) => {
     if(Validation.formValidate('email', addData.email)) setIsOK(false);
     else setIsOK(true);
   },[addData])
+
+  useEffect(() => {
+    if (props.location.state) {
+      setAddData({
+        email: props.location.state.email,
+      });
+    }
+  }, [])
 
   return (
     <HomeLayout headerText="メールアドレス登録" prevRef={RouteName.REGISTER}>

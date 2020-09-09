@@ -2,27 +2,32 @@ import React from 'react';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { Link } from 'react-router-dom';
+// library
+import { CheckCircle } from 'react-feather';
 // components
 import Icon, { IconThemes } from '../../atoms/Icon';
 import Text, { TextThemes } from '../../atoms/Text';
 
 const propStyle = {
   loginIcon: {
-    marginRight: '16px',
+    margin: 'auto 16px auto auto'
   }
 }
 interface LoginFlexCardProps {
   src: string;
   text: string;
   nextRef?: string;
+  loginWay?: boolean;
 }
 
-const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#' }) => {
+const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#', loginWay }) => {
   return (
     <li className="login-card">
       <div className="login-card_content">
         <span className="login-card_check-box">
-
+          {loginWay &&
+            <CheckCircle size={14} color={CommonStyle.AccentColor} />
+          }
         </span>
         <Icon theme={[IconThemes.SMALL]} propStyle={propStyle.loginIcon}>
           <img className="login-card_img" src={src} alt="" />
@@ -31,7 +36,7 @@ const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#' 
           {text}
         </Text>
       </div>
-      {text === 'メールアドレス' &&
+      {text === 'メールアドレス' && loginWay &&
         <Link to={nextRef}>
           <button className="login-card_btn">
             変更する
@@ -58,7 +63,7 @@ const LoginFlexCard: React.FC<LoginFlexCardProps> = ({ src, text, nextRef = '#' 
         .login-card_check-box{
           width: 14px;
           height: 14px;
-          margin-right: 10px;
+          margin: auto 10px auto auto;
         }
         .login-card_btn{
           font-weight: bold;

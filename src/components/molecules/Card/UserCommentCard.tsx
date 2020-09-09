@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 // library
 import { Calendar, Trash2 } from 'react-feather';
-import { Link } from 'react-router-dom';
 import { Smile, Frown, Clock, ChevronRight } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
@@ -33,7 +32,7 @@ type CardProps = {
 
 const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId}) => {
   const delete_bool = deletedId === comment.id;
-  const {uri, setUri} = useContext(RedirectContext);
+  const { setUri } = useContext(RedirectContext);
 
   const handleClick = () => {
     setUri({
@@ -41,7 +40,7 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
       shop: comment.shop.id,
     });
   }
-  console.log(uri)
+
   return (
     <React.Fragment>
       <li className={`card ${delete_bool && 'delete'}`} onClick={handleClick}>

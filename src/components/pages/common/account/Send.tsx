@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 // library
 import axios from "axios";
-import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../../common/CommonStyle';
 import { RouteName } from '../../../../common/Const';
@@ -10,7 +9,6 @@ import HomeLayout from '../../../templates/HomeLayout';
 import Text, { TextThemes } from '../../../atoms/Text';
 import Button, { ButtonThemes } from '../../../atoms/Button';
 
-{/* FIXME 挙動ちゃんと確かめる */ }
 const Send: React.FC = (props: any) => {
   const [resend, setResend] = useState("");
   const [err, setErr] = useState("");
@@ -33,8 +31,26 @@ const Send: React.FC = (props: any) => {
     }
   }
 
+  const handleClick = () => {
+    if(props.location.state.is_owner){
+      props.history.push({
+        pathname: RouteName.OWNER_REGISTER_EMAIL,
+        state: {
+          email: props.location.state.email,
+        }
+      });
+    } else {
+      props.history.push({
+        pathname: RouteName.REGISTER_EMAIL,
+        state: {
+          email: props.location.state.email,
+        }
+      });
+    }
+  }
+
   return (
-    <HomeLayout headerText={props.location.state.subTitle} prevRef='#' noBtn={true}>
+    <HomeLayout headerText={props.location.state.subTitle} noBtn={true}>
       <div className="container">
         {resend && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>{resend}</Text>}
         {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>{err}</Text>}
@@ -44,11 +60,9 @@ const Send: React.FC = (props: any) => {
           <Button theme={[ButtonThemes.NORMAL]} onClick={send} propStyle={{ margin: '10px auto' }}>
             もう一度メールを送信する
           </Button>
-          <Link to={RouteName.REGISTER_EMAIL}>
-            <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '10px auto' }}>
-              メールアドレスを変更する
-            </Button>
-          </Link>
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={{ margin: '10px auto' }} onClick={handleClick}>
+            メールアドレスを変更する
+          </Button>
         </div>
       </div>
       <style jsx>{`

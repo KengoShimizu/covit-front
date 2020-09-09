@@ -18,7 +18,7 @@ interface AddParam {
 
 const OwnerEmailRegister: React.FC = (props: any) => {
   const [err, setErr] = useState("");
-  const [isOK, setIsOK] = useState(true);
+  const [isOK, setIsOK] = useState(false);
   const [addData, setAddData] = useState<AddParam>({
     email: "",
     is_owner: 1,
@@ -32,6 +32,7 @@ const OwnerEmailRegister: React.FC = (props: any) => {
         pathname: RouteName.SEND,
         state: {
           email: addData.email,
+          is_owner: addData.is_owner,
           text: '登録',
           subTitle: 'メールアドレス登録',
           ref: RouteName.REGISTER_EMAIL
@@ -57,6 +58,15 @@ const OwnerEmailRegister: React.FC = (props: any) => {
     if(Validation.formValidate('email', addData.email)) setIsOK(false);
     else setIsOK(true);
   },[addData])
+
+  useEffect(() => {
+    if (props.location.state) {
+      setAddData({
+        ...addData,
+        email: props.location.state.email,
+      });
+    }
+  }, [])
 
   return (
     <HomeLayout headerText="オーナー様会員登録" prevRef={RouteName.REQUEST_TOP}>
