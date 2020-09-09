@@ -1,6 +1,7 @@
 import React from 'react';
 // common
 import CommonStyle from './../../../common/CommonStyle';
+import { ShopStatus } from './../../../common/Const';
 // components
 import Text, { TextThemes } from './../../atoms/Text';
 import Button, { ButtonThemes } from './../../atoms/Button';
@@ -36,18 +37,18 @@ const OwnerShopCard: React.FC<OwnerShopCardProps> = ({ shop, deleteModal, publis
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.shopName}>{shop.name}</Text>
         <div className="publish-status">
           <div className="publish-status-left">
-            <div className={shop.status === 2 ? 'active-circle' : 'disable-circle'}></div>
+            <div className={shop.status === ShopStatus.APPROVED ? 'active-circle' : 'disable-circle'}></div>
             <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.statusText}>
-              {shop.status === 1 && 'リクエスト中'}
-              {shop.status === 2 && '公開中'}
-              {shop.status === 3 && '非公開中'}
+              {shop.status === ShopStatus.UNAPPROVED && 'リクエスト中'}
+              {shop.status === ShopStatus.APPROVED && '公開中'}
+              {shop.status === ShopStatus.NOT_PUBLISHED && '非公開中'}
             </Text>
           </div>
-          {shop.status !== 1 &&
+          {shop.status !== ShopStatus.UNAPPROVED &&
             <div className="publish-status-right">
               <Button theme={[ButtonThemes.SUBBTN]} propStyle={propStyle.statusBtn} onClick={() => publishModal(shop.id, shop.status)}>
-                {shop.status === 2 && '公開停止'}
-                {shop.status === 3 && '公開'}
+                {shop.status === ShopStatus.APPROVED && '公開停止'}
+                {shop.status === ShopStatus.NOT_PUBLISHED && '公開'}
               </Button>
             </div>
           }
@@ -57,7 +58,7 @@ const OwnerShopCard: React.FC<OwnerShopCardProps> = ({ shop, deleteModal, publis
         <hr className="shop-card-hr" />
         <AccoutTopCard src='/trash2.svg' text="お店の情報を削除する" onClick={() => deleteModal(shop.id, shop.name)} />
         <hr className="shop-card-hr" />
-        <NextRefBtn text='公開ページを確認する' nextRef={`/shops/${shop.id}`} />
+        <NextRefBtn text={shop.status !== ShopStatus.APPROVED ? 'お店の情報を確認する' : '公開ページを確認する'} nextRef={`/shops/${shop.id}`} />
       </div>
       <style>{`
         .shop-card-container{

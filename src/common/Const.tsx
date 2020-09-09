@@ -110,6 +110,12 @@ export class OwnerType {
   public static readonly APPROVED_OWNER    = 2
 }
 
+export class ShopStatus {
+  public static readonly UNAPPROVED    = 1
+  public static readonly APPROVED      = 2
+  public static readonly NOT_PUBLISHED = 3
+}
+
 export class RedirectFrom {
   public static readonly NEW_COMMENT = 'new_comment'
   public static readonly HISTORY = 'history'
