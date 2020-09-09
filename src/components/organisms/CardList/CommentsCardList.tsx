@@ -251,11 +251,12 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             {
               (state === 'good' ? goodReputations : badReputations).map((comment: any) => {
                 const icon = state === 'good' ? 'smile' : 'frown';
+                console.log(comment)
                 return (
                   isShopPage ?
                     <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />
                     :
-                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} onClick={clickDelete} deletedId={deletedId} />
+                    <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} onClick={clickDelete} deletedId={deletedId} nextRef={isCurrentUser ? `/shops/${comment.shop_id}?from=accounts` : '#'}/>
                 );
               })
             }

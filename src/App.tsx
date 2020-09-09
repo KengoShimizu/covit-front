@@ -18,6 +18,7 @@ import { RedirectPathProvider } from './context/RedirectContext';
 import Top from './components/pages/Top';
 import Menu from './components/pages/Menu';
 import NotFound from './components/pages/NotFound';
+import ServerError from './components/pages/ServerError';
 // common/account
 import EditProfile from './components/pages/user/account/auth/EditProfile';
 import EditEmail from './components/pages/common/account/EditEmail';
@@ -98,6 +99,8 @@ function App() {
                     <OwnerRoute exact path={RouteName.OWNER_SHOP_INFO_EDIT} component={OwnerShopInfoEdit} />
                     <AuthRoute exact path={RouteName.EDIT_EMAIL} component={EditEmail} />
                     {/* ログインユーザー */}
+                    <Route exact path={RouteName.SERVER_ERROR} component={ServerError} />
+                    <Route exact path={RouteName.NOT_FOUND} component={NotFound} />
                     <Route component={NotFound} />
                   </Switch>
                 </RedirectPathProvider>

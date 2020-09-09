@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 // library
 import { Calendar, Trash2 } from 'react-feather';
 import { Smile, Frown, Clock, ChevronRight } from 'react-feather';
+import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { RedirectFrom } from './../../../common/Const';
@@ -28,9 +29,10 @@ type CardProps = {
   isCurrentUser: boolean;
   onClick?: any;
   deletedId?: number;
+  nextRef?: string;
 };
 
-const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId}) => {
+const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onClick, deletedId, nextRef='#'}) => {
   const delete_bool = deletedId === comment.id;
   const { setUri } = useContext(RedirectContext);
 
@@ -43,40 +45,42 @@ const UserCommentCard: React.FC<CardProps> = ({icon, comment, isCurrentUser, onC
 
   return (
     <React.Fragment>
-      <li className={`card ${delete_bool && 'delete'}`} onClick={handleClick}>
-        <div className="card_content">
-            <div className="card_content-head">
-              {icon === 'smile' && <Smile size={24} color="#ED753A" style={propStyle.headIcon}/>}
-              {icon === 'frown' && <Frown size={24} color="#3A8CED" style={propStyle.headIcon}/>}
-              <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.headText}>{comment.shop.name}</Text>
-            </div>
-            <div className="card_date">
-              <Icon theme={[IconThemes.SMALL]}>
-                <Calendar size={14} color="#8C8C8C" />
-              </Icon>
-              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={{margin: '0 6px 0 3px'}}>来店日</Text>
-              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YM(new Date(comment.date))}</Text>
-            </div>
-            <div className="card_comment">
-              <Text theme={[TextThemes.TEXT]}>{comment.content}</Text>
-              <div className="card_comment-history">
-                <Clock size={14} color={CommonStyle.TextDarkGary} style={{margin: 'auto 6px'}}/>
-                <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YMD(new Date(comment.created_at))}</Text>
+      <Link to={nextRef}>
+        <li className={`card ${delete_bool && 'delete'}`} onClick={handleClick}>
+          <div className="card_content">
+              <div className="card_content-head">
+                {icon === 'smile' && <Smile size={24} color="#ED753A" style={propStyle.headIcon}/>}
+                {icon === 'frown' && <Frown size={24} color="#3A8CED" style={propStyle.headIcon}/>}
+                <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.headText}>{comment.shop.name}</Text>
               </div>
-            </div>
-          { isCurrentUser &&
-            <div className="card_trash" onClick={() => onClick(comment.id)}>
-              <Icon theme={[IconThemes.SMALL]}>
-                <Trash2 size={14} color="#8C8C8C" />
-              </Icon>
-              <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>削除</Text>
-            </div>
-          }
-        </div>
-        <div onClick={handleClick} style={{margin: 'auto 10px auto 0'}}>
-          <ChevronRight size={24} color="#000"/>
-        </div>
-      </li>
+              <div className="card_date">
+                <Icon theme={[IconThemes.SMALL]}>
+                  <Calendar size={14} color="#8C8C8C" />
+                </Icon>
+                <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]} propStyle={{margin: '0 6px 0 3px'}}>来店日</Text>
+                <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YM(new Date(comment.date))}</Text>
+              </div>
+              <div className="card_comment">
+                <Text theme={[TextThemes.TEXT]}>{comment.content}</Text>
+                <div className="card_comment-history">
+                  <Clock size={14} color={CommonStyle.TextDarkGary} style={{margin: 'auto 6px'}}/>
+                  <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>{FormatDate_YMD(new Date(comment.created_at))}</Text>
+                </div>
+              </div>
+            { isCurrentUser &&
+              <div className="card_trash" onClick={() => onClick(comment.id)}>
+                <Icon theme={[IconThemes.SMALL]}>
+                  <Trash2 size={14} color="#8C8C8C" />
+                </Icon>
+                <Text theme={[TextThemes.SMALL, TextThemes.DARKGRAY]}>削除</Text>
+              </div>
+            }
+          </div>
+          <div onClick={handleClick} style={{margin: 'auto 10px auto 0'}}>
+            <ChevronRight size={24} color="#000"/>
+          </div>
+        </li>
+      </Link>
       <style jsx>
         {`
           .card{

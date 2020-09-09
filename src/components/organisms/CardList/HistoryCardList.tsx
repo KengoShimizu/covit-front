@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // library
 import axios from 'axios';
-import Cookies from 'universal-cookie';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 // components
