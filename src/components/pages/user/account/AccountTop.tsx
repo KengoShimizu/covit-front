@@ -20,10 +20,10 @@ const AccountTop: React.FC = (props: any) => {
       <TopModal />
       <div className="profile-head_container">
         <div className="profile-head_name">
-          <ProfileIconNameCard src={account.image} name={account.name} />
+          <ProfileIconNameCard src={account.image} name={account.name} styleImg={{marginRight: '8px'}}/>
         </div>
         <div className="profile-head-btn">
-          <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' />
+          <NextRefBtn nextRef={RouteName.EDIT_PROFILE} text='プロフィールを編集' styleText={{width: '150px'}}/>
         </div>
       </div>
       
@@ -34,7 +34,6 @@ const AccountTop: React.FC = (props: any) => {
           max-width: 400px;
           width: 100%;
           margin: 16px auto 20px auto;
-          padding-left: 12px;
           box-sizing: border-box;
           display: flex;
           align-items: center;

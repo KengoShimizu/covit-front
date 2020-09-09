@@ -10,17 +10,18 @@ const propStyle = {
   }
 };
 
-interface AccoutTopCardProps {
+interface ProfileIconNameCardProps {
   src: string;
   name: string;
   style?: any;
+  styleImg?: any;
 }
 
-const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name, style}) => {
+const ProfileIconNameCard: React.FC<ProfileIconNameCardProps> = ({src, name, style, styleImg}) => {
   return (
     <div className="account-info_card" style={style}>
       {/* FIXME IconThemes.COVIDMEASURE*/}
-      <Icon theme={[IconThemes.PROFILE]} propStyle={propStyle.accountIcon}>
+      <Icon theme={[IconThemes.PROFILE]} propStyle={{...propStyle.accountIcon, ...styleImg}}>
         <img className="account-info_profile-icon" src={src} alt=""/>
       </Icon>
       <Text theme={[TextThemes.CAPTION]}> 
@@ -44,4 +45,4 @@ const AccountTopCard: React.FC<AccoutTopCardProps> = ({src, name, style}) => {
   );
 }
 
-export default AccountTopCard;
+export default ProfileIconNameCard;

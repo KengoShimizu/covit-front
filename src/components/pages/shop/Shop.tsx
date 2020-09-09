@@ -17,7 +17,6 @@ import Loading from '../../molecules/Loading';
 // context
 import RedirectContext from '../../../context/RedirectContext';
 import AuthContext from "../../../context/CommonProvider";
-import { InputThemes } from '../../atoms/Input';
 
 const propStyle = {
   commentBtn: {
@@ -41,6 +40,7 @@ const Shop: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
   const [businessDate, setBusinessDate] = useState([]);
+  const [businessExist, setBusinessExist] = useState(false);
   const [dayPriceObj, setDayPriceObj] = useState({
     id: 0,
     name: ''
@@ -84,6 +84,14 @@ const Shop: React.FC = (props: any) => {
       if (error.message.match(/404/g)) props.history.push(RouteName.NOT_FOUND)
     }
   }
+
+  useEffect(() => {
+    if (businessDate.length !== 0) {
+      if(businessDate.filter((data: any) => (data.opening !== data.closing) || data.is_close).length !== 0) {
+        setBusinessExist(true)
+      }
+    }
+  }, [businessDate])
 
   useEffect(() => {
     let isSubscribed = true;
@@ -193,24 +201,29 @@ const Shop: React.FC = (props: any) => {
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
                   <ul className="shop_info-list">
-                    <li className="shop_info-option">
-                      <Clock size={16} color="#333" style={{marginBottom: 'auto'}}/>
-                      <span className="shop_info-option_content">
-                        {businessDate.filter((data: any) => (data.opening !== data.closing) || data.is_close).map((data: any, i: number) => (
-                          <React.Fragment key={`business_date${i}`}>
-                            <div className="shop-business">
-                              <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
-                                {`${data.label}曜日`}
-                              </Text>
-                              <Text theme={[TextThemes.SMALL]}>
-                                {data.is_close ? '定休日' : `${data.opening} 〜 ${data.closing}`}
-                              </Text>
-                            </div>
-                          </React.Fragment>
-                        ))}
-                      </span>
-                    </li>
-                    <hr className="infection-control_hr" />
+                    {businessExist && 
+                      <React.Fragment>
+                        <li className="shop_info-option">
+                          <Clock size={16} color="#333" style={{marginBottom: 'auto'}}/>
+                          <span className="shop_info-option_content">
+                            {businessDate.filter((data: any) => (data.opening !== data.closing) || data.is_close).map((data: any, i: number) => 
+                            (
+                              <React.Fragment key={`business_date${i}`}>
+                                <div className="shop-business">
+                                  <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
+                                    {`${data.label}曜日`}
+                                  </Text>
+                                  <Text theme={[TextThemes.SMALL]}>
+                                    {data.is_close ? '定休日' : `${data.opening} 〜 ${data.closing}`}
+                                  </Text>
+                                </div>
+                              </React.Fragment>
+                            ))}
+                          </span>
+                        </li>
+                        <hr className="infection-control_hr" />
+                      </React.Fragment>
+                    }
                     <li className="shop_info-option">
                       <Phone size={16} color="#333" />
                       <span className="shop_info-option_content">
