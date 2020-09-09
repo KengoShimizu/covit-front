@@ -4,7 +4,7 @@ import Icon, { IconThemes } from '../atoms/Icon';
 import Text, { TextThemes } from '../atoms/Text';
 import CommonStyle from '../../common/CommonStyle';
 
-const pointerLocation = ['8%', '29%', '50%', '70%', '91%'];
+const pointerLocation = ['8%', '29%', '49%', '70%', '91%'];
 
 interface InfectionControlListProps {
   stepData: any
@@ -51,18 +51,18 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
       </ol>
       <style jsx>{`
         .infection-control{
-          width: 100%;
+          width: 340px;
           margin: 0 auto 10px;
         }
         .infection-control_list{
           display: flex;
           justify-content: flex-start;
           margin-bottom: 16px;
-          width: 348px;
+          width: 340px;
           margin: 0 auto 20px;
         }
         .infection-control_option :not(:last-child) {
-          margin-right: 12px;
+          margin-right: 10px;
         }
         .infection-control_option{
           width: 60px;

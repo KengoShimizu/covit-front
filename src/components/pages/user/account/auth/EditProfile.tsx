@@ -9,6 +9,7 @@ import Input, { InputThemes } from '../../../../atoms/Input'
 import UserIconSellection from '../../../../organisms/UserIconSellection';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 import TopModal from '../../../../molecules/Modal/TopModal';
+import Text, { TextThemes } from '../../../../atoms/Text';
 // context
 import AuthContext from "../../../../../context/CommonProvider";
 import TopModalContext from '../../../../../context/TopModalContext';
@@ -25,6 +26,7 @@ const EditProfile: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
   const qs = queryString.parse(props.location.search);
   const [isOK, setIsOK] = useState(true);
+  const [err, setErr] = useState('');
   const topModalContext = useContext(TopModalContext);
   const [editData, setEditData] = useState<EditParam>({
     image: authState.user.image,
@@ -65,8 +67,14 @@ const EditProfile: React.FC = (props: any) => {
   }
 
   useEffect(() => {
-    if(Validate.formValidate('edit_profile', editData.name)) setIsOK(false);
-    else setIsOK(true);
+    if(Validate.formValidate('edit_profile', editData.name)) {
+      setIsOK(false);
+      if (editData.name.length > 10 ) setErr('ニックネームが長すぎます');
+    }
+    else {
+      setIsOK(true);
+      setErr('')
+    }
   }, [editData.name]);
 
   useEffect(() => {
@@ -97,7 +105,8 @@ const EditProfile: React.FC = (props: any) => {
   return (
     <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} noBtn={qs.state === 'new' ? true : false}>
       <TopModal/>
-      <Input theme={InputThemes.EDIT_PROFILE} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto', padding: '1rem'}}/>
+      <Input theme={InputThemes.EDIT_PROFILE} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto 0', padding: '1rem 1rem 0'}}/>
+      {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={{textAlign: 'center'}}>{err}</Text>}
       <UserIconSellection data={editData} setData={setEditData} />
       <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>登録する</Button>
     </HomeLayout>

@@ -49,7 +49,7 @@ const ShopComments: React.FC = (props: any) => {
         :
         <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`}>
           <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
-          <FooterActionBar initialAccent={0}/>
+          {!authState.user.is_owner &&<FooterActionBar initialAccent={0}/>}
         </HomeLayout>
   );
 }

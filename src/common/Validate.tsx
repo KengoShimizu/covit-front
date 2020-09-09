@@ -9,6 +9,7 @@ export const emailValidation = (email: string): string => {
 
 export const profileValidation = (name: string): string => {
   if (!name) return 'ニックネームを入力してください';
+  if (name.length > 10) return 'ニックネームが長すぎます';
   return '';
 }
 

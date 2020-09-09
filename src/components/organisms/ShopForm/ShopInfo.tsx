@@ -154,10 +154,10 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     if (isOwnerPage) {
       if (Validate.formValidate('owner_shop_form', addData)) {
         setIsOK(false);
-        setEditIsOK(false);
+        if (setEditIsOK) setEditIsOK(false);
       } else {
         setIsOK(true);
-        setEditIsOK(true);
+        if (setEditIsOK) setEditIsOK(true);
       }
     } else {
       if (Validate.formValidate('user_shop_form', addData)) setIsOK(false)
