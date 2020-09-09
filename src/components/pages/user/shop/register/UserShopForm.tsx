@@ -34,6 +34,7 @@ interface AddParam {
 
 const UserShopForm: React.FC = (props: any) => {
   const { authState } = useContext(AuthContext);
+  const [isOK, setIsOK] = useState(false);
   const qs = queryString.parse(props.location.search);
   const [page, setPage] = useState(qs.page ? Number(qs.page) : 1);
   const topModalContext = useContext(TopModalContext);
@@ -58,6 +59,7 @@ const UserShopForm: React.FC = (props: any) => {
 
   const post = async () => {
     try{
+      setIsOK(false)
       await axios.post('/api/v1/user/shops', addData)
       topModalContext.setContents({
         isShown: true,
@@ -91,7 +93,7 @@ const UserShopForm: React.FC = (props: any) => {
         :
         <HomeLayout headerText="お店の情報登録(2/2)" onClick={() => setPage(1)}>
           <div className="container">
-            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} post={post}/>
+            <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} post={post} setIsOK={setIsOK} isOK={isOK}/>
           </div>
         </HomeLayout>
       }

@@ -22,11 +22,12 @@ interface InfectionControlProps {
   noKanaName?: boolean;
   load2?: boolean;
   setEditIsOK?: any;
+  setIsOK?: any;
+  isOK?: boolean;
 }
 
-export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, load2, noKanaName, setEditIsOK }) => {
+export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, setAddData, addData, post, load2, noKanaName, setEditIsOK, setIsOK, isOK }) => {
   const { match }: any = useReactRouter();
-  const [isOK, setIsOK] = useState(false);
   const [loading, setLoading] = useState(true);
   const isEdit = match.path.match(/edit/g);
   const identifer = match.path.match(/owner/g) ? 'owner' : 'user';

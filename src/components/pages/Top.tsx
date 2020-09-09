@@ -96,16 +96,13 @@ const Top: React.FC = (props: any) => {
   const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
-    const images = steps.map((data: any) => data.image);
-    const uniqueImgs = images.filter(function (x: string, i: number, self: string[]) {
-      return self.indexOf(x) === i;
-    });
-    return uniqueImgs;
+    const uniqueArray = steps.map((data: any) => data.step_category.id);
+    const categoryData = steps.map((data: any) => data.step_category);
+    return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
   }
 
   const fetchStepsData = (shop: any) => {
-    // FIXME
-    axios.get(`/api/v1/user/steps?shop_id=${1}`)
+    axios.get(`/api/v1/user/steps?shop_id=${shop.id}`)
       .then(res => {
         setSteps(res.data);
         setClickedShop(shop);
@@ -114,7 +111,7 @@ const Top: React.FC = (props: any) => {
       .catch(err => console.log(err));
   }
 
-  const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number, isSubscribed: boolean) => {
+  const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number) => {
     setLoading(true);
     const selectedGenre_str = selectedGenre.length === 0 ? genres.map((data: any) => data.id) : selectedGenre.join(',')
     try {
@@ -127,7 +124,7 @@ const Top: React.FC = (props: any) => {
             to_lng: lng_ + threshold,
           }
         });
-      if (isSubscribed) setCoordinations(res.data);
+      setCoordinations(res.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -142,6 +139,7 @@ const Top: React.FC = (props: any) => {
         const pos_lng = pos.coords.longitude;
         setMapCenter({ lat: pos_lat, lng: pos_lng });
         setCurLoc({ lat: pos_lat, lng: pos_lng });
+        fetchCoordinationsData(selectedGenre, pos_lat, pos_lng)
         // setMapCenter({ lat: lastlat, lng: lastlng });
         // setCurLoc({ lat: lastlat, lng: lastlng });
       },
@@ -158,9 +156,10 @@ const Top: React.FC = (props: any) => {
   useEffect(() => {
     // モーダルクローズ履歴を参照
     setInitModalIsOpen(cookies.get('close-modal-once'));
-    getCullentLocation();
     let isSubscribed = true;
-    fetchCoordinationsData(selectedGenre, lastlat, lastlng, isSubscribed);
+    if(isSubscribed){
+      getCullentLocation();
+    }
     const cleanup = () => {
       isSubscribed = false;
     };
@@ -197,11 +196,6 @@ const Top: React.FC = (props: any) => {
     }
   }, [topModalContext.contents.isShown]);
 
-  useEffect(() => {
-    setFirstGetCurrent(firstGetCurrent + 1)
-    if (firstGetCurrent === 1) fetchCoordinationsData(selectedGenre, lastlat, lastlng, true)
-  }, [lastlat])
-
   return (
     <HomeLayout>
       <TopModal/>
@@ -230,7 +224,7 @@ const Top: React.FC = (props: any) => {
         </div>
         {initModalIsOpen && 
           <React.Fragment>
-            <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(selectedGenre, lastlat, lastlng, true)}>
+            <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(selectedGenre, lastlat, lastlng)}>
               <Icon theme={[IconThemes.NORMAL]}>
                 <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/>
               </Icon>
