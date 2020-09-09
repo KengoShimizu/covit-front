@@ -78,7 +78,6 @@ const Top: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
   const topModalContext = useContext(TopModalContext);
   const [loading, setLoading] = useState(true);
-  const [firstGetCurrent, setFirstGetCurrent] = useState(0);
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);

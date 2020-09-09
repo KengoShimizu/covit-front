@@ -65,16 +65,16 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
 
   useEffect(() => {
     if(Validate.formValidate('shop_form_infections', addData.step_ids)) {
-      setIsOK(false);
+      if (setIsOK) setIsOK(false);
       if (setEditIsOK) setEditIsOK(false);
     } else {
-      setIsOK(true);
+      if (setIsOK) setIsOK(true);
       if (setEditIsOK) setEditIsOK(true);
     }
   }, [addData.step_ids]);
 
   useEffect(() => {
-    setIsOK(false)
+    if (setIsOK) setIsOK(false)
   }, [load2])
 
   return (
