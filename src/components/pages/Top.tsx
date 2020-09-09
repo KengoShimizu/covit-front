@@ -6,6 +6,7 @@ import { ChevronDown,  } from 'react-feather';
 import queryString from 'query-string';
 // common
 import CommonStyle from './../../common/CommonStyle';
+import { TopModalTime } from './../../common/Const';
 // components
 import IntroModal from './../molecules/Modal/IntroModal'
 import HomeLayout from '../templates/HomeLayout';
@@ -191,7 +192,7 @@ const Top: React.FC = (props: any) => {
             caption: ''
           }
         })
-      }, 1000)
+      }, TopModalTime)
     }
   }, [topModalContext.contents.isShown]);
 

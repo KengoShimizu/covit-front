@@ -8,7 +8,7 @@ import { RouteName } from '../../../../../common/Const';
 
 const EditLogin: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText='ログイン情報の編集' prevRef={RouteName.ACCOUNT_TOP} history={props.history}>
+    <HomeLayout headerText='ログイン情報の編集' prevRef={RouteName.ACCOUNT_TOP}>
         <div className='container'>
           <ul>
             <LoginFlexCard src={'/twitter.png'} text={'Twitter'} />

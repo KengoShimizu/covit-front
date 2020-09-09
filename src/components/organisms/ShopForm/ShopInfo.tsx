@@ -28,9 +28,10 @@ interface ShopInfoProps {
   addData: any;
   setAddData: any;
   defaultLinks?: any;
+  setEditIsOK?: any;
 }
 
-export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks}) => {
+export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks, setEditIsOK}) => {
   const { match }: any = useReactRouter();
   const compress = new Compress()
   const isOwnerPage = match.path.match(/owner/g);
@@ -151,8 +152,13 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
 
   useEffect(() => {
     if (isOwnerPage) {
-      if (Validate.formValidate('owner_shop_form', addData)) setIsOK(false)
-      else setIsOK(true)
+      if (Validate.formValidate('owner_shop_form', addData)) {
+        setIsOK(false);
+        setEditIsOK(false);
+      } else {
+        setIsOK(true);
+        setEditIsOK(true);
+      }
     } else {
       if (Validate.formValidate('user_shop_form', addData)) setIsOK(false)
       else setIsOK(true)

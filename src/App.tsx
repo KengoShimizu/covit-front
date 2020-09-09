@@ -73,14 +73,14 @@ function App() {
                     <GuestRoute exact path={RouteName.REGISTER} component={Register} />
                     <GuestRoute exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
                     <GuestRoute exact path={RouteName.LOGIN} component={Login} />
+                    <GuestRoute exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
+                    <GuestRoute exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
                     <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
                     <Route exact path={RouteName.LANDING_PAGE} component={About} />
                     <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} />
-                    <Route exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <Route exact path={RouteName.SEND} component={Send} />
-                    <Route exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
                     {/* ログインユーザー */}
                     <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
                     <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
