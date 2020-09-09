@@ -12,7 +12,7 @@ const propStyle = {
 
 const NotFound: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText='存在しないページです' prevRef='#' history={props.history}>
+    <HomeLayout headerText='存在しないページ' prevRef='#' history={props.history}>
       <div className="container">
         <div className="not-found-wrap">
           <div className="not-found-img-wrap">

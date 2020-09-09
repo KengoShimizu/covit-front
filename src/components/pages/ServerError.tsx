@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+// library
+import queryString from 'query-string';
 // components
 import HomeLayout from './../templates/HomeLayout';
 import Text, { TextThemes } from './../atoms/Text';
@@ -11,25 +13,34 @@ const propStyle = {
 }
 
 const ServerError: React.FC = (props: any) => {
+  const qs = queryString.parse(props.location.search);
+
+  const [message, setMessage] = useState('') 
+
+  useEffect(() => {
+    if (qs.state === 'sns-error') setMessage('指定したSNSアカウントには、メールアドレスが登録されていません。もしくは他のログイン方法で使われているメールアドレスです。');
+    else setMessage('')
+  }, [])
+
   return (
-    <HomeLayout headerText='存在しないページです' prevRef='#' history={props.history}>
+    <HomeLayout headerText='サーバーエラー' prevRef='#' history={props.history}>
       <div className="container">
-        <div className="not-found-wrap">
-          <div className="not-found-img-wrap">
-            <img className="not-found-img" src='/404.png' alt="404" />
+        <div className="server-error-wrap">
+          <div className="server-error-img-wrap">
+            <img className="server-error-img" src='/404.png' alt="500" />
           </div>
-          <div className="not-found-text">
+          <div className="server-error-text">
             <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={propStyle.textHead}>
-              お探しのページが見つかりません
+              申し訳ございません。サーバーエラーが発生しました。
             </Text>
             <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]}>
-              ご指定のURLが間違っているかページが移動/削除された可能性があります。
+              {message}
             </Text>
           </div>
         </div>
       </div>
       <style jsx>{`
-        .not-found-wrap{
+        .server-error-wrap{
           position: absolute;
           text-align: center;
           top: 46%;
@@ -37,11 +48,11 @@ const ServerError: React.FC = (props: any) => {
           transform: translate(-50%, -50%);
           -webkit- transform: translate(-50%, -50%);
         }
-        .not-found-img{
+        .server-error-img{
           width: auto;
           height: 300px;
         }
-        .not-found-text{
+        .server-error-text{
           width: 300px;
         }
       `}</style>
