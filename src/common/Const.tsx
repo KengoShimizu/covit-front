@@ -147,4 +147,5 @@ export class RouteName {
   public static readonly USER_SHOP_FORM           = '/users/request/form'
   public static readonly LANDING_PAGE             = '/about'
   public static readonly NOT_FOUND                = '/404'
+  public static readonly SERVER_ERROR             = '/500'
 }

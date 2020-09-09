@@ -13,7 +13,6 @@ import CommonStyle from '../../../../common/CommonStyle';
 // common
 import { RouteName } from '../../../../common/Const';
 import Loading from '../../../molecules/Loading';
-import { Z_FIXED } from 'zlib';
 
 const Comments: React.FC = (props: any) => {
   const [loading, setLoading] = useState(false);
@@ -79,7 +78,7 @@ const Comments: React.FC = (props: any) => {
             <ProfileIconNameCard src={user.image} name={user.name} style={{position: 'fixed'}}/>
           }
           {pageState.update &&
-            <CommentsCardList sqlQuery={pageState.sqlQuery} />
+            <CommentsCardList sqlQuery={pageState.sqlQuery}/>
           }
         </div>
       }

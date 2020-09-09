@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 // components
 import Icon, { IconThemes } from '../atoms/Icon';
 import Text, { TextThemes } from '../atoms/Text';

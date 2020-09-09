@@ -241,14 +241,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       <div className="shop-img_wrapper">
         <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
       </div>
-      <canvas
-        id="canvas"
-        style={{
-          display: "none"
-        }}
-        width="64"
-        height="64"
-      />
       <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} />
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
