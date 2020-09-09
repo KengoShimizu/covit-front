@@ -17,6 +17,10 @@ export enum TextThemes {
   LEFT     = 'LEFT',
   ERROR    = 'ERROR',
   DARKGRAY = 'DARKGRAY',
+  LPSUBTITLE = 'LPSUBTITLE',
+  LPSUBTITLEACCENT = 'LPSUBTITLEACCENT',
+  LPTEXT = 'LPTEXT',
+  LPTEXTACCENT = 'LPTEXTACCENT',
 }
 
 enum ModifierClassNames {
@@ -28,6 +32,10 @@ enum ModifierClassNames {
   LEFT     = 'left-text',
   ERROR    = 'error-text',
   DARKGRAY = 'dark-gray-text',
+  LPSUBTITLE = 'lp_subtitle',
+  LPSUBTITLEACCENT = 'lp_subtitle_accent',
+  LPTEXT = 'lp_text',
+  LPTEXTACCENT = 'lp_text_accent',
 }
 
 
@@ -73,6 +81,28 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
           }
           .dark-gray-text{
             color: ${CommonStyle.TextDarkGary};
+          }
+          .lp_subtitle{
+            font-weight: bold;
+            line-height: 1.7em;
+            font-size: ${CommonStyle.SubTitle}
+          }
+          .lp_subtitle_accent{
+            color: ${CommonStyle.AccentColor};
+            font-weight: bold;
+            line-height: 1.7em;
+            font-size: ${CommonStyle.SubTitle};
+          }
+          .lp_text{
+            font-weight: bold;
+            line-height: 1.7em;
+            font-size: ${CommonStyle.Caption}
+          }
+          .lp_text_accent{
+            color: ${CommonStyle.AccentColor};
+            font-weight: bold;
+            line-height: 1.7em;
+            font-size: ${CommonStyle.Caption}
           }
         `}
       </style>
