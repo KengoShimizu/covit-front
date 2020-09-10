@@ -2,6 +2,7 @@ import React from 'react';
 // components
 import HomeLayout from './../templates/HomeLayout';
 import Text, { TextThemes } from './../atoms/Text';
+import { RouteName } from '../../common/Const';
 
 const propStyle = {
   textHead: {
@@ -12,7 +13,7 @@ const propStyle = {
 
 const NotFound: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText='存在しないページ' prevRef='#' history={props.history}>
+    <HomeLayout headerText='存在しないページ' prevRef={RouteName.ROOT}>
       <div className="container">
         <div className="not-found-wrap">
           <div className="not-found-img-wrap">

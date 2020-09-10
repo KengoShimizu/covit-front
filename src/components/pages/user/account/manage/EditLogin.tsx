@@ -38,11 +38,15 @@ const EditLogin: React.FC = (props: any) => {
           <style jsx>{`
           .container{
             width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
             min-height: 100vh;
             padding-top: 24px;
           }
           .sub-hr{
-            width: 340px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
             margin: 0 auto 16px auto;
             height: 2px;
             background: ${CommonStyle.BgGray}

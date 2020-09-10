@@ -89,10 +89,10 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
       }
       <CheckSectionList stepCategories={stepCategories} setAddData={setAddData} addData={addData}/>
       {addData.shop.other_step && isEdit &&
-        <Textarea content={addData.shop.other_step} theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
+        <Textarea content={addData.shop.other_step} theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策があればご記入ください。' />
       }
       {!isEdit &&
-        <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策やメッセージがあればご記入ください。' />
+        <Textarea theme={TextareaThemes.INIT} handleChange={handleChange} label='その他' name='other_step' subtitle='その他にお店で行っている感染対策があればご記入ください。' />
       }
       {identifer === 'user' || (!isEdit && !noKanaName) ?
         <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{margin: '24px auto', width: '150px'}} onClick={isOK ? () => post(2) : () => {}}>
