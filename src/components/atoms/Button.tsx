@@ -26,7 +26,7 @@ enum ModifierClassNames {
   SUBBTN = 'btn_sub',
   SHOPSNS = 'shop_sns-btn',
   SUBNORMAL = 'normal-btn_gray',
-  LP = 'lp-btn',
+  LP = 'lp_btn',
 }
 
 
@@ -87,10 +87,11 @@ const Button: React.FC<ButtonProps> = ({theme = [ButtonThemes.INIT], children, p
           }
           .lp_btn{
             padding: 8px 16px;
-            background: #DF6059;
+            background: ${CommonStyle.AccentColor};
             border-radius: 4px;
             color: ${CommonStyle.TextWhite};
             font-size: ${CommonStyle.Caption};
+            font-weight: bold;
           }
           
         `}
