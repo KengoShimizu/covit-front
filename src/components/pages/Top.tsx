@@ -194,7 +194,7 @@ const Top: React.FC = (props: any) => {
       pos => {
         const pos_lat = pos.coords.latitude;
         const pos_lng = pos.coords.longitude;
-        setMapCenter({ lat: 0, lng: pos_lng });
+        setMapCenter({ lat: pos_lat, lng: pos_lng });
         setCurLoc({ lat: pos_lat, lng: pos_lng });
         fetchCoordinationsData(selectedGenre, pos_lat, pos_lng)
         // setMapCenter({ lat: lastlat, lng: lastlng });
