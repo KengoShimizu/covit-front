@@ -115,7 +115,6 @@ const Top: React.FC = (props: any) => {
 
   const onSearchStations = () => {
     let formedSearchString = searchString;
-    // いらない
     if(searchString.slice(-1) === '駅') {
       formedSearchString = formedSearchString.slice(0, -1)
     } else if (searchString.slice(-2) === 'えき') {
@@ -271,7 +270,10 @@ const Top: React.FC = (props: any) => {
           setLastLat={setLastLat}
           setLastLng={setLastLng}
           setZoom={setZoom}
-          stations={stations}/>
+          stations={stations}
+          fetchCoordinationsData={fetchCoordinationsData}
+          selectedGenre={selectedGenre}
+        />
 
         <div className="refinement-btn-wrap">
           <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
