@@ -142,7 +142,6 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         // 感染対策
         .infection-control_list{
           display: flex;
-          justify-content: center;
           margin-bottom: 16px;
         }
         .infection-control_option :not(:last-child) {
