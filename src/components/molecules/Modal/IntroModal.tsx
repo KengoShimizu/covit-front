@@ -33,6 +33,7 @@ const IntroModal: React.FC<IntroModalProps> = ({ initModalIsOpen, handleInitModa
     <React.Fragment>
       {!initModalIsOpen && <div className='intro-mordal-back' onClick={handleInitModal}></div>}
       <div className={initModalIsOpen ? 'intro-mordal disable' : 'intro-mordal'}>
+        {/* FIXME公式マーク非公式の時は'shop_pin_unofficial.svg'に変更 */}
         <span className="intro-modal-pin_wrapper">
           <img src="/shop_pin.svg" alt="pin" className='intro-modal-pin'/>
         </span>
