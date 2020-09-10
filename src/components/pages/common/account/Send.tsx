@@ -48,6 +48,13 @@ const Send: React.FC = (props: any) => {
           email: props.location.state.email,
         }
       });
+    } else if (props.location.state.text === 'ログイン') {
+      props.history.push({
+        pathname: RouteName.LOGIN,
+        state: {
+          email: props.location.state.email,
+        }
+      });
     } else {
       props.history.push({
         pathname: RouteName.REGISTER_EMAIL,

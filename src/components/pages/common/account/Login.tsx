@@ -8,6 +8,7 @@ import { RouteName } from '../../../../common/Const';
 import NextRefBtn from '../../../molecules/NextRefBtn';
 import HomeLayout from '../../../templates/HomeLayout';
 import Button, { ButtonThemes } from '../../../atoms/Button';
+import Text, { TextThemes } from '../../../atoms/Text';
 import Input from '../../../atoms/Input';
 
 interface AddParam {
@@ -15,7 +16,7 @@ interface AddParam {
 }
 
 const Login: React.FC = (props: any) => {
-  const [err, setErr] = useState("");
+  const [isOK, setIsOK] = useState(false);
   const [addData, setAddData] = useState<AddParam>({
     email: ""
   });
@@ -23,6 +24,7 @@ const Login: React.FC = (props: any) => {
   const send = async () => {
     try {
       await axios.post('/api/v1/common/sessions/login', addData)
+      setIsOK(false)
       props.history.push({
         pathname: RouteName.SEND,
         state: {
@@ -33,7 +35,7 @@ const Login: React.FC = (props: any) => {
         }
       });
     } catch (error) {
-      setErr('エラーが発生しました。もう一度お試しください。')
+      console.log(error)
     }
   }
 
@@ -44,9 +46,17 @@ const Login: React.FC = (props: any) => {
   }
 
   useEffect(()=>{
-    const errText = Validation.formValidate('email', addData.email);
-    errText ? setErr(errText) : setErr('')
+    if(Validation.formValidate('email', addData.email)) setIsOK(false);
+    else setIsOK(true);
   },[addData])
+
+  useEffect(() => {
+    if (props.location.state) {
+      setAddData({
+        email: props.location.state.email,
+      });
+    }
+  }, [])
 
   return (
     <HomeLayout headerText={'ログイン'} prevRef={RouteName.REGISTER}>
@@ -54,20 +64,11 @@ const Login: React.FC = (props: any) => {
         <div className="content">
           <div className="mail-form">
             <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
-            {/* {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>} */}
-            {err ?
-              <div className="mail-form_btn-container">
-                <Button theme={[ButtonThemes.SUBNORMAL]}>
-                  認証コードを送信
-                </Button>
-              </div>
-              :
-              <div className="mail-form_btn-container">
-                <Button theme={[ButtonThemes.NORMAL]} onClick={send}>
-                  認証コードを送信
-                </Button>
-              </div>
-            }
+            <div className="mail-form_btn-container">
+              <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? send : () => {}}>
+                認証コードを送信
+              </Button>
+            </div>
             <NextRefBtn nextRef={RouteName.REGISTER} text='会員登録はこちら'/>
           </div>
         </div>
