@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // library
 import Cookies from 'universal-cookie';
 import axios from "axios";
-import { ChevronDown,  } from 'react-feather';
+import { ChevronDown, Search } from 'react-feather';
 import queryString from 'query-string';
 // common
 import CommonStyle from './../../common/CommonStyle';
@@ -12,6 +12,7 @@ import IntroModal from './../molecules/Modal/IntroModal'
 import HomeLayout from '../templates/HomeLayout';
 import MapObject from '../organisms/MapObject';
 import Button from './../atoms/Button';
+import Input, { InputThemes } from './../atoms/Input';
 import GenreCardList from '../organisms/CardList/GenreCardList';
 import TopModal from '../molecules/Modal/TopModal';
 import Icon, { IconThemes } from '../atoms/Icon';
@@ -20,6 +21,7 @@ import FooterActionBar from './../organisms/FooterActionBar';
 import TopModalContext from '../../context/TopModalContext';
 // types
 import Genre from '../../types/Genre';
+import Station from '../../types/Station';
 import Loading from '../molecules/Loading';
 
 // ボタンのCSS
@@ -73,6 +75,15 @@ const propStyle = {
   }
 };
 
+// FIXME debug style
+const inputStyle = {
+  minWidth: '400px',
+  position: 'absolute',
+  top: '100px',
+  zIndex: '4111110',
+  backgroundColor: 'white',
+}
+
 const Top: React.FC = (props: any) => {
   const cookies = new Cookies();
   const qs = queryString.parse(props.location.search);
@@ -92,13 +103,48 @@ const Top: React.FC = (props: any) => {
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
-  const [stations, setStations] = useState([]);
+  const [searchString, setSearchString] = useState<string>('')
+  const [stations, setStations] = useState<Station[]>([]);
   const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
     const uniqueArray = steps.map((data: any) => data.step_category.id);
     const categoryData = steps.map((data: any) => data.step_category);
     return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
+  }
+
+  const onSearchStations = () => {
+    let formedSearchString = searchString;
+    if(searchString.slice(-1) === '駅') {
+      formedSearchString = formedSearchString.slice(0, -1)
+    } else if (searchString.slice(-2) === 'えき') {
+      formedSearchString = formedSearchString.slice(0, -2)
+    }
+    axios
+      .get(`https://express.heartrails.com/api/json?method=getStations&name=${formedSearchString}`)
+      .then(res => {
+        const stationsData = res.data.response.station;
+        if (stationsData) {
+          let temp  = JSON.parse(JSON.stringify(stationsData));
+          let result = JSON.parse(JSON.stringify(stationsData.filter((a: Station, i: number, self: Station[]) => self.findIndex((e: Station) => e.x === a.x && e.y === a.y) === i)))
+          temp.filter((a: Station, i: number, self: Station[]) => {
+            var flag = self.findIndex((e: Station) => e.x === a.x && e.y === a.y) === i;
+            var data = self.find((e: Station) => e.x === a.x && e.y === a.y && e.line !== a.line)
+            result = result.map((b: Station) => { 
+              if(b.x === data?.x && b.y === data?.y){
+                b.line = '';
+              }
+              return b
+            })
+            return flag
+          });
+          setStations(result);
+        } else {
+          setStations([]);
+        }
+
+      })
+      .catch(err => console.log(err));
   }
 
   const fetchStepsData = (shop: any) => {
@@ -201,6 +247,14 @@ const Top: React.FC = (props: any) => {
       <TopModal/>
       <div className='container'>
         {loading && <Loading/>}
+        <Input
+          theme={InputThemes.INIT}
+          placeholder="駅名を入力してください"
+          content={searchString}
+          handleChange={(e: any) => setSearchString(e.target.value)}
+          propStyle={inputStyle}
+          icon={<Search onClick={onSearchStations} style={{ cursor: 'pointer' }} />}
+        />
         <MapObject
           setPopupIsOpen={setPopupIsOpen}
           loading={loading}
@@ -216,7 +270,10 @@ const Top: React.FC = (props: any) => {
           setLastLat={setLastLat}
           setLastLng={setLastLng}
           setZoom={setZoom}
-          stations={stations}/>
+          stations={stations}
+          fetchCoordinationsData={fetchCoordinationsData}
+          selectedGenre={selectedGenre}
+        />
 
         <div className="refinement-btn-wrap">
           <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>

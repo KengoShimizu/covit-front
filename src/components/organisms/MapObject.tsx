@@ -23,8 +23,8 @@ interface MapPopupProps {
   setLastLat: any;
   setLastLng: any;
   stations: any;
-  //fetchCoordinationsData: any;
-  //selectedGenre: any;
+  fetchCoordinationsData: any;
+  selectedGenre: any;
 }
 
 
@@ -32,19 +32,19 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   
   //FIXME stations →　props.stations
-  const stations = [
-    {"name":"新宿","prefecture":"東京都","line":"JR中央線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"代々木","next":"大久保"},
-    {"name":"新宿","prefecture":"東京都","line":"JR埼京線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"渋谷","next":"池袋"},
-    {"name":"新宿","prefecture":"東京都","line":"JR山手線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"代々木","next":"新大久保"},
-    {"name":"新宿","prefecture":"東京都","line":"JR湘南新宿ライン","x":139.700464,"y":35.689729,"postal":"1600022","prev":"池袋","next":"渋谷"},
-    {"name":"新宿","prefecture":"東京都","line":"JR総武線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"大久保","next":"代々木"},
-    {"name":"新宿","prefecture":"東京都","line":"京王線","x":139.699187,"y":35.690163,"postal":"1600023","prev":null,"next":"笹塚"},
-    {"name":"新宿","prefecture":"東京都","line":"小田急小田原線","x":139.699574,"y":35.691435,"postal":"1600023","prev":null,"next":"南新宿"},
-    {"name":"新宿","prefecture":"東京都","line":"東京メトロ丸ノ内線","x":139.700711,"y":35.69235,"postal":"1600022","prev":"新宿三丁目","next":"西新宿"},
-    {"name":"新宿","prefecture":"東京都","line":"都営大江戸線","x":139.698812,"y":35.68869,"postal":"1510053","prev":"代々木","next":"都庁前"},
-    {"name":"新宿","prefecture":"東京都","line":"都営新宿線","x":139.698812,"y":35.68869,"postal":"1600023","prev":null,"next":"新宿三丁目"},
-    {"name":"新宿","prefecture":"東京都","line":"相鉄・JR直通線","x":139.700464,"y":35.689729,"postal":"1600022","prev":null,"next":"渋谷"}
-  ];
+  // const stations = [
+  //   {"name":"新宿","prefecture":"東京都","line":"JR中央線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"代々木","next":"大久保"},
+  //   {"name":"新宿","prefecture":"東京都","line":"JR埼京線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"渋谷","next":"池袋"},
+  //   {"name":"新宿","prefecture":"東京都","line":"JR山手線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"代々木","next":"新大久保"},
+  //   {"name":"新宿","prefecture":"東京都","line":"JR湘南新宿ライン","x":139.700464,"y":35.689729,"postal":"1600022","prev":"池袋","next":"渋谷"},
+  //   {"name":"新宿","prefecture":"東京都","line":"JR総武線","x":139.700464,"y":35.689729,"postal":"1600022","prev":"大久保","next":"代々木"},
+  //   {"name":"新宿","prefecture":"東京都","line":"京王線","x":139.699187,"y":35.690163,"postal":"1600023","prev":null,"next":"笹塚"},
+  //   {"name":"新宿","prefecture":"東京都","line":"小田急小田原線","x":139.699574,"y":35.691435,"postal":"1600023","prev":null,"next":"南新宿"},
+  //   {"name":"新宿","prefecture":"東京都","line":"東京メトロ丸ノ内線","x":139.700711,"y":35.69235,"postal":"1600022","prev":"新宿三丁目","next":"西新宿"},
+  //   {"name":"新宿","prefecture":"東京都","line":"都営大江戸線","x":139.698812,"y":35.68869,"postal":"1510053","prev":"代々木","next":"都庁前"},
+  //   {"name":"新宿","prefecture":"東京都","line":"都営新宿線","x":139.698812,"y":35.68869,"postal":"1600023","prev":null,"next":"新宿三丁目"},
+  //   {"name":"新宿","prefecture":"東京都","line":"相鉄・JR直通線","x":139.700464,"y":35.689729,"postal":"1600022","prev":null,"next":"渋谷"}
+  // ];
 
   const curLocMarker = L.icon({
     iconUrl: '/current_location_pin.svg',
@@ -83,7 +83,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   }
 
   const handleStationClick = (data: any) => {
-    //props.fetchCoordinationsData(props.selectedGenre, data.y, data.x)
+    props.fetchCoordinationsData(props.selectedGenre, data.y, data.x)
     props.setLastLat(data.y);
     props.setLastLng(data.x);
     props.setMapCenter({
@@ -123,6 +123,12 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
     props.setPopupIsOpen(true);
   }
 
+  useEffect(() => {
+    if (props.stations.length !== 0) {
+      calcStationCenter(props.stations);
+    }
+  }, [props.stations]);
+
   return (
     <div className="map-container">
       <Map
@@ -142,7 +148,6 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           props.setPopupIsOpen(false);
         }}
         onClick={() => {
-          calcStationCenter(stations);
           setPopupIsOpen(false);
           props.setPopupIsOpen(false);
         }}>
@@ -162,8 +167,8 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
             </Marker>
           ))}
 
-        {stations && 
-          stations.map((data: any, i: number) => (
+        {props.stations && 
+          props.stations.map((data: any, i: number) => (
             <Marker
               position={{ lat: data.y, lng: data.x }}
               icon={stationMarker}
