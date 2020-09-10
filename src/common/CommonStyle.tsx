@@ -23,6 +23,8 @@
   TwitterColor: '#91C4F3',
   GoogleColor: '#D8503F',
   FacebookColor: '#425994',
+  // margin
+  MarginLP: '64px',
 };
 
 export default CommonStyle;

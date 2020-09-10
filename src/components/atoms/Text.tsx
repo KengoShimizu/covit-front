@@ -96,13 +96,14 @@ const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propSty
           .lp_text{
             font-weight: bold;
             line-height: 1.7em;
-            font-size: ${CommonStyle.Caption}
+            font-size: ${CommonStyle.Caption};
+            text-align: left;
           }
           .lp_text_accent{
             color: ${CommonStyle.AccentColor};
             font-weight: bold;
             line-height: 1.7em;
-            font-size: ${CommonStyle.Caption}
+            font-size: ${CommonStyle.Caption};
           }
         `}
       </style>
