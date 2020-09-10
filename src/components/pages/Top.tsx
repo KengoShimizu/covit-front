@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 // library
-import Cookies from 'universal-cookie';
 import axios from "axios";
 import { ChevronDown, Search } from 'react-feather';
 import queryString from 'query-string';
@@ -85,7 +84,6 @@ const inputStyle = {
 }
 
 const Top: React.FC = (props: any) => {
-  const cookies = new Cookies();
   const qs = queryString.parse(props.location.search);
   const topModalContext = useContext(TopModalContext);
   const [loading, setLoading] = useState(true);
@@ -105,7 +103,7 @@ const Top: React.FC = (props: any) => {
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   const [searchString, setSearchString] = useState<string>('')
   const [stations, setStations] = useState<Station[]>([]);
-  const threshold = 0.015;
+  const threshold = [0.035, 0.05];
 
   const GetUniqueImgs = (steps: any) => {
     const uniqueArray = steps.map((data: any) => data.step_category.id);
@@ -164,10 +162,10 @@ const Top: React.FC = (props: any) => {
       const res = await axios.get('/api/v1/user/coordinations', {
           params: {
             genre_ids: selectedGenre_str,
-            from_lat: lat_ - threshold,
-            to_lat: lat_ + threshold,
-            from_lng: lng_ - threshold,
-            to_lng: lng_ + threshold,
+            from_lat: lat_ - threshold[0],
+            to_lat: lat_ + threshold[0],
+            from_lng: lng_ - threshold[1],
+            to_lng: lng_ + threshold[1],
           }
         });
       setCoordinations(res.data);
@@ -195,13 +193,13 @@ const Top: React.FC = (props: any) => {
 
   // 初回モーダルクローズ
   const handleInitModal = () => {
-    cookies.set('close-modal-once', true);
-    setInitModalIsOpen(cookies.get('close-modal-once'))
+    localStorage.setItem('close-modal-once', 'true')
+    setInitModalIsOpen(true)
   }
 
   useEffect(() => {
     // モーダルクローズ履歴を参照
-    setInitModalIsOpen(cookies.get('close-modal-once'));
+    if(!localStorage.getItem('close-modal-once')) setInitModalIsOpen(false);
     let isSubscribed = true;
     if(isSubscribed){
       getCullentLocation();
