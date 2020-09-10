@@ -1,6 +1,6 @@
 import React from 'react';
 // library
-import { Smile, Frown, Check } from 'react-feather';
+import { Smile, Frown } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from './../../common/CommonStyle';

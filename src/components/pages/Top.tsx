@@ -92,6 +92,7 @@ const Top: React.FC = (props: any) => {
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
+  const [stations, setStations] = useState([]);
   const threshold = 0.015;
 
   const GetUniqueImgs = (steps: any) => {
@@ -214,7 +215,8 @@ const Top: React.FC = (props: any) => {
           fetchStepsData={(shop: any) => fetchStepsData(shop)}
           setLastLat={setLastLat}
           setLastLng={setLastLng}
-          setZoom={setZoom}/>
+          setZoom={setZoom}
+          stations={stations}/>
 
         <div className="refinement-btn-wrap">
           <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>

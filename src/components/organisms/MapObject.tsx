@@ -22,6 +22,7 @@ interface MapPopupProps {
   setMapCenter: any;
   setLastLat: any;
   setLastLng: any;
+  stations: any;
 }
 
 
@@ -108,7 +109,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
             </Marker>
           ))}
 
-        {popupIsOpen && <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages} />}
+        {popupIsOpen && <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages}/>}
       </Map>
       <style jsx>{`
         .map-container{
