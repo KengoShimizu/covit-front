@@ -161,7 +161,7 @@ const Shop: React.FC = (props: any) => {
                   <InfectionControlList stepData={shopData.steps} />
                   {shopData.other_step &&
                     <div className="other-step">
-                      <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{ marginBottom: '5px' }}>お店からのメッセージ</Text>
+                      <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{ marginBottom: '5px' }}>その他の感染症対策</Text>
                       <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
                     </div>
                   }
@@ -210,29 +210,35 @@ const Shop: React.FC = (props: any) => {
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
                   <ul className="shop_info-list">
-                    {businessExist && 
-                      <React.Fragment>
-                        <li className="shop_info-option">
-                          <Clock size={16} color="#333" style={{marginBottom: 'auto'}}/>
-                          <span className="shop_info-option_content">
-                            {businessDate.filter((data: any) => (data.opening !== data.closing) || data.is_close).map((data: any, i: number) => 
-                            (
-                              <React.Fragment key={`business_date${i}`}>
-                                <div className="shop-business">
-                                  <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
-                                    {`${data.label}曜日`}
-                                  </Text>
-                                  <Text theme={[TextThemes.SMALL]}>
-                                    {data.is_close ? '定休日' : `${data.opening} 〜 ${data.closing}`}
-                                  </Text>
-                                </div>
-                              </React.Fragment>
-                            ))}
-                          </span>
-                        </li>
-                        <hr className="infection-control_hr" />
-                      </React.Fragment>
-                    }
+                    <li className="shop_info-option">
+                      <Clock size={16} color="#333" style={{marginBottom: 'auto'}}/>
+                      <span className="shop_info-option_content">
+                        {businessExist ? 
+                        businessDate.map((data: any, i: number) =>
+                          <React.Fragment key={`business_date${i}`}>
+                            <div className="shop-business">
+                              <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
+                                {`${data.label}曜日`}
+                              </Text>
+                              <Text theme={[TextThemes.SMALL]}>
+                                {data.is_close ? '定休日' : data.opening === data.closing ? ' - ' : `${data.opening} 〜 ${data.closing}`}
+                              </Text>
+                            </div>
+                          </React.Fragment>)
+                        :
+                        ['月', '火', '水', '木', '金', '土', '日'].map((data: any, i: number) => 
+                          <React.Fragment key={`business_date${i}`}>
+                            <div className="shop-business">
+                              <Text theme={[TextThemes.SMALL]} propStyle={{marginRight: '20px'}}>
+                                {`${data}曜日`}
+                              </Text>
+                              <Text theme={[TextThemes.SMALL]}>- </Text>
+                            </div>
+                          </React.Fragment>)
+                          }
+                      </span>
+                    </li>
+                    <hr className="infection-control_hr" />
                     <li className="shop_info-option">
                       <Phone size={16} color="#333" />
                       <span className="shop_info-option_content">
@@ -284,6 +290,8 @@ const Shop: React.FC = (props: any) => {
             }
             // 中身
             .shop-card{
+              max-width: 1000px;
+              margin: 0 auto;
             }
             .shop-img_wrapper{
               width: 240px;

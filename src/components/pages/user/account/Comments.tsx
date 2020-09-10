@@ -73,7 +73,7 @@ const Comments: React.FC = (props: any) => {
   return (
     <HomeLayout headerText={pageState.headerText} prevRef={pageState.prevRef}>
       {loading ? <Loading /> :
-        <div>
+        <div className="container">
           {match.params.id && user &&
             <ProfileIconNameCard src={user.image} name={user.name} style={{position: 'fixed'}}/>
           }
@@ -86,13 +86,9 @@ const Comments: React.FC = (props: any) => {
       
       <style jsx>{`
         .container{
-          background-color: ${CommonStyle.BgWhite}
-        }
-        .profile-card{
-          position: fixed;
-          padding: 16px;
-          width: 100%;
           background-color: ${CommonStyle.BgWhite};
+          max-width: 1000px;
+          margin: 0 auto;
         }
       `}</style>
     </HomeLayout>
