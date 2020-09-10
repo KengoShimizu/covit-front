@@ -14,10 +14,12 @@ import Button from './../atoms/Button';
 import Input, { InputThemes } from './../atoms/Input';
 import GenreCardList from '../organisms/CardList/GenreCardList';
 import TopModal from '../molecules/Modal/TopModal';
+import Modal from '../molecules/Modal/Modal';
 import Icon, { IconThemes } from '../atoms/Icon';
 import FooterActionBar from './../organisms/FooterActionBar';
 // context
 import TopModalContext from '../../context/TopModalContext';
+import ModalContext from '../../context/ModalContext';
 // types
 import Genre from '../../types/Genre';
 import Station from '../../types/Station';
@@ -86,6 +88,9 @@ const inputStyle = {
 const Top: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
   const topModalContext = useContext(TopModalContext);
+  const threshold = [0.035, 0.05];
+  const modalContext = useContext(ModalContext);
+  const [couldFind, setCouldFind] = useState(true);
   const [loading, setLoading] = useState(true);
   const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
@@ -103,8 +108,15 @@ const Top: React.FC = (props: any) => {
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   const [searchString, setSearchString] = useState<string>('')
   const [stations, setStations] = useState<Station[]>([]);
-  const threshold = [0.035, 0.05];
+  const [modalState, setModalState] = useState({
+    title: '',
+    subtitle: '',
+    btntext: '',
+    onClick: () => { },
+    nobtn: false
+  });
 
+  // 
   const GetUniqueImgs = (steps: any) => {
     const uniqueArray = steps.map((data: any) => data.step_category.id);
     const categoryData = steps.map((data: any) => data.step_category);
@@ -168,6 +180,7 @@ const Top: React.FC = (props: any) => {
             to_lng: lng_ + threshold[1],
           }
         });
+      if(res.data.length === 0) setCouldFind(false)
       setCoordinations(res.data);
       setLoading(false);
     } catch (error) {
@@ -181,7 +194,7 @@ const Top: React.FC = (props: any) => {
       pos => {
         const pos_lat = pos.coords.latitude;
         const pos_lng = pos.coords.longitude;
-        setMapCenter({ lat: pos_lat, lng: pos_lng });
+        setMapCenter({ lat: 0, lng: pos_lng });
         setCurLoc({ lat: pos_lat, lng: pos_lng });
         fetchCoordinationsData(selectedGenre, pos_lat, pos_lng)
         // setMapCenter({ lat: lastlat, lng: lastlng });
@@ -240,9 +253,29 @@ const Top: React.FC = (props: any) => {
     }
   }, [topModalContext.contents.isShown]);
 
+  useEffect(() => {
+    if(!couldFind){
+      setModalState({
+        title: 'このエリアにはまだ\nお店が登録されていません。',
+        subtitle: '感染対策をしているお店をご存知ですか？\n是非リクエスト機能でお店を登録して下さい！',
+        btntext: '',
+        onClick: () => {},
+        nobtn: true
+      })
+      setCouldFind(true)
+      modalContext.toggleModalShown(true);
+    }
+  }, [couldFind])
+
   return (
     <HomeLayout>
       <TopModal/>
+      <Modal
+        title={modalState.title}
+        subtitle={modalState.subtitle}
+        btntext={modalState.btntext}
+        onClick={modalState.onClick}
+        nobtn={modalState.nobtn}/>
       <div className='container'>
         {loading && <Loading/>}
         <Input

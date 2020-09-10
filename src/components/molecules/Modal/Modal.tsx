@@ -11,10 +11,11 @@ import ModalContext from '../../../context/ModalContext';
 
 const propStyle = {
   title: {
-    marginBottom: '15px'
+    marginBottom: '15px',
+    whiteSpace: 'pre-wrap',
   },
   subTitle: {
-    textAlign: 'left',
+    whiteSpace: 'pre-wrap',
   },
   btn: {
     marginTop: '35px',
@@ -27,15 +28,18 @@ interface ModalProps {
   subtitle?: string;
   btntext: string;
   onClick: any;
+  nobtn?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
+const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick, nobtn}) => {
   const renderModal = (modalHookState: any) => {
     const changeShownModal = modalHookState;
-    let propsOnClick = onClick;
-    onClick = () => {
-      propsOnClick();
-      changeShownModal(false);
+    if (!nobtn) {
+      let propsOnClick = onClick;
+      onClick = () => {
+        propsOnClick();
+        changeShownModal(false);
+      }
     }
     return (
       <React.Fragment>
@@ -46,11 +50,13 @@ const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
             {subtitle && <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.subTitle}>{subtitle}</Text>}
             <div className="modal-btns">
               <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.btn} onClick={() => changeShownModal(false)}>
-                キャンセル
+                {nobtn ? '閉じる' : 'キャンセル'}
               </Button>
+              {!nobtn &&
               <Button theme={[ButtonThemes.NORMAL]} propStyle={propStyle.btn} onClick={onClick}>
                 {btntext}
               </Button>
+              }
             </div>
           </div>
         </div>
