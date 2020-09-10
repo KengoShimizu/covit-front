@@ -24,6 +24,9 @@ const propStyle = {
   },
   shopedit: {
     margin: '0 auto 0 auto',
+  },
+  shopName: {
+    marginRight: '4px',
   }
 };
 
@@ -119,9 +122,15 @@ const Shop: React.FC = (props: any) => {
                   </div>
                   <ol className="shop_base-info">
                     <li className="shop_base-info_option">
-                      <Text theme={[TextThemes.CAPTION]}>
+                      <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.shopName}>
                         {shopData.name}
                       </Text>
+                      {/* FIXME公式マーク */}
+                      <span className="official-mark">
+                        <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </span>
                     </li>
                     <li className="shop_base-info_option">
                       <ol className="shop_cost-list">
@@ -289,13 +298,23 @@ const Shop: React.FC = (props: any) => {
               width: 100%;
               height: auto;
             }
+            .official-mark{
+              background: ${CommonStyle.AccentColor};
+              width: 16px;
+              height: 16px;
+              border-radius: 16px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
 
             // 基本情報
             .shop_base-info{
             }
             .shop_base-info_option:not(:last-child){
               margin-bottom: 8px;
-              
+              display: flex;
+              align-items: center;
             }
             // コスト
             .shop_cost-list{

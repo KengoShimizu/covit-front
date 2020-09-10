@@ -1,6 +1,6 @@
 import React from 'react';
 // library
-import { Smile, Frown } from 'react-feather';
+import { Smile, Frown, Check } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from './../../common/CommonStyle';
@@ -19,6 +19,10 @@ interface MapPopupProps {
 const propStyle = {
   reviewIcon: {
     marginLeft: '8px'
+  },
+  shopName: {
+    marginRight: '4px',
+    maxWidth: 'calc(100% - 20px)',
   }
 };
 
@@ -29,9 +33,15 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         <div className="shop-card_content">
           <ul className="shop-card_info">
             <li className="shop-card_name">
-              <Text theme={[TextThemes.SUBTITLE]}>
+              <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.shopName}>
                 {props.data.name}
               </Text>
+              {/* FIXME公式マーク */}
+              <span className="official-mark">
+                <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
             </li>
             <li className="shop-card_review">
               <ul className="shop-card_review-list">
@@ -72,7 +82,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           -webkit- transform: translateX(-50%);
           bottom: 44px;
           z-index: 6000;
-          border-radius: 24px;
+          border-radius: 16px;
           overflow: hidden;
           background: ${CommonStyle.BgWhite};
           transition: opacity 0.5s, transform 0s 0.5s;
@@ -101,6 +111,23 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           align-items: center;
           justify-content: space-between;
           margin-bottom: 10px;
+        }
+        .shop-card_name{
+          display: flex;
+          align-items: center;
+          width: calc(100% - 102px);
+        }
+        .official-mark{
+          background: ${CommonStyle.AccentColor};
+          width: 16px;
+          height: 16px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .shop-card_review{
+          max-width: calc(100% - 102px);
         }
         .shop-card_review-list{
           display: flex;
