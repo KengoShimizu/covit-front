@@ -32,27 +32,29 @@ const propStyle = {
 }
 
 const History: React.FC = (props: any) => {
-    const modalContext = useContext(ModalContext);
-    const qs = queryString.parse(props.location.search);
+  const modalContext = useContext(ModalContext);
+  const qs = queryString.parse(props.location.search);
 
-    const handleCookie = () => {
-      localStorage.setItem('histories', '');
-      localStorage.setItem('histories_date', '');
-      window.location.reload();
-    }
+  const handleCookie = () => {
+    localStorage.setItem('histories', '');
+    localStorage.setItem('histories_date', '');
+    window.location.reload();
+  }
 
-    return (
-      <HomeLayout headerText='閲覧履歴' prevRef={qs.from === RedirectFrom.ACCOUNTS ? RouteName.ACCOUNT_TOP : RouteName.ROOT}>
-        <Modal 
-          title='本当に履歴を削除しますか？'
-          btntext='削除する'
-          onClick={handleCookie}/>
-        <div className='container'>
-          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={localStorage.getItem('histories') ? modalContext.toggleModalShown : () => {}}>
+  return (
+    <HomeLayout headerText='閲覧履歴' prevRef={qs.from === RedirectFrom.ACCOUNTS ? RouteName.ACCOUNT_TOP : RouteName.ROOT}>
+      <Modal
+        title='本当に履歴を削除しますか？'
+        btntext='削除する'
+        onClick={handleCookie} />
+      <div className='container'>
+        <div className="delete-btn-container">
+          <Button theme={[ButtonThemes.SUBNORMAL]} propStyle={propStyle.deleteBtn} onClick={localStorage.getItem('histories') ? modalContext.toggleModalShown : () => { }}>
             <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.deleteBtnIcon}><Trash2 size="18" color="#8C8C8C" /></Icon>
             <span className="delete-btn_text">履歴を削除</span>
           </Button>
-          <HistoryCardList/>
+        </div>
+        <HistoryCardList />
         <style jsx>{`
           .container{
             width: 100%;
@@ -60,15 +62,19 @@ const History: React.FC = (props: any) => {
             background-color: ${CommonStyle.BgGray};
             padding-top: 8px;
           }
+          .delete-btn-container{
+            max-width: 700px;
+            margin: 0 auto;
+          }
           .delete-btn_text{
             color: ${CommonStyle.TextDarkGary};
             font-size: 16px;
             line-height: 13px;
           }
         `}</style>
-        </div>
-      </HomeLayout>
-    );
+      </div>
+    </HomeLayout>
+  );
 
 }
 

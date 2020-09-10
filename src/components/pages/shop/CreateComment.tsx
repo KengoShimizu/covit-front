@@ -162,6 +162,10 @@ const CreateComment: React.FC = (props: any) => {
           </div>
         </div>}
       <style jsx>{`
+          .container{
+            max-width: 1000px;
+            margin: 0 auto;
+          }
           .shop-name{
             padding-top: 16px;
           }

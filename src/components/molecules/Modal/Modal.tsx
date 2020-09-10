@@ -62,6 +62,7 @@ const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick}) => {
             z-index: 9999;
           }
           .modal-container{
+            max-width: 600px;
             box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
             position: fixed;
             z-index: 10000;

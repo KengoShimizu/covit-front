@@ -272,6 +272,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
           }
           .review-switch_container{
             width: 100%;
+            max-width: 1000px;
             display: flex;
             background-color: ${CommonStyle.BgWhite};
             padding-top: 1.5rem;

@@ -48,8 +48,16 @@ const ShopComments: React.FC = (props: any) => {
         <Redirect to={RouteName.ACCOUNT_TOP} />
         :
         <HomeLayout headerText={'コメント一覧'} prevRef={`/shops/${match.params.id}`}>
-          <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
-          {!authState.user.is_owner &&<FooterActionBar initialAccent={0}/>}
+          <div className="container">
+            <CommnetsCardList sqlQuery={`shop_id=${match.params.id}`}/>
+            {!authState.user.is_owner &&<FooterActionBar initialAccent={0}/>}
+          </div>
+          <style jsx>{`
+            .container{
+              max-width: 1000px;
+              margin: 0 auto;
+            }
+          `}</style>
         </HomeLayout>
   );
 }
