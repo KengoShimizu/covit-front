@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import CommonStyle from './../../common/CommonStyle';
 // components
 import Text, { TextThemes } from './../atoms/Text';
+import { OwnerType } from '../../common/Const';
 
 interface MapPopupProps {
   steps: {
@@ -36,12 +37,12 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
               <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.shopName}>
                 {props.data.name}
               </Text>
-              {/* FIXME公式マーク */}
-              <span className="official-mark">
-                <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
+              {props.data?.user?.is_owner !== OwnerType.NOT_OWNER ?
+                <span className="official-mark">
+                  <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span> : <React.Fragment />}
             </li>
             <li className="shop-card_review">
               <ul className="shop-card_review-list">
@@ -61,18 +62,18 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
             </li>
           </ul>
           <ol className="infection-control_list" >
-          {props.uniqueImgs.map((data: any) => (
+            {props.uniqueImgs.map((data: any) => (
               <li className="infection-control_option">
                 <img className="infection-control_icon" src={data.image} alt="sample" />
               </li>
-          ))}
+            ))}
           </ol>
         </div>
-        <div　className="shop-card_header-img_wrapper">
+        <div className="shop-card_header-img_wrapper">
           <img className="shop-card_header-img" src={props.data.image} alt="shop" />
         </div>
       </Link>
-    <style jsx>{`
+      <style jsx>{`
         .shop-mordal_container{
           width: 308px;
           height: 204px;
