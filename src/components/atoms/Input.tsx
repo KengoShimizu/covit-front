@@ -49,7 +49,6 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
             display: block;
             justify-content: center;
             align-items: center;
-            margin-bottom: 2rem;
             max-width: 400px;
           }
 

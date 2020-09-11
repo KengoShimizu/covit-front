@@ -30,6 +30,7 @@ import Loading from '../molecules/Loading';
 const propStyle = {
   refinement: {
     height: '28px',
+    border: 'none',
     backgroundColor: CommonStyle.BgGray,
     borderRadius: '4px',
     color: CommonStyle.TextBlack,
@@ -338,7 +339,6 @@ const Top: React.FC = (props: any) => {
               content={searchString}
               handleChange={(e: any) => setSearchString(e.target.value)}
               propStyle={{...propStyle.refinement, ...propStyle.refinementStation}}
-              noLabel={true}
               icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
             />
           </div>
