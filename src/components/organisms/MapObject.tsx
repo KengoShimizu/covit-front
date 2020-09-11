@@ -61,7 +61,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
 
   // FIXME 駅のマーカー画像にする
   const stationMarker = L.icon({
-    iconUrl: '/shop_pin.svg',
+    iconUrl: '/station.svg',
     iconSize: [55, 61],
     iconAnchor: [27, 61]
   });

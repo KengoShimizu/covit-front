@@ -159,6 +159,17 @@ const Top: React.FC = (props: any) => {
             })
             return flag
           });
+          result = result.map((data: any) => {
+            data.dist = data.x - lastlng + data.y - lastlat;
+            return data
+          })
+          result.sort(function(a: any, b: any) {
+            if (a.dist < b.dist) {
+                return -1;
+            } else {
+                return 1;
+            }
+          });
           setStations(result);
         } else {
           setStations([]);
@@ -205,6 +216,8 @@ const Top: React.FC = (props: any) => {
       pos => {
         const pos_lat = pos.coords.latitude;
         const pos_lng = pos.coords.longitude;
+        setLastLat(pos_lat)
+        setLastLng(pos_lng)
         setMapCenter({ lat: pos_lat, lng: pos_lng });
         setCurLoc({ lat: pos_lat, lng: pos_lng });
         fetchCoordinationsData(selectedGenre, pos_lat, pos_lng)
