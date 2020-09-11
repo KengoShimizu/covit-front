@@ -20,8 +20,8 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
   return (
     <div className="stations-card-list">
       <ul className="stations-card-ul">
-        {stations.map((data: any) =>
-          <React.Fragment>
+        {stations.map((data: any, i: number) =>
+          <React.Fragment key={`station-card${i}`}>
             <div style={{minWidth: '24px'}}></div>
             <li className="station-card" onClick={() => handleClick(data)}>
               <Text theme={[TextThemes.CAPTION]} propStyle={{ padding: '8px 24px' }}>
