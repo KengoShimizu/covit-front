@@ -160,16 +160,17 @@ const Top: React.FC = (props: any) => {
             return flag
           });
           result = result.map((data: any) => {
-            data.dist = data.x - lastlng + data.y - lastlat;
+            data.dist = Math.pow(data.x - lastlng, 2) + Math.pow(data.y - lastlat, 2);
             return data
           })
-          result.sort(function(a: any, b: any) {
+          result = result.sort(function(a: any, b: any) {
             if (a.dist < b.dist) {
                 return -1;
             } else {
                 return 1;
             }
           });
+          console.log(result)
           setStations(result);
         } else {
           setStations([]);

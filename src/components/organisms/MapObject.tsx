@@ -157,7 +157,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
             <Marker
               position={{ lat: data.y, lng: data.x }}
               icon={stationMarker}
-              key={`station${data.id}`}
+              key={`station${i}`}
               onClick={() => props.handleStationClick(data)} >
             </Marker>
           ))}
