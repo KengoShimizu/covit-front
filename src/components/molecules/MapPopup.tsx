@@ -39,7 +39,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
               {/* FIXME公式マーク */}
               <span className="official-mark">
                 <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </span>
             </li>
