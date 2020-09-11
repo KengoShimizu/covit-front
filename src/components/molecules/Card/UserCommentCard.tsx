@@ -97,7 +97,7 @@ const UserCommentCard: React.FC<CardProps> = ({ icon, comment, isCurrentUser, on
           }
           .card_content{
             width: 100%;
-            padding: 15px;
+            padding: 16px;
           }
           .card_content-head{
             display: flex;
@@ -106,7 +106,7 @@ const UserCommentCard: React.FC<CardProps> = ({ icon, comment, isCurrentUser, on
             line-height: 19px;
             display:flex;
             align-items: center;
-            margin: 5px;
+            margin: 4px;
           }
           .history-icon{
             color: ${CommonStyle.TextDarkGary};

@@ -75,7 +75,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
     <style jsx>{`
         .shop-mordal_container{
           width: 308px;
-          height: 205px;
+          height: 204px;
           position: absolute;
           left: 50%;
           transform: translateX(-50%);

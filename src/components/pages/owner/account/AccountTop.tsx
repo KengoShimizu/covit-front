@@ -24,7 +24,7 @@ import ModalContext from '../../../../context/ModalContext';
 const propStyle = {
   btn: {
     margin: '8px auto',
-    padding: '8px 55px',
+    padding: '8px 56px',
   },
   privacy: {
     position: 'relative',

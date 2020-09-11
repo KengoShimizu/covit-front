@@ -161,7 +161,7 @@ const Shop: React.FC = (props: any) => {
                   <InfectionControlList stepData={shopData.steps} />
                   {shopData.other_step &&
                     <div className="other-step">
-                      <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{ marginBottom: '5px' }}>その他の感染症対策</Text>
+                      <Text theme={[TextThemes.DARKGRAY, TextThemes.CAPTION]} propStyle={{ marginBottom: '4px' }}>その他の感染症対策</Text>
                       <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
                     </div>
                   }
@@ -363,8 +363,8 @@ const Shop: React.FC = (props: any) => {
             .other-step{
               padding: 10px;
               border: 1px solid ${CommonStyle.BorderGray};
-              border-radius: 5px;
-              margin-bottom: 25px;
+              border-radius: 4px;
+              margin-bottom: 24px;
             }
             .infection-control_hr{
               height: 1px;

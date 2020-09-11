@@ -93,7 +93,7 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
           overflow-y: scroll;
           max-height: 400px;
           max-width: 500px;
-          box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
+          box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
           position: fixed;
           z-index: 10000;
           top: 50%;
@@ -103,7 +103,7 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
           text-align: center;
           background-color: ${CommonStyle.BgWhite};
           border: 1px solid ${CommonStyle.BorderGray};
-          border-radius: 5px;
+          border-radius: 4px;
         }
         .modal-inner{
           padding: 20px;

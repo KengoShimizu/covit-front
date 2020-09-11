@@ -89,7 +89,7 @@ const CommentPrepare: React.FC = (props: any) => {
       <FooterActionBar initialAccent={2} propStyle={{ boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.25)" }} />
       <style jsx>{`
         .mt10{
-          margin: 45px 0 130px;
+          margin: 44px 0 130px;
         }
       `}</style>
     </HomeLayout>

@@ -46,7 +46,7 @@ const InputFile: React.FC<InputFileProps> = ({ theme = InputFileThemes.INIT, pro
             display: inline-block;
             position: absolute;
             right: 2rem;
-            padding-top: 5px;
+            padding-top: 4px;
           }
 
           .input-file label {

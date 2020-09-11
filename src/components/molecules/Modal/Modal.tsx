@@ -11,14 +11,14 @@ import ModalContext from '../../../context/ModalContext';
 
 const propStyle = {
   title: {
-    marginBottom: '15px',
+    marginBottom: '16px',
     whiteSpace: 'pre-wrap',
   },
   subTitle: {
     whiteSpace: 'pre-wrap',
   },
   btn: {
-    marginTop: '35px',
+    marginTop: '32px',
     width: '40%',
   }
 }
@@ -68,18 +68,18 @@ const Modal: React.FC<ModalProps> = ({title, subtitle, btntext, onClick, nobtn})
             z-index: 9999;
           }
           .modal-container{
+            width: 90%;
             max-width: 360px;
-            box-shadow: 0px 0px 5px 0px ${CommonStyle.BorderGray};
+            box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
             position: fixed;
             z-index: 10000;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 90%;
             text-align: center;
             background-color: ${CommonStyle.BgWhite};
             border: 1px solid ${CommonStyle.BorderGray};
-            border-radius: 5px;
+            border-radius: 4px;
           }
           .modal-inner{
             padding: 20px;
