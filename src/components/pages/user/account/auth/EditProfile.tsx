@@ -105,7 +105,16 @@ const EditProfile: React.FC = (props: any) => {
   return (
     <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} noBtn={qs.state === 'new' ? true : false}>
       <TopModal/>
-      <Input theme={InputThemes.EDIT_PROFILE} label="ニックネーム" placeholder="おなまえ" content={editData.name} icon={<Edit2 color="black" />} handleChange={handleNameChange} propStyle={{margin: '32px auto 0', padding: '1rem 1rem 0'}}/>
+      <Input 
+        theme={InputThemes.EDIT_PROFILE}
+        IconTheme={InputThemes.ICON_RIGHT}
+        label="ニックネーム"
+        placeholder="おなまえ"
+        content={editData.name}
+        icon={<Edit2 color="black" />}
+        handleChange={handleNameChange}
+        propStyle={{margin: '32px auto 0', padding: '1rem 1rem 0'}}
+      />
       {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={{textAlign: 'center'}}>{err}</Text>}
       <UserIconSellection data={editData} setData={setEditData} />
       <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>登録する</Button>
