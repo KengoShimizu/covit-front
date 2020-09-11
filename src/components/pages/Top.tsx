@@ -170,7 +170,6 @@ const Top: React.FC = (props: any) => {
                 return 1;
             }
           });
-          console.log(result)
           setStations(result);
         } else {
           setStations([]);
