@@ -9,7 +9,7 @@ import Button, { ButtonThemes } from '../../atoms/Button'
 import Text, { TextThemes } from '../../atoms/Text'
 import Select, { SelectThemes } from '../../atoms/Select'
 import InputFile, { InputFileThemes } from '../../atoms/InputFile';
-import Input from '../../atoms/Input'
+import Input, { InputThemes } from '../../atoms/Input'
 // organisms
 import { ShopForm } from '../../organisms/ShopForm/ShopForm';
 import { ShopLinkForm } from '../../organisms/ShopForm/ShopLinkForm';
@@ -213,28 +213,54 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         /* 営業時間フォーム */
         <ShopBusinessDateForm setAddData={setAddData} addData={addData} defaultBusinessDate={addData.shop.business_date ? addData.shop.business_date : ""}/>
       }
+      <div className="hr"></div>
       {/* ジャンル系 */}
       <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id} labelColor={{color: CommonStyle.TextBlack}}/>
       {setPage ?
         !isOwnerPage &&
           <React.Fragment>
             <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} propStyle={{ margin: '24px auto', width: '180px' }} onClick={isOK ? () => setPage(2) : () => {}}>
-              詳細をスキップ<ArrowRight size={24} />
+              詳細をスキップ<ArrowRight size={16} />
             </Button>
             {/* 電話番号 */}
-            <Input handleChange={phoneHandleChange} label='電話番号(半角数字のみ)' placeholder='02019228888' content={addData.shop.contact} name='contact' labelColor={{color: CommonStyle.TextBlack}}/>
+            <Input 
+              handleChange={phoneHandleChange}
+              theme={[InputThemes.SHOP_REGISTRATION]}
+              label='電話番号(半角数字のみ)'
+              placeholder='000○○○0000'
+              content={addData.shop.contact}
+              name='contact'
+              labelColor={{color: CommonStyle.TextBlack}}/>
             {/* 営業時間フォーム */}
             <ShopBusinessDateForm setAddData={setAddData} addData={addData} />
           </React.Fragment> : <React.Fragment></React.Fragment>
       }
-      <label>料理の価格帯</label>
-      <div>
-        <Sun color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
-        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_day" propStyle={{ marginBottom: '8px', width: '75%', display: 'inline-block' }} defaultValue={addData.shop.price_day} />
-      </div>
-      <div>
-        <Moon color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
-        <Select theme={SelectThemes.INIT} handleChange={handleChange} label='' defaultLabel="価格帯を選択してください" items={PriceArray} name="price_night" propStyle={{ width: '75%', display: 'inline-block' }} defaultValue={addData.shop.price_night} />
+      <div className="price_container">
+        <label className="price_label">料理の価格帯</label>
+        <div className="price_select-container">
+          <Sun color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
+          <Select
+            theme={SelectThemes.INIT}
+            handleChange={handleChange}
+            label=''
+            defaultLabel="価格帯を選択してください"
+            items={PriceArray}
+            name="price_day"
+            propStyle={{ width: ' 14em', display: 'inline-block' }}
+            defaultValue={addData.shop.price_day} />
+        </div>
+        <div className="price_select-container">
+          <Moon color={CommonStyle.TextDarkGary} style={{ verticalAlign: 'middle', marginRight: '8px' }} />
+          <Select 
+            theme={SelectThemes.INIT}
+            handleChange={handleChange}
+            label=''
+            defaultLabel="価格帯を選択してください"
+            items={PriceArray}
+            name="price_night"
+            propStyle={{ width: '14em', display: 'inline-block' }}
+            defaultValue={addData.shop.price_night} />
+        </div>
       </div>
       <label>ヘッダー画像</label>
       <div className="shop-img_wrapper">
@@ -244,6 +270,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       {
         isOwnerPage ?  <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} /> : <React.Fragment />
       }
+      <div className="hr"></div>
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
       {setPage ?
@@ -260,9 +287,15 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         {`
         label {
           font-weight: bold;
-          margin-bottom: 0.25rem;
+          margin-bottom: 8px;
           font-size: ${CommonStyle.Caption};
           display: block;
+        }
+        .price_container{
+          margin-bottom: 24px;
+        }
+        .price_select-container{
+          margin-bottom: 16px;
         }
         .shop-img_wrapper{
           width: 320px;
@@ -277,6 +310,11 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           height: 100%;
           margin: 0 auto;
           display: block;
+        }
+        .hr{
+          margin: 8px auto 32px auto;
+          width: 100%;
+          border: 1px solid #C0C0C0;
         }
         `}
       </style>

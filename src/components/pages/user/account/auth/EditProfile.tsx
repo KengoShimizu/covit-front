@@ -106,7 +106,7 @@ const EditProfile: React.FC = (props: any) => {
     <HomeLayout headerText={'プロフィールの編集'} prevRef={RouteName.ACCOUNT_TOP} noBtn={qs.state === 'new' ? true : false}>
       <TopModal/>
       <Input 
-        theme={InputThemes.EDIT_PROFILE}
+        theme={[InputThemes.EDIT_PROFILE]}
         IconTheme={InputThemes.ICON_RIGHT}
         label="ニックネーム"
         placeholder="おなまえ"
