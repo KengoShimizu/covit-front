@@ -69,8 +69,8 @@ const EditEmail: React.FC = (props: any) => {
     <HomeLayout headerText="メールアドレスの変更" prevRef={authState.user.is_owner ? RouteName.OWNER_ACCOUNT_TOP : RouteName.EDIT_LOGIN}>
       {/* FIXME リンク先 */}
       <div className="mail-form">
-        <Input theme={InputThemes.DISABLED} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '16px auto'}} readonly={true} />
-        <Input theme={InputThemes.REQUIRED} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '16px auto'}} />
+        <Input theme={[InputThemes.DISABLED]} label="現在のメールアドレス" placeholder="sample@sample.com" content={authState.user.email} propStyle={{ margin: '16px auto'}} readonly={true} />
+        <Input theme={[InputThemes.REQUIRED]} label="新しいメールアドレス" placeholder="sample@sample.com" content={editData.email} handleChange={handleChange} propStyle={{ margin: '16px auto'}} />
         {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
         <div className="mail-form_btn-container">
           <Button

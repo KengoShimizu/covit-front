@@ -349,7 +349,7 @@ const Top: React.FC = (props: any) => {
         <div className="search-header">
           <div className="station-search" onKeyPress={onKeyPressEnter}>
             <Input
-              theme={InputThemes.INIT}
+              theme={[InputThemes.INIT]}
               placeholder="駅名で検索"
               content={searchString}
               handleChange={(e: any) => setSearchString(e.target.value)}

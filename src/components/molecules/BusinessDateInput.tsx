@@ -19,6 +19,8 @@ export const BusinessDateInput: React.FC<BusinessDateInputProps> = ({ handleChan
       <style jsx>{`
         .container {
           margin-bottom: 16px;
+          display: flex;
+          align-items: center;
         }
         label {
           font-size: ${CommonStyle.Caption};

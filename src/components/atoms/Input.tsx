@@ -4,7 +4,7 @@ import CommonStyle from '../../common/CommonStyle';
 
 interface InputProps {
   id?: string;
-  theme?: InputThemes;
+  theme?: InputThemes[];
   IconTheme?: InputThemes;
   propStyle?: {};
   handleChange?: any;
@@ -26,6 +26,7 @@ export enum InputThemes {
   EDIT_PROFILE = 'EDIT_PROFILE',
   ICON_RIGHT = 'ICON_RIGHT',
   ICON_LEFT = 'ICON_LEFT',
+  SHOP_REGISTRATION = 'SHOP_REGISTRATION',
 }
 
 enum ModifierClassNames {
@@ -35,15 +36,20 @@ enum ModifierClassNames {
   EDIT_PROFILE = 'input-edit_profile',
   ICON_RIGHT = 'input-icon_right',
   ICON_LEFT = 'input-icon_left',
+  SHOP_REGISTRATION = 'regist_form-container',
 }
 
 
-const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, IconTheme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step }) => {
+const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step }) => {
+  const modifierClasses = theme?.map(data => ModifierClassNames[data]).join(' ');
   const isRight = IconTheme.includes(InputThemes.ICON_RIGHT)
   const isLeft = IconTheme.includes(InputThemes.ICON_LEFT)
+  const isRequired = theme.includes(InputThemes.REQUIRED)
   return (
-    <div className={["input-container", ModifierClassNames[theme]].join(' ')} style={propStyle}>
-      {label ? <label className="input-label" style={labelColor}>{label}<span className="require-icon">*</span></label> : <React.Fragment/> }
+    <div className={["form-container", modifierClasses].join(' ')} style={propStyle}>
+      {label ? <label className="input-label" style={labelColor}>{label}
+        {isRequired && <span className="require-icon">*</span>}
+        </label> : <React.Fragment/> }
       <div className="input-wrapper">
         <span className={["input-icon", ModifierClassNames[IconTheme]].join(' ')}>{icon}</span>
         <input 
@@ -63,12 +69,15 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, IconTheme =
           .input-init{
           }
 
-          .input-container {
+          .form-container {
             display: block;
             justify-content: center;
             align-items: center;
             max-width: 400px;
             position: relative;
+          }
+          .regist_form-container{
+            margin-bottom: 24px;
           }
           {/* ラベル */}
           .input-label {
@@ -76,6 +85,7 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, IconTheme =
             font-size: 14px;
             line-height: 24px;
             text-align: left;
+            margin-bottom: 4px;
             color: ${CommonStyle.TextDarkGary};
             display: inline-block;
           }

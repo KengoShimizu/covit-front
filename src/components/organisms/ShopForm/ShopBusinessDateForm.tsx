@@ -129,13 +129,24 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
 
   return (
     <div className="container">
-      <p>
-        <label>営業時間</label>
-      </p>
-      <div style={{ marginBottom: '16px' }}>
-        <Input name='opening' label='' handleChange={handleAllChange} placeholder='09:00' content={openingAll} propStyle={{ width: '88px', display: 'inline-block', margin: '0' }} type="time" />
+      <label className="business-date_label">営業時間</label>
+      <div className="business-date_input-wrapper">
+        <Input 
+          name='opening'
+          label=''
+          handleChange={handleAllChange}
+          placeholder='09:00'
+          content={openingAll}
+        　propStyle={{ width: '88px', display: 'inline-block', margin: '0' }} type="time" />
         <span style={{ margin: '0 4px', display: 'inline-block' }}>〜</span>
-        <Input name='closing' label='' handleChange={handleAllChange} placeholder='21:00' content={closingAll} propStyle={{ width: '88px', display: 'inline-block', margin: '0', marginRight: '16px' }} type="time" />
+        <Input 
+          name='closing'
+          label=''
+          handleChange={handleAllChange}
+          placeholder='21:00'
+          content={closingAll}
+          propStyle={{ width: '88px', display: 'inline-block', margin: '0', marginRight: '16px' }}
+          type="time" />
         <Button theme={[ButtonThemes.NORMAL]} onClick={allBusinessTimeChanged} propStyle={{ display: 'inline-block' }} >一括変更</Button>
       </div>
       {
@@ -146,10 +157,19 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
         })
       }
       <style jsx>{`
-        label {
+        .container{
+          margin-bottom: 24px;
+        }
+        .business-date_label{
           font-size: ${CommonStyle.Caption};
           font-weight: bold;
-          margin-right: 8px;
+          display: block;
+          margin-bottom: 4px;
+        }
+        .business-date_input-wrapper{
+          display: flex;
+          align-items: center;
+          margin-bottom: 16px;
         }
       `}</style>
     </div>
