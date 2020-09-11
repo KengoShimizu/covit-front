@@ -74,7 +74,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
       lat: data[0].y,
       lng: data[0].x 
     });
-    props.setZoom(16);
+    props.setZoom(14);
   }
 
   const createDate = () => {
