@@ -99,12 +99,12 @@ const Top: React.FC = (props: any) => {
   const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
-  const [zoom, setZoom] = useState(16);
+  const [zoom, setZoom] = useState(14);
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
   const [clickedShop, setClickedShop] = useState({});
   const [mapCenter, setMapCenter] = useState({ lat: lastlat, lng: lastlng });
-  const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng });
+  const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng }); // これは現在地でしか使わない
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [genres, setGenres] = useState<Genre[]>([]);
@@ -133,7 +133,7 @@ const Top: React.FC = (props: any) => {
       lat: data.y,
       lng: data.x 
     });
-    setZoom(16);
+    setZoom(14);
   }
 
   const onSearchStations = () => {
@@ -213,16 +213,30 @@ const Top: React.FC = (props: any) => {
     }
   }
 
-  const getCullentLocation = () => {
+  const backFromShopPage = async (coord_id: number) => {
+    try{
+      const res = await axios.get(`/api/v1/user/coordinations/${coord_id}`);
+      const lat = Number(res.data.latitude);
+      const lng = Number(res.data.longitude);
+      setMapCenter({ lat: lat, lng: lng });
+      fetchCoordinationsData(selectedGenre, lat, lng);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const getCullentLocation = (coord_id?: number) => {
     navigator.geolocation.getCurrentPosition(
       pos => {
         const pos_lat = pos.coords.latitude;
         const pos_lng = pos.coords.longitude;
-        setLastLat(pos_lat)
-        setLastLng(pos_lng)
-        setMapCenter({ lat: pos_lat, lng: pos_lng });
         setCurLoc({ lat: pos_lat, lng: pos_lng });
-        fetchCoordinationsData(selectedGenre, pos_lat, pos_lng)
+        if (coord_id) {
+          backFromShopPage(coord_id);
+        } else {
+          setMapCenter({ lat: pos_lat, lng: pos_lng });
+          fetchCoordinationsData(selectedGenre, pos_lat, pos_lng);
+        }
         // setMapCenter({ lat: lastlat, lng: lastlng });
         // setCurLoc({ lat: lastlat, lng: lastlng });
       },
@@ -247,7 +261,8 @@ const Top: React.FC = (props: any) => {
     if(!localStorage.getItem('close-modal-once')) setInitModalIsOpen(false);
     let isSubscribed = true;
     if(isSubscribed){
-      getCullentLocation();
+      if(typeof qs.coord === "string") getCullentLocation(parseInt(qs.coord));
+      else getCullentLocation();
     }
     const cleanup = () => {
       isSubscribed = false;
@@ -367,7 +382,7 @@ const Top: React.FC = (props: any) => {
             </Button>
             <Button propStyle={propStyle.currentPlaceBtn} onClick={() => {
               setMapCenter(curLoc)
-              setZoom(16)
+              setZoom(14)
             }}>
               <span className="research-btn_icon">
                 <svg id="" data-name="" xmlns="" fill="#DF6059" width="16px" viewBox="0 0 9.6 9.85"><path d="M4.21,5.77,5.74,9.7a.22.22,0,0,0,.42,0L9.58.56a.23.23,0,0,0-.29-.3L.15,3.68a.23.23,0,0,0,0,.43L4.08,5.64A.21.21,0,0,1,4.21,5.77Z"/></svg>
