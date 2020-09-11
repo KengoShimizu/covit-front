@@ -16,7 +16,6 @@ interface InputProps {
   type?: string; //phone or time
   labelColor?: any;
   step?: number;
-  noLabel?: boolean;
 }
 
 export enum InputThemes {
@@ -33,10 +32,10 @@ enum ModifierClassNames {
   EDIT_PROFILE = 'input-edit_profile',
 }
 
-const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step, noLabel }) => {
+const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step }) => {
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
-      <label style={labelColor}>{label}<span>*</span></label>
+      {label ? <label style={labelColor}>{label}<span>*</span></label> : <React.Fragment/> }
       <div className="input-icon-container">
         <span className="input-icon">{icon}</span>
         <input type={type} className="input" id={id} value={content} onChange={handleChange} placeholder={placeholder} readOnly={readonly} name={name} step={step}/>
@@ -73,15 +72,13 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
             display: none;
           }
 
-          ${!noLabel &&
-          `.input label {
+          .input label {
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
             color: ${CommonStyle.TextDarkGary};
             display: inline-block;
             margin-bottom: 8px;
-          }`
           }
 
           .input input {
