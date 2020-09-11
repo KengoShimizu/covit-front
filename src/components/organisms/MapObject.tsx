@@ -25,6 +25,7 @@ interface MapPopupProps {
   stations: any;
   fetchCoordinationsData: any;
   selectedGenre: any;
+  handleStationClick: any;
 }
 
 
@@ -66,29 +67,12 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   });
 
   const calcStationCenter = (data: any) => {
-    const x_arr = data.map((item: any) => item.x)
-    const y_arr = data.map((item: any) => item.y)
-
-    const lat = (Math.max.apply(null, y_arr) + Math.min.apply(null, y_arr)) / 2;
-    const lng = (Math.max.apply(null, x_arr) + Math.min.apply(null, x_arr)) / 2;
-
-    props.setLastLat(lat);
-    props.setLastLng(lng);
+    props.setLastLat(data[0].y);
+    props.setLastLng(data[0].x);
 
     props.setMapCenter({ 
-      lat: lat,
-      lng: lng 
-    });
-    props.setZoom(16);
-  }
-
-  const handleStationClick = (data: any) => {
-    props.fetchCoordinationsData(props.selectedGenre, data.y, data.x)
-    props.setLastLat(data.y);
-    props.setLastLng(data.x);
-    props.setMapCenter({
-      lat: data.y,
-      lng: data.x 
+      lat: data[0].y,
+      lng: data[0].x 
     });
     props.setZoom(16);
   }
@@ -126,6 +110,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   useEffect(() => {
     if (props.stations.length !== 0) {
       calcStationCenter(props.stations);
+      props.handleStationClick(props.stations[0])
     }
   }, [props.stations]);
 
@@ -173,7 +158,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
               position={{ lat: data.y, lng: data.x }}
               icon={stationMarker}
               key={`station${data.id}`}
-              onClick={() => {handleStationClick(data)}} >
+              onClick={() => props.handleStationClick(data)} >
             </Marker>
           ))}
 

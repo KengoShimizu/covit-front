@@ -17,6 +17,7 @@ import TopModal from '../molecules/Modal/TopModal';
 import Modal from '../molecules/Modal/Modal';
 import Icon, { IconThemes } from '../atoms/Icon';
 import FooterActionBar from './../organisms/FooterActionBar';
+import StationsCardList from './../organisms/CardList/StationsCardList';
 // context
 import TopModalContext from '../../context/TopModalContext';
 import ModalContext from '../../context/ModalContext';
@@ -27,8 +28,7 @@ import Loading from '../molecules/Loading';
 
 // ボタンのCSS
 const propStyle = {
-  refinementBtn: {
-    padding: '4px 16px',
+  refinement: {
     height: '28px',
     backgroundColor: CommonStyle.BgGray,
     borderRadius: '4px',
@@ -36,11 +36,18 @@ const propStyle = {
     fontSize: '12px',
     lineHeight: '12px',
     fontWeight: 'bold',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    WebkitTransform: 'translate(-50%, -50%)',
+    // display: 'flex',
+    // justifyContent: 'space-evenly',
+    // position: 'absolute',
+    // top: '50%',
+    // transform: 'translateY(-50%)',
+    // WebkitTransform: 'translateY(-50%)',
+  },
+  refinementBtn: {
+    right: '0',
+    padding: '4px 16px',
+  },
+  refinementStation: {
   },
   researchBtn: {
     position: 'fixed',
@@ -73,17 +80,11 @@ const propStyle = {
     boxSizing: 'border-box',
     borderRadius: '64px',
     zIndex: 1000,
+  },
+  inputStyle: {
+    backgroundColor: 'white',
   }
 };
-
-// FIXME debug style
-const inputStyle = {
-  minWidth: '400px',
-  position: 'absolute',
-  top: '100px',
-  zIndex: '4111110',
-  backgroundColor: 'white',
-}
 
 const Top: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
@@ -116,11 +117,21 @@ const Top: React.FC = (props: any) => {
     nobtn: false
   });
 
-  // 
   const GetUniqueImgs = (steps: any) => {
     const uniqueArray = steps.map((data: any) => data.step_category.id);
     const categoryData = steps.map((data: any) => data.step_category);
     return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
+  }
+
+  const handleStationClick = (data: any) => {
+    fetchCoordinationsData(selectedGenre, data.y, data.x)
+    setLastLat(data.y);
+    setLastLng(data.x);
+    setMapCenter({
+      lat: data.y,
+      lng: data.x 
+    });
+    setZoom(16);
   }
 
   const onSearchStations = () => {
@@ -204,6 +215,12 @@ const Top: React.FC = (props: any) => {
     );
   }
 
+  const onKeyPressEnter = (event: any) => {
+    if(event.key === 'Enter'){
+      onSearchStations()
+    }
+  }
+
   // 初回モーダルクローズ
   const handleInitModal = () => {
     localStorage.setItem('close-modal-once', 'true')
@@ -278,14 +295,6 @@ const Top: React.FC = (props: any) => {
         nobtn={modalState.nobtn}/>
       <div className='container'>
         {loading && <Loading/>}
-        <Input
-          theme={InputThemes.INIT}
-          placeholder="駅名を入力してください"
-          content={searchString}
-          handleChange={(e: any) => setSearchString(e.target.value)}
-          propStyle={inputStyle}
-          icon={<Search onClick={onSearchStations} style={{ cursor: 'pointer' }} />}
-        />
         <MapObject
           setPopupIsOpen={setPopupIsOpen}
           loading={loading}
@@ -304,13 +313,34 @@ const Top: React.FC = (props: any) => {
           stations={stations}
           fetchCoordinationsData={fetchCoordinationsData}
           selectedGenre={selectedGenre}
+          handleStationClick={handleStationClick}
         />
 
         <div className="refinement-btn-wrap">
-          <Button propStyle={propStyle.refinementBtn} onClick={() => setGenreSerchIsOpen(true)}>
-            お店のジャンルで絞り込む<ChevronDown size={24} color="#333" />
-          </Button>
+          <div className="station-search" onKeyPress={onKeyPressEnter}>
+            <Input
+              theme={InputThemes.INIT}
+              placeholder="駅名を入力してください"
+              content={searchString}
+              handleChange={(e: any) => setSearchString(e.target.value)}
+              propStyle={{...propStyle.refinement, ...propStyle.refinementStation}}
+              noLabel={true}
+              icon={<Search onClick={onSearchStations} style={{ cursor: 'pointer' }} />}
+            />
+          </div>
+          <div className="genre-search">
+            <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
+              絞り込み<ChevronDown size={24} color="#333" />
+            </Button>
+          </div>
         </div>
+
+        {stations && 
+        <StationsCardList
+          stations={stations}
+          handleStationClick={handleStationClick}
+        />}
+
         {initModalIsOpen && 
           <React.Fragment>
             <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(selectedGenre, lastlat, lastlng)}>
@@ -350,7 +380,7 @@ const Top: React.FC = (props: any) => {
         <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
 
         {/* フッター操作バー */}
-        {initModalIsOpen && !popupIsOpen && <FooterActionBar initialAccent={1}/>}
+        {initModalIsOpen && !popupIsOpen && stations.length === 0 && <FooterActionBar initialAccent={1}/>}
         
         <style jsx>{`
           .container{
@@ -358,12 +388,21 @@ const Top: React.FC = (props: any) => {
           }
           .refinement-btn-wrap{
             width: 100%;
+            display: flex;
             background-color: ${CommonStyle.BgWhite};
             position: fixed;
             top: 0;
             height: 40px;
             text-align: center;
             z-index: 400;
+          }
+          .station-search{
+            position: relative;
+            width: 70%;
+          }
+          .genre-search{
+            position: relative;
+            width: 30%;
           }
           .research-btn_text{
             margin: 4px 0 2px 0;
