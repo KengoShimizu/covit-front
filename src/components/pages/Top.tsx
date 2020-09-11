@@ -44,8 +44,9 @@ const propStyle = {
     // WebkitTransform: 'translateY(-50%)',
   },
   refinementBtn: {
-    right: '0',
-    padding: '4px 16px',
+    margin: '0 8px 0 0',
+    padding: '8px 12px',
+    boxSizing: 'border-box',
   },
   refinementStation: {
   },
@@ -329,16 +330,16 @@ const Top: React.FC = (props: any) => {
           handleStationClick={handleStationClick}
         />
 
-        <div className="refinement-btn-wrap">
+        <div className="search-header">
           <div className="station-search" onKeyPress={onKeyPressEnter}>
             <Input
               theme={InputThemes.INIT}
-              placeholder="駅名を入力してください"
+              placeholder="駅名で検索"
               content={searchString}
               handleChange={(e: any) => setSearchString(e.target.value)}
               propStyle={{...propStyle.refinement, ...propStyle.refinementStation}}
               noLabel={true}
-              icon={<Search onClick={onSearchStations} style={{ cursor: 'pointer' }} />}
+              icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
             />
           </div>
           <div className="genre-search">
@@ -399,14 +400,16 @@ const Top: React.FC = (props: any) => {
           .container{
             width: 100%;
           }
-          .refinement-btn-wrap{
+          .search-header{
             width: 100%;
+            height: 56px;
+            box-sizing: border-box;
+            padding: 12px;
             display: flex;
-            background-color: ${CommonStyle.BgWhite};
             position: fixed;
             top: 0;
-            height: 40px;
             text-align: center;
+            background-color: ${CommonStyle.BgWhite};
             z-index: 400;
           }
           .station-search{
