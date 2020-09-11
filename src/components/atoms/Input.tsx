@@ -16,6 +16,7 @@ interface InputProps {
   type?: string; //phone or time
   labelColor?: any;
   step?: number;
+  noLabel?: boolean;
 }
 
 export enum InputThemes {
@@ -32,7 +33,7 @@ enum ModifierClassNames {
   EDIT_PROFILE = 'input-edit_profile',
 }
 
-const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step }) => {
+const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step, noLabel }) => {
   return (
     <div className={["input", ModifierClassNames[theme]].join(' ')} style={propStyle}>
       <label style={labelColor}>{label}<span>*</span></label>
@@ -72,13 +73,15 @@ const Input: React.FC<InputProps> = ({ id, theme = InputThemes.INIT, propStyle =
             display: none;
           }
 
-          .input label {
+          ${!noLabel &&
+          `.input label {
             font-weight: bold;
             font-size: 14px;
             line-height: 24px;
             color: ${CommonStyle.TextDarkGary};
             display: inline-block;
             margin-bottom: 8px;
+          }`
           }
 
           .input input {
