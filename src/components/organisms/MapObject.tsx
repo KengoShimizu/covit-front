@@ -12,15 +12,13 @@ interface MapPopupProps {
   setPopupIsOpen: any;
   loading: boolean;
   coordinations: any;
-  steps: any;
   zoom: number;
   setZoom: any;
-  clickedShop: any;
+  clickedCoord: any;
   mapCenter: any;
   curLoc: any;
-  clickedShopUniqueStepsImages: any;
+  clickedCoordUniqueImgs: any;
   setMapPopupInfo: any;
-  clickedShopGenre: any;
   setMapCenter: any;
   setLastLat: any;
   setLastLng: any;
@@ -40,7 +38,13 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
     iconAnchor: [27, 61]
   });
 
-  const shopMarker = L.icon({
+  const shopMarkerNotOfficial = L.icon({
+    iconUrl: '/shop_pin_unofficial.svg',
+    iconSize: [55, 61],
+    iconAnchor: [27, 61]
+  });
+
+  const shopMarkerOfficial = L.icon({
     iconUrl: '/shop_pin.svg',
     iconSize: [55, 61],
     iconAnchor: [27, 61]
@@ -138,7 +142,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
             <Marker
               riseOnHover={true}
               position={{ lat: data.latitude, lng: data.longitude }}
-              icon={shopMarker}
+              icon={data.is_official ? shopMarkerOfficial : shopMarkerNotOfficial}
               key={`shop${data.id}`}
               onClick={() => handleMarkerClick(data)} >
             </Marker>
@@ -156,10 +160,8 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           ))}
         {popupIsOpen &&
           <MapPopup
-            steps={props.steps}
-            data={props.clickedShop}
-            uniqueImgs={props.clickedShopUniqueStepsImages}
-            clickedShopGenre={props.clickedShopGenre}
+            data={props.clickedCoord}
+            uniqueImgs={props.clickedCoordUniqueImgs}
           />}
       </Map>
       <style jsx>{`

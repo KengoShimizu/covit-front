@@ -7,6 +7,11 @@ export class Comment {
   public static readonly REPUTATION_BAD  = 2 // 悪い評価
 }
 
+export class CoordType {
+  public static readonly NOT_OFFICIAL = 0
+  public static readonly OFFICIAL     = 1
+}
+
 /* 価格帯 */
 class Price {
   public static readonly LESS_THAN_THOUSAND       = 1  // 〜1000
