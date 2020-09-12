@@ -76,9 +76,7 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
             max-width: 400px;
             position: relative;
           }
-          .regist_form-container{
-            margin-bottom: 24px;
-          }
+        
           {/* ラベル */}
           .input-label {
             font-weight: bold;
@@ -116,12 +114,12 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
           }
           .input-icon_left {
             order: 1;
+            margin-right: 4px;
           }
           
           {/* インプット */}
           .input{
             font-size: 16px;
-            line-height: 24px;
             width: calc(100% - 20px);
             color: ${CommonStyle.TextBlack};
           }
@@ -139,8 +137,15 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
           {/* プロフィール編集 */}
           .input-edit_profile{
             display: flex;
+            line-height: 24px;
             flex-direction: column;
             justify-content: center;
+          }
+
+          {/* フォーム */}
+          .regist_form-container{
+            margin-bottom: 24px;
+            line-height: 24px;
           }
 
           input[type="time"]::-webkit-calendar-picker-indicator {

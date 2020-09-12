@@ -29,63 +29,64 @@ import Loading from '../molecules/Loading';
 // ボタンのCSS
 const propStyle = {
   refinement: {
-    height: '28px',
-    border: 'none',
-    backgroundColor: CommonStyle.BgGray,
+    height: '32px',
     borderRadius: '4px',
-    color: CommonStyle.TextBlack,
-    fontSize: '12px',
-    lineHeight: '12px',
-    fontWeight: 'bold',
-    // display: 'flex',
-    // justifyContent: 'space-evenly',
-    // position: 'absolute',
-    // top: '50%',
-    // transform: 'translateY(-50%)',
-    // WebkitTransform: 'translateY(-50%)',
+    backgroundColor: CommonStyle.BgGray,
   },
   refinementBtn: {
-    margin: '0 8px 0 0',
+    height: '32px',
     padding: '8px 12px',
+    borderRadius: '18px',
     boxSizing: 'border-box',
+    backgroundColor: CommonStyle.AccentColor,
   },
   refinementStation: {
   },
   researchBtn: {
     position: 'fixed',
-    top: '54px',
+    top: '68px',
     left: '50%',
     transform: 'translateX(-50%)',
     WebkitTransform: 'translateX(-50%)',
     height: '36px',
-    padding: '4px 20px',
+    width: '176px',
+    padding: '8px 20px',
     background: CommonStyle.BgWhite,
     border: `1.5px solid ${CommonStyle.BorderGray}`,
     boxSizing: 'border-box',
     borderRadius: '36px',
     color: CommonStyle.TextBlack,
     fontSize: '12px',
-    lineHeight: '19px',
+    lineHeight: '1em',
     fontWeight: 'bold',
     zIndex: 1000,
   },
+  reloadIcon: {
+    marginRight: '4px',
+  },
   currentPlaceBtn: {
     position: 'fixed',
-    top: '54px',
-    right: '24px',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    // -webkit- transform: 'translateY(-50%)',
+    right: '-4px',
     width: '64px',
     height: '64px',
+    paddingLeft: '8px',
     fontSize: '8px',
+    fontWeight: 'bold',
     flexDirection: 'column',
     background: CommonStyle.BgWhite,
     border: `4px solid ${CommonStyle.AccentColor}`,
     boxSizing: 'border-box',
-    borderRadius: '64px',
+    borderRadius: '40px 0px 0px 40px',
+    boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.15);',
     zIndex: 1000,
   },
   inputStyle: {
     backgroundColor: 'white',
-  }
+  },
+  
 };
 
 const Top: React.FC = (props: any) => {
@@ -350,6 +351,7 @@ const Top: React.FC = (props: any) => {
           <div className="station-search" onKeyPress={onKeyPressEnter}>
             <Input
               theme={[InputThemes.INIT]}
+              IconTheme={InputThemes.ICON_LEFT}
               placeholder="駅名で検索"
               content={searchString}
               handleChange={(e: any) => setSearchString(e.target.value)}
@@ -357,11 +359,12 @@ const Top: React.FC = (props: any) => {
               icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
             />
           </div>
-          <div className="genre-search">
-            <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
-              絞り込み<ChevronDown size={24} color="#333" />
-            </Button>
-          </div>
+          <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
+            <img className="genre-search_icon" src="narrow-down.svg" alt="ジャンルで絞り込む"/>
+            <p className="genre-search_text">
+              絞り込み
+            </p>
+          </Button>
         </div>
 
         {stations && 
@@ -373,8 +376,8 @@ const Top: React.FC = (props: any) => {
         {initModalIsOpen && 
           <React.Fragment>
             <Button propStyle={propStyle.researchBtn} onClick={() => fetchCoordinationsData(selectedGenre, lastlat, lastlng)}>
-              <Icon theme={[IconThemes.NORMAL]}>
-                <img src='/reload-outline.svg' alt='reload' style={{paddingRight: '12px'}}/>
+              <Icon theme={[IconThemes.LITTLE]} propStyle={propStyle.reloadIcon}>
+                <img src='/reload-outline.svg' alt='reload'/>
               </Icon>
               <span className="research-btn_text">
                 このエリアで再検索
@@ -428,8 +431,9 @@ const Top: React.FC = (props: any) => {
             z-index: 400;
           }
           .station-search{
-            position: relative;
-            width: 70%;
+            margin-right: 8px;
+            width: calc(100% - 98px);
+            max-width: 20em;
           }
           .genre-search{
             position: relative;
@@ -437,6 +441,15 @@ const Top: React.FC = (props: any) => {
           }
           .research-btn_text{
             margin: 4px 0 2px 0;
+          }
+          .genre-search_icon{
+            margin-right: 4px;
+          }
+          .genre-search_text{
+            color: white;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 1em;
           }
         `}</style>
       </div>
