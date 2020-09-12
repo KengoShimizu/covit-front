@@ -6,16 +6,10 @@ import { Link } from 'react-router-dom';
 import CommonStyle from './../../common/CommonStyle';
 // components
 import Text, { TextThemes } from './../atoms/Text';
-import { OwnerType } from '../../common/Const';
+import { OwnerType, CoordType } from '../../common/Const';
 
 interface MapPopupProps {
-  steps: {
-    id: number;
-    content: string;
-    image: string;
-  }[];
   data: any;
-  clickedShopGenre: any;
   uniqueImgs: string[];
 }
 const propStyle = {
@@ -27,17 +21,17 @@ const propStyle = {
   }
 };
 
-const MapPopup: React.FC<MapPopupProps> = (props: any) => {
+const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
   return (
     <section className="shop-mordal_container">
-      <Link to={`/shops/${props.data.id}`}>
+      <Link to={`/shops/${data?.shop?.id}`}>
         <div className="shop-card_content">
           <ul className="shop-card_info">
             <li className="shop-card_name">
               <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.shopName}>
-                {props.data.name}
+                {data?.shop?.name}
               </Text>
-              {props.data?.user?.is_owner !== OwnerType.NOT_OWNER ?
+              {data.is_official === CoordType.OFFICIAL ?
                 <span className="official-mark">
                   <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -49,32 +43,32 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
                 <li className="shop-card_review-option">
                   <Smile size={24} color="#ED753A" />
                   <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                    {props.data.good_count}
+                    {data?.shop?.good_count}
                   </Text>
                 </li>
                 <li className="shop-card_review-option">
                   <Frown size={24} color="#3A8CED" />
                   <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                    {props.data.bad_count}
+                    {data?.shop?.bad_count}
                   </Text>
                 </li>
                 <li className="shop-card_review-option" style={{ position: 'absolute', right: '16px' }}>
-                  <span style={{height: '30px'}}><img src={props.clickedShopGenre.icon} height="30" width="30"/></span>
-                  <Text theme={[TextThemes.SMALL]}>{props.clickedShopGenre.name}</Text>
+                  <span style={{height: '30px'}}><img src={data?.genre?.icon} height="30" width="30"/></span>
+                  <Text theme={[TextThemes.SMALL]}>{data?.genre?.name}</Text>
                 </li>
               </ul>
             </li>
           </ul>
           <ol className="infection-control_list" >
-            {props.uniqueImgs.map((data: any, i: number) => (
+            {uniqueImgs?.map((data: any, i: number) => (
               <li className="infection-control_option" key={`infection${i}`}>
-                <img className="infection-control_icon" src={data.image} alt="sample" />
+                <img className="infection-control_icon" src={data?.image} alt="sample" />
               </li>
             ))}
           </ol>
         </div>
         <div className="shop-card_header-img_wrapper">
-          <img className="shop-card_header-img" src={props.data.image} alt="shop" />
+          <img className="shop-card_header-img" src={data?.shop?.image} alt="shop" />
         </div>
       </Link>
       <style jsx>{`

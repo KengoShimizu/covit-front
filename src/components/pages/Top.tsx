@@ -87,29 +87,34 @@ const propStyle = {
 };
 
 const Top: React.FC = (props: any) => {
+  // library
   const qs = queryString.parse(props.location.search);
-  const topModalContext = useContext(TopModalContext);
-  const threshold = [0.035, 0.05];
+  // context
   const modalContext = useContext(ModalContext);
-  const [couldFind, setCouldFind] = useState(true);
-  const [loading, setLoading] = useState(true);
-  const [popupIsOpen, setPopupIsOpen] = useState(false);
-  const [initModalIsOpen, setInitModalIsOpen] = useState(true);
+  const topModalContext = useContext(TopModalContext);
+  // map
+  const threshold = [0.035, 0.05];
   const [lastlat, setLastLat] = useState(35.6513297);
   const [lastlng, setLastLng] = useState(139.5832906);
   const [zoom, setZoom] = useState(14);
+  const [popupIsOpen, setPopupIsOpen] = useState(false);
   const [coordinations, setCoordinations] = useState([]);
-  const [steps, setSteps] = useState([]);
-  const [clickedShop, setClickedShop] = useState({});
-  const [clickedShopGenre, setClickedShopGenre] = useState({});
+  const [clickedCoord, setClickedCoord] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: lastlat, lng: lastlng });
   const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng }); // これは現在地でしか使わない
-  const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
+  const [clickedCoordUniqueImgs, setClickedCoordUniqueImgs] = useState([]);
+  // genre search
   const [selectedGenre, setSelectedGenre] = useState([]);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
+  // station search
   const [searchString, setSearchString] = useState<string>('')
   const [stations, setStations] = useState<Station[]>([]);
+  // loading
+  const [couldFind, setCouldFind] = useState(true);
+  const [loading, setLoading] = useState(true);
+  // modal
+  const [initModalIsOpen, setInitModalIsOpen] = useState(true);
   const [modalState, setModalState] = useState({
     title: '',
     subtitle: '',
@@ -117,7 +122,7 @@ const Top: React.FC = (props: any) => {
     onClick: () => { },
     nobtn: false
   });
-
+  
   const GetUniqueImgs = (steps: any) => {
     const uniqueArray = steps.map((data: any) => data.step_category.id);
     const categoryData = steps.map((data: any) => data.step_category);
@@ -187,12 +192,10 @@ const Top: React.FC = (props: any) => {
       })
       .catch(err => console.log(err));
   }
-
+// setSteps setClickedShop setClickedShopGenre 統一化　setClickedCoord
   const setMapPopupInfo = (coordination: any) => {
-    setSteps(coordination.shop.steps);
-    setClickedShop(coordination.shop);
-    setClickedShopUniqueStepsImages(GetUniqueImgs(coordination.shop.steps));
-    setClickedShopGenre(coordination.genre);
+    setClickedCoord(coordination);
+    setClickedCoordUniqueImgs(GetUniqueImgs(coordination.shop.steps));
   }
 
   const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number) => {
@@ -333,13 +336,11 @@ const Top: React.FC = (props: any) => {
           setPopupIsOpen={setPopupIsOpen}
           loading={loading}
           coordinations={coordinations}
-          steps={steps}
           zoom={zoom}
-          clickedShopGenre={clickedShopGenre}
           curLoc={curLoc}
-          clickedShop={clickedShop}
+          clickedCoord={clickedCoord}
           mapCenter={mapCenter}
-          clickedShopUniqueStepsImages={clickedShopUniqueStepsImages}
+          clickedCoordUniqueImgs={clickedCoordUniqueImgs}
           setMapCenter={setMapCenter}
           setMapPopupInfo={(coordination: any) => setMapPopupInfo(coordination)}
           setLastLat={setLastLat}
