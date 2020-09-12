@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react';
-// library
+import React from 'react';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 // components
 import Text, { TextThemes } from './../../atoms/Text';
-
 
 interface StationsCardListProps {
   stations: any;
@@ -13,37 +11,37 @@ interface StationsCardListProps {
 
 const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleStationClick }) => {
 
-  const handleClick = (data: any) => {
+  const handleSliderClick = (index: number, data: any, event: any) => {
     handleStationClick(data);
+    event.currentTarget.parentNode.scrollLeft = 250 * index;
   }
 
   return (
-    <ul className="stations-card_list">
+    <ul className="stations-card_list" >
       {stations.map((data: any, i: number) =>
         <React.Fragment key={`station-card${i}`}>
-          <li className="station-card" onClick={() => handleClick(data)}>
-            <img className="station-card_icon" src="station_line.svg" alt=""/>
+          <li className="station-card" onClick={(event) => handleSliderClick(i, data, event)}>
+            <img className="station-card_icon" src="station_line.svg" alt="" />
             <div className="station-card_info">
-              {/* FIXMEデータの綺麗な取り出し方わからん */}
-              <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '8px'}}>
-                東京都
-                {/* {data.name}駅 */}
+              <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '8px' }}>
+                {data.prefecture}
               </Text>
               <Text theme={[TextThemes.SMALL]} propStyle={{ marginBottom: '4px' }}>
-                〒107-0052
-                {/* {`${data.prefecture}　${data.line}`} */}
+                〒{data.postal.substr(0, 3)}-{data.postal.substr(3, 4)}
               </Text>
-              <p className="station-card_line">
-                東京メトロ千代田線
-                {/* {`${data.prefecture}　${data.line}`} */}
-              </p>
+              {data.line.length !== 0 &&
+                <p className="station-card_line">
+                  {data.line}
+                </p>
+              }
             </div>
           </li>
         </React.Fragment>
       )}
-      <div style={{minWidth: '24px'}}></div>
+      <div style={{ minWidth: '24px' }}></div>
       <style jsx>{`
         .stations-card_list{
+          scroll-behavior: smooth;
           width: 100%;
           display: flex;
           overflow-x: scroll;
@@ -69,6 +67,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
           display: flex;
           align-items: flex-start;
           margin-right: 12px;
+          min-width: 200px;
         }
         .station-card_icon{
           margin-right: 16px;
