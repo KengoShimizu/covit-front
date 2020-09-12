@@ -20,6 +20,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
     <ul className="stations-card_list" >
       {stations.map((data: any, i: number) =>
         <React.Fragment key={`station-card${i}`}>
+          <div style={{minWidth: '24px'}}></div>
           <li className="station-card" onClick={(event) => handleSliderClick(i, data, event)}>
             <img className="station-card_icon" src="station_line.svg" alt="" />
             <div className="station-card_info">
@@ -45,8 +46,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
           width: 100%;
           display: flex;
           overflow-x: scroll;
-          margin: 0;	
-          padding: 0 0 0 24px;
+          margin: 0;
           width: 100%;
           position: absolute;
           bottom: 24px;
