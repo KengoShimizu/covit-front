@@ -136,6 +136,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
         {props.loading ? <Loading /> :
           props.coordinations.map((data: any, i: number) => (
             <Marker
+              riseOnHover={true}
               position={{ lat: data.latitude, lng: data.longitude }}
               icon={shopMarker}
               key={`shop${data.id}`}
@@ -146,6 +147,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
         {props.stations && 
           props.stations.map((data: any, i: number) => (
             <Marker
+              riseOnHover={true}
               position={{ lat: data.y, lng: data.x }}
               icon={stationMarker}
               key={`station${i}`}

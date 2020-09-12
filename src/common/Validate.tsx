@@ -15,14 +15,20 @@ export const profileValidation = (name: string): string => {
 
 export const userShopForm = (data: any): string => {
   let returnStr = '';
+  const reg = /^[0-9]*$/;
+  if (!reg.test(data.shop.contact)) returnStr = returnStr + '数字で入力してください';
+  if (data.shop.contact.length !== 0 && data.shop.contact.length !== 10 && data.shop.contact.length !== 11) returnStr = returnStr + '桁数が間違っています';
   if (!data.shop.name) returnStr = returnStr + 'お店の名前を入力してください\n';
   if (!data.shop.address) returnStr = returnStr + 'お店の住所を入力してください\n';
-  if (!data.genre_id) returnStr = 'ジャンルを選択してください\n';
+  if (!data.genre_id) returnStr = returnStr + 'ジャンルを選択してください\n';
   return returnStr;
 }
 
 export const ownerShopForm = (data: any): string => {
   let returnStr = '';
+  const reg = /^[0-9]*$/;
+  if (!reg.test(data.shop.contact)) returnStr = returnStr + '数字で入力してください';
+  if (data.shop.contact.length !== 10 && data.shop.contact.length !== 11) returnStr = returnStr + '桁数が間違っています';
   if (!data.shop.name) returnStr = returnStr + 'お店の名前を入力してください\n';
   if (!data.shop.kana_name) returnStr = returnStr + 'お店のふりがなを入力してください\n';
   if (!data.shop.address) returnStr = returnStr + 'お店の住所を入力してください\n';
@@ -41,13 +47,6 @@ export const ownerInfoValidation = (data: any): string => {
   if (!data.owner.name) returnStr = returnStr + 'お名前を入力してください\n';
   if (!data.owner.kana_name) returnStr = returnStr + 'ふりがなを入力してください\n';
   return returnStr;
-}
-
-export const phoneValidation = (value: any): string => {
-  const reg = /^[0-9]*$/;
-  let err = '';
-  if (!reg.test(value)) err = '数字で入力してください';
-  return err;
 }
 
 export const commentValidation = (data: any): string => {
@@ -74,10 +73,6 @@ export default class Validation {
         return ownerShopForm(value);
       case 'shop_form_infections':
         return infectionsValidation(value);
-      case 'owner_info':
-        return ownerInfoValidation(value);
-      case 'owner_phone':
-        return phoneValidation(value);
     }
   };
 }

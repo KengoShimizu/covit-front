@@ -78,7 +78,7 @@ const propStyle = {
     border: `4px solid ${CommonStyle.AccentColor}`,
     boxSizing: 'border-box',
     borderRadius: '40px 0px 0px 40px',
-    boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.15);',
+    boxShadow: '0px 0px 12px rgba(0, 0, 0, 0.15)',
     zIndex: 1000,
   },
   inputStyle: {
