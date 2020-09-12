@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 // components
@@ -10,8 +10,10 @@ interface StationsCardListProps {
 }
 
 const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleStationClick }) => {
+  const [selected, setSelected] = useState(0);
 
   const handleSliderClick = (index: number, data: any, event: any) => {
+    setSelected(index);
     handleStationClick(data);
     event.currentTarget.parentNode.scrollLeft = 274 * index - 30;
   }
@@ -21,7 +23,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
       {stations.map((data: any, i: number) =>
         <React.Fragment key={`station-card${i}`}>
           <div style={{minWidth: '24px'}}></div>
-          <li className="station-card" onClick={(event) => handleSliderClick(i, data, event)}>
+          <li className={`station-card ${selected === i && 'selected'}`} onClick={(event) => handleSliderClick(i, data, event)}>
             <img className="station-card_icon" src="station_line.svg" alt="" />
             <div className="station-card_info">
               <Text theme={[TextThemes.CAPTION]} propStyle={{ marginBottom: '8px' }}>
@@ -68,6 +70,9 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
           align-items: flex-start;
           margin-right: 12px;
           min-width: 200px;
+        }
+        .selected{
+          background: #EEFFFF;
         }
         .station-card_icon{
           margin-right: 16px;
