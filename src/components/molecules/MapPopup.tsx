@@ -80,12 +80,12 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
       <style jsx>{`
         .shop-mordal_container{
           width: 308px;
-          height: 256px;
+          height: 248px;
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
-          bottom: 44px;
+          bottom: 28px;
           z-index: 6000;
           border-radius: 16px;
           overflow: hidden;
@@ -116,7 +116,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         .shop-card_info{
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 10px;
+          margin-bottom: 4px;
         }
         .shop-card_name{
           display: flex;
