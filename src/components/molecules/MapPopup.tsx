@@ -15,6 +15,7 @@ interface MapPopupProps {
     image: string;
   }[];
   data: any;
+  clickedShopGenre: any;
   uniqueImgs: string[];
 }
 const propStyle = {
@@ -22,8 +23,7 @@ const propStyle = {
     marginLeft: '8px'
   },
   shopName: {
-    marginRight: '4px',
-    maxWidth: 'calc(100% - 20px)',
+    marginRight: '4px'
   }
 };
 
@@ -58,6 +58,10 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
                     {props.data.bad_count}
                   </Text>
                 </li>
+                <li className="shop-card_review-option" style={{ position: 'absolute', right: '16px' }}>
+                  <span style={{height: '30px'}}><img src={props.clickedShopGenre.icon} height="30" width="30"/></span>
+                  <Text theme={[TextThemes.SMALL]}>{props.clickedShopGenre.name}</Text>
+                </li>
               </ul>
             </li>
           </ul>
@@ -76,7 +80,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
       <style jsx>{`
         .shop-mordal_container{
           width: 308px;
-          height: 204px;
+          height: 256px;
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
@@ -91,7 +95,7 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         }
         .shop-card_header-img_wrapper{
           width: 100%;
-          height: 98px;
+          height: 120px;
           position: absolute;
           overflow: hidden;
         }
@@ -99,16 +103,17 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           width: 100%;
           height: auto;
           position: relative;
-          top: -24px;
+          top: -16px;
         }
         .shop-card_content{
-          top: 98px;
+          width: 100%;
+          top: 120px;
           position: absolute;
           padding: 8px 16px;
+          box-sizing: border-box;
         }
         // 店名と評価数のヘッダー
         .shop-card_info{
-          display: flex;
           align-items: center;
           justify-content: space-between;
           margin-bottom: 10px;
@@ -116,7 +121,8 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
         .shop-card_name{
           display: flex;
           align-items: center;
-          width: calc(100% - 102px);
+          width: 100%;
+          margin-bottom: 4px;
         }
         .official-mark{
           background: ${CommonStyle.AccentColor};
@@ -128,10 +134,12 @@ const MapPopup: React.FC<MapPopupProps> = (props: any) => {
           justify-content: center;
         }
         .shop-card_review{
-          max-width: calc(100% - 102px);
+          max-width: 100%;
+          display: block;
         }
         .shop-card_review-list{
           display: flex;
+          height: 30px
         }
         .shop-card_review-option{
           display: flex;

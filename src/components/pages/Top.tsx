@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 // library
 import axios from "axios";
-import { ChevronDown, Search } from 'react-feather';
+import { Search } from 'react-feather';
 import queryString from 'query-string';
 // common
 import CommonStyle from './../../common/CommonStyle';
@@ -104,6 +104,7 @@ const Top: React.FC = (props: any) => {
   const [coordinations, setCoordinations] = useState([]);
   const [steps, setSteps] = useState([]);
   const [clickedShop, setClickedShop] = useState({});
+  const [clickedShopGenre, setClickedShopGenre] = useState({});
   const [mapCenter, setMapCenter] = useState({ lat: lastlat, lng: lastlng });
   const [curLoc, setCurLoc] = useState({ lat: lastlat, lng: lastlng }); // これは現在地でしか使わない
   const [clickedShopUniqueStepsImages, setClickedShopUniqueStepsImages] = useState([]);
@@ -175,6 +176,14 @@ const Top: React.FC = (props: any) => {
           });
           setStations(result);
         } else {
+          setModalState({
+            title: '駅名が見つかりませんでした。',
+            subtitle: '正しい駅名を入力してください。',
+            btntext: '',
+            onClick: () => {},
+            nobtn: true
+          })
+          modalContext.toggleModalShown(true);
           setStations([]);
         }
 
@@ -182,14 +191,11 @@ const Top: React.FC = (props: any) => {
       .catch(err => console.log(err));
   }
 
-  const fetchStepsData = (shop: any) => {
-    axios.get(`/api/v1/user/steps?shop_id=${shop.id}`)
-      .then(res => {
-        setSteps(res.data);
-        setClickedShop(shop);
-        setClickedShopUniqueStepsImages(GetUniqueImgs(res.data))
-      })
-      .catch(err => console.log(err));
+  const setMapPopupInfo = (coordination: any) => {
+    setSteps(coordination.shop.steps);
+    setClickedShop(coordination.shop);
+    setClickedShopUniqueStepsImages(GetUniqueImgs(coordination.shop.steps));
+    setClickedShopGenre(coordination.genre);
   }
 
   const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number) => {
@@ -332,12 +338,13 @@ const Top: React.FC = (props: any) => {
           coordinations={coordinations}
           steps={steps}
           zoom={zoom}
+          clickedShopGenre={clickedShopGenre}
           curLoc={curLoc}
           clickedShop={clickedShop}
           mapCenter={mapCenter}
           clickedShopUniqueStepsImages={clickedShopUniqueStepsImages}
           setMapCenter={setMapCenter}
-          fetchStepsData={(shop: any) => fetchStepsData(shop)}
+          setMapPopupInfo={(coordination: any) => setMapPopupInfo(coordination)}
           setLastLat={setLastLat}
           setLastLng={setLastLng}
           setZoom={setZoom}

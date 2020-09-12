@@ -19,7 +19,8 @@ interface MapPopupProps {
   mapCenter: any;
   curLoc: any;
   clickedShopUniqueStepsImages: any;
-  fetchStepsData: any;
+  setMapPopupInfo: any;
+  clickedShopGenre: any;
   setMapCenter: any;
   setLastLat: any;
   setLastLng: any;
@@ -90,7 +91,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
 
     axios
       .get(`/api/v1/user/coordinations/${data.id}`)
-      .then(res => props.fetchStepsData(res.data.shop))
+      .then(res => props.setMapPopupInfo(res.data))
       .catch(err => console.log(err));
 
     setPopupIsOpen(true);
@@ -151,8 +152,13 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
               onClick={() => props.handleStationClick(data)} >
             </Marker>
           ))}
-
-        {popupIsOpen && <MapPopup steps={props.steps} data={props.clickedShop} uniqueImgs={props.clickedShopUniqueStepsImages}/>}
+        {popupIsOpen &&
+          <MapPopup
+            steps={props.steps}
+            data={props.clickedShop}
+            uniqueImgs={props.clickedShopUniqueStepsImages}
+            clickedShopGenre={props.clickedShopGenre}
+          />}
       </Map>
       <style jsx>{`
         .map-container{
