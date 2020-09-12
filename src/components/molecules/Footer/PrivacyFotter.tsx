@@ -18,12 +18,7 @@ const PrivacyFotter: React.FC<PrivacyFotterProps> = ({propStyle}) => {
       <style jsx>{`
         .privacy_container{
           text-align: center;
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          -webkit- transform: translateX(-50%);
-          bottom: 44px;
-          top: auto;
+          margin-bottom: 40px;
         }
         .privacy_text{
           font-weight: bold;

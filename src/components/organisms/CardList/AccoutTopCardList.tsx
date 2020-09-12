@@ -156,6 +156,9 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
         <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor} />} text='口コミ投稿のガイドライン' nextRef={RouteName.GUIDE_LINE} />
       </ul>
       <style jsx>{`
+        .container{
+          margin-bottom: 60px;
+        }
         .account-function_list{
           padding: 0 16px;
           max-width: 400px;
