@@ -1,4 +1,6 @@
 import React from 'react';
+// library
+import { Helmet } from 'react-helmet';
 // molecules
 import Header from '../molecules/Header/Header';
 
@@ -9,11 +11,15 @@ interface HomeLayoutProps {
   history?: any;
   onClick?: any;
   noBtn?: boolean;
+  title?: string;
 }
 
-const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, history, onClick, noBtn}) => {
+const HomeLayout: React.FC<HomeLayoutProps> = ({headerText, prevRef, children, history, onClick, noBtn, title}) => {
   return (
     <div className="container">
+      <Helmet>
+        <title>{title ? title : 'covEAT/こびイート | 感染症対策店舗検索サービス'}</title>
+      </Helmet>
       {history && <Header headerText={headerText} prevRef={prevRef} history={history}/>}
       {!history && <Header headerText={headerText} prevRef={prevRef}/>}
       {onClick && <Header headerText={headerText} prevRef={prevRef} onClick={onClick}/>}

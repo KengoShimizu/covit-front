@@ -116,7 +116,7 @@ const Shop: React.FC = (props: any) => {
       {loading ? <Loading /> :
         shopData.user_id && authState.user.is_owner !== OwnerType.NOT_OWNER && shopData.user_id !== authState.user.id ?
           <Redirect to='' /> :
-          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.id}`}>
+          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}>
             <div className="content">
               <div className="shop-card">
                 {/* ヘッダー画像 */}

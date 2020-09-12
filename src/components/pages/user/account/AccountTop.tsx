@@ -16,7 +16,7 @@ const AccountTop: React.FC = (props: any) => {
   const [account] = useState(authState.user);
 
   return (
-    <HomeLayout headerText={'ユーザ情報'} prevRef={RouteName.ROOT} >
+    <HomeLayout headerText={'ユーザ情報'} prevRef={RouteName.ROOT} title={`covEAT/こびイート | ${account.name}さんのマイページ`}>
       <TopModal />
       <div className="profile-head_container">
         <div className="profile-head_name">

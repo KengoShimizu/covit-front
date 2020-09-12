@@ -85,13 +85,13 @@ const UserShopForm: React.FC = (props: any) => {
   return (
     <React.Fragment>
       {page === 1 ?
-        <HomeLayout headerText="お店の情報登録(1/2)" prevRef={RouteName.SHOP_SEARCH_FOR_COMMENTS}>
+        <HomeLayout headerText="お店の情報登録(1/2)" prevRef={RouteName.SHOP_SEARCH_FOR_COMMENTS} title='covEAT/こびイート | 店舗の感染症対策情報リクエストフォーム'>
           <div className="container">
             <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
           </div>
         </HomeLayout>
         :
-        <HomeLayout headerText="お店の情報登録(2/2)" onClick={() => setPage(1)}>
+        <HomeLayout headerText="お店の情報登録(2/2)" onClick={() => setPage(1)} title='covEAT/こびイート | 店舗の感染症対策情報リクエストフォーム'>
           <div className="container">
             <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} post={post} setIsOK={setIsOK} isOK={isOK}/>
           </div>

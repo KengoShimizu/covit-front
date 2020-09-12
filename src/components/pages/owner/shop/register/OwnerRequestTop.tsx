@@ -18,7 +18,7 @@ const propStyle = {
 
 const OwnerRequestTop: React.FC = (props: any) => {
   return (
-    <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT}>
+    <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT} title='covEAT/こびイート | 店舗の感染症対策情報リクエストページ'>
       <div className="container">
         <div className="img-container">
           <img className="image" src='/register_top.png' /> 

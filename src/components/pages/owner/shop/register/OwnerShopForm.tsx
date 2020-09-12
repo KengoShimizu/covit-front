@@ -134,20 +134,20 @@ const OwnerShopForm: React.FC = (props: any) => {
   return (
     <React.Fragment>
       {page === 1 &&
-        <HomeLayout headerText={`お店の情報登録(1/${totalPage})`} prevRef={RouteName.OWNER_ACCOUNT_TOP}>
+        <HomeLayout headerText={`お店の情報登録(1/${totalPage})`} prevRef={RouteName.OWNER_ACCOUNT_TOP} title='covEAT/こびイート | 店舗の感染症対策情報リクエストフォーム'>
           <TopModal/>
           <div className="container">
             <ShopInfo setPage={setPage} setAddData={setAddData} addData={addData} />
           </div>
         </HomeLayout>}
       {page === 2 &&
-        <HomeLayout headerText={`お店の情報登録(2/${totalPage})`} onClick={() => setPage(1)}>
+        <HomeLayout headerText={`お店の情報登録(2/${totalPage})`} onClick={() => setPage(1)} title='covEAT/こびイート | 店舗の感染症対策情報リクエストフォーム'>
           <div className="container">
             <InfectionControl setPage={setPage} setAddData={setAddData} addData={addData} noKanaName={noKanaName} post={noKanaName? undefined : post} load2={load2} setIsOK={setIsOK} isOK={isOK}/>
           </div>
         </HomeLayout>}
       {page === 3 && noKanaName &&
-        <HomeLayout headerText="お店の情報登録(3/3)" onClick={() => setPage(2)}>
+        <HomeLayout headerText="お店の情報登録(3/3)" onClick={() => setPage(2)} title='covEAT/こびイート | 店舗の感染症対策情報リクエストフォーム'>
           <div className="container">
             <OwnerInfo post={post} handleChange={handleOwnerChange} addData={addData} load3={load3}/>
           </div>
