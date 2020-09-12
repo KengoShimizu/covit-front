@@ -192,7 +192,7 @@ const Top: React.FC = (props: any) => {
       })
       .catch(err => console.log(err));
   }
-// setSteps setClickedShop setClickedShopGenre 統一化　setClickedCoord
+
   const setMapPopupInfo = (coordination: any) => {
     setClickedCoord(coordination);
     setClickedCoordUniqueImgs(GetUniqueImgs(coordination.shop.steps));
@@ -211,7 +211,7 @@ const Top: React.FC = (props: any) => {
             to_lng: lng_ + threshold[1],
           }
         });
-      if(res.data.length === 0) setCouldFind(false)
+      if(res.data.length === 0 && localStorage.getItem('close-modal-once')) setCouldFind(false)
       setCoordinations(res.data);
       setLoading(false);
     } catch (error) {
