@@ -68,7 +68,7 @@ const EmailRegister: React.FC = (props: any) => {
       <div className="form">
         <div className="content">
           <div className="mail-form">
-            <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange}/>
+            <Input label='メールアドレス' placeholder='sample@sample.com' content={addData.email} handleChange={handleChange} propStyle={{marginBottom: '24px'}}/>
             {err && <Text theme={[TextThemes.ERROR]}>{err}</Text>}
             <div className="mail-form_btn-container">
               <Button 

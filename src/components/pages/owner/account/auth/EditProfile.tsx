@@ -58,7 +58,7 @@ const OwnerEditProfile: React.FC = (props: any) => {
   }, [editData]);
 
   useEffect(() => {
-    if (topModalContext.contents.isShown){
+    if (topModalContext.contents.isShown) {
       setTimeout(() => {
         topModalContext.setContents({
           isShown: false,
@@ -72,10 +72,21 @@ const OwnerEditProfile: React.FC = (props: any) => {
 
   return (
     <HomeLayout headerText='担当者情報' prevRef={RouteName.OWNER_ACCOUNT_TOP}>
-      <TopModal/>
-      <Input theme={[InputThemes.REQUIRED]} label="お名前" placeholder="田中太郎" name="name" content={editData.name} handleChange={handleChange} propStyle={{margin: '0 auto', padding: '0.5rem'}}/>
-      <Input theme={[InputThemes.REQUIRED]} label="ふりがな" placeholder="たなかたろう" name="kana_name" content={editData.kana_name} handleChange={handleChange} propStyle={{margin: '0 auto', padding: '0.5rem'}}/>
-      <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>{isEdit ? '変更する' : '登録する'}</Button>
+      <TopModal />
+      <div className="content">
+        <div className="mail-form">
+          <Input theme={[InputThemes.REQUIRED]} label="お名前" placeholder="田中太郎" name="name" content={editData.name} handleChange={handleChange} propStyle={{ marginBottom: '24px'}} />
+          <Input theme={[InputThemes.REQUIRED]} label="ふりがな" placeholder="たなかたろう" name="kana_name" content={editData.kana_name} handleChange={handleChange} propStyle={{ marginBottom: '24px'}} />
+        </div>
+      </div>
+      <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => { }} propStyle={{ margin: '16px auto' }}>{isEdit ? '変更する' : '登録する'}</Button>
+      <style jsx>{`
+        .mail-form{
+          max-width: 324px;
+          width: 90%;
+          margin: 40px auto 0;
+        }
+      `}</style>
     </HomeLayout>
   );
 }

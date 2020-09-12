@@ -113,7 +113,7 @@ const EditProfile: React.FC = (props: any) => {
         content={editData.name}
         icon={<Edit2 color="black" />}
         handleChange={handleNameChange}
-        propStyle={{margin: '32px auto 0', padding: '1rem 1rem 0'}}
+        propStyle={{margin: '32px auto 24px', padding: '1rem 1rem 0'}}
       />
       {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={{textAlign: 'center'}}>{err}</Text>}
       <UserIconSellection data={editData} setData={setEditData} />

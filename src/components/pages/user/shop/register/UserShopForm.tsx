@@ -76,6 +76,7 @@ const UserShopForm: React.FC = (props: any) => {
 
   useEffect(() => {
     setErr('');
+    console.log(addData)
   }, [addData])
 
   useEffect(() => {
