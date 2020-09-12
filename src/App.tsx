@@ -49,7 +49,6 @@ import Comments from './components/pages/user/account/Comments';
 import EmailRegister from './components/pages/user/account/auth/EmailRegister';
 // user/account/manage
 import EditLogin from './components/pages/user/account/manage/EditLogin';
-import AddEmail from './components/pages/user/account/manage/AddEmail';
 // user/shop/register
 import UserShopForm from './components/pages/user/shop/register/UserShopForm';
 // shop
@@ -90,7 +89,6 @@ function App() {
                     <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
                     <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
                     <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
-                    <UserRoute exact path={RouteName.ADD_EMAIL} component={AddEmail} />
                     <UserRoute exact path={RouteName.HISTORY} component={History} />
                     <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
                     <OwnerRoute exact path={RouteName.OWNER_EDIT_PROFILE} component={OwnerEditProfile} />

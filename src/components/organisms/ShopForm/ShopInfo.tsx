@@ -20,7 +20,6 @@ import Link from '../../../types/Link';
 // common
 import { PriceArray, LinkType } from '../../../common/Const'
 import CommonStyle from '../../../common/CommonStyle';
-import Validate from '../../../common/Validate';
 import Validation from '../../../common/Validate';
 
 interface ShopInfoProps {
@@ -133,12 +132,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     }
   }
 
-  const phoneHandleChange = (e: any) => {
-    if(!Validation.formValidate('owner_phone', e.target.value)){
-      handleChange(e);
-    }
-  }
-
   useEffect(() => {
     fetchGenres();
   }, []);
@@ -152,7 +145,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
 
   useEffect(() => {
     if (isOwnerPage) {
-      if (Validate.formValidate('owner_shop_form', addData)) {
+      if (Validation.formValidate('owner_shop_form', addData)) {
         setIsOK(false);
         if (setEditIsOK) setEditIsOK(false);
       } else {
@@ -160,7 +153,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         if (setEditIsOK) setEditIsOK(true);
       }
     } else {
-      if (Validate.formValidate('user_shop_form', addData)) setIsOK(false)
+      if (Validation.formValidate('user_shop_form', addData)) setIsOK(false)
       else setIsOK(true)
     }
   }, [addData]);
@@ -208,7 +201,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           :
           <React.Fragment></React.Fragment>
       }
-      <ShopForm handleChange={handleChange} addData={addData} phoneHandleChange={phoneHandleChange}/>
+      <ShopForm handleChange={handleChange} addData={addData} phoneHandleChange={(e: any) => handleChange(e)}/>
       {isOwnerPage &&
         /* 営業時間フォーム */
         <ShopBusinessDateForm setAddData={setAddData} addData={addData} defaultBusinessDate={addData.shop.business_date ? addData.shop.business_date : ""}/>
@@ -224,7 +217,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
             </Button>
             {/* 電話番号 */}
             <Input 
-              handleChange={phoneHandleChange}
+              handleChange={(e: any) => handleChange(e)}
               theme={[InputThemes.SHOP_REGISTRATION]}
               label='電話番号(半角数字のみ)'
               placeholder='000○○○0000'
