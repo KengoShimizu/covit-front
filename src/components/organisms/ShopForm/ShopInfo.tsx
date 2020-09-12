@@ -286,6 +286,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         }
         .price_container{
           margin-bottom: 24px;
+          margin-top: 24px;
         }
         .price_select-container{
           margin-bottom: 16px;
