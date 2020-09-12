@@ -20,7 +20,6 @@ interface ProfileIconNameCardProps {
 const ProfileIconNameCard: React.FC<ProfileIconNameCardProps> = ({src, name, style, styleImg}) => {
   return (
     <div className="account-info_card" style={style}>
-      {/* FIXME IconThemes.COVIDMEASURE*/}
       <Icon theme={[IconThemes.PROFILE]} propStyle={{...propStyle.accountIcon, ...styleImg}}>
         <img className="account-info_profile-icon" src={src} alt=""/>
       </Icon>

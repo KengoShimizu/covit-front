@@ -405,7 +405,6 @@ const Shop: React.FC = (props: any) => {
                   content: '';
                   position: absolute;
                   left: 20px;
-                  //FIXME 選択中の対策内容によって吹き出しの位置が変わると○
                   top: -8px;
                   display: block;
                   width: 0;

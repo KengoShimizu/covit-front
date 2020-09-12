@@ -236,8 +236,6 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
               </Icon>
               <p className="review-switch_num" style={{ color: "#3A8CED" }}>{pagenationForBad.total}</p>
             </div>
-            {/* FIXME 非選択時アイコンと数字も色かわる*/}
-            {/* 選択中じゃない時は#B6B2AA */}
           </div>
           <InfiniteScroll
             element='ol'

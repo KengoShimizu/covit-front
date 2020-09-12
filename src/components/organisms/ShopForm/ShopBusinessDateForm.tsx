@@ -14,7 +14,6 @@ interface ShopBusinessDateFormProps {
 }
 
 export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setAddData, addData, defaultBusinessDate }) => {
-  // FIXME ここはしょうがない気がする.ちゃんとDB直した方が良かった説
   const [businessDate, setBusinessDate] = useState([
     {
       number: 1,
