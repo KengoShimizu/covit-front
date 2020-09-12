@@ -146,7 +146,7 @@ const CreateComment: React.FC = (props: any) => {
                   </ul>
                 </li>
                 <li className="review-form_selector_container">
-                  <Select handleChange={handleChange} label='来店月を選択してください' defaultLabel={'来店月を選択してください'} defaultValue={0} items={VisitMonthArray} name={'date'} labelColor={{color: CommonStyle.TextBlack}}/>
+                  <Select handleChange={handleChange} label='来店月を選択してください' defaultLabel={'来店月を選択してください'} defaultValue={0} items={VisitMonthArray} name={'date'} labelColor={{color: CommonStyle.TextBlack}} propStyle={{marginBottom: '24px'}}/>
                 </li>
                 <li className="review-form_comment_container">
                   <label className="review-form_comment-label" htmlFor="">感染対策についての感想や評価を記入しよう！</label>
