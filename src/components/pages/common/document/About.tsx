@@ -56,6 +56,12 @@ const propStyle = {
     maxWidth: '20em',
     order: '3',
   },
+  postText:{
+    marginBottom: '32px',
+  },
+  postButton:{
+    margin: '0 auto',
+  }
 };
 
 // LP
@@ -283,23 +289,25 @@ const greeting: React.FC = (props: any) => {
         </section>
         {/* post */}
         <section className="post_container">
-          <div className="post_inner-container">
-            <div className="post_title-container">
-              <p className="title_en">post</p>
-              <h2 className="title_jp">感染対策をしているお店を投稿して応援しませんか？</h2>
-            </div>
-            <p className="post_sentence">covEATは立ち上げたばかりのサービスなので、まだまだお店の数が少ないです。<br />
-            よければあなたが行ったことのある感染対策をしているお店を教えてください！</p>
-            <button className="post_btn">教えてあげる</button>
+          <div className="title-container">
+            <p className="title_en">post</p>
+            <h2 className="title_jp">感染対策をしているお店を投稿して<br/>
+            お店を応援しませんか？</h2>
           </div>
+          <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.postText}>covEATは立ち上げたばかりのサービスなので、まだまだお店の数が少ないです。<br/>
+          よければあなたが行ったことのある感染対策をしているお店を教えてください！</Text>
+          <Button theme={[ButtonThemes.LP]} propStyle={propStyle.postButton}>教えてあげる</Button>
+          <p className="post_img-wrapper">
+            <img className="post_img" src="/post-shop.png" alt=""/>
+          </p>
         </section>
-        <footer className="footer-contaienr">
-          <ul className="footer-list">
-            <li className="footer-option">プライバシー ポリシー</li>
-            <li className="footer-option">コンタクト</li>
-            <li className="footer-option">サービスページ</li>
+        <footer className="footer_contaienr">
+          <ul className="footer_list">
+            <li className="footer_option">プライバシー ポリシー</li>
+            <li className="footer_option">コンタクト</li>
+            <li className="footer_option">サービスページ</li>
           </ul>
-          <small>＆copy; 2020 covEAT</small>
+          <small className="footer_copyright">&copy; 2020 covEAT</small>
         </footer>
       </div>
       <style jsx>{`
@@ -350,7 +358,7 @@ const greeting: React.FC = (props: any) => {
         .header_caption-bubble{
           background-image: url("/header-bubble.svg"); 
           background-size: contain;
-          bckground-position: center;
+          background-position: center;
           background-repeat: no-repeat;
           width: 96px;
           height: 48px;
@@ -467,6 +475,7 @@ const greeting: React.FC = (props: any) => {
         .title_jp{
           font-weight: bold;
           font-size: 18px;
+          line-height: 1.6em;
           color: ${CommonStyle.TextBlack};
           text-align: center;
         }
@@ -522,6 +531,7 @@ const greeting: React.FC = (props: any) => {
           margin-bottom: 16px;
         }
         
+        {/* about */}
         .about_worries-container{
           padding: 40px 8px;
           background-image: url("/about-bg.png");
@@ -630,6 +640,49 @@ const greeting: React.FC = (props: any) => {
           order: 1;
         }
 
+        {/* post */}
+        .post_container{
+          position: relative;
+          padding: 36px 40px 200px 40px;
+          background: ${CommonStyle.BgWhite};
+        }
+        .post_img-wrapper{
+          width: 70%;
+          height: auto;
+          position: absolute;
+          bottom: 0;
+          right: 0;
+        }
+        .post_img{
+          width: 100%;
+          height: auto;
+        }
+
+        .footer_contaienr{
+          padding: 64px 40px 80px 40px;
+          background: #333;
+          color: ${CommonStyle.TextWhite};
+        }
+
+        .footer_list{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          background: #333;
+          font-size: ${CommonStyle.Caption};
+          font-weight: bold;
+          color: ${CommonStyle.TextWhite};
+          margin-bottom: 32px;
+        }
+        .footer_option:not(:last-child){
+          margin-bottom: 8px;
+        }
+        .footer_copyright{
+          display: block;
+          text-align: center;
+          font-weight: bold;
+          font-size: ${CommonStyle.Caption};
+        }
 
       `}</style>
     </HomeLayout>
