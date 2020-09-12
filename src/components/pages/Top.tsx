@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 // library
 import axios from "axios";
-import { Search } from 'react-feather';
+import { Search, X } from 'react-feather';
 import queryString from 'query-string';
 // common
 import CommonStyle from './../../common/CommonStyle';
@@ -39,8 +39,6 @@ const propStyle = {
     borderRadius: '18px',
     boxSizing: 'border-box',
     backgroundColor: CommonStyle.AccentColor,
-  },
-  refinementStation: {
   },
   researchBtn: {
     position: 'fixed',
@@ -85,8 +83,7 @@ const propStyle = {
   },
   inputStyle: {
     backgroundColor: 'white',
-  },
-  
+  }
 };
 
 const Top: React.FC = (props: any) => {
@@ -362,9 +359,22 @@ const Top: React.FC = (props: any) => {
               placeholder="駅名で検索"
               content={searchString}
               handleChange={(e: any) => setSearchString(e.target.value)}
-              propStyle={{...propStyle.refinement, ...propStyle.refinementStation}}
+              propStyle={propStyle.refinement}
               icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
             />
+            {searchString.length !== 0 && 
+              <X size={24} 
+                color={CommonStyle.BorderGray} 
+                style={{position: 'absolute',
+                  top: '4px',
+                  right: '4px',
+                }}
+                onClick={() => {
+                  setSearchString('');
+                  setStations([]);
+                }}
+              />
+            }
           </div>
           <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
             <img className="genre-search_icon" src="narrow-down.svg" alt="ジャンルで絞り込む"/>
@@ -438,6 +448,7 @@ const Top: React.FC = (props: any) => {
             z-index: 400;
           }
           .station-search{
+            position: relative;
             margin-right: 8px;
             width: calc(100% - 98px);
             max-width: 20em;
