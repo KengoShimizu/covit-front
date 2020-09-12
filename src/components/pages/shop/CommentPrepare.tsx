@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 // library
-import { Search } from 'react-feather';
+import { Search, X } from 'react-feather';
 import axios from 'axios';
 // components
+import Modal from '../../molecules/Modal/Modal';
 import HomeLayout from '../../templates/HomeLayout';
 import HistoryCardList from '../../organisms/CardList/HistoryCardList';
 import ShopCardList from '../../organisms/CardList/ShopCardList';
 import Input from '../../atoms/Input';
 import Loading from '../../molecules/Loading';
 // common
+import CommonStyle from './../../../common/CommonStyle';
 import { RequestTextSection } from '../../molecules/RequestTextSection';
 import FooterActionBar from '../../organisms/FooterActionBar';
 // types
 import Shop from '../../../types/Shop';
+// context
+import ModalContext from '../../../context/ModalContext';
+import { RouteName } from '../../../common/Const';
 
 interface SearchParam {
   name: string;
@@ -22,8 +27,15 @@ interface SearchParam {
 const CommentPrepare: React.FC = (props: any) => {
   const [shops, setShops] = useState<Shop[]>([]);
   const [loading, setLoading] = useState(false);
+  const modalContext = useContext(ModalContext);
   const [searchData, setSearchData] = useState<SearchParam>({
     name: '',
+  });
+  const [modalState, setModalState] = useState({
+    title: '',
+    subtitle: '',
+    btntext: '',
+    onClick: () => { },
   });
 
   const handleChange = (event: any) => {
@@ -34,12 +46,27 @@ const CommentPrepare: React.FC = (props: any) => {
   }
 
   const fetchShopsData = async () => {
-    setLoading(true);
-    await axios
-      .get(`/api/v1/user/shops?name=${searchData.name}`)
-      .then(result => setShops(result.data.data))
-      .catch(error => console.log(error))
-      .finally(() => setLoading(false));
+    if(searchData.name !== '') {
+      setLoading(true);
+      await axios
+        .get(`/api/v1/user/shops?name=${searchData.name}`)
+        .then(result => {
+          if(result.data.data.length === 0){
+            setModalState({
+              title: '検索したお店は\n現在登録されておりません。',
+              subtitle: 'お店リクエスト機能を使って\nお店を登録しましょう！',
+              btntext: 'リクエスト',
+              onClick: () => props.history.push(RouteName.USER_SHOP_FORM),
+            })
+            modalContext.toggleModalShown(true);
+          }
+          setShops(result.data.data)
+        })
+        .catch(error => console.log(error))
+        .finally(() => setLoading(false));
+    } else {
+      setShops([]);
+    }
   }
 
   const onKeyPressEnter = (event: any) => {
@@ -48,22 +75,27 @@ const CommentPrepare: React.FC = (props: any) => {
     }
   }
   
-  useEffect(() => {
-    if (searchData.name !== '') {
-      let isSubscribed = true;
-      const cleanup = () => {
-        isSubscribed = false;
-      };
-      if(isSubscribed){
-        fetchShopsData();
-      }
-      return cleanup;
-    }
-  }, [searchData.name])
+  // useEffect(() => {
+  //   if (searchData.name !== '') {
+  //     let isSubscribed = true;
+  //     const cleanup = () => {
+  //       isSubscribed = false;
+  //     };
+  //     if(isSubscribed){
+  //       fetchShopsData();
+  //     }
+  //     return cleanup;
+  //   }
+  // }, [searchData.name])
 
   return (
     <HomeLayout headerText='お店のレビューを登録する' prevRef='/'>
-      <div onKeyPress={onKeyPressEnter}>
+      <Modal
+        title={modalState.title}
+        subtitle={modalState.subtitle}
+        btntext={modalState.btntext}
+        onClick={modalState.onClick}/>
+      <div onKeyPress={onKeyPressEnter} style={{position: 'relative'}}>
         <Input
           handleChange={handleChange}
           name='name'
@@ -72,6 +104,20 @@ const CommentPrepare: React.FC = (props: any) => {
           icon={<Search onClick={fetchShopsData}/>}
           propStyle={{ margin: '16px auto', maxWidth: '400px', width: '90%' }}
         />
+        {searchData.name.length !== 0 && 
+          <X size={24} 
+            color={CommonStyle.BorderGray} 
+            style={{
+              position: 'absolute',
+              top: '8px',
+              right: '32px',
+            }}
+            onClick={() => {
+              setSearchData({name: ''});
+              setShops([]);
+            }}
+          />
+        }
       </div>
 
       {

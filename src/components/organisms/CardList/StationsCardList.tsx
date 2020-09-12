@@ -13,7 +13,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
 
   const handleSliderClick = (index: number, data: any, event: any) => {
     handleStationClick(data);
-    event.currentTarget.parentNode.scrollLeft = 250 * index;
+    event.currentTarget.parentNode.scrollLeft = 274 * index - 30;
   }
 
   return (
