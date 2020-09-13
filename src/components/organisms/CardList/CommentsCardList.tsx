@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 // library
 import InfiniteScroll from "react-infinite-scroller";
 import { CircularProgress } from '@material-ui/core';
-import { Smile, Frown } from 'react-feather';
+import { Smile } from 'react-feather';
 import useReactRouter from "use-react-router";
 import axios from 'axios';
 // common
@@ -46,16 +46,16 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   const { authState } = useContext(AuthContext);
   const isShopPage = match.path.match(/shops/g);
   const isCurrentUser = match.path.match(/accounts/g);
-  const [state, setState] = useState('good');
+  const [state, setState] = useState('all');
   const [showLoader, setShowLoader] = useState(false);
+  const [allReputations, setAllReputations] = useState([]);
   const [goodReputations, setGoodReputations] = useState([]);
-  const [badReputations, setBadReputations] = useState([]);
-  const [pagenationForGood, setPagenationForGood] = useState({
+  const [pagenationForAll, setPagenationForAll] = useState({
     total: 0,
     perPage: 10,
     currentPage: 1
   });
-  const [pagenationForBad, setPagenationForBad] = useState({
+  const [pagenationForGood, setPagenationForGood] = useState({
     total: 0,
     perPage: 10,
     currentPage: 1
@@ -65,6 +65,38 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
     btntext: '',
     onClick: () => { }
   });
+
+  const fetchAllData = async (isSubscribed: boolean) => {
+    try {
+      const res = await axios.get(`/api/v1/user/comments?page=${1}&limit=${10}&${sqlQuery}`);
+      if (isSubscribed) {
+        setAllReputations(res.data.data);
+        setPagenationForAll({
+          total: res.data.meta.total,
+          perPage: res.data.meta.perPage,
+          currentPage: res.data.meta.currentPage
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const fetchMoreData = async () => {
+    setShowLoader(true);
+    let response = await axios
+      .get(`/api/v1/user/comments?page=${pagenationForAll.currentPage + 1}&limit=${pagenationForAll.perPage}&${sqlQuery}`)
+      .then(result => result.data)
+      .catch(error => console.log(error))
+      .finally(() => setShowLoader(false));
+
+    setAllReputations(allReputations.concat(response.data));
+    setPagenationForAll({
+      total: response.meta.total,
+      perPage: response.meta.perPage,
+      currentPage: response.meta.currentPage
+    });
+  }
 
   const fetchGoodData = async (isSubscribed: boolean) => {
     try {
@@ -92,38 +124,6 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
 
     setGoodReputations(goodReputations.concat(response.data));
     setPagenationForGood({
-      total: response.meta.total,
-      perPage: response.meta.perPage,
-      currentPage: response.meta.currentPage
-    });
-  }
-
-  const fetchBadData = async (isSubscribed: boolean) => {
-    try {
-      const res = await axios.get(`/api/v1/user/comments?page=${1}&limit=${10}&reputation=2&${sqlQuery}`);
-      if (isSubscribed) {
-        setBadReputations(res.data.data);
-        setPagenationForBad({
-          total: res.data.meta.total,
-          perPage: res.data.meta.perPage,
-          currentPage: res.data.meta.currentPage
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  const fetchMoreBadData = async () => {
-    setShowLoader(true);
-    let response = await axios
-      .get(`/api/v1/user/comments?page=${pagenationForBad.currentPage + 1}&limit=${pagenationForBad.perPage}&reputation=1&${sqlQuery}`)
-      .then(result => result.data)
-      .catch(error => console.log(error))
-      .finally(() => setShowLoader(false));
-
-    setBadReputations(badReputations.concat(response.data));
-    setPagenationForBad({
       total: response.meta.total,
       perPage: response.meta.perPage,
       currentPage: response.meta.currentPage
@@ -188,8 +188,8 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   useEffect(() => {
     let isSubscribed = true;
     setLoading(true);
+    fetchAllData(isSubscribed);
     fetchGoodData(isSubscribed);
-    fetchBadData(isSubscribed);
     setLoading(false);
     const cleanup = () => {
       isSubscribed = false;
@@ -224,31 +224,28 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             btntext={modalState.btntext}
             onClick={modalState.onClick} />
           <div className="review-switch_container">
+            <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'all' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('all')}>
+              <p className="review-switch_num">コメント一覧</p>
+            </div>
             <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'good' ? "#ED753A" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('good')}>
               <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
                 <Smile className="review-icon_unselected" size={24} color="#ED753A" />
               </Icon>
-              <p className="review-switch_num" style={{ color: "#ED753A" }}>{pagenationForGood.total}</p>
-            </div>
-            <div className="review-switch" style={{ borderBottom: "solid", borderBottomColor: state === 'bad' ? "#3A8CED" : "#B6B2AA", borderBottomWidth: "4px" }} onClick={() => setState('bad')}>
-              <Icon theme={[IconThemes.NORMAL]} propStyle={propStyle.reviewIcon}>
-                <Frown className="review-icon_unselected" size={24} color="#3A8CED" />
-              </Icon>
-              <p className="review-switch_num" style={{ color: "#3A8CED" }}>{pagenationForBad.total}</p>
+              <p className="review-switch_num" style={{ color: "#ED753A" }}>最高！評価のコメント</p>
             </div>
           </div>
           <InfiniteScroll
             element='ol'
             className="review-list"
             pageStart={1}
-            hasMore={!showLoader && (state === 'good' ? pagenationForGood.total > goodReputations.length : pagenationForBad.total > badReputations.length)}
-            loadMore={state === 'good' ? fetchMoreGoodData : fetchMoreBadData}
+            hasMore={!showLoader && (state === 'all' ? pagenationForAll.total > allReputations.length : pagenationForGood.total > goodReputations.length)}
+            loadMore={state === 'all' ? fetchMoreData : fetchMoreGoodData}
             initialLoad={false}
             style={isShopPage ? propStyle.isShopPage : isCurrentUser ? propStyle.isUserPage : { padding: '162px 0 1px', backgroundColor: CommonStyle.BgGray,}}
           >
             {
-              (state === 'good' ? goodReputations : badReputations).map((comment: any) => {
-                const icon = state === 'good' ? 'smile' : 'frown';
+              (state === 'all' ? allReputations : goodReputations).map((comment: any) => {
+                const icon = comment.reputation === 1 ? 'smile' : '';
                 return (
                   isShopPage ?
                     <ShopCommentCard comment={comment} clickReport={clickReport} clickDelete={clickDelete} key={comment.id} deletedId={deletedId} />
