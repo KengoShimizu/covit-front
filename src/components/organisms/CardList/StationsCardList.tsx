@@ -8,12 +8,13 @@ interface StationsCardListProps {
   stations: any;
   handleStationClick: any;
   selected: number;
+  isSliderAppear: boolean;
 }
 
-const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleStationClick, selected }) => {
+const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleStationClick, selected, isSliderAppear }) => {
 
   return (
-    <ul className="stations-card_list" id="station-slider">
+    <ul className={`stations-card_list ${!isSliderAppear && 'disable'}`} id="station-slider">
       {stations.map((data: any, i: number) =>
         <React.Fragment key={`station-card${i}`}>
           <div style={{minWidth: '24px'}}></div>
@@ -48,6 +49,10 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
           bottom: 24px;
           -ms-overflow-style: none; /* IE, Edge 対応 */
           scrollbar-width: none; /* Firefox 対応 */
+          transition-duration: .5s;
+        }
+        .disable{
+          bottom: -300px;
         }
         .stations-card_list::-webkit-scrollbar { /* Chrome, Safari 対応 */
           display:none;

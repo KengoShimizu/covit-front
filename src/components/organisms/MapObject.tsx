@@ -26,6 +26,7 @@ interface MapPopupProps {
   fetchCoordinationsData: any;
   selectedGenre: any;
   handleStationClick: any;
+  setIsSliderAppear: any;
 }
 
 
@@ -129,6 +130,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
         }}
         onClick={() => {
           setPopupIsOpen(false);
+          props.setIsSliderAppear(false);
           props.setPopupIsOpen(false);
         }}>
         <TileLayer

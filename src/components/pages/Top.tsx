@@ -108,6 +108,7 @@ const Top: React.FC = (props: any) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   // station search
+  const [isSliderAppear, setIsSliderAppear] = useState(false);
   const [selected, setSelected] = useState(0);
   const [searchString, setSearchString] = useState<string>('')
   const [stations, setStations] = useState<Station[]>([]);
@@ -131,6 +132,7 @@ const Top: React.FC = (props: any) => {
   }
 
   const handleStationClick = (data: any) => {
+    setIsSliderAppear(true);
     const slider = document.getElementById('station-slider');
     setSelected(data.index);
     if(slider) slider.scrollLeft = 274 * data.index - 30;
@@ -184,6 +186,7 @@ const Top: React.FC = (props: any) => {
             data.index = i;
             return data
           })
+          setIsSliderAppear(true);
           setStations(result);
         } else {
           setModalState({
@@ -358,6 +361,7 @@ const Top: React.FC = (props: any) => {
           fetchCoordinationsData={fetchCoordinationsData}
           selectedGenre={selectedGenre}
           handleStationClick={handleStationClick}
+          setIsSliderAppear={setIsSliderAppear}
         />
 
         <div className="search-header">
@@ -400,6 +404,7 @@ const Top: React.FC = (props: any) => {
           selected={selected}
           stations={stations}
           handleStationClick={handleStationClick}
+          isSliderAppear={isSliderAppear}
         />}
 
         {initModalIsOpen && 
