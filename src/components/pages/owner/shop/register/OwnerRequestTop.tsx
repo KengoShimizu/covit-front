@@ -21,7 +21,7 @@ const OwnerRequestTop: React.FC = (props: any) => {
     <HomeLayout headerText="お店の追加" prevRef={RouteName.ROOT} title='covEAT/こびイート | 店舗の感染症対策情報リクエストページ'>
       <div className="container">
         <div className="img-container">
-          <img className="image" src='/register_top.png' /> 
+          <img className="image" src='/charactor.png' /> 
         </div>
         <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{marginBottom: '32px'}}>Coveatをご覧いただきありがとうございます。</Text>
         <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{marginBottom: '32px'}}>Coveatは感染対策に取り組む飲食店と感染対策を求めているお客様の出会いをお手伝いするためのグルメサービスです。</Text>
@@ -44,7 +44,8 @@ const OwnerRequestTop: React.FC = (props: any) => {
           }
 
           .img-container {
-            margin: 32px 0;
+            margin: 32px auto;
+            width: 160px;
           }
 
           .img-container img.image {
