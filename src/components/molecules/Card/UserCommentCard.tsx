@@ -50,7 +50,6 @@ const UserCommentCard: React.FC<CardProps> = ({ icon, comment, isCurrentUser, on
           <Link to={nextRef}>
             <div className="card_content-head">
               {icon === 'smile' && <Smile size={24} color="#ED753A" style={propStyle.headIcon} />}
-              {icon === 'frown' && <Frown size={24} color="#3A8CED" style={propStyle.headIcon} />}
               <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.headText}>{comment.shop.name}</Text>
             </div>
             <div className="card_date">
