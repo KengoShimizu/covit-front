@@ -7,7 +7,7 @@ import Modal from '../../molecules/Modal/Modal';
 import HomeLayout from '../../templates/HomeLayout';
 import HistoryCardList from '../../organisms/CardList/HistoryCardList';
 import ShopCardList from '../../organisms/CardList/ShopCardList';
-import Input from '../../atoms/Input';
+import Input, { InputThemes } from '../../atoms/Input';
 import Loading from '../../molecules/Loading';
 // common
 import CommonStyle from './../../../common/CommonStyle';
@@ -97,12 +97,14 @@ const CommentPrepare: React.FC = (props: any) => {
         onClick={modalState.onClick}/>
       <div onKeyPress={onKeyPressEnter} style={{position: 'relative'}}>
         <Input
+          theme={[InputThemes.INIT]}
+          IconTheme={InputThemes.ICON_LEFT}
           handleChange={handleChange}
           name='name'
           placeholder='お店名で検索'
           content={searchData.name}
-          icon={<Search onClick={fetchShopsData}/>}
-          propStyle={{ margin: '16px auto', maxWidth: '400px', width: '90%' }}
+          icon={<Search onClick={fetchShopsData} size="16px" color="#8C8C8C" />}
+          propStyle={{ margin: '24px auto 24px', maxWidth: '400px', width: '90%' }}
         />
         {searchData.name.length !== 0 && 
           <X size={24} 
@@ -122,11 +124,11 @@ const CommentPrepare: React.FC = (props: any) => {
 
       {
         shops.length ?
-          loading ? <Loading /> : <ShopCardList shops={shops} />
+          loading ? <Loading /> : <ShopCardList shops={shops} type='search'/>
           :
           <React.Fragment>
             
-            <HistoryCardList maxRow={4} props={props} type='search' />
+            <HistoryCardList maxRow={4} type='search'/>
             <div className='mt10'>
               <RequestTextSection />
             </div>

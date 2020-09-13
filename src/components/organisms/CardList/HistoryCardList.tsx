@@ -21,11 +21,10 @@ const propStyle = {
 
 interface HistoryCardListProps {
   maxRow?: number;
-  props?: any;
   type?: string;
 }
 
-const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }) => {
+const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, type }) => {
   const [loading, setLoading] = useState(false);
   const histories = localStorage.getItem('histories');
   const histories_date = localStorage.getItem('histories_date');
@@ -80,7 +79,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, props, type }
               <SearchHistoryCard
                 name={shop.name}
                 browse_date={arr_date[i]}
-                nextRef={`/shops/${shop.id}/comments/new`}
+                nextRef={`/shops/${shop.id}/comments/new?from=search`}
                 key={`history${i}`} />
             )
           } else {
