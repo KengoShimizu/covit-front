@@ -12,6 +12,7 @@ import { TopModalTime } from './../../../common/Const';
 import ShopCommentCard from '../../molecules/Card/ShopCommentCard';
 import UserCommentCard from '../../molecules/Card/UserCommentCard';
 import Icon, { IconThemes } from '../../atoms/Icon';
+import Text, { TextThemes } from '../../atoms/Text';
 import Loading from '../../molecules/Loading';
 import Modal from '../../molecules/Modal/Modal';
 import TopModal from '../../molecules/Modal/TopModal';
@@ -40,6 +41,7 @@ interface CommentsCardListProps {
 const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
   const { match }: any = useReactRouter();
   const [loading, setLoading] = useState(true);
+  const [isFetched, setisFetched] = useState(false);
   const [deletedId, setDeletedId] = useState(0);
   const topModalContext = useContext(TopModalContext);
   const modalContext = useContext(ModalContext);
@@ -76,6 +78,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
           perPage: res.data.meta.perPage,
           currentPage: res.data.meta.currentPage
         });
+        setisFetched(true)
       }
     } catch (error) {
       console.log(error);
@@ -108,6 +111,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
           perPage: res.data.meta.perPage,
           currentPage: res.data.meta.currentPage
         });
+        setisFetched(true)
       }
     } catch (error) {
       console.log(error);
@@ -253,6 +257,9 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
                     <UserCommentCard icon={icon} comment={comment} key={comment.id} isCurrentUser={isCurrentUser} onClick={clickDelete} deletedId={deletedId} nextRef={isCurrentUser ? `/shops/${comment.shop_id}?from=accounts` : '#'}/>
                 );
               })
+            }
+            {isFetched && (state === 'all' ? allReputations : goodReputations).length === 0 &&
+              <Text theme={[TextThemes.CAPTION]} propStyle={{ paddingTop: "24px", textAlign: 'center' }}>まだコメントがありません。</Text>
             }
           </InfiniteScroll>
           {showLoader &&
