@@ -192,7 +192,7 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >ユーザーがあなたのお店について知れるように、お店の情報の登録をお願いしています！</Text> 
           : 
           <React.Fragment>
-            <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >感染対策をしているお店の推薦していただくとお店の情報が追加されるかもしれません！</Text> 
+            <Text theme={[TextThemes.SUBTITLE, TextThemes.LEFT]} propStyle={{ marginBottom: '32px' }} >感染対策をしているお店の推薦していただくと、お店の情報が追加されるかもしれません！</Text> 
             <div style={{display: 'flex'}}>
               <div style={{color: CommonStyle.TextDarkGary}}>※</div>
               <Text theme={[TextThemes.CAPTION, TextThemes.SMALL]} propStyle={{ marginBottom: '32px', color: CommonStyle.TextDarkGary }} >感染対策の内容についてチェックを行うため、登録はリクエストの許可制となっております。</Text> 
@@ -208,7 +208,9 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       }
       <div className="hr"></div>
       {/* ジャンル系 */}
-      <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id} labelColor={{color: CommonStyle.TextBlack}}/>
+      <div className="zenre_container">
+        <Select theme={SelectThemes.REQUIRED} handleChange={handleGenreChange} label='お店のジャンル' defaultLabel="お店のジャンルを選択してください" items={genres} name="genre_id" defaultValue={addData.genre_id} labelColor={{color: CommonStyle.TextBlack}}/>
+      </div>
       {setPage ?
         !isOwnerPage &&
           <React.Fragment>
@@ -255,9 +257,11 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
             defaultValue={addData.shop.price_night} />
         </div>
       </div>
-      <label>ヘッダー画像</label>
-      <div className="shop-img_wrapper">
-        <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
+      <div className="shop-img_container">
+        <label>ヘッダー画像</label>
+        <div className="shop-img_wrapper">
+          <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
+        </div>
       </div>
       {/* 一般ユーザーには画像を投稿させない */}
       {
@@ -284,12 +288,20 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           font-size: ${CommonStyle.Caption};
           display: block;
         }
+        .zenre_container{
+          margin: 0 auto ${CommonStyle.FormMargin} auto;
+          max-width: 400px;
+        }
         .price_container{
-          margin-bottom: 24px;
-          margin-top: 24px;
+          margin: ${CommonStyle.FormMargin} auto;
+          max-width: 400px;
         }
         .price_select-container{
           margin-bottom: 16px;
+        }
+        .shop-img_container{
+          margin: 0 auto ${CommonStyle.FormMargin} auto;
+          max-width: 400px;
         }
         .shop-img_wrapper{
           width: 320px;

@@ -13,6 +13,7 @@ import Loading from '../../molecules/Loading';
 import StepCategory from '../../../types/StepCategory';
 // common
 import Validate from '../../../common/Validate';
+import CommonStyle from '../../../common/CommonStyle';
 
 interface InfectionControlProps {
   setPage?: any;
@@ -105,6 +106,15 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
             次へ <ArrowRight />
           </Button>
       }
+      <style jsx>
+        {`
+          .container{
+            margin: 0 auto ${CommonStyle.FormMargin} auto;
+            max-width: 400px;
+          }
+        `}
+      </style>
     </div>
+    
   );
 }

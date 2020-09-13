@@ -124,7 +124,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
         {`
           .container {
             width: 100%;
-            max-width: 330px;
+            max-width: 600px;
             margin: 90px auto 30px;
           }
         `}

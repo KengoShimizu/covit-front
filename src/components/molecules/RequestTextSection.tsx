@@ -29,7 +29,7 @@ export const RequestTextSection: React.FC = () => {
           padding: 24px 0 0 0;
           border-radius: 12px;
           min-height: 230px;
-          max-width: 330px;
+          max-width: 400px;
           width: 90%;
           margin: 0 auto;
           overflow: hidden;

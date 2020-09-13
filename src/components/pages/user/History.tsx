@@ -5,6 +5,7 @@ import queryString from 'query-string';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { RouteName, RedirectFrom } from '../../../common/Const';
+import FooterActionBar from '../../organisms/FooterActionBar';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import HistoryCardList from '../../organisms/CardList/HistoryCardList';
@@ -55,6 +56,7 @@ const History: React.FC = (props: any) => {
           </Button>
         </div>
         <HistoryCardList />
+        <FooterActionBar initialAccent={3} />
         <style jsx>{`
           .container{
             width: 100%;

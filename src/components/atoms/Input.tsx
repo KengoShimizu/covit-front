@@ -85,7 +85,7 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
             text-align: left;
             margin-bottom: 4px;
             color: ${CommonStyle.TextDarkGary};
-            display: inline-block;
+            display: block;
           }
           .require-icon {
             display: none;
@@ -104,6 +104,7 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
             border-radius: 4px;
             padding: 6px 8px;
             width: 100%;
+            font-size: 16x;
             line-height: 1em;
           }
 
@@ -145,7 +146,7 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
 
           {/* フォーム */}
           .regist_form-container{
-            margin-bottom: 24px;
+            margin: 0 auto 24px auto;
             line-height: 24px;
           }
 

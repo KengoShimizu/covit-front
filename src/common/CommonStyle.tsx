@@ -25,6 +25,7 @@
   FacebookColor: '#425994',
   // margin
   MarginLP: '64px',
+  FormMargin: '36px',
   
 };
 

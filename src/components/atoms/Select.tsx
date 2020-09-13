@@ -63,7 +63,7 @@ const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = 
             font-size: 14px;
             line-height: 24px;
             color: ${CommonStyle.TextDarkGary};
-            display: inline-block;
+            display: block;
             margin-bottom: 8px;
           }
           .selectbox{
