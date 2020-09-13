@@ -262,11 +262,11 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
         <div className="shop-img_wrapper">
           <img className="shop-img" src={addData.shop.image ? addData.shop.image : "/charactor.png"} alt="shop header" />
         </div>
+        {/* 一般ユーザーには画像を投稿させない */}
+        {
+          isOwnerPage ?  <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} /> : <React.Fragment />
+        }
       </div>
-      {/* 一般ユーザーには画像を投稿させない */}
-      {
-        isOwnerPage ?  <InputFile theme={InputFileThemes.INIT} label="画像をアップロードする" handleChange={handleImageChange} /> : <React.Fragment />
-      }
       <div className="hr"></div>
       {/* リンク系 */}
       <ShopLinkForm handleLinkChange={handleLinkChange} links={links} />
@@ -287,6 +287,11 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
           margin-bottom: 8px;
           font-size: ${CommonStyle.Caption};
           display: block;
+        }
+        .container{
+          max-width: 600px;
+          margin: 0 auto;
+          width: 90%;
         }
         .zenre_container{
           margin: 0 auto ${CommonStyle.FormMargin} auto;
