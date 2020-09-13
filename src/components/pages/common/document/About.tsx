@@ -242,7 +242,7 @@ const Greeting: React.FC = (props: any) => {
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.answerComment}>そこでcovEATではユーザーがお店の感染対策を評価できるようになっています！</Text>
                   <ul className="about_comment-list">
                     <li className="about_comment-option">
-                      <Text theme={[TextThemes.LPTEXT]}>感染対策に対するユーザーの2段階評価</Text>
+                      <Text theme={[TextThemes.LPTEXT]}>感染対策に対するユーザーの「最高！」の評価</Text>
                     </li>
                     <li className="about_comment-option">
                       <Text theme={[TextThemes.LPTEXT]}>感染対策へのコメント</Text>

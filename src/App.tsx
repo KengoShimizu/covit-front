@@ -87,7 +87,7 @@ function App() {
                     <UserRoute exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
                     <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
                     <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
-                    <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} />
+                    {/* <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} /> */}
                     <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
                     <UserRoute exact path={RouteName.HISTORY} component={History} />
                     <OwnerRoute exact path={RouteName.OWNER_SHOP_FORM} component={OwnerShopForm} />
