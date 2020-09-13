@@ -13,6 +13,7 @@ import HomeLayout from '../../templates/HomeLayout';
 import InfectionControlList from '../../organisms/InfectionControlList';
 import Loading from '../../molecules/Loading';
 import Button, { ButtonThemes } from '../../atoms/Button';
+import Text, { TextThemes } from '../../atoms/Text';
 import Select from './../../atoms/Select'
 // context
 import TopModalContext from '../../../context/TopModalContext';
@@ -131,6 +132,7 @@ const CreateComment: React.FC = (props: any) => {
             <div className="review-form">
               <ul>
                 <li className="review-form_switch_container">
+                  <Text theme={[TextThemes.CAPTION]} propStyle={{textAlign: 'center', marginBottom: '16px'}}>感染対策に満足した場合に、選択してください。</Text>
                   <ul className="review-form_switch">
                     <li className="review-form_switch-option">
                       <label className="review-form_switch-label" htmlFor="">
