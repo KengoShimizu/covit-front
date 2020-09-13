@@ -8,11 +8,13 @@ import Shop from '../../../types/Shop';
 
 interface ShopCardProps {
   shop: Shop;
+  type?: string;
 }
 
-const ShopCard: React.FC<ShopCardProps> = ({ shop }) => {
+const ShopCard: React.FC<ShopCardProps> = ({ shop, type }) => {
+  const uri = type === 'search' ? '?from=search' : '';
   return (
-    <Link to={`/shops/${shop.id}/comments/new`}>
+    <Link to={`/shops/${shop.id}/comments/new${uri}`}>
       <li className="shop-card">
         <div className="shop-card_content">
           <h2 className="shop-card_name">{shop.name}</h2>

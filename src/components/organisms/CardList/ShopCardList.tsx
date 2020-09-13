@@ -8,16 +8,17 @@ import Shop from '../../../types/Shop';
 
 interface ShopCardListProps {
   shops: Shop[];
+  type?: string;
 }
 
-const ShopCardList: React.FC<ShopCardListProps> = ({ shops }) => {
+const ShopCardList: React.FC<ShopCardListProps> = ({ shops, type }) => {
 
   return (
       <div className="container">
         <ol className="card-list">
           {shops.map((shop: Shop, index: number) => {
             return (
-              <ShopCard key={`shop_card${index}`} shop={shop} />
+              <ShopCard key={`shop_card${index}`} shop={shop} type={type}/>
             )
           })}
         </ol>

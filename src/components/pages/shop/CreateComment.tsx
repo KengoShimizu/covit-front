@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 // library
+import queryString from 'query-string';
 import useReactRouter from "use-react-router";
 import axios from 'axios';
-import { Smile, Frown } from 'react-feather';
+import { Smile } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { Comment, RouteName, VisitMonthArray } from '../../../common/Const';
@@ -15,6 +16,7 @@ import Button, { ButtonThemes } from '../../atoms/Button';
 import Select from './../../atoms/Select'
 // context
 import TopModalContext from '../../../context/TopModalContext';
+import { Route } from 'react-router-dom';
 
 const propStyle = {
   formBtn: {
@@ -32,6 +34,7 @@ interface AddParam {
 
 // レビュー記入
 const CreateComment: React.FC = (props: any) => {
+  const qs = queryString.parse(props.location.search);
   const [loading, setLoading] = useState(true);
   const [isOK, setIsOK] = useState(false);
   const topModalContext = useContext(TopModalContext);
@@ -116,7 +119,7 @@ const CreateComment: React.FC = (props: any) => {
   }, [addData])
 
   return (
-    <HomeLayout headerText={'感染対策レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
+    <HomeLayout headerText={'感染対策レビュー記入'} prevRef={qs.from === 'search' ? RouteName.SHOP_SEARCH_FOR_COMMENTS :`/shops/${match.params.id}`}>
       {loading ? <Loading/> :
         <div className='container'>
           <div className="content">
