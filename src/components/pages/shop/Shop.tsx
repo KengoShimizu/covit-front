@@ -278,6 +278,9 @@ const Shop: React.FC = (props: any) => {
               </div>
               <FooterActionBar initialAccent={0} />
               <style jsx>{`
+                .content{
+                  margin-bottom: 100px;
+                }
                 .shop-card_section{
                   padding: 24px 16px;
                 }

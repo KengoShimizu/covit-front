@@ -9,6 +9,7 @@ import PrivacyFotter from './../molecules/Footer/PrivacyFotter';
 import HomeLayout from './../templates/HomeLayout';
 import RegisterCardList from './../organisms/CardList/RegisterCardList';
 import AccountTopCard from './../molecules/Card/AccoutTopCard';
+// import Nend from './../common/Nend';
 
 const Menu: React.FC = (props: any) => {
   return (
@@ -19,6 +20,7 @@ const Menu: React.FC = (props: any) => {
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら' nextRef={RouteName.REQUEST_TOP}/>
       </div>
       <PrivacyFotter/>
+      {/* <Nend media={65737} site={342425} spot={1014046} type={2} oriented={1} id={'menu'}/> */}
       <style jsx>{`
         .about{
           width: 90%;

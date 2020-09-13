@@ -262,6 +262,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
               <Text theme={[TextThemes.CAPTION]} propStyle={{ paddingTop: "24px", textAlign: 'center' }}>まだコメントがありません。</Text>
             }
           </InfiniteScroll>
+          <div style={{height: '120px'}}/>
           {showLoader &&
             <div style={{ textAlign: "center", paddingBottom: "10px" }}>
               <CircularProgress style={{ margin: "24px auto" }} />

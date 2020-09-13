@@ -62,7 +62,7 @@ const History: React.FC = (props: any) => {
             width: 100%;
             min-height: calc(100vh - 40px);
             background-color: ${CommonStyle.BgGray};
-            padding-top: 8px;
+            padding: 8px 0 100px;
           }
           .delete-btn-container{
             max-width: 700px;
