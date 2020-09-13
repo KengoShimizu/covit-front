@@ -156,7 +156,7 @@ const OwnerShopForm: React.FC = (props: any) => {
         {`
           .container {
             width: 100%;
-            max-width: 330px;
+            max-width: 600px;
             margin: 30px auto 0;
           }
         `}

@@ -56,6 +56,7 @@ const FotterActionItem: React.FC<FotterActionItemProps> = ({ svg, svgSize, svgSi
         .footer-action-bar_icon._clicked{
           stroke: #DF6059;
         }
+        
         .footer-action-bar_caption._clicked{
           color: #DF6059;
         }

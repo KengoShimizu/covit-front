@@ -122,7 +122,7 @@ const OwnerShopInfoEdit: React.FC = (props: any) => {
       <style jsx>{`
         .container {
           width: 100%;
-          max-width: 330px;
+          max-width: 600px;
           margin: 90px auto 30px;
         }
       `}</style>

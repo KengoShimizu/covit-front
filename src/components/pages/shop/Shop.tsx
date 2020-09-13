@@ -8,6 +8,7 @@ import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monito
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { RedirectFrom, RouteName, OwnerType, PriceArray } from '../../../common/Const';
+import FooterActionBar from '../../organisms/FooterActionBar';
 // components
 import HomeLayout from '../../templates/HomeLayout';
 import Text, { TextThemes } from '../../atoms/Text';
@@ -275,6 +276,7 @@ const Shop: React.FC = (props: any) => {
                 </div> */}
                 {/* ここまで */}
               </div>
+              <FooterActionBar initialAccent={0} />
               <style jsx>{`
                 .shop-card_section{
                   padding: 24px 16px;

@@ -48,7 +48,7 @@ const propStyle = {
     WebkitTransform: 'translateX(-50%)',
     height: '36px',
     width: '176px',
-    padding: '8px 20px',
+    padding: '8px 12px',
     background: CommonStyle.BgWhite,
     border: `1.5px solid ${CommonStyle.BorderGray}`,
     boxSizing: 'border-box',
@@ -60,7 +60,7 @@ const propStyle = {
     zIndex: 1000,
   },
   reloadIcon: {
-    marginRight: '4px',
+    marginRight: '6px',
   },
   currentPlaceBtn: {
     position: 'fixed',
@@ -446,7 +446,7 @@ const Top: React.FC = (props: any) => {
         <IntroModal initModalIsOpen={initModalIsOpen} handleInitModal={handleInitModal}/>
 
         {/* フッター操作バー */}
-        {initModalIsOpen && !popupIsOpen && stations.length === 0 && <FooterActionBar initialAccent={1}/>}
+        {initModalIsOpen && !popupIsOpen && !isSliderAppear && <FooterActionBar initialAccent={1}/>}
         
         <style jsx>{`
           .container{

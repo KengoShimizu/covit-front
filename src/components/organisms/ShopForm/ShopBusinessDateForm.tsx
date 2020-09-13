@@ -157,13 +157,14 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
       }
       <style jsx>{`
         .container{
-          margin-bottom: 24px;
+          margin: 0 auto ${CommonStyle.FormMargin} auto;
+          max-width: 400px;
         }
         .business-date_label{
           font-size: ${CommonStyle.Caption};
           font-weight: bold;
           display: block;
-          margin-bottom: 4px;
+          margin-bottom: 8px;
         }
         .business-date_input-wrapper{
           display: flex;

@@ -134,7 +134,7 @@ const CommentPrepare: React.FC = (props: any) => {
             </div>
           </React.Fragment>
       }
-      <FooterActionBar initialAccent={2} propStyle={{ boxShadow: "0px 0px 5px rgba(0, 0, 0, 0.25)" }} />
+      <FooterActionBar initialAccent={2} />
       <style jsx>{`
         .mt10{
           margin: 44px 0 130px;
