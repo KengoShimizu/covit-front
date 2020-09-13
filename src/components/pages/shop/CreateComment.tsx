@@ -38,8 +38,8 @@ const CreateComment: React.FC = (props: any) => {
   const { match }: any = useReactRouter();
   const [addData, setAddData] = useState<AddParam>({
     content: "",
-    shop_id: match.params.id,
-    reputation: 0,
+    shop_id: Number(match.params.id),
+    reputation: Comment.REPUTATION_BAD,
     date: ""
   });
   const [shopData, setShopData] = useState({
@@ -86,7 +86,7 @@ const CreateComment: React.FC = (props: any) => {
   const handleChange = (event: any) => {
     setAddData({
       ...addData,
-      [event.target.name]: event.target.value
+      [event.target.name]: ["reputation"].includes(event.target.name) ? Number(event.target.value) : event.target.value
     });
   }
 
@@ -132,16 +132,9 @@ const CreateComment: React.FC = (props: any) => {
                     <li className="review-form_switch-option">
                       <label className="review-form_switch-label" htmlFor="">
                         <Smile size={24} color="#ED753A" />
-                        <p className="review-form_switch-label_text">よかった</p>
+                        <p className="review-form_switch-label_text">最高！</p>
                       </label>
-                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_GOOD} />
-                    </li>
-                    <li className="review-form_switch-option">
-                      <label className="review-form_switch-label" htmlFor="">
-                        <Frown size={24} color="#3A8CED" />
-                        <p className="review-form_switch-label_text">いまいち</p>
-                      </label>
-                      <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_BAD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_BAD} />
+                      <input className="review-form_switch-input" type="radio" name="reputation" value={addData.reputation === Comment.REPUTATION_GOOD ? Comment.REPUTATION_BAD : Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation === Comment.REPUTATION_GOOD} />
                     </li>
                   </ul>
                 </li>
