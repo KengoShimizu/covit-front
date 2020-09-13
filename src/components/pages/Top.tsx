@@ -108,6 +108,7 @@ const Top: React.FC = (props: any) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [genreSerchIsOpen, setGenreSerchIsOpen] = useState(false);
   // station search
+  const [selected, setSelected] = useState(0);
   const [searchString, setSearchString] = useState<string>('')
   const [stations, setStations] = useState<Station[]>([]);
   // loading
@@ -130,6 +131,9 @@ const Top: React.FC = (props: any) => {
   }
 
   const handleStationClick = (data: any) => {
+    const slider = document.getElementById('station-slider');
+    setSelected(data.index);
+    if(slider) slider.scrollLeft = 274 * data.index - 30;
     fetchCoordinationsData(selectedGenre, data.y, data.x)
     setLastLat(data.y);
     setLastLng(data.x);
@@ -176,6 +180,10 @@ const Top: React.FC = (props: any) => {
                 return 1;
             }
           });
+          result = result.map((data: any, i: number) => {
+            data.index = i;
+            return data
+          })
           setStations(result);
         } else {
           setModalState({
@@ -389,6 +397,7 @@ const Top: React.FC = (props: any) => {
 
         {stations && 
         <StationsCardList
+          selected={selected}
           stations={stations}
           handleStationClick={handleStationClick}
         />}

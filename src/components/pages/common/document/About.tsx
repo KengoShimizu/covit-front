@@ -244,6 +244,9 @@ const Greeting: React.FC = (props: any) => {
                     <li className="about_comment-option">
                       <Text theme={[TextThemes.LPTEXT]}>感染対策に対するユーザーの評価とコメント</Text>
                     </li>
+                    <li className="about_comment-option">
+                      <Text theme={[TextThemes.LPTEXT]}>高く評価された回数</Text>
+                    </li>
                   </ul>
                   <Text theme={[TextThemes.LPTEXT]}>
                     を見ることができるので安心してご利用いただけます！
