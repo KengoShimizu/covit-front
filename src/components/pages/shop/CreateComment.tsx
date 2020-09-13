@@ -116,7 +116,7 @@ const CreateComment: React.FC = (props: any) => {
   }, [addData])
 
   return (
-    <HomeLayout headerText={'レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
+    <HomeLayout headerText={'感染対策レビュー記入'} prevRef={`/shops/${match.params.id}`} history={props.history}>
       {loading ? <Loading/> :
         <div className='container'>
           <div className="content">
@@ -132,7 +132,7 @@ const CreateComment: React.FC = (props: any) => {
                     <li className="review-form_switch-option">
                       <label className="review-form_switch-label" htmlFor="">
                         <Smile size={24} color="#ED753A" />
-                        <p className="review-form_switch-label_text">バッチリ</p>
+                        <p className="review-form_switch-label_text">よかった</p>
                       </label>
                       <input className="review-form_switch-input" type="radio" name="reputation" value={Comment.REPUTATION_GOOD} onClick={handleChange} checked={addData.reputation == Comment.REPUTATION_GOOD} />
                     </li>

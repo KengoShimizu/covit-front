@@ -60,7 +60,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
         }
         .station-card{
           background: ${CommonStyle.BgWhite};
-          border: 4px solid ${CommonStyle.BadColor};
+          border: 4px solid ${CommonStyle.BorderGray};
           padding: 12px 16px;
           box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
           border-radius: 16px;
@@ -68,11 +68,17 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
           list-style: none;
           display: flex;
           align-items: flex-start;
-          margin-right: 12px;
+          margin-top: 10px;
           min-width: 200px;
+          transition-duration: .2s;
+          transition-timing-function: ease;
         }
-        .selected{
-          background: #EEFFFF;
+        .station-card.selected{
+          margin-top: 0;
+          border: 4px solid ${CommonStyle.BadColor};
+          margin-bottom: 10px;
+          transition-delay: .1s;
+          
         }
         .station-card_icon{
           margin-right: 16px;

@@ -353,36 +353,38 @@ const Top: React.FC = (props: any) => {
         />
 
         <div className="search-header">
-          <div className="station-search" onKeyPress={onKeyPressEnter}>
-            <Input
-              theme={[InputThemes.INIT]}
-              IconTheme={InputThemes.ICON_LEFT}
-              placeholder="駅名で検索"
-              content={searchString}
-              handleChange={(e: any) => setSearchString(e.target.value)}
-              propStyle={propStyle.refinement}
-              icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
-            />
-            {searchString.length !== 0 && 
-              <X size={24} 
-                color={CommonStyle.BorderGray} 
-                style={{position: 'absolute',
-                  top: '4px',
-                  right: '4px',
-                }}
-                onClick={() => {
-                  setSearchString('');
-                  setStations([]);
-                }}
+          <div className="search-header_inner">
+            <div className="station-search" onKeyPress={onKeyPressEnter}>
+              <Input
+                theme={[InputThemes.INIT]}
+                IconTheme={InputThemes.ICON_LEFT}
+                placeholder="駅名で検索"
+                content={searchString}
+                handleChange={(e: any) => setSearchString(e.target.value)}
+                propStyle={propStyle.refinement}
+                icon={<Search onClick={onSearchStations} size="16px" color="#8C8C8C" />}
               />
-            }
+              {searchString.length !== 0 && 
+                <X size={24} 
+                  color={CommonStyle.BorderGray} 
+                  style={{position: 'absolute',
+                    top: '4px',
+                    right: '4px',
+                  }}
+                  onClick={() => {
+                    setSearchString('');
+                    setStations([]);
+                  }}
+                />
+              }
+            </div>
+            <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
+              <img className="genre-search_icon" src="narrow-down.svg" alt="ジャンルで絞り込む"/>
+              <p className="genre-search_text">
+                絞り込み
+              </p>
+            </Button>
           </div>
-          <Button propStyle={{...propStyle.refinement, ...propStyle.refinementBtn}} onClick={() => setGenreSerchIsOpen(true)}>
-            <img className="genre-search_icon" src="narrow-down.svg" alt="ジャンルで絞り込む"/>
-            <p className="genre-search_text">
-              絞り込み
-            </p>
-          </Button>
         </div>
 
         {stations && 
@@ -441,12 +443,16 @@ const Top: React.FC = (props: any) => {
             height: 56px;
             box-sizing: border-box;
             padding: 12px;
-            display: flex;
             position: fixed;
             top: 0;
-            text-align: center;
             background-color: ${CommonStyle.BgWhite};
             z-index: 400;
+          }
+          .search-header_inner{
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            text-align: center;
           }
           .station-search{
             position: relative;
