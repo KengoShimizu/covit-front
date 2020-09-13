@@ -104,6 +104,7 @@ const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme
             border-radius: 4px;
             padding: 6px 8px;
             width: 100%;
+            line-height: 1em;
           }
 
           {/* アイコン */}

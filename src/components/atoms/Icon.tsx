@@ -36,7 +36,7 @@ enum ModifierClassNames {
 const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propStyle = {}, onClick}) => {
   const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
   return (
-    <span 
+    <p 
       onClick={onClick}
       className={["icon_wrapper", modifierClasses].join(' ')} style={propStyle}
       >
@@ -59,7 +59,7 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
           }
           .icon-wrapper_little{
             width: 20px;
-            height: 2px;
+            height: 20px;
           }
           .icon-wrapper_small{
             width: 16px;
@@ -103,7 +103,7 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
           }
         `}
       </style>
-    </span>
+    </p>
   );
 }
 

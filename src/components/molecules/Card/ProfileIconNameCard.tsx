@@ -32,7 +32,7 @@ const ProfileIconNameCard: React.FC<ProfileIconNameCardProps> = ({src, name, sty
           align-items: center;
           width: 100%;
           box-sizing: border-box;
-          padding: 24px 0 24px 16px;
+          margin-bottom: 16px;
           background: ${CommonStyle.BgWhite};
         }
         .account-info_profile-icon{
