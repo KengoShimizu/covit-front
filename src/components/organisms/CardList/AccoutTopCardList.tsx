@@ -173,7 +173,7 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
                 <Icon theme={[IconThemes.SMALL]} propStyle={{margin: 'auto 16px auto auto'}}>
                   <img className="sns-info-card-img" src={`/${loginWay}.png`} alt={loginWay} />
                 </Icon>
-                <Text theme={[TextThemes.CAPTION]}>
+                <Text theme={[TextThemes.CAPTION]} propStyle={{margin: 'auto'}}>
                   {loginWay.substr(0,1).toUpperCase() + loginWay.slice(1)}
                 </Text>
               </div>
