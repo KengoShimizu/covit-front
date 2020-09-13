@@ -33,7 +33,6 @@ const GuideLine: React.FC = (props: any) => {
           </h2>
           <Text theme={[TextThemes.TEXT]} propStyle={propStyle.privacy}>
             covEATは感染対策をしているお店を他のユーザー様におすすめするためのサービスです。実際にご飲食されたのお店の感染対策の感想を、他のユーザー様にもわかりやすい内容で投稿してください。
-            また、
           </Text>
           <ul className="privacy-list">
             <li className="privacy-option">
@@ -52,17 +51,17 @@ const GuideLine: React.FC = (props: any) => {
         </section>
         <section className="privacy-section">
           <h2 className="privacy-title">
-            お店に悪影響を与える可能性があり、かつ事実の確認が難しいコメントはご遠慮ください
+            お店に悪影響を与える可能性があり、かつ事実の確認が難しいコメントはご遠慮ください。
           </h2>
           <Text theme={[TextThemes.TEXT]} propStyle={propStyle.privacy}>
             covEATでは投稿された内容の事実確認を行っておりません。
             お店へ悪影響を与える可能性があり、かつ事実の確認が難しいコメントの投稿はご遠慮下さい。
-            なお、店舗の関係者や他のユーザー様から事実誤認である報告があった場合には当該評価・コメント除する場合がございます。
+            なお、店舗の関係者や他のユーザー様から事実誤認である報告があった場合には当該評価・コメントを削除する場合がございます。
           </Text>
         </section>
         <section className="privacy-section">
           <h2 className="privacy-title">
-            攻撃的・断定的な表現は避け、節度ある投稿をお願い致します
+            攻撃的・断定的な表現は避け、節度ある配慮をお願い致します
           </h2>
           <Text theme={[TextThemes.TEXT]} propStyle={propStyle.privacy}>
             covEATでは感染対策への不満の内容も投稿していただけますが、他のユーザー様やお店に配慮した表現をお願い致します。運営側が不適切であると判断した場合には当該評価・コメントを削除する場合がございます。
@@ -130,7 +129,7 @@ const GuideLine: React.FC = (props: any) => {
             お店への個人的なクレームやトラブルに関する投稿はご遠慮ください
           </h2>
           <Text theme={[TextThemes.TEXT]} propStyle={propStyle.privacy}>
-            個人的なクレームやトラブルに関する投稿はごß慮ください。
+            個人的なクレームやトラブルに関する投稿はご遠慮ください。
           </Text>
           <ul className="privacy-list">
             <li className="privacy-option">

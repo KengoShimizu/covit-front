@@ -121,6 +121,7 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
           z-index: 1000;
           border-radius: 60px;
           display: flex;
+          box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
         }
         .option_fill{
           fill: #8C8C8C;
