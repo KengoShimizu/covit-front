@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 // library
 import { Link } from 'react-router-dom';
 // components
@@ -7,10 +7,24 @@ import CommonStyle from '../../../../common/CommonStyle';
 //atom
 import Text, { TextThemes } from './../../../atoms/Text';
 import Button, { ButtonThemes } from './../../../atoms/Button';
-//font
+import { RouteName } from '../../../../common/Const';
+// context
+import AuthContext from "../../../../context/CommonProvider";
+
 
 
 const propStyle = {
+  headerTitleComment: {
+    fontSize: window.innerWidth > 560 ? '24px' : '18px',
+  },
+  headerTitle: {
+    fontSize: window.innerWidth > 560 ? '24px' : '18px',
+    borderBottom: '4px dotted rgb(255, 255, 255)',
+    paddingBottom: '4px',
+    lineHeight: '2.4em',
+    display: 'initial',
+    color: 'white',
+  },
   headerText: {
     marginTop: '4px',
   },
@@ -20,13 +34,14 @@ const propStyle = {
     left: window.innerWidth > 560 ? '144px' : 'auto',
     bottom: '24px',
     zIndex: '100',
-    
+    transitionDuraiton: '.5s',
+    transitionTimingFunction: 'ease',
   },
   greetingText:{
     marginBottom: '16px',
   },
   greetingBtn:{
-    margin: '0 auto 160px auto',
+    margin: window.innerWidth > 560 ? '0 auto 160px 0' : '0 auto 160px auto',
   },
   mapBtn:{
     margin: '0 auto',
@@ -41,10 +56,12 @@ const propStyle = {
   },
   aboutCatchCopy:{
     margin: '0 auto 64px auto',
-    maxWidth: '344px',
+    width: '19em',
+    maxWidth: '90%',
     textAlign: 'center',
     paddingBottom: '8px',
     borderBottom: '4px dotted #DF6059',
+    fontSize: window.innerWidth > 560 ? '24px' : '14px',
   },
   worryComment:{
     background: '#FFFFFF',
@@ -67,58 +84,61 @@ const propStyle = {
   },
   postButton:{
     margin: '0 auto',
+  },
+  copyRightText:{
+    marginBottom: '16px',
+    color: 'white',
+    textDecoration: 'underline',
   }
 };
 
 // LP
-const greeting: React.FC = (props: any) => {
-  
+const Greeting: React.FC = (props: any) => {
+  const { authState } = useContext(AuthContext);
   return (
     <HomeLayout headerText="" prevRef='#' history={props.history}>
       {/* header */}
       <header className="header_container">
-          {/* <h1>covEAT</h1> */}
-          <div className="header_inner-container">
-            <div className="header_circle"></div>
-            <div className="header_caption-container">
-              <div className="header-caption-wrapper">
-                <span className="header_caption-bubble">
-                  <Text theme={[TextThemes.LPSUBTITLE]}>
-                    口コミ
-                  </Text>
-                </span>
-                <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerText}>
-                  で分かる
+        {/* <h1>covEAT</h1> */}
+        <div className="header_inner-container">
+          <div className="header_circle"></div>
+          <div className="header_caption-container">
+            <div className="header-caption-wrapper">
+              <span className="header_caption-bubble">
+                <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerTitleComment}>
+                  口コミ
                 </Text>
-              </div>
-              <Text theme={[TextThemes.LPSUBTITLE]}>感染対策をしている<br />飲食店MAP</Text>
+              </span>
+              <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerText}>
+                で分かる
+              </Text>
             </div>
-            <div className="header_img-wrapper">
-              <img className="header_img" src="/header-img.png" alt="" />
-            </div>
+            <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerTitle}>感染対策をしている<br />飲食店MAP</Text>
           </div>
-        </header>
+          <div className="header_img-wrapper">
+            <img className="header_img" src="/header-img.png" alt="" />
+          </div>
+        </div>
+      </header>
       <div className="main-container">
         <section className="header-post_container">
           <p className="header-post_bg-wrapper">
             <img className="header-post_bg-img" src="/top-blobs.svg" alt="" />
           </p>
-          <p className="header-post_img-wrapper">
-            <img className="header-post_img" src="/post.png" alt="" />
-          </p>
-          <Link to="">
-            <p className="header-post_comment-img_wrapper">
-              <img className="header-post_comment-img" src="" alt="" />
+          <div className="header-post_img-container">
+            <p className="header-post_img-wrapper">
+              <img className="header-post_img" src="/post.png" alt="" />
             </p>
-          </Link>
-          <div className="header-post_comment">
-            <span className="header-post_comment-line_left"></span>
-            <span className="header-post_comment-line_right"></span>
-            <p className="header-post_comment-text">感染対策をしている<br/>
-            お店を投稿しよう！</p>
+            <div className="header-post_comment">
+              <span className="header-post_comment-line_left"></span>
+              <span className="header-post_comment-line_right"></span>
+              <p className="header-post_comment-text">感染対策をしている<br/>
+              お店を投稿しよう！</p>
+            </div>
           </div>
-          
-          <Button theme={[ButtonThemes.LP]} propStyle={propStyle.topBtn}>さっそく始める</Button>
+          <Link to={RouteName.ROOT}>
+              <Button theme={[ButtonThemes.LP]} propStyle={propStyle.topBtn}>さっそく始める</Button>
+          </Link>
         </section>
         {/* greeting */}
         <section className="greeting_container">
@@ -129,7 +149,9 @@ const greeting: React.FC = (props: any) => {
               でも、感染対策がきちんとされているか不安。</Text>
               <Text theme={[TextThemes.LPTEXT]}>そんな人が安心して外食ができるように、感染対策をしているお店だけを掲載するグルメマップを作りました。</Text>
             </div>
-            <Button theme={[ButtonThemes.LP]} propStyle={propStyle.greetingBtn}>さっそくお店をさがす</Button>
+            <Link to={RouteName.ROOT}>
+              <Button theme={[ButtonThemes.LP]} propStyle={propStyle.greetingBtn}>さっそくお店をさがす</Button>
+            </Link>
             <p className="greeting_img_wrapper"><img className="greeting_img" src="/greeting.png" alt="" /></p>
           </div>
         </section>
@@ -181,7 +203,7 @@ const greeting: React.FC = (props: any) => {
               {/* ユーザー側 */}
               <div className="about_user-container">
                 <p className="about_icon-img-wrapper_user"><img className="about_icon-img" src="/about_user.png" alt="" /></p>
-                <div className="about_comment-wrapper">
+                <div className="about_comment-wrapper_user">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.worryComment}>感染対策をしているお店が知りたい！</Text>
                 </div>
               </div>
@@ -207,7 +229,7 @@ const greeting: React.FC = (props: any) => {
               {/* ユーザー側 */}
               <div className="about_user-container">
                 <p className="about_icon-img-wrapper_user"><img className="about_icon-img" src="/about_user.png" alt="" /></p>
-                <div className="about_comment-wrapper">
+                <div className="about_comment-wrapper_user">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.worryComment}>
                     でもお店の自己申告だと嘘がつけちゃわない？
                   </Text>
@@ -238,7 +260,7 @@ const greeting: React.FC = (props: any) => {
               {/* ユーザー側 */}
               <div className="about_user-container">
                 <p className="about_icon-img-wrapper_owner"><img className="about_icon-img" src="/about_owner.png" alt="" /></p>
-                <div className="about_comment-wrapper">
+                <div className="about_comment-wrapper_user">
                 <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.worryComment}>ちゃんと感染対策をしていることを伝えてお客さんにお店にきて欲しい！</Text>
                 </div>
               </div>
@@ -258,7 +280,7 @@ const greeting: React.FC = (props: any) => {
                   <Text theme={[TextThemes.LPTEXT]}>これによって、covEATで感染対策をしているお店として見つけてもらうことができます！</Text>
                 </div>
               </div>
-              <Button theme={[ButtonThemes.LP]} propStyle={propStyle.aboutBtn}>お店の登録はこちら</Button>
+              <Link to={authState.user.is_owner ? RouteName.OWNER_SHOP_FORM : RouteName.REQUEST_TOP}><Button theme={[ButtonThemes.LP]} propStyle={propStyle.aboutBtn}>お店の登録はこちら</Button></Link>
             </li>
           </ul>
         </section>
@@ -268,32 +290,34 @@ const greeting: React.FC = (props: any) => {
             <p className="title_en">features</p>
             <h2 className="title_jp">covEATでできること</h2>
           </div>
-          <section className="features_card">
-            <h3 className="features_card-title">マップからお店を見つける</h3>
-            <p className="features_card-num">01</p>
-            <p className="features_card-img-wrapper">
-              <img className="features_card-img" src="/features1.png" alt="" />
-            </p>
-            <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATでは地図上で感染対策をしているお店を見つけることができます。</Text>
-          </section>
-          <section className="features_card">
-            <h3 className="features_card-title">お店の感染対策をチェック</h3>
-            <p className="features_card-num_right">02</p>
-            <p className="features_card-img-wrapper">
-              <img className="features_card-img" src="/features2.png" alt="" />
-            </p>
-            <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>お店の感染対策を<br />
-            マスク・消毒・ソーシャルディスタンス体調管理・換気<br />
-            の項目で確認することが出来ます！</Text>
-          </section>
-          <section className="features_card">
-            <h3 className="features_card-title">実際に行ってみたお店の感染対策をレビュー</h3>
-            <p className="features_card-num">03</p>
-            <p className="features_card-img-wrapper">
-              <img className="features_card-img" src="/features3.png" alt="" />
-            </p>
-            <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATで実際に行ってみたお店の感染対策をレビューを書くことでみんなのお店探しの手助けになります！</Text>
-          </section>
+          <ul className="features_card-container">
+            <li className="features_card">
+              <h3 className="features_card-title">マップからお店を見つける</h3>
+              <p className="features_card-num">01</p>
+              <p className="features_card-img-wrapper">
+                <img className="features_card-img" src="/features1.png" alt="" />
+              </p>
+              <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATでは地図上で感染対策をしているお店を見つけることができます。</Text>
+            </li>
+            <li className="features_card">
+              <h3 className="features_card-title">お店の感染対策をチェック</h3>
+              <p className="features_card-num_right">02</p>
+              <p className="features_card-img-wrapper">
+                <img className="features_card-img" src="/features2.png" alt="" />
+              </p>
+              <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>お店の感染対策を<br />
+              マスク・消毒・ソーシャルディスタンス体調管理・換気<br />
+              の項目で確認することが出来ます！</Text>
+            </li>
+            <li className="features_card">
+              <h3 className="features_card-title">実際に行ってみたお店の感染対策をレビュー</h3>
+              <p className="features_card-num">03</p>
+              <p className="features_card-img-wrapper">
+                <img className="features_card-img" src="/features3.png" alt="" />
+              </p>
+              <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATで実際に行ってみたお店の感染対策をレビューを書くことでみんなのお店探しの手助けになります！</Text>
+            </li>
+          </ul>
         </section>
         {/* post */}
         <section className="post_container">
@@ -304,24 +328,53 @@ const greeting: React.FC = (props: any) => {
           </div>
           <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.postText}>covEATは立ち上げたばかりのサービスなので、まだまだお店の数が少ないです。<br/>
           よければあなたが行ったことのある感染対策をしているお店を教えてください！</Text>
-          <Button theme={[ButtonThemes.LP]} propStyle={propStyle.postButton}>教えてあげる</Button>
+          <Link to={authState.user.is_owner ? 
+            RouteName.OWNER_SHOP_FORM 
+            : authState.user ? 
+            RouteName.USER_SHOP_FORM
+            : RouteName.REGISTER
+            }><Button theme={[ButtonThemes.LP]} propStyle={propStyle.postButton}>教えてあげる</Button>
+          </Link>
           <p className="post_img-wrapper">
             <img className="post_img" src="/post-shop.png" alt=""/>
           </p>
         </section>
         <footer className="footer_contaienr">
           <ul className="footer_list">
-            <li className="footer_option">プライバシー ポリシー</li>
-            <li className="footer_option">コンタクト</li>
-            <li className="footer_option">サービスページ</li>
+            <li className="footer_option">
+              <Link to={RouteName.PRIVACY}>
+                <Text theme={[TextThemes.CAPTION]} propStyle={{color: CommonStyle.TextWhite}}>プライバシー ポリシー</Text>
+              </Link>
+            </li>
+            {/* <li className="footer_option">
+              <Link to={RouteName.PRIVACY}>
+                <Text theme={[TextThemes.INIT]} propStyle={{color: CommonStyle.TextWhite}}>コンタクト</Text>
+              </Link>
+            </li> */}
+            <li className="footer_option">
+              <Link to={RouteName.ROOT}>
+                <Text theme={[TextThemes.CAPTION]} propStyle={{color: CommonStyle.TextWhite}}>サービスページ</Text>
+              </Link>
+            </li>
           </ul>
+          <small className="footer_copyright_other">
+            <a href="http://express.heartrails.com/" target="_blank" rel="noopener noreferrer">
+              <Text propStyle={propStyle.copyRightText}>&copy; HeartRails Express</Text>
+            </a>
+            <a href="https://www.iconfinder.com/iconsets/stop-virus-outline-iconset?utm_campaign=Virus%20awareness&utm_medium=landing%20page&utm_source=Webflow&utm_content=Stop%20virus%20by%20LAFS" target="_blank" rel="noopener noreferrer">
+              <Text propStyle={propStyle.copyRightText}>Stop virus outline iconset icon set by Avatar LAFS</Text>
+            </a>
+          </small>
           <small className="footer_copyright">&copy; 2020 covEAT</small>
         </footer>
       </div>
       <style jsx>{`
+        *{
+          transition-timing-function: ease;
+        }
         .header_container{
           width: 100%;
-          height： auto;
+          height: auto;
           position: relative;
           overflow: hidden;
         }
@@ -338,7 +391,10 @@ const greeting: React.FC = (props: any) => {
         .header_inner-container{
           background: ${CommonStyle.AccentColor};
           border-radius: 24px;
-          margin: 24px 14px;
+          width: calc(100% - 28px);
+          max-width: 720px;
+          margin: 24px auto;
+          box-sizing: border-box;
           padding: 32px 30px;
           min-height: 60vh;
         }
@@ -356,7 +412,6 @@ const greeting: React.FC = (props: any) => {
           bottom: -20px;
           z-index: 5;
         }
-       
         .header_img{
           width: 100%;
           height： auto;
@@ -372,23 +427,68 @@ const greeting: React.FC = (props: any) => {
           background-size: contain;
           background-position: center;
           background-repeat: no-repeat;
-          width: 96px;
-          height: 48px;
+          width: 120px;
+          height: 60px;
           box-sizing: border-box;
           display: flex;
           align-items: center;
           justify-content: center;
           margin-right: 8px;
         }
-        @media screen and (max-width: 400px) {
+        @media screen and (max-width: 370px) {
+          .header_inner-container{
+            min-height: 360px;
+          }
           .header_img-wrapper{
-            width: 280px;
+            transition-timing-function: ease;
+            transition-duration: .5s;
+            width: 200px;
           }
           .header_circle{
+            transition-timing-function: ease;
+            transition-duration: .2s;
             width: 160px;
             height: 160px;
             top: -64px;
             right: -64px;
+          }
+          .header_caption-bubble{
+            width: 96px;
+            height: 40px;
+          }
+        }
+        @media screen and (min-width: 370px) {
+          .header_img-wrapper{
+            transition-timing-function: ease;
+            transition-duration: .5s;
+            width: 280px;
+            
+          }
+          .header_inner-container{
+            min-height: 480px;
+          }
+          .header_circle{
+            transition-timing-function: ease;
+            transition-duration: .2s;
+            width: 200px;
+            height: 200px;
+            top: -64px;
+            right: -64px;
+          }
+        }
+        @media screen and (min-width: 680px) {
+          .header_inner-container{
+            padding: 32px 80px;
+          }
+          .header_img-wrapper{
+            width: 360px;
+            transition-timing-function: ease;
+            transition-duration: .5s;
+            right: calc(50vw - 460px);
+          }
+          .header_caption-bubble{
+            width: 120px;
+            height: 80px;
           }
         }
         
@@ -401,6 +501,8 @@ const greeting: React.FC = (props: any) => {
           top: -64px;
           height: 220px;
           overflow: hidden;
+          max-width: 800px;
+          margin: 0 auto;
         }
         .header-post_bg-wrapper{
           position: absolute;
@@ -415,28 +517,33 @@ const greeting: React.FC = (props: any) => {
           width: 100%;
           height: auto;
         }
-        .header-post_img-wrapper{
-          width: 120px;
-          height: auto;
+        .header-post_img-container{
           position: absolute;
           left: 16px;
           bottom: -16px;
           z-index: 50;
+        }
+        .header-post_img-wrapper{
+          width: 120px;
+          height: auto;
+          position: absolute;
+          left: 0;
+          bottom: 0;
         }
         .header-post_img{
           width: 100%;
           height: auto;
         }
         .header-post_comment{
-          width: 100%;
+          width: 10em;
           height: auto;
           font-size: 12px;
           line-height: 1.6em;
           font-weight: bold;
           position: absolute;
           transform: rotate(6.5deg);
-          left: 144px;
-          top: 88px;
+          left: 136px;
+          bottom: 120px;
           z-index: 100;
         }
         .header-post_comment-line_left{
@@ -460,13 +567,22 @@ const greeting: React.FC = (props: any) => {
         @media screen and (min-width: 560px) {
           .header-post_container{
             top: -220px;
+            transition-duration: .1s;
+            transition-timing-function: ease;
           }
         }
 
         .greeting_container{
           padding: 0 24px;
-          margin-bottom: ${CommonStyle.MarginLP};
+          margin: 0 auto ${CommonStyle.MarginLP} auto;
+          max-width: 760px;
         }
+        @media screen and (min-width: 560px) {
+          .greeting_container{
+            margin-bottom: 120px;
+          }
+        }
+        
         .greeting_inner-container{
           background: #FFFFFF;
           border: 2px solid #333333;
@@ -476,6 +592,7 @@ const greeting: React.FC = (props: any) => {
         }
         .greeting_sentence_container{
           margin-bottom: 24px;
+          max-width: 28em;
         }
         .greeting_img_wrapper{
           width: 240px;
@@ -488,6 +605,21 @@ const greeting: React.FC = (props: any) => {
         .greeting_img{
           width: 100%;
           height: auto;
+        }
+        @media screen and (min-width: 560px) {
+          .greeting_container{
+            margin-top: -160px;
+          }
+          .greeting_inner-container{
+            padding: 24px 40px;
+          }
+        }
+        @media screen and (min-width: 720px) {
+          .greeting_img_wrapper{
+            width: 360px;
+            transition-timing-function: ease;
+            transition-duration: .5s;
+          }
         }
 
         {/* セクション共通 */}
@@ -504,11 +636,24 @@ const greeting: React.FC = (props: any) => {
         }
         .title_jp{
           font-weight: bold;
-          font-size: 18px;
+          font-size: 16px;
           line-height: 1.6em;
           color: ${CommonStyle.TextBlack};
           text-align: center;
         }
+        @media screen and (min-width: 720px) {
+          .title-container{
+            margin-bottom: 60px;
+          }
+          .title_en{
+            font-size: 16px;
+          }
+          .title_jp{
+            font-size: 24px;
+          }
+        }
+
+        
 
         {/* map */}
         .map_container{
@@ -528,7 +673,8 @@ const greeting: React.FC = (props: any) => {
           margin-bottom: ${CommonStyle.MarginLP};
         }
         .about_comment-container{
-          margin-bottom: 40px;
+          margin: 0 auto 40px auto;
+          max-width: 640px;
         }
         .about_comment-wrapper{
           width: 80%;
@@ -571,6 +717,18 @@ const greeting: React.FC = (props: any) => {
           margin-bottom: 16px;
         }
         
+        @media screen and (min-width: 560px) {
+          .about{
+            margin-top: -160px;
+          }
+          .about_comment-container{
+            margin-bottom: 60px;
+          }
+          .about_arrow-container{
+            margin-bottom: 40px;
+          }
+        }
+        
         {/* about */}
         .about_worries-container{
           padding: 40px 8px;
@@ -578,7 +736,14 @@ const greeting: React.FC = (props: any) => {
           background-repeat: repeat;
           background-size: 32px;
         }
+        @media screen and (min-width: 560px) {
+          .about_worries-container{
+            background: ${CommonStyle.KeyColor};
+          }
+        }
         .about_worry-card{
+          max-width: 840px;
+          margin: 0 auto;
           background: ${CommonStyle.BgGray};
           border: 4px solid ${CommonStyle.BgWhite};
           box-sizing: border-box;
@@ -617,11 +782,16 @@ const greeting: React.FC = (props: any) => {
           width: 100%;
           height: auto;
         }
+        .about_comment-wrapper_user{
+          padding: 8px 12px;
+          background: ${CommonStyle.BgWhite};
+          border-radius: 8px;
+          display: contents;
+        }
         .about_comment-wrapper_manager{
           padding: 8px 12px;
           background: ${CommonStyle.BgWhite};
           border-radius: 8px;
-          
         }
         .about_comment-option{
           margin-left: 20px;
@@ -644,17 +814,41 @@ const greeting: React.FC = (props: any) => {
         .about_comment-list{
           margin-bottom: 8px;
         }
+        @media screen and (min-width: 560px) {
+          .about_worry-card{
+            padding: 40px 60px;
+          } 
+          .about_user-container{
+            margin-bottom: 0;
+          }
+          .about_comment-wrapper_manager{
+            padding: 16px 24px;
+          }
+        }
 
         {/* features */}
         .features_container{
           margin-bottom: ${CommonStyle.MarginLP};
         }
+        @media screen and (min-width: 560px) {
+          .features_container{
+            margin-bottom: 120px;
+          }
+        }
+        
+        .features_card-container{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          max-width: 1200px;
+          margin: 0 auto;
+        }
         .features_card{
           width: 80%;
           max-width: 360px;
           box-sizing: border-box;
-          border-radius: 24px;
-          padding: 32px 40px;
+          border-radius: 16px;
+          padding: 32px 24px;
           margin: 0 auto;
           display: flex;
           align-items: center;
@@ -698,12 +892,30 @@ const greeting: React.FC = (props: any) => {
           font-family: 'Sriracha', cursive;
           color: ${CommonStyle.AccentColor};
         }
+        @media screen and (min-width: 1200px) {
+          .features_card-container{
+            flex-direction: row;
+            transition-timing-function: ease;
+            transition-duration: .5s;
+          }
+          .features_card-num_right{
+            right: auto;
+            left: 20px;
+          }
+          .features_card{
+            height: 416px;
+            padding: 36px 40px;
+          }
+        }
 
         {/* post */}
         .post_container{
           position: relative;
-          padding: 36px 40px 200px 40px;
+          padding: 36px 20px 200px 20px;
           background: ${CommonStyle.BgWhite};
+          margin: 0 auto;
+          box-sizing: border-box;
+          max-width: 720px;
         }
         .post_img-wrapper{
           width: 70%;
@@ -711,19 +923,32 @@ const greeting: React.FC = (props: any) => {
           position: absolute;
           bottom: 0;
           right: 0;
-
         }
         .post_img{
           width: 100%;
           height: auto;
+        }
+        @media screen and (min-width: 560px) {
+          .post_container{
+            padding: 36px 40px 200px 40px;
+          }
+          .post_img-wrapper{
+            max-width: 320px;
+          }
+        }
+        @media screen and (min-width: 720px) {
+          .post_container{
+            border-radius: 24px;
+            margin-bottom: 120px;
+          }
         }
 
         .footer_contaienr{
           padding: 64px 40px 80px 40px;
           background: #333;
           color: ${CommonStyle.TextWhite};
+          position: relative;
         }
-
         .footer_list{
           display: flex;
           justify-content: center;
@@ -732,7 +957,8 @@ const greeting: React.FC = (props: any) => {
           font-size: ${CommonStyle.Caption};
           font-weight: bold;
           color: ${CommonStyle.TextWhite};
-          margin-bottom: 32px;
+          max-width: 800px;
+          margin: 0 auto 32px auto;
         }
         .footer_option:not(:last-child){
           margin-bottom: 8px;
@@ -741,12 +967,19 @@ const greeting: React.FC = (props: any) => {
           display: block;
           text-align: center;
           font-weight: bold;
+          font-size: ${CommonStyle.Text};
+        }
+        .footer_copyright_other{
+          display: block;
+          width: 90%;
+          max-width: 800px;
+          margin: 0 auto 40px auto;
+          font-weight: bold;
           font-size: ${CommonStyle.Caption};
         }
-return
       `}</style>
     </HomeLayout>
   );
 }
 
-export default greeting;
+export default Greeting;
