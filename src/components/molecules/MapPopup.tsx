@@ -1,12 +1,12 @@
 import React from 'react';
 // library
-import { Smile, Frown } from 'react-feather';
+import { Smile } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from './../../common/CommonStyle';
 // components
 import Text, { TextThemes } from './../atoms/Text';
-import { OwnerType, CoordType } from '../../common/Const';
+import { CoordType } from '../../common/Const';
 
 interface MapPopupProps {
   data: any;
@@ -40,18 +40,14 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
             </li>
             <li className="shop-card_review">
               <ul className="shop-card_review-list">
-                <li className="shop-card_review-option">
-                  <Smile size={24} color="#ED753A" />
-                  <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                    {data?.shop?.good_count}
-                  </Text>
-                </li>
-                <li className="shop-card_review-option">
-                  <Frown size={24} color="#3A8CED" />
-                  <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
-                    {data?.shop?.bad_count}
-                  </Text>
-                </li>
+                {data?.shop?.good_count !== 0 &&
+                  <li className="shop-card_review-option">
+                    <Smile size={24} color="#ED753A" />
+                    <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
+                      最高！ {data?.shop?.good_count}件
+                    </Text>
+                  </li>
+                }
                 <li className="shop-card_review-option" style={{ position: 'absolute', right: '16px' }}>
                   <span style={{height: '30px'}}><img src={data?.genre?.icon} height="30" width="30"/></span>
                   <Text theme={[TextThemes.SMALL]}>{data?.genre?.name}</Text>
