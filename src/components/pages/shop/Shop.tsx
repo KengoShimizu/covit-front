@@ -177,13 +177,7 @@ const Shop: React.FC = (props: any) => {
                       <li className="infection-control_review-option">
                         <Smile size={24} color="#ED753A" />
                         <span className="infection-control_review-num">
-                          {shopData.good_count}<br />
-                        </span>
-                      </li>
-                      <li className="infection-control_review-option">
-                        <Frown size={24} color="#3A8CED" />
-                        <span className="infection-control_review-num">
-                          {shopData.bad_count}<br />
+                          最高！ {shopData.good_count}件<br />
                         </span>
                       </li>
                     </ol>
