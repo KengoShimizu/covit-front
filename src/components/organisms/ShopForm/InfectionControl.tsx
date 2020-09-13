@@ -109,8 +109,9 @@ export const InfectionControl : React.FC<InfectionControlProps> = ({ setPage, se
       <style jsx>
         {`
           .container{
-            margin: 0 auto ${CommonStyle.FormMargin} auto;
-            max-width: 400px;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 90%;
           }
         `}
       </style>
