@@ -16,9 +16,11 @@ const propStyle = {
   },
   topBtn: {
     position: 'absolute',
-    right: '16px',
+    right: window.innerWidth > 560 ? 'auto' : '1px',
+    left: window.innerWidth > 560 ? '144px' : 'auto',
     bottom: '24px',
     zIndex: '100',
+    
   },
   greetingText:{
     marginBottom: '16px',
@@ -30,7 +32,11 @@ const propStyle = {
     margin: '0 auto',
   },
   aboutComment:{
-    margin: '0 auto 16px auto',
+    margin: '0 auto 0 0',
+    maxWidth: '18em',
+  },
+  aboutCommentRight:{
+    margin: '0 0 0 auto',
     maxWidth: '18em',
   },
   aboutCatchCopy:{
@@ -112,7 +118,7 @@ const greeting: React.FC = (props: any) => {
             お店を投稿しよう！</p>
           </div>
           
-          <Button theme={[ButtonThemes.LP]} propStyle={propStyle.topBtn}>さっそくお店をさがす</Button>
+          <Button theme={[ButtonThemes.LP]} propStyle={propStyle.topBtn}>さっそく始める</Button>
         </section>
         {/* greeting */}
         <section className="greeting_container">
@@ -128,14 +134,16 @@ const greeting: React.FC = (props: any) => {
           </div>
         </section>
         {/* map */}
-        <section className="map_container">
+        {/* <section className="map_container">
           <div className="title-container">
             <p className="title_en">map</p>
             <h2 className="title_jp">近くの感染対策をしているお店</h2>
           </div>
-          <div className="map_iframe-container"></div>
+          <div className="map_iframe-container">
+          <iframe src="https://www.coveat.work/" title="covEAT" width="100%" height="100%"/>
+          </div>
           <Button theme={[ButtonThemes.LP]} propStyle={propStyle.mapBtn}>もっと見る</Button>
-        </section>
+        </section> */}
         {/* about */}
         <section className="about_container">
           <div className="title-container">
@@ -152,10 +160,10 @@ const greeting: React.FC = (props: any) => {
               </Text>
             </li>
             <li className="about_comment-wrapper">
-              <p className="about_comment-img-wrapper">
+              <p className="about_comment-img-wrapper_right">
                 <img className="about_comment-img" src="/about_owner.png" alt="オーナーの声" />
               </p>
-              <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.aboutComment}>
+              <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.aboutCommentRight}>
                 コロナ でお客さんが減ってしまった。ちゃんと感染対策をしているんだけど伝える手段がないし困った……
               </Text>
             </li>
@@ -262,28 +270,28 @@ const greeting: React.FC = (props: any) => {
           </div>
           <section className="features_card">
             <h3 className="features_card-title">マップからお店を見つける</h3>
-            <div className="features_card-img-container">
-              <p className="features_card-num">01</p>
-              <span className="features_card-img-wrapper"><img className="features_card-img" src="" alt="" /></span>
-            </div>
+            <p className="features_card-num">01</p>
+            <p className="features_card-img-wrapper">
+              <img className="features_card-img" src="/features1.png" alt="" />
+            </p>
             <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATでは地図上で感染対策をしているお店を見つけることができます。</Text>
           </section>
           <section className="features_card">
             <h3 className="features_card-title">お店の感染対策をチェック</h3>
-            <div className="features_card-img-container">
-              <p className="features_card-num">02</p>
-              <span className="features_card-img-wrapper"><img className="features_card-img" src="" alt="" /></span>
-            </div>
+            <p className="features_card-num_right">02</p>
+            <p className="features_card-img-wrapper">
+              <img className="features_card-img" src="/features2.png" alt="" />
+            </p>
             <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>お店の感染対策を<br />
             マスク・消毒・ソーシャルディスタンス体調管理・換気<br />
             の項目で確認することが出来ます！</Text>
           </section>
           <section className="features_card">
             <h3 className="features_card-title">実際に行ってみたお店の感染対策をレビュー</h3>
-            <div className="features_card-img-container">
-              <p className="features_card-num">03</p>
-              <span className="features_card-img-wrapper"><img className="features_card-img" src="" alt="" /></span>
-            </div>
+            <p className="features_card-num">03</p>
+            <p className="features_card-img-wrapper">
+              <img className="features_card-img" src="/features3.png" alt="" />
+            </p>
             <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATで実際に行ってみたお店の感染対策をレビューを書くことでみんなのお店探しの手助けになります！</Text>
           </section>
         </section>
@@ -324,7 +332,8 @@ const greeting: React.FC = (props: any) => {
           position: absolute;
           top: -96px;
           right: -72px;
-          background: ${CommonStyle.BgWhite}
+          background: ${CommonStyle.BgWhite};
+          z-index: 1;
         }
         .header_inner-container{
           background: ${CommonStyle.AccentColor};
@@ -337,6 +346,7 @@ const greeting: React.FC = (props: any) => {
           font-weight: bold;
           font-size: 18px;
           line-height: 36px;
+          z-index: 10;
         }
         .header_img-wrapper{
           width: 320px;
@@ -344,7 +354,9 @@ const greeting: React.FC = (props: any) => {
           position: absolute;
           right: -60px;
           bottom: -20px;
+          z-index: 5;
         }
+       
         .header_img{
           width: 100%;
           height： auto;
@@ -368,6 +380,19 @@ const greeting: React.FC = (props: any) => {
           justify-content: center;
           margin-right: 8px;
         }
+        @media screen and (max-width: 400px) {
+          .header_img-wrapper{
+            width: 280px;
+          }
+          .header_circle{
+            width: 160px;
+            height: 160px;
+            top: -64px;
+            right: -64px;
+          }
+        }
+        
+        
         .main-container{
           background: ${CommonStyle.BgGray}
         }
@@ -431,6 +456,11 @@ const greeting: React.FC = (props: any) => {
           top: 36px;
           left: 88px;
           background: ${CommonStyle.TextBlack};
+        }
+        @media screen and (min-width: 560px) {
+          .header-post_container{
+            top: -220px;
+          }
         }
 
         .greeting_container{
@@ -500,6 +530,10 @@ const greeting: React.FC = (props: any) => {
         .about_comment-container{
           margin-bottom: 40px;
         }
+        .about_comment-wrapper{
+          width: 80%;
+          margin: 0 auto;
+        }
         .about_comment-wrapper:not(:last-child){
           margin-bottom: 40px;
         }
@@ -507,7 +541,13 @@ const greeting: React.FC = (props: any) => {
           width: 140px;
           height: 140px;
           border-radius: 50%;
-          margin: 0 auto 20px auto;
+          margin-bottom: 16px;
+        }
+        .about_comment-img-wrapper_right{
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          margin: 0 0 16px auto;
         }
         .about_comment-img{
           width: 100%;
@@ -611,13 +651,17 @@ const greeting: React.FC = (props: any) => {
         }
         .features_card{
           width: 80%;
-          max-width: 260px;
+          max-width: 360px;
+          box-sizing: border-box;
+          border-radius: 24px;
+          padding: 32px 40px;
           margin: 0 auto;
           display: flex;
           align-items: center;
           flex-direction: column;
           position: relative;
           margin-bottom: 64px;
+          background: ${CommonStyle.BgWhite};
         }
         .features_card-title{
           font-size: 18px;
@@ -627,25 +671,32 @@ const greeting: React.FC = (props: any) => {
           margin-bottom: 12px;
           order: 2;
         }
+        .features_card-img-wrapper{
+          width: 180px;
+          height: auto;
+          margin-bottom: 16px;
+          order: 1;
+        }
+        .features_card-img{
+          width: 100%;
+          height: auto;
+        }
         @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
         .features_card-num{
           position: absolute;
-          left: 0;
-          top: 0;
+          left: 20px;
+          top: -40px;
           font-size: 72px;
           font-family: 'Sriracha', cursive;
           color: ${CommonStyle.AccentColor};
         }
-        .features_card-img-container{
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          margin: 0 auto 24px auto;
-          background: ${CommonStyle.BgWhite};
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          order: 1;
+        .features_card-num_right{
+          position: absolute;
+          right: 20px;
+          top: -40px;
+          font-size: 72px;
+          font-family: 'Sriracha', cursive;
+          color: ${CommonStyle.AccentColor};
         }
 
         {/* post */}
@@ -660,6 +711,7 @@ const greeting: React.FC = (props: any) => {
           position: absolute;
           bottom: 0;
           right: 0;
+
         }
         .post_img{
           width: 100%;
