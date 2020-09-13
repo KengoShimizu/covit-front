@@ -179,7 +179,7 @@ const greeting: React.FC = (props: any) => {
               </div>
               {/* 運営側 */}
               <div className="about_manager-container">
-                <p className="about_icon-img-wrapper_owner"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
+                <p className="about_icon-img-wrapper_manager"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
                 <div className="about_comment-wrapper_manager">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.answerComment}>covEATに登録されているお店は</Text>
                   <ul className="about_comment-list">
@@ -207,7 +207,7 @@ const greeting: React.FC = (props: any) => {
               </div>
               {/* 運営側 */}
               <div className="about_manager-container">
-                <p className="about_icon-img-wrapper_owner"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
+                <p className="about_icon-img-wrapper_manager"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
                 <div className="about_comment-wrapper_manager">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.answerComment}>そこでcovEATではユーザーがお店の感染対策を評価できるようになっています！</Text>
                   <ul className="about_comment-list">
@@ -229,14 +229,14 @@ const greeting: React.FC = (props: any) => {
             <li className="about_worry-card">
               {/* ユーザー側 */}
               <div className="about_user-container">
-                <p className="about_icon-img-wrapper_user"><img className="about_icon-img" src="/about_user.png" alt="" /></p>
+                <p className="about_icon-img-wrapper_owner"><img className="about_icon-img" src="/about_owner.png" alt="" /></p>
                 <div className="about_comment-wrapper">
                 <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.worryComment}>ちゃんと感染対策をしていることを伝えてお客さんにお店にきて欲しい！</Text>
                 </div>
               </div>
               {/* 運営側 */}
               <div className="about_manager-container">
-                <p className="about_icon-img-wrapper_owner"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
+                <p className="about_icon-img-wrapper_manager"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
                 <div className="about_comment-wrapper_manager">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.answerComment}>お店のオーナー様がcovEATに登録していただくと以下のことができます！</Text>
                   <ul className="about_comment-list">
@@ -564,6 +564,13 @@ const greeting: React.FC = (props: any) => {
           width: 120px;
           height: 120px;
           border-radius: 120px;
+          margin:  0 auto 8px 0;
+          transform: scale(-1, 1);
+        }
+        .about_icon-img-wrapper_manager{
+          width: 120px;
+          height: 120px;
+          border-radius: 120px;
           margin:  0 0 8px auto;
         }
         .about_icon-img{
@@ -574,6 +581,7 @@ const greeting: React.FC = (props: any) => {
           padding: 8px 12px;
           background: ${CommonStyle.BgWhite};
           border-radius: 8px;
+          
         }
         .about_comment-option{
           margin-left: 20px;
@@ -683,7 +691,7 @@ const greeting: React.FC = (props: any) => {
           font-weight: bold;
           font-size: ${CommonStyle.Caption};
         }
-
+return
       `}</style>
     </HomeLayout>
   );
