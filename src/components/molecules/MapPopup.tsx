@@ -22,7 +22,7 @@ const propStyle = {
     lineHeight: '1.1em',
   }
 };
-// data?.shop?.name
+
 const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
   return (
     <section className="shop-mordal_container">
@@ -31,7 +31,7 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
           <ul className="shop-card_info">
             <li className="shop-card_name">
               <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.shopName}>
-                {'スターバックスコーヒー　松井山手店'}
+                {data?.shop?.name}
               </Text>
               {data.is_official === CoordType.OFFICIAL ?
                 <span className="official-mark">
