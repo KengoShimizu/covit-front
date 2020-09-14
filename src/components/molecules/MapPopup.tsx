@@ -17,10 +17,12 @@ const propStyle = {
     marginLeft: '8px'
   },
   shopName: {
-    marginRight: '4px'
+    marginRight: '4px',
+    maxWidth: '254px',
+    lineHeight: '1.1em',
   }
 };
-
+// data?.shop?.name
 const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
   return (
     <section className="shop-mordal_container">
@@ -29,7 +31,7 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
           <ul className="shop-card_info">
             <li className="shop-card_name">
               <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.shopName}>
-                {data?.shop?.name}
+                {'スターバックスコーヒー　松井山手店'}
               </Text>
               {data.is_official === CoordType.OFFICIAL ?
                 <span className="official-mark">
@@ -70,7 +72,7 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
       <style jsx>{`
         .shop-mordal_container{
           width: 308px;
-          height: 248px;
+          height: 256px;
           position: absolute;
           left: 50%;
           transform: translateX(-50%);
