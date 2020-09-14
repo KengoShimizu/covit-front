@@ -44,7 +44,7 @@ const UserShopForm: React.FC = (props: any) => {
       user_id: authState.user.id,
       name: "",
       kana_name: "",
-      address: "",
+      address: props.location.state.address ? props.location.state.address : "",
       contact: "",
       image: "",
       business_date: "",

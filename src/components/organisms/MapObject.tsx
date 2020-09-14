@@ -6,6 +6,7 @@ import L from 'leaflet';
 // components
 import MapPopup from '../molecules/MapPopup';
 import Loading from './../molecules/Loading';
+import { RouteName } from '../../common/Const';
 
 
 interface MapPopupProps {
@@ -27,11 +28,14 @@ interface MapPopupProps {
   selectedGenre: any;
   handleStationClick: any;
   setIsSliderAppear: any;
+  history: any;
 }
 
 
 const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const [popupIsOpen, setPopupIsOpen] = useState(false);
+  const [reqShopIsOpen, setReqShopIsOpen] = useState(false);
+  const [reqShopCoord, setReqShopCoord] = useState({lat: 0, lng: 0});
 
   const curLocMarker = L.icon({
     iconUrl: '/current_location_pin.svg',
@@ -74,6 +78,23 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
     const MM = dd.getMonth() + 1;
     const DD = dd.getDate();
     return YYYY + "/" + MM + "/" + DD;
+  }
+
+  const handleReqShop = async (coords: any) => {
+    try {
+      const res = await axios
+        .get(`http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=${coords.lng}&y=${coords.lat}`)
+      const add_obj = res.data.response.location[0];
+      const address = '〒'+ add_obj.postal.substr(0,3) + '-' + add_obj.postal.slice(3) + ' ' + add_obj.prefecture + add_obj.city + add_obj.town;
+      props.history.push({
+        pathname: RouteName.USER_SHOP_FORM,
+        state: {
+          address: address,
+        }
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const handleMarkerClick = (data: any) => {
@@ -128,7 +149,9 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           setPopupIsOpen(false);
           props.setPopupIsOpen(false);
         }}
-        onClick={() => {
+        onClick={(e: any) => {
+          setReqShopCoord(e.latlng);
+          setReqShopIsOpen(true);
           setPopupIsOpen(false);
           props.setIsSliderAppear(false);
           props.setPopupIsOpen(false);
@@ -138,6 +161,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           minZoom={5} />
         <Marker position={props.curLoc} icon={curLocMarker} />
+        {reqShopIsOpen && <Marker position={reqShopCoord} onClick={() => handleReqShop(reqShopCoord)}/>}
 
         {props.loading ? <Loading /> :
           props.coordinations.map((data: any, i: number) => (

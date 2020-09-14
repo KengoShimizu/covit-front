@@ -362,6 +362,7 @@ const Top: React.FC = (props: any) => {
           selectedGenre={selectedGenre}
           handleStationClick={handleStationClick}
           setIsSliderAppear={setIsSliderAppear}
+          history={props.history}
         />
 
         <div className="search-header">
