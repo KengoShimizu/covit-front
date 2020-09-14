@@ -118,13 +118,13 @@ const CreateComment: React.FC = (props: any) => {
     if(Validate.formValidate('comment', addData)) setIsOK(false);
     else setIsOK(true);
   }, [addData])
-
+  
   return (
     <HomeLayout headerText={'感染対策レビュー記入'} prevRef={qs.from === 'search' ? RouteName.SHOP_SEARCH_FOR_COMMENTS :`/shops/${match.params.id}`}>
       {loading ? <Loading/> :
         <div className='container'>
           <div className="content">
-            <h1 className="shop-name">cafe えにしえ</h1>
+          <h1 className="shop-name">{shopData.name}</h1>
             <section className="infection-control_card">
               <h2 className="infection-control_title">感染症対策内容</h2>
               <InfectionControlList stepData={shopData.steps} />
