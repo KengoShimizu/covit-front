@@ -61,6 +61,12 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
     iconAnchor: [27, 61]
   });
 
+  const reqShopMarker = L.icon({
+    iconUrl: '/selected-pin.svg',
+    iconSize: [55, 61],
+    iconAnchor: [27, 61]
+  });
+
   const calcStationCenter = (data: any) => {
     props.setLastLat(data[0].y);
     props.setLastLng(data[0].x);
@@ -161,7 +167,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           minZoom={5} />
         <Marker position={props.curLoc} icon={curLocMarker} />
-        {reqShopIsOpen && <Marker position={reqShopCoord} onClick={() => handleReqShop(reqShopCoord)}/>}
+        {reqShopIsOpen && <Marker position={reqShopCoord} icon={reqShopMarker} onClick={() => handleReqShop(reqShopCoord)}/>}
 
         {props.loading ? <Loading /> :
           props.coordinations.map((data: any, i: number) => (
