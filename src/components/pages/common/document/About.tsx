@@ -361,6 +361,9 @@ const Greeting: React.FC = (props: any) => {
             <a href="http://express.heartrails.com/" target="_blank" rel="noopener noreferrer">
               <Text propStyle={propStyle.copyRightText}>&copy; HeartRails Express</Text>
             </a>
+            <a href="http://express.heartrails.com/" target="_blank" rel="noopener noreferrer">
+              <Text propStyle={propStyle.copyRightText}>&copy; HeartRails Geo API</Text>
+            </a>
             <a href="https://www.iconfinder.com/iconsets/stop-virus-outline-iconset?utm_campaign=Virus%20awareness&utm_medium=landing%20page&utm_source=Webflow&utm_content=Stop%20virus%20by%20LAFS" target="_blank" rel="noopener noreferrer">
               <Text propStyle={propStyle.copyRightText}>Stop virus outline iconset icon set by Avatar LAFS</Text>
             </a>
