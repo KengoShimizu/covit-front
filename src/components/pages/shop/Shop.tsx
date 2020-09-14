@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
 import useReactRouter from "use-react-router";
-import { Smile, ChevronRight, Frown, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
+import { Smile, ChevronRight, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
 import { RedirectFrom, RouteName, OwnerType, PriceArray } from '../../../common/Const';
@@ -76,7 +76,10 @@ const Shop: React.FC = (props: any) => {
     user: {
       is_owner: 0
     },
-    links: []
+    links: [],
+    coordination: {
+      id: 0,
+    }
   });
 
   const fetchShopData = async (isSubscribed: boolean) => {
@@ -117,7 +120,7 @@ const Shop: React.FC = (props: any) => {
       {loading ? <Loading /> :
         shopData.user_id && authState.user.is_owner !== OwnerType.NOT_OWNER && shopData.user_id !== authState.user.id ?
           <Redirect to='' /> :
-          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}>
+          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.coordination.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}>
             <div className="content">
               <div className="shop-card">
                 {/* ヘッダー画像 */}
