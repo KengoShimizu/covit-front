@@ -83,7 +83,7 @@ const MapObject: React.FC<MapPopupProps> = (props: any) => {
   const handleReqShop = async (coords: any) => {
     try {
       const res = await axios
-        .get(`http://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=${coords.lng}&y=${coords.lat}`)
+        .get(`https://geoapi.heartrails.com/api/json?method=searchByGeoLocation&x=${coords.lng}&y=${coords.lat}`)
       const add_obj = res.data.response.location[0];
       const address = '〒'+ add_obj.postal.substr(0,3) + '-' + add_obj.postal.slice(3) + ' ' + add_obj.prefecture + add_obj.city + add_obj.town;
       props.history.push({
