@@ -19,7 +19,7 @@ const SearchHistoryCard: React.FC<SearchHistoryCardProps> = ({name, browse_date,
       <Link to={nextRef} style={{display:'flex', paddingBottom: '6px',
           boxSizing: 'border-box', alignItems: 'center'}}>
         <div className="history-card_content">
-          <Text theme={[TextThemes.CAPTION]} propStyle={{fontSize: '1em'}}>{name}</Text>
+          <Text theme={[TextThemes.CAPTION]} propStyle={{fontSize: '1em', width: '152px'}}>{name}</Text>
           <div className="history-card_info">
             <div className="history-card_date">
               <span className="history-card_review-icon">
