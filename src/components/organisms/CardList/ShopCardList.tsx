@@ -27,7 +27,7 @@ const ShopCardList: React.FC<ShopCardListProps> = ({ shops, type }) => {
           background-color: ${CommonStyle.BgGray}
         }
         .card-list {
-          padding: 12px 0;
+          padding: 12px 0 100px 0;
         }
       `}</style>
       </div>

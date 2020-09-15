@@ -1,6 +1,6 @@
 import React from 'react';
 // library
-import { Smile, Frown, Calendar, ChevronRight } from 'react-feather';
+import { Smile, Calendar, ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
@@ -21,16 +21,14 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
           <h2 className="history-card_name">{name}</h2>
           <div className="history-card_info">
             <ul className="history-card_review">
-              <li className="history-card_review_option">
-                <span className="history-card_review-icon">
-                  <Smile size="20" color="#ED753A" />
-                </span>
-                {good_count}
-              </li>
-              <li className="history-card_review_option">
-                <span className="history-card_review-icon"><Frown size="20" color="#3A8CED" /></span>
-                {bad_count}
-              </li>
+              {good_count !== 0 &&
+                <li className="history-card_review_option">
+                  <span className="history-card_review-icon">
+                    <Smile size="20" color="#ED753A" />
+                  </span>
+                  最高！ {good_count}
+                </li>
+              }
             </ul>
             <div className="history-card_date">
               <span className="history-card_review-icon">
