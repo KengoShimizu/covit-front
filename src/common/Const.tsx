@@ -14,59 +14,59 @@ export class CoordType {
 
 /* 価格帯 */
 class Price {
-  public static readonly LESS_THAN_THOUSAND       = 1  // 〜1000
-  public static readonly LESS_THAN_TWO_THOUSAND   = 2  // 1000~2000
-  public static readonly LESS_THAN_THREE_THOUSAND = 3  // 2000~3000
-  public static readonly LESS_THAN_FOUR_THOUSAND  = 4  // 3000~4000
-  public static readonly LESS_THAN_FIVE_THOUSAND  = 5  // 4000~5000
-  public static readonly LESS_THAN_SIX_THOUSAND   = 6  // 5000~6000
-  public static readonly LESS_THAN_SEVEN_THOUSAND = 7  // 6000~7000
-  public static readonly LESS_THAN_EIGHT_THOUSAND = 8  // 7000~8000
-  public static readonly LESS_THAN_NIGHT_THOUSAND = 9  // 8000~9000
-  public static readonly LESS_THAN_TEN_THOUSAND   = 10 // 9000~10000
+  public static readonly LESS_THAN_THOUSAND       = 1  // 〜999
+  public static readonly LESS_THAN_TWO_THOUSAND   = 2  // 1000~1999
+  public static readonly LESS_THAN_THREE_THOUSAND = 3  // 2000~2999
+  public static readonly LESS_THAN_FOUR_THOUSAND  = 4  // 3000~3999
+  public static readonly LESS_THAN_FIVE_THOUSAND  = 5  // 4000~4999
+  public static readonly LESS_THAN_SIX_THOUSAND   = 6  // 5000~5999
+  public static readonly LESS_THAN_SEVEN_THOUSAND = 7  // 6000~6999
+  public static readonly LESS_THAN_EIGHT_THOUSAND = 8  // 7000~7999
+  public static readonly LESS_THAN_NIGHT_THOUSAND = 9  // 8000~8999
+  public static readonly LESS_THAN_TEN_THOUSAND   = 10 // 9000~9999
   public static readonly MORE_THAN_TEN_THOUSAND   = 11 // 10000~
 }
 
 export const PriceArray: Array<any> = [
   {
     id: Price.LESS_THAN_THOUSAND,
-    name: '￥~1,000'
+    name: '￥~999'
   },
   {
     id: Price.LESS_THAN_TWO_THOUSAND,
-    name: '￥1,000~2,000'
+    name: '￥1,000~1,999'
   },
   {
     id: Price.LESS_THAN_THREE_THOUSAND,
-    name: '￥2,000~3,000'
+    name: '￥2,000~2,999'
   },
   {
     id: Price.LESS_THAN_FOUR_THOUSAND,
-    name: '￥3,000~4,000'
+    name: '￥3,000~3,999'
   },
   {
     id: Price.LESS_THAN_FIVE_THOUSAND,
-    name: '￥4,000~5,000'
+    name: '￥4,000~4,999'
   },
   {
     id: Price.LESS_THAN_SIX_THOUSAND,
-    name: '￥5,000~6,000'
+    name: '￥5,000~5,999'
   },
   {
     id: Price.LESS_THAN_SEVEN_THOUSAND,
-    name: '￥6,000~7,000'
+    name: '￥6,000~6,999'
   },
   {
     id: Price.LESS_THAN_EIGHT_THOUSAND,
-    name: '￥7,000~8,000'
+    name: '￥7,000~7,999'
   },
   {
     id: Price.LESS_THAN_NIGHT_THOUSAND,
-    name: '￥8,000~9,000'
+    name: '￥8,000~8,999'
   },
   {
     id: Price.LESS_THAN_TEN_THOUSAND,
-    name: '￥9,000~10,000'
+    name: '￥9,000~9,999'
   },
   {
     id: Price.MORE_THAN_TEN_THOUSAND,

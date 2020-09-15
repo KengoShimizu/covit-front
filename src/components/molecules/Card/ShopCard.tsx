@@ -1,6 +1,6 @@
 import React from 'react';
 // library
-import { Smile, Frown, ChevronRight } from 'react-feather';
+import { Smile, ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
@@ -20,16 +20,14 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop, type }) => {
           <h2 className="shop-card_name">{shop.name}</h2>
           <div className="shop-card_info">
             <ul className="shop-card_review">
-              <li className="shop-card_review_option">
-                <span className="shop-card_review-icon">
-                  <Smile size="20" color="#ED753A" />
-                </span>
-                {shop.good_count}
-              </li>
-              <li className="shop-card_review_option">
-                <span className="shop-card_review-icon"><Frown size="20" color="#3A8CED" /></span>
-                {shop.bad_count}
-              </li>
+              {shop?.good_count !== 0 &&
+                <li className="shop-card_review_option" style={{color: CommonStyle.TextBlack}}>
+                  <span className="shop-card_review-icon">
+                    <Smile size="20" color="#ED753A" />
+                  </span>
+                  最高！ {shop.good_count}件
+                </li>
+              }
             </ul>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 // library
 import { Calendar, Trash2 } from 'react-feather';
-import { Smile, Frown, Clock, ChevronRight } from 'react-feather';
+import { Smile, Clock, ChevronRight } from 'react-feather';
 import { Link } from 'react-router-dom';
 // common
 import CommonStyle from '../../../common/CommonStyle';
