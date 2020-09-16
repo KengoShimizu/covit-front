@@ -89,7 +89,7 @@ const CommentPrepare: React.FC = (props: any) => {
   // }, [searchData.name])
 
   return (
-    <HomeLayout headerText='お店のレビューを登録する' prevRef='/'>
+    <HomeLayout headerText='お店を探す' prevRef={RouteName.ROOT}>
       <Modal
         title={modalState.title}
         subtitle={modalState.subtitle}

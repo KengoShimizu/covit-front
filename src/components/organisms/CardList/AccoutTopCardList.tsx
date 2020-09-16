@@ -158,7 +158,8 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
         onClick={modalState.onClick} />
       <ul className="account-function_list">
         <AccountTopCard src='/history_accent.svg' text='閲覧履歴' onClick={handleClick} />
-        <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef={RouteName.SELF_COMMENTS} />
+        {/* コメント・評価 削除 */}
+        {/* <AccountTopCard icon={<Edit size={20} color={CommonStyle.AccentColor} />} text='レビューしたお店' nextRef={RouteName.SELF_COMMENTS} /> */}
         <hr className="account-function_hr" />
         {loginWay === 'email' ?
           <React.Fragment>
@@ -187,7 +188,8 @@ export const AccountTopCardList: React.FC<AccoutTopCardListProps> = ({ history, 
         <AccountTopCard icon={<Trash2 size={20} color={CommonStyle.AccentColor} />} text='アカウントを削除する' onClick={() => handleModalState(1, modalContext.toggleModalShown)}/>
         <hr className="account-function_hr" />
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor} />} text='covEATについて' nextRef={RouteName.LANDING_PAGE} />
-        <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor} />} text='口コミ投稿のガイドライン' nextRef={RouteName.GUIDE_LINE} />
+        {/* コメント・評価 削除 */}
+        {/* <AccountTopCard icon={<AlertCircle size={20} color={CommonStyle.AccentColor} />} text='口コミ投稿のガイドライン' nextRef={RouteName.GUIDE_LINE} /> */}
       </ul>
       <style jsx>{`
         .container{

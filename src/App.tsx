@@ -68,7 +68,7 @@ function App() {
                 <RedirectPathProvider>
                   <Switch>
                     <NotOwnerRoute exact path={RouteName.ROOT} component={Top} />
-                    <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} />
+                    {/* <NotOwnerRoute exact path={RouteName.USER_COMMENTS} component={Comments} /> */}
                     <NotOwnerRoute exact path={RouteName.REQUEST_TOP} component={OwnerRequestTop} />
                     <NotOwnerRoute exact path={RouteName.OWNER_REGISTER_EMAIL} component={OwnerEmailRegister} />
                     <GuestRoute exact path={RouteName.MENU} component={Menu} />
@@ -76,17 +76,17 @@ function App() {
                     <GuestRoute exact path={RouteName.REGISTER_EMAIL} component={EmailRegister} />
                     <GuestRoute exact path={RouteName.LOGIN} component={Login} />
                     <Route exact path={RouteName.SHOP} component={Shop} />
-                    <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} />
+                    {/* <Route exact path={RouteName.SHOP_COMMENTS} component={ShopComments} /> */}
                     <Route exact path={RouteName.PRIVACY} component={Privacy} />
                     <Route exact path={RouteName.LANDING_PAGE} component={About} />
-                    <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} />
+                    {/* <Route exact path={RouteName.GUIDE_LINE} component={GuideLine} /> */}
                     <Route exact path={RouteName.SEND} component={Send} />
                     {/* ログインユーザー */}
-                    <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} />
+                    {/* <UserRoute exact path={RouteName.COMMENTS_NEW} component={CreateComment} /> */}
                     <UserRoute exact path={RouteName.SHOP_SEARCH_FOR_COMMENTS} component={CommentPrepare} />
                     <UserRoute exact path={RouteName.USER_SHOP_FORM} component={UserShopForm} />
                     <UserRoute exact path={RouteName.ACCOUNT_TOP} component={AccountTop} />
-                    <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} />
+                    {/* <UserRoute exact path={RouteName.SELF_COMMENTS} component={Comments} /> */}
                     {/* <UserRoute exact path={RouteName.EDIT_LOGIN} component={EditLogin} /> */}
                     <UserRoute exact path={RouteName.EDIT_PROFILE} component={EditProfile} />
                     <UserRoute exact path={RouteName.HISTORY} component={History} />

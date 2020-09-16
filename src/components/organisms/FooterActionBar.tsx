@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react';
+// library
+import { Map } from 'react-feather';
 // common
 import { RedirectFrom, RouteName } from './../../common/Const';
 // components
@@ -6,6 +8,7 @@ import FotterActionItem from '../molecules/Footer/FotterActionItem';
 // context
 import AuthContext from './../../context/CommonProvider';
 import RedirectContext from './../../context/RedirectContext';
+import CommonStyle from '../../common/CommonStyle';
 
 interface FooterActionBarProps {
   propStyle?: any;
@@ -21,28 +24,22 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
     <ul className='footer-action-bar' style={propStyle}>
       <FotterActionItem
         id='1'
-        text='さがす'
+        text='TOP'
         nextRef={RouteName.ROOT}
-        svg={
-          <React.Fragment>
-            <rect/>
-            <path d="M11 18C15.4183 18 19 14.4183 19 10C19 5.58172 15.4183 2 11 2C6.58172 2 3 5.58172 3 10C3 14.4183 6.58172 18 11 18Z"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M22 21L17 16"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-          </React.Fragment>}
+        svg={<Map color={isClicked === 1 ? CommonStyle.AccentColor : CommonStyle.TextDarkGary}/>}
         svgSize={24}
         onClick={() => setIsClicked(1)}
         isFocus={isClicked === 1 ? '_clicked' : ''}/>
 
       <FotterActionItem
         id='2'
-        text='投稿する'
+        text='探す'
         nextRef={RouteName.SHOP_SEARCH_FOR_COMMENTS}
         svg={
           <React.Fragment>
             <rect/>
-            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 8.00012V16.0001"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 12H16"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M11 18C15.4183 18 19 14.4183 19 10C19 5.58172 15.4183 2 11 2C6.58172 2 3 5.58172 3 10C3 14.4183 6.58172 18 11 18Z"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M22 21L17 16"  strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
           </React.Fragment>}
         svgSize={24}
         onClick={() => {

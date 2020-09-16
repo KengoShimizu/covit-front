@@ -79,7 +79,8 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, type }) => {
               <SearchHistoryCard
                 name={shop.name}
                 browse_date={arr_date[i]}
-                nextRef={`/shops/${shop.id}/comments/new?from=search`}
+                // nextRef={`/shops/${shop.id}/comments/new?from=search`}
+                nextRef={`/shops/${shop.id}?from=search`}
                 key={`history${i}`} />
             )
           } else {
@@ -89,7 +90,7 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, type }) => {
                 good_count={shop.good_count}
                 bad_count={shop.bad_count}
                 browse_date={arr_date[i]}
-                nextRef={`/shops/${shop.id}`}
+                nextRef={`/shops/${shop.id}?from=history`}
                 key={`history${i}`} />
             )
           }

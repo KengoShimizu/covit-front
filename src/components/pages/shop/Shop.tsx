@@ -120,7 +120,8 @@ const Shop: React.FC = (props: any) => {
       {loading ? <Loading /> :
         shopData.user_id && authState.user.is_owner !== OwnerType.NOT_OWNER && shopData.user_id !== authState.user.id ?
           <Redirect to='' /> :
-          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.coordination.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}>
+          <HomeLayout headerText={shopData.name} prevRef={qs.from === 'search' ? RouteName.SHOP_SEARCH_FOR_COMMENTS : qs.from == 'history' ? RouteName.HISTORY : `${RouteName.ROOT}?coord=${shopData.coordination.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}>
+          {/* <HomeLayout headerText={shopData.name} prevRef={qs.from === 'accounts' ? RouteName.SELF_COMMENTS : qs.from ? `/users/${match.params.id}/comments` : `${RouteName.ROOT}?coord=${shopData.coordination.id}`} title={`covEAT/こびイート | ${shopData.name}の感染症対策詳細`}> */}
             <div className="content">
               <div className="shop-card">
                 {/* ヘッダー画像 */}
@@ -180,7 +181,8 @@ const Shop: React.FC = (props: any) => {
                       <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
                     </div>
                   }
-                  <hr className="infection-control_hr" />
+                  {/* コメント・評価は削除 */}
+                  {/* <hr className="infection-control_hr" />
                   <div className="infection-control_review">
                     <h3 className="infection-control_review-title">対策への評価</h3>
                     <ol className="infection-control_review-list">
@@ -213,7 +215,7 @@ const Shop: React.FC = (props: any) => {
                           <span className="infection-control_comment-text">感染対策のレビューを書く</span>
                         </Button>
                       </Link>
-                    </React.Fragment>}
+                    </React.Fragment>} */}
                 </section>
                 <hr className="shop_hr" />
                 <section className="shop-card_section">
