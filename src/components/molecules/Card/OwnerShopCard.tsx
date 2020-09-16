@@ -73,6 +73,7 @@ const OwnerShopCard: React.FC<OwnerShopCardProps> = ({ shop, deleteModal, publis
           border: 1px solid ${CommonStyle.BorderGray};
           border-radius: 4px;
           box-shadow: 0px 0px 4px 0px ${CommonStyle.BorderGray};
+          
         }
         .publish-status{
           padding: 12px 0;

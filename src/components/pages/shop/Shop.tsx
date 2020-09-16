@@ -135,9 +135,7 @@ const Shop: React.FC = (props: any) => {
                       </Text>
                       {shopData.user?.is_owner !== OwnerType.NOT_OWNER ?
                         <span className="official-mark">
-                          <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8.86668 1.80005L4.10002 6.56672L1.93335 4.40005" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                          公式
                         </span> : <React.Fragment />
                       }
                     </li>
@@ -162,6 +160,12 @@ const Shop: React.FC = (props: any) => {
                       </ol>
                     </li>
                   </ol>
+                  <div className="unofficial-alert">
+                    <span className="unofficial-alert_icon">※</span>
+                    <p className="unofficial-alert_text">
+                      このお店の情報は、ユーザーの方が登録されている情報であるため正確性の保証はできません。
+                    </p> 
+                  </div>
                 </section>
                 <hr className="shop_hr" />
                 {/* 感染対策情報 */}
@@ -295,7 +299,7 @@ const Shop: React.FC = (props: any) => {
                 }
                 // 中身
                 .shop-card{
-                  max-width: 1000px;
+                  max-width: 400px;
                   margin: 0 auto;
                 }
                 .shop-img_wrapper{
@@ -313,15 +317,15 @@ const Shop: React.FC = (props: any) => {
                 }
                 .official-mark{
                   background: ${CommonStyle.AccentColor};
-                  width: 16px;
-                  height: 16px;
-                  border-radius: 16px;
-                  display: flex;
-                  align-items: center;
-                  justify-content: center;
+                  padding: 2px 4px;
+                  font-size: ${CommonStyle.Smallest};
+                  line-height: ${CommonStyle.Smallest};
+                  font-weight: bold;
+                  color: ${CommonStyle.TextWhite};
                 }
                 // 基本情報
                 .shop_base-info{
+                  margin-bottom: 16px;
                 }
                 .shop_base-info_option:not(:last-child){
                   margin-bottom: 8px;
@@ -362,6 +366,22 @@ const Shop: React.FC = (props: any) => {
                   font-weight: bold;
                   font-size: 12px;
                   color: ${CommonStyle.TextBlack}
+                }
+                .unofficial-alert{
+                  display: flex;
+                }
+                .unofficial-alert_icon{
+                  font-size: 14px;
+                  color: ${CommonStyle.TextDarkGary};
+                  margin-right: 4px;
+                }
+                .unofficial-alert_text{
+                  padding-top: 1px;
+                  width: 24em;
+                  font-weight: bold;
+                  font-size: 10px;
+                  line-height: 14px;
+                  color: ${CommonStyle.TextDarkGary};
                 }
                 // 感染対策
                 .other-step{

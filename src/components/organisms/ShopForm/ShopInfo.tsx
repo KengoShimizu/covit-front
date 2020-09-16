@@ -185,6 +185,8 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
     }
   }, [defaultLinks])
 
+  console.log(addData.shop.business_date)
+  
   return (
     <div className="container">
       {setPage ?
