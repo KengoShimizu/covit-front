@@ -21,14 +21,15 @@ const HistoryCard: React.FC<HistoryCardProps> = ({name, good_count, bad_count, b
           <h2 className="history-card_name">{name}</h2>
           <div className="history-card_info">
             <ul className="history-card_review">
-              {good_count !== 0 &&
+              {/* コメント・評価 削除 */}
+              {/* {good_count !== 0 &&
                 <li className="history-card_review_option">
                   <span className="history-card_review-icon">
                     <Smile size="20" color="#ED753A" />
                   </span>
                   最高！ {good_count}
                 </li>
-              }
+              } */}
             </ul>
             <div className="history-card_date">
               <span className="history-card_review-icon">

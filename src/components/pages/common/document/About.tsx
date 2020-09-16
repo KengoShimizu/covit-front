@@ -225,18 +225,18 @@ const Greeting: React.FC = (props: any) => {
               </div>
             </li>
             {/* お悩みカード2 */}
-            <li className="about_worry-card">
+            {/* <li className="about_worry-card"> */}
               {/* ユーザー側 */}
-              <div className="about_user-container">
+              {/* <div className="about_user-container">
                 <p className="about_icon-img-wrapper_user"><img className="about_icon-img" src="/about_user.png" alt="" /></p>
                 <div className="about_comment-wrapper_user">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.worryComment}>
                     でもお店の自己申告だと嘘がつけちゃわない？
                   </Text>
                 </div>
-              </div>
+              </div> */}
               {/* 運営側 */}
-              <div className="about_manager-container">
+              {/* <div className="about_manager-container">
                 <p className="about_icon-img-wrapper_manager"><img className="about_icon-img" src="/about_manager.png" alt="" /></p>
                 <div className="about_comment-wrapper_manager">
                   <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.answerComment}>そこでcovEATではユーザーがお店の感染対策を評価できるようになっています！</Text>
@@ -253,7 +253,7 @@ const Greeting: React.FC = (props: any) => {
                   </Text>
                 </div>
               </div>
-            </li>
+            </li> */}
             <li className="about_worry-hr"></li>
             {/* お悩みカード3 */}
             <li className="about_worry-card">
@@ -309,14 +309,14 @@ const Greeting: React.FC = (props: any) => {
               マスク・消毒・ソーシャルディスタンス体調管理・換気<br />
               の項目で確認することが出来ます！</Text>
             </li>
-            <li className="features_card">
+            {/* <li className="features_card">
               <h3 className="features_card-title">実際に行ってみたお店の感染対策をレビュー</h3>
               <p className="features_card-num">03</p>
               <p className="features_card-img-wrapper">
                 <img className="features_card-img" src="/features3.png" alt="" />
               </p>
               <Text theme={[TextThemes.LPTEXT]} propStyle={propStyle.featuresText}>covEATで実際に行ってみたお店の感染対策をレビューを書くことでみんなのお店探しの手助けになります！</Text>
-            </li>
+            </li> */}
           </ul>
         </section>
         {/* post */}

@@ -42,14 +42,15 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
             </li>
             <li className="shop-card_review">
               <ul className="shop-card_review-list">
-                {data?.shop?.good_count !== 0 &&
+                {/* コメント・評価機能削除 */}
+                {/* {data?.shop?.good_count !== 0 &&
                   <li className="shop-card_review-option">
                     <Smile size={24} color="#ED753A" />
                     <Text theme={[TextThemes.SMALL]} propStyle={propStyle.reviewIcon}>
                       最高！ {data?.shop?.good_count}件
                     </Text>
                   </li>
-                }
+                } */}
                 <li className="shop-card_review-option" style={{ position: 'absolute', right: '16px' }}>
                   <span style={{height: '30px'}}><img src={data?.genre?.icon} height="30" width="30"/></span>
                   <Text theme={[TextThemes.SMALL]}>{data?.genre?.name}</Text>
