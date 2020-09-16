@@ -44,7 +44,7 @@ const FooterActionBar: React.FC<FooterActionBarProps> = ({ propStyle, initialAcc
         svgSize={24}
         onClick={() => {
           setUri({
-            fromPath: RedirectFrom.NEW_COMMENT,
+            fromPath: RedirectFrom.SHOP_SEARCH,
             shop: 0,
           });
           setIsClicked(2);

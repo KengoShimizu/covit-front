@@ -126,6 +126,7 @@ export class RedirectFrom {
   public static readonly HISTORY = 'history'
   public static readonly USER_COMMENT = 'user_comment'
   public static readonly ACCOUNTS = 'accounts'
+  public static readonly SHOP_SEARCH = 'shop_search'
 }
 
 export class RouteName {

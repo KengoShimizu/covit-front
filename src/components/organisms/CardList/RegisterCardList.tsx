@@ -13,7 +13,7 @@ const RegisterCardList: React.FC<{query: any}> = ({query}) => {
   return (
     <div className="container">
       <div className="mb40"></div>
-      {qs.from === RedirectFrom.NEW_COMMENT && <NotifyCard line_1='会員登録をすると' line_2='お店のレビューを投稿できます！'/>}
+      {qs.from === RedirectFrom.SHOP_SEARCH && <NotifyCard line_1='会員登録をすると' line_2='お店の名前検索ができます！'/>}
       {qs.from === RedirectFrom.HISTORY && <NotifyCard line_1='会員登録をすると' line_2='閲覧履歴を確認できます！'/>}
       <RegisterCard src='/twitter.png' text='Twitterで登録・ログイン' className='twitter' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/twitter`}/>
       <RegisterCard src='/google.png' text='Googleで登録・ログイン' className='google' nextRef={`${process.env.REACT_APP_API_END_POINT}/auth/google_oauth2`}/>
