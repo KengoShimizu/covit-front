@@ -160,12 +160,14 @@ const Shop: React.FC = (props: any) => {
                       </ol>
                     </li>
                   </ol>
-                  <div className="unofficial-alert">
-                    <span className="unofficial-alert_icon">※</span>
-                    <p className="unofficial-alert_text">
-                      このお店の情報は、ユーザーの方が登録されている情報であるため正確性の保証はできません。
-                    </p> 
-                  </div>
+                  {shopData.user?.is_owner === OwnerType.NOT_OWNER &&
+                    <div className="unofficial-alert">
+                      <span className="unofficial-alert_icon">※</span>
+                      <p className="unofficial-alert_text">
+                        このお店の情報は、ユーザーの方が登録されている情報であるため正確性の保証はできません。
+                      </p> 
+                    </div>
+                  }
                 </section>
                 <hr className="shop_hr" />
                 {/* 感染対策情報 */}
@@ -372,7 +374,7 @@ const Shop: React.FC = (props: any) => {
                 }
                 .unofficial-alert_icon{
                   font-size: 14px;
-                  color: ${CommonStyle.TextDarkGary};
+                  color: ${CommonStyle.AccentColor};
                   margin-right: 4px;
                 }
                 .unofficial-alert_text{
@@ -381,7 +383,7 @@ const Shop: React.FC = (props: any) => {
                   font-weight: bold;
                   font-size: 10px;
                   line-height: 14px;
-                  color: ${CommonStyle.TextDarkGary};
+                  color: ${CommonStyle.AccentColor};
                 }
                 // 感染対策
                 .other-step{

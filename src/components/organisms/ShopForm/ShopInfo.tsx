@@ -32,7 +32,7 @@ interface ShopInfoProps {
 
 export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData, defaultLinks, setEditIsOK}) => {
   const { match }: any = useReactRouter();
-  const compress = new Compress()
+  const compress = new Compress();
   const isOwnerPage = match.path.match(/owner/g);
   const [genres, setGenres] = useState<Genre[]>([]);
   const [links, setLinks] = useState({
@@ -184,8 +184,6 @@ export const ShopInfo: React.FC<ShopInfoProps> = ({ setPage, setAddData, addData
       })
     }
   }, [defaultLinks])
-
-  console.log(addData.shop.business_date)
   
   return (
     <div className="container">
