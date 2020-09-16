@@ -10,6 +10,7 @@ import UserIconSellection from '../../../../organisms/UserIconSellection';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 import TopModal from '../../../../molecules/Modal/TopModal';
 import Text, { TextThemes } from '../../../../atoms/Text';
+import InlineNend from './../../../../common/InlineNend';
 // context
 import AuthContext from "../../../../../context/CommonProvider";
 import TopModalContext from '../../../../../context/TopModalContext';
@@ -118,6 +119,7 @@ const EditProfile: React.FC = (props: any) => {
       {err && <Text theme={[TextThemes.ERROR, TextThemes.CAPTION]} propStyle={{textAlign: 'center'}}>{err}</Text>}
       <UserIconSellection data={editData} setData={setEditData} />
       <Button theme={isOK ? [ButtonThemes.NORMAL] : [ButtonThemes.SUBNORMAL]} onClick={isOK ? putData : () => {}} propStyle={{margin: '16px auto'}}>登録する</Button>
+      <InlineNend media={65737} site={342425} spot={1014053} type={1} oriented={1} id={'EditProfile'} height={300} width={300}/>
     </HomeLayout>
   );
 }

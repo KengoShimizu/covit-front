@@ -10,6 +10,7 @@ import NextRefBtn from './../../../../molecules/NextRefBtn';
 import Input from '../../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../../atoms/Button';
 import Text, { TextThemes } from '../../../../atoms/Text';
+import InlineNend from './../../../../common/InlineNend';
 
 interface AddParam {
   email: string;
@@ -77,6 +78,7 @@ const EmailRegister: React.FC = (props: any) => {
                 登録する
               </Button>
             </div>
+            <InlineNend media={65737} site={342425} spot={1014056} type={1} oriented={1} id={'EmailRegister'} height={270} width={300}/>
             <NextRefBtn nextRef={RouteName.LOGIN} text='ログインはこちら'/>
           </div>
         </div>
@@ -88,7 +90,7 @@ const EmailRegister: React.FC = (props: any) => {
           margin: 40px auto 0;
         }
         .mail-form_btn-container{
-          margin: 0 auto 32px auto;
+          margin: 0 auto 8px auto;
           width: fit-content;
         }
       `}</style>

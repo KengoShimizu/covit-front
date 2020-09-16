@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 // library
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
 import useReactRouter from "use-react-router";
-import { Smile, ChevronRight, Edit, Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
+import { Clock, Phone, MapPin, Twitter, Monitor, Facebook, Instagram, Sun, Moon } from 'react-feather';
 // common
 import CommonStyle from '../../../common/CommonStyle';
-import { RedirectFrom, RouteName, OwnerType, PriceArray } from '../../../common/Const';
+import { RouteName, OwnerType, PriceArray } from '../../../common/Const';
 import FooterActionBar from '../../organisms/FooterActionBar';
 // components
 import HomeLayout from '../../templates/HomeLayout';
@@ -15,6 +15,7 @@ import Text, { TextThemes } from '../../atoms/Text';
 import Button, { ButtonThemes } from '../../atoms/Button';
 import InfectionControlList from '../../organisms/InfectionControlList';
 import Loading from '../../molecules/Loading';
+import InlineNend from './../../common/InlineNend';
 // context
 import RedirectContext from '../../../context/RedirectContext';
 import AuthContext from "../../../context/CommonProvider";
@@ -216,6 +217,7 @@ const Shop: React.FC = (props: any) => {
                         </Button>
                       </Link>
                     </React.Fragment>} */}
+                  <InlineNend media={65737} site={342425} spot={1014054} type={1} oriented={1} id={'shop'} height={150} width={320}/>
                 </section>
                 <hr className="shop_hr" />
                 <section className="shop-card_section">

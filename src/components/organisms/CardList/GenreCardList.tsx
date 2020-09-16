@@ -6,6 +6,7 @@ import CommonStyle from '../../../common/CommonStyle';
 import GenreCard from '../../molecules/Card/GenreCard';
 import Text, { TextThemes } from '../../atoms/Text';
 import Button, { ButtonThemes } from '../../atoms/Button';
+import InlineNend from './../../common/InlineNend';
 
 const propStyle = {
   title: {
@@ -82,6 +83,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
             </li>
           ))}
         </ul>
+        <InlineNend media={65737} site={342425} spot={1014055} type={1} oriented={1} id={'GenreSearch'} height={70} width={320}/>
         <div className="genre-btns">
           <Button 
             theme={[ButtonThemes.SUBNORMAL]} 
@@ -110,7 +112,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
           top: 0;
           left: 50%;
           width: 100%;
-          padding: 32px 20px;
+          padding: 16px 20px;
           margin: 0 auto;
           transform: translateX(-50%);
           -webkit- transform: translateX(-50%);
@@ -122,10 +124,9 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
         .close {
           top: -200vh;
         }
-
         .genres-container {
           width: fit-content;
-          margin: 0 auto 40px auto;
+          margin: 0 auto 8px auto;
           display: grid;
           grid-template-columns: repeat(4, 72px);
           grid-auto-rows: 72px;
@@ -139,7 +140,6 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
             grid-template-columns: repeat(6, 72px);
           }
         }
-
         .genre-card {
           display: inline-block;
           background: ${CommonStyle.BgWhite};
@@ -155,12 +155,11 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
         .genre-card.selected {
           border: 2px solid ${CommonStyle.AccentColor};
         } 
-
         .genre-btns {
           display: flex;
           justify-content: space-evenly;
           max-width: 340px;
-          margin: 0 auto 40px auto;
+          margin: 0 auto 24px auto;
         }
         .blur-range{
           height: 500px;

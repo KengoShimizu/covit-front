@@ -9,6 +9,7 @@ import { RouteName } from '../../../../common/Const';
 import HomeLayout from '../../../templates/HomeLayout';
 import RegisterCardList from '../../../organisms/CardList/RegisterCardList';
 import AccountTopCard from '../../../molecules/Card/AccoutTopCard';
+import InlineNend from './../../../common/InlineNend';
 
 const Register: React.FC = (props: any) => {
   const qs = queryString.parse(props.location.search);
@@ -18,6 +19,7 @@ const Register: React.FC = (props: any) => {
       <div className="about">
         <AccountTopCard icon={<HelpCircle size={20} color={CommonStyle.AccentColor}/>} text='お店のオーナー様はこちら' nextRef={RouteName.REQUEST_TOP}/>
       </div>
+      <InlineNend media={65737} site={342425} spot={1014050} type={1} oriented={1} id={'register'} height={150} width={300}/>
       <style jsx>{`
         .about{
           position: absolute;
