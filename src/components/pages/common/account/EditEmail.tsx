@@ -6,6 +6,7 @@ import HomeLayout from '../../../templates/HomeLayout';
 import Input, { InputThemes } from '../../../atoms/Input';
 import Button, { ButtonThemes } from '../../../atoms/Button';
 import Text, { TextThemes } from './../../../atoms/Text';
+import InlineNend from './../../../common/InlineNend';
 // context
 import AuthContext from "../../../../context/CommonProvider";
 // common
@@ -80,6 +81,7 @@ const EditEmail: React.FC = (props: any) => {
           </Button>
         </div>
       </div>
+      <InlineNend media={65737} site={342425} spot={1014052} type={1} oriented={1} id={'EditEmail'} height={300} width={300}/>
       <style jsx>{`
         .mail-form{
           max-width: 324px;

@@ -9,6 +9,7 @@ import HistoryCardList from '../../organisms/CardList/HistoryCardList';
 import ShopCardList from '../../organisms/CardList/ShopCardList';
 import Input, { InputThemes } from '../../atoms/Input';
 import Loading from '../../molecules/Loading';
+import InlineNend from './../../common/InlineNend';
 // common
 import CommonStyle from './../../../common/CommonStyle';
 import { RequestTextSection } from '../../molecules/RequestTextSection';
@@ -121,14 +122,13 @@ const CommentPrepare: React.FC = (props: any) => {
           />
         }
       </div>
-
       {
         shops.length ?
           loading ? <Loading /> : <ShopCardList shops={shops} type='search'/>
           :
           <React.Fragment>
-            
             <HistoryCardList maxRow={4} type='search'/>
+            <InlineNend media={65737} site={342425} spot={1014051} type={1} oriented={1} id={'CommentPrepare'} height={100} width={320}/>
             <div className='mt10'>
               <RequestTextSection />
             </div>
@@ -137,7 +137,7 @@ const CommentPrepare: React.FC = (props: any) => {
       <FooterActionBar initialAccent={2} />
       <style jsx>{`
         .mt10{
-          margin: 44px 0 130px;
+          margin: 8px 0 130px;
         }
       `}</style>
     </HomeLayout>
