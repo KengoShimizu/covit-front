@@ -14,11 +14,12 @@ interface ShopCardProps {
 const ShopCard: React.FC<ShopCardProps> = ({ shop, type }) => {
   const uri = type === 'search' ? '?from=search' : '';
   return (
-    <Link to={`/shops/${shop.id}/comments/new${uri}`}>
+    // <Link to={`/shops/${shop.id}/comments/new${uri}`}>
+    <Link to={`/shops/${shop.id}?from=search`}>
       <li className="shop-card">
         <div className="shop-card_content">
           <h2 className="shop-card_name">{shop.name}</h2>
-          <div className="shop-card_info">
+          {/* <div className="shop-card_info">
             <ul className="shop-card_review">
               {shop?.good_count !== 0 &&
                 <li className="shop-card_review_option" style={{color: CommonStyle.TextBlack}}>
@@ -29,7 +30,7 @@ const ShopCard: React.FC<ShopCardProps> = ({ shop, type }) => {
                 </li>
               }
             </ul>
-          </div>
+          </div> */}
         </div>
         <button className="shop-card_btn"><ChevronRight size="20" color="#333" /></button>
       </li>

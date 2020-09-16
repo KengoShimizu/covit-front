@@ -215,7 +215,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
     } else {
       setModalState({
         title: '本当にアカウントを削除しますか？',
-        subtitle: 'アカウントを削除すると、レビューなどの情報が全て削除され復元はできません。',
+        subtitle: 'アカウントを削除すると、全ての情報が削除され復元はできません。',
         btntext: '削除する',
         onClick: () => handleDeleteAccount(topModalContext.setContents)
       });
