@@ -80,7 +80,10 @@ const Shop: React.FC = (props: any) => {
     links: [],
     coordination: {
       id: 0,
-    }
+    },
+    reactions: [{
+      user_id: 0
+    }]
   });
 
   const fetchShopData = async (isSubscribed: boolean) => {
@@ -115,6 +118,7 @@ const Shop: React.FC = (props: any) => {
     };
     return cleanup;
   }, [])
+
 
   return (
     <React.Fragment>
@@ -174,7 +178,25 @@ const Shop: React.FC = (props: any) => {
                 <hr className="shop_hr" />
                 {/* 感染対策情報 */}
                 <section className="shop-card_section nfection-control_card">
-                  <h2 className="infection-control_title">感染対策</h2>
+                  <div className="title-container">
+                    <h2 className="infection-control_title">感染対策</h2>
+                    {/* FIXME 0件の時は表示しない */}
+                    {/* {shopData.user?.is_owner === OwnerType.NOT_OWNER && authState.isLogin &&
+                      <div className="reaction">
+                        <Button theme={[ButtonThemes.NORMAL]}>共感</Button>
+                        
+                        <Text theme={[TextThemes.CAPTION]}>58件</Text>
+                      </div>
+                    } */}
+                  </div>
+                  {shopData.user?.is_owner === OwnerType.NOT_OWNER &&
+                    <div className="unofficial-alert-infection">
+                      <span className="unofficial-alert_icon">※</span>
+                      <p className="unofficial-alert_text">
+                        感染対策は、実際に店舗が実施している項目ではなく、ユーザーの方が実施していると感じた項目です。
+                      </p>
+                    </div>
+                  }
                   <InfectionControlList stepData={shopData.steps} />
                   {shopData.other_step &&
                     <div className="other-step">
@@ -182,6 +204,7 @@ const Shop: React.FC = (props: any) => {
                       <Text theme={[TextThemes.CAPTION]}>{shopData.other_step}</Text>
                     </div>
                   }
+                  
                   {/* コメント・評価は削除 */}
                   {/* <hr className="infection-control_hr" />
                   <div className="infection-control_review">
@@ -383,13 +406,22 @@ const Shop: React.FC = (props: any) => {
                 }
                 .unofficial-alert_text{
                   padding-top: 1px;
-                  width: 24em;
                   font-weight: bold;
                   font-size: 10px;
                   line-height: 14px;
                   color: ${CommonStyle.AccentColor};
                 }
+                .unofficial-alert-infection{
+                  display: flex;
+                  padding: 0 10px 10px 0;
+                }
                 // 感染対策
+                .reaction{
+                  display: flex;
+                }
+                .title-container{
+                  display: flex;
+                }
                 .other-step{
                   padding: 10px;
                   border: 1px solid ${CommonStyle.BorderGray};

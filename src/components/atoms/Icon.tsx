@@ -1,6 +1,4 @@
 import React from 'react';
-// common
-import CommonStyle from '../../common/CommonStyle';
 
 interface IconProps {
   theme?: IconThemes[];
@@ -67,7 +65,6 @@ const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propSty
             margin-right: 4px;
           }
           .infection-control_icon-wrapper{
-            background-color: ${CommonStyle.KeyColor};
             width: 60px;
             height: 60px;
             border-radius: 60px;
