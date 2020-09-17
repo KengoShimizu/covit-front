@@ -32,7 +32,7 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
     <div className='infection-control'>
       <ol className="infection-control_list">
         {uniqueCategory.map((data: any, i: number) => (
-          <li className="infection-control_option" key={`icon${i}`} onClick={() => showControllDetail(data.id, i)}>
+          <li className={`infection-control_option ${clickedIndex === i && 'clicked'}` }key={`icon${i}`} onClick={() => showControllDetail(data.id, i)}>
             <Icon theme={[IconThemes.COVIDMEASURE]}>
               <img className="infection-control_icon" src={data.image} alt={data.content}/>
             </Icon>
@@ -65,6 +65,7 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
           margin-right: 10px;
         }
         .infection-control_option{
+          box-shadow: 1px 1px 3px 2px rgba(0, 0, 0, 0.19);
           width: 60px;
           height: 60px;
           border-radius: 60px;
@@ -72,6 +73,10 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
           display: flex;
           align-items: center;
           justify-content: center;
+          transition-duration: .5s;
+        }
+        .clicked{
+          background: ${CommonStyle.AccentColor};
         }
         .infection-control_icon{
           width: 34px;

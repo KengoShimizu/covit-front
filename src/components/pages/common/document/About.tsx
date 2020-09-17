@@ -103,7 +103,7 @@ const Greeting: React.FC = (props: any) => {
         <div className="header_inner-container">
           <div className="header_circle"></div>
           <div className="header_caption-container">
-            <div className="header-caption-wrapper">
+            {/* <div className="header-caption-wrapper">
               <span className="header_caption-bubble">
                 <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerTitleComment}>
                   口コミ
@@ -112,7 +112,7 @@ const Greeting: React.FC = (props: any) => {
               <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerText}>
                 で分かる
               </Text>
-            </div>
+            </div> */}
             <Text theme={[TextThemes.LPSUBTITLE]} propStyle={propStyle.headerTitle}>感染対策をしている<br />飲食店MAP</Text>
           </div>
           <div className="header_img-wrapper">
