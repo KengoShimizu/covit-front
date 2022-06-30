@@ -16,7 +16,7 @@ const ShopCardList: React.FC<ShopCardListProps> = ({ shops, type }) => {
   return (
       <div className="container">
         <ol className="card-list">
-          {shops.map((shop: Shop, index: number) => {
+          {shops?.map((shop: Shop, index: number) => {
             return (
               <ShopCard key={`shop_card${index}`} shop={shop} type={type}/>
             )

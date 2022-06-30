@@ -59,7 +59,7 @@ const MapPopup: React.FC<MapPopupProps> = ({data, uniqueImgs}) => {
             </li>
           </ul>
           <ol className="infection-control_list" >
-            {uniqueImgs?.map((data: any, i: number) => (
+            {uniqueImgs??.map((data: any, i: number) => (
               <li className="infection-control_option" key={`infection${i}`}>
                 <img className="infection-control_icon" src={data?.image} alt="sample" />
               </li>

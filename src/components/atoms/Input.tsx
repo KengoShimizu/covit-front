@@ -41,7 +41,7 @@ enum ModifierClassNames {
 
 
 const Input: React.FC<InputProps> = ({ id, theme = [InputThemes.INIT], IconTheme = InputThemes.INIT, propStyle = {}, handleChange, label, placeholder, content, icon, readonly, name, type, labelColor, step }) => {
-  const modifierClasses = theme?.map(data => ModifierClassNames[data]).join(' ');
+  const modifierClasses = theme??.map(data => ModifierClassNames[data]).join(' ');
   const isRight = IconTheme.includes(InputThemes.ICON_RIGHT)
   const isLeft = IconTheme.includes(InputThemes.ICON_LEFT)
   const isRequired = theme.includes(InputThemes.REQUIRED)

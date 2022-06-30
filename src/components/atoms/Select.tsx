@@ -31,7 +31,7 @@ const Select: React.FC<SelectProps> = ({ theme = SelectThemes.INIT, propStyle = 
       <div className="select_wrapper">
         <select className="selectbox" onChange={handleChange} name={name}>
           {defaultLabel ? <option value={0}>{defaultLabel}</option> : ""}
-          {items.map((item: any, i: number) => {
+          {items?.map((item: any, i: number) => {
             return (
               <option value={item.id} key={`option${i}`} selected={item.id === defaultValue}>{item.name}</option>
             )

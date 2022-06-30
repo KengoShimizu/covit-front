@@ -20,7 +20,7 @@ enum ModifierClassNames {
 
 
 const Title: React.FC<TitleProps> = ({theme = [TitleThemes.INIT], children, propStyle = {}}) => {
-  const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
+  const modifierClasses = theme?.map(data => ModifierClassNames[data]).join(' ');
   return (
     <h1 className={["title", modifierClasses].join(' ')} style={propStyle}>
       {children}

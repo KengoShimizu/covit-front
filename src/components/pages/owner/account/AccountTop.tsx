@@ -259,7 +259,7 @@ const OwnerAccountTop: React.FC = (props: any) => {
       
       {loading ? <Loading/> :
         <React.Fragment>
-          {showState && <ToggleModal shop_names={shopData.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} onClick={handleSelect}/>}
+          {showState && <ToggleModal shop_names={shopData?.map((data: any) => data.name)} setShowState={setShowState} showState={showState} selectedShopIndex={selectedShopIndex} onClick={handleSelect}/>}
           {shopData.length !== 0 && shopData[selectedShopIndex] && <OwnerShopCard shop={shopData[selectedShopIndex]} deleteModal={deleteModal} publishModal={publishModal}/>}
         </React.Fragment>
       }

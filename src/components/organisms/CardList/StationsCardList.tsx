@@ -15,7 +15,7 @@ const StationsCardList: React.FC<StationsCardListProps> = ({ stations, handleSta
 
   return (
     <ul className={`stations-card_list ${!isSliderAppear && 'disable'}`} id="station-slider">
-      {stations.map((data: any, i: number) =>
+      {stations?.map((data: any, i: number) =>
         <React.Fragment key={`station-card${i}`}>
           <div style={{minWidth: '24px'}}></div>
           <li className={`station-card ${selected === i && 'selected'}`} onClick={() => handleStationClick(data)}>

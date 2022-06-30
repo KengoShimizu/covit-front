@@ -87,7 +87,7 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
   }
 
   const allBusinessTimeChanged = () => {
-    setBusinessDate(businessDate.map((date: any) => {
+    setBusinessDate(businessDate?.map((date: any) => {
       date.opening = openingAll;
       date.closing = closingAll;
       return date;
@@ -149,7 +149,7 @@ export const ShopBusinessDateForm: React.FC<ShopBusinessDateFormProps> = ({ setA
         <Button theme={[ButtonThemes.NORMAL]} onClick={allBusinessTimeChanged} propStyle={{ display: 'inline-block' }} >一括変更</Button>
       </div>
       {
-        businessDate.map((dateInfo: any, i: number) => {
+        businessDate?.map((dateInfo: any, i: number) => {
           return (
             <BusinessDateInput handleChange={handleDateInfoChange} dateInfo={dateInfo} key={`business-date${i}`}/>
           )

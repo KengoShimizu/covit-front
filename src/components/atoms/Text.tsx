@@ -40,7 +40,7 @@ enum ModifierClassNames {
 
 
 const Text: React.FC<TextProps> = ({theme = [TextThemes.INIT], children, propStyle = {}}) => {
-  const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
+  const modifierClasses = theme?.map(data => ModifierClassNames[data]).join(' ');
   return (
     <p className={["text", modifierClasses].join(' ')} style={propStyle}>
       {children}

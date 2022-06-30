@@ -39,7 +39,7 @@ const ToggleModal: React.FC<ToggleModalProps> = ({ shop_names, setShowState, sho
         <div className='modal-inner'>
           <Text theme={[TextThemes.SUBTITLE]} propStyle={propStyle.title}>お店の切り替え</Text>
           <div className="scroll-inner">
-            {shop_names.map((item: string, i: number) => (
+            {shop_names?.map((item: string, i: number) => (
               <React.Fragment key={`shop_name${i}`}>
                 <hr className="modal-inner-hr" />
                 <div className="modal-inner-item" onClick={() => { onClick(i) }}>

@@ -249,7 +249,7 @@ const Shop: React.FC = (props: any) => {
                       <Clock size={16} color="#333" style={{ marginBottom: 'auto' }} />
                       <span className="shop_info-option_content">
                         {businessExist ?
-                          businessDate.map((data: any, i: number) =>
+                          businessDate?.map((data: any, i: number) =>
                             <React.Fragment key={`business_date${i}`}>
                               <div className="shop-business">
                                 <Text theme={[TextThemes.SMALL]} propStyle={{ marginRight: '20px' }}>
@@ -261,7 +261,7 @@ const Shop: React.FC = (props: any) => {
                               </div>
                             </React.Fragment>)
                           :
-                          ['月', '火', '水', '木', '金', '土', '日'].map((data: any, i: number) =>
+                          ['月', '火', '水', '木', '金', '土', '日']?.map((data: any, i: number) =>
                             <React.Fragment key={`business_date${i}`}>
                               <div className="shop-business">
                                 <Text theme={[TextThemes.SMALL]} propStyle={{ marginRight: '20px' }}>
@@ -290,7 +290,7 @@ const Shop: React.FC = (props: any) => {
                     </li>
                   </ul>
                   <ul className="shop_sns-list">
-                    {shopData.links.map((data: any, i: number) => (
+                    {shopData.links?.map((data: any, i: number) => (
                       <li className="shop_sns-option" key={`sns${i}`}>
                         <a href={data.url} target="_blank" rel="noopener noreferrer">
                           <Button theme={[ButtonThemes.SHOPSNS]}>

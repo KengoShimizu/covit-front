@@ -16,8 +16,8 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
   const [clickedIndex, setClickedIndex] = useState(0);
 
   const GetUniqueImgs = () => {
-    const uniqueArray = stepData.map((data: any) => data.step_category.id);
-    const categoryData = stepData.map((data: any) => data.step_category);
+    const uniqueArray = stepData?.map((data: any) => data.step_category.id);
+    const categoryData = stepData?.map((data: any) => data.step_category);
     return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
   }
   const uniqueCategory = GetUniqueImgs();
@@ -31,7 +31,7 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
   return (
     <div className='infection-control'>
       <ol className="infection-control_list">
-        {uniqueCategory.map((data: any, i: number) => (
+        {uniqueCategory?.map((data: any, i: number) => (
           <li className={`infection-control_option ${clickedIndex === i && 'clicked'}` }key={`icon${i}`} onClick={() => showControllDetail(data.id, i)}>
             <Icon theme={[IconThemes.COVIDMEASURE]}>
               <img className="infection-control_icon" src={data.image} alt={data.content}/>
@@ -41,11 +41,11 @@ const InfectionControlList: React.FC<InfectionControlListProps> = ({stepData}) =
       </ol>
       <ol className="infection-control_comment-box">
         {/* 対策内容の初期表示 */}
-        {isInit && stepData.filter((data: any) => data.step_category_id === uniqueCategory[0].id).map((data: any, i:number) => 
+        {isInit && stepData.filter((data: any) => data.step_category_id === uniqueCategory[0].id)?.map((data: any, i:number) => 
           <li className="infection-control_comment" key={`control${i}`}><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
         )}
         {/* 他の対策内容 */}
-        {controllDetail.map((data: any, i:number) => 
+        {controllDetail?.map((data: any, i:number) => 
           <li className="infection-control_comment" key={`control${i}`}><Text theme={[TextThemes.SMALL]}>{data.content}</Text></li>
         )}
       </ol>

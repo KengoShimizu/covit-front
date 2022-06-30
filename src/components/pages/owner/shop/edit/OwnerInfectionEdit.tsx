@@ -83,7 +83,7 @@ const OwnerInfectionEdit: React.FC = (props: any) => {
           price_night: 0,
           other_step: res.data.other_step
         },
-        step_ids: res.data.steps.map((data: any) => data.id)
+        step_ids: res.data.steps?.map((data: any) => data.id)
       })
     } catch (error) {
       console.log(error)

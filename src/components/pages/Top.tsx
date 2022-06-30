@@ -126,8 +126,8 @@ const Top: React.FC = (props: any) => {
   });
   
   const GetUniqueImgs = (steps: any) => {
-    const uniqueArray = steps.map((data: any) => data.step_category.id);
-    const categoryData = steps.map((data: any) => data.step_category);
+    const uniqueArray = steps?.map((data: any) => data.step_category.id);
+    const categoryData = steps?.map((data: any) => data.step_category);
     return categoryData.filter((x: any, i: number) => uniqueArray.indexOf(x.id) === i);
   }
 
@@ -163,7 +163,7 @@ const Top: React.FC = (props: any) => {
           temp.filter((a: Station, i: number, self: Station[]) => {
             var flag = self.findIndex((e: Station) => e.x === a.x && e.y === a.y) === i;
             var data = self.find((e: Station) => e.x === a.x && e.y === a.y && e.line !== a.line)
-            result = result.map((b: Station) => { 
+            result = result?.map((b: Station) => { 
               if(b.x === data?.x && b.y === data?.y){
                 b.line = '';
               }
@@ -171,7 +171,7 @@ const Top: React.FC = (props: any) => {
             })
             return flag
           });
-          result = result.map((data: any) => {
+          result = result?.map((data: any) => {
             data.dist = Math.pow(data.x - lastlng, 2) + Math.pow(data.y - lastlat, 2);
             return data
           })
@@ -182,7 +182,7 @@ const Top: React.FC = (props: any) => {
                 return 1;
             }
           });
-          result = result.map((data: any, i: number) => {
+          result = result?.map((data: any, i: number) => {
             data.index = i;
             return data
           })
@@ -211,7 +211,7 @@ const Top: React.FC = (props: any) => {
 
   const fetchCoordinationsData = async (selectedGenre: number[], lat_: number, lng_: number) => {
     setLoading(true);
-    const selectedGenre_str = selectedGenre.length === 0 ? genres.map((data: any) => data.id) : selectedGenre.join(',')
+    const selectedGenre_str = selectedGenre.length === 0 ? genres?.map((data: any) => data.id) : selectedGenre.join(',')
     try {
       const res = await axios.get('/api/v1/user/coordinations', {
           params: {

@@ -70,7 +70,7 @@ const GenreCardList: React.FC<GenreCardListProps> = ({selectedGenre, setSelected
       <div className={genreSerchIsOpen ? 'container' : 'container close'}>
         <Text theme={[TextThemes.CAPTION]} propStyle={propStyle.title}>ジャンルで絞り込む</Text>
         <ul className="genres-container">
-          {genres.map((data: any, i: number) => (
+          {genres?.map((data: any, i: number) => (
             <li 
               className={selectedGenre.find(data => data === i+1) ? 'selected genre-card' : 'genre-card'}
               onClick={handleChange}

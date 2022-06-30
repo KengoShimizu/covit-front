@@ -32,7 +32,7 @@ enum ModifierClassNames {
 }
 
 const Icon: React.FC<IconProps> = ({theme = [IconThemes.INIT], children, propStyle = {}, onClick}) => {
-  const modifierClasses = theme.map(data => ModifierClassNames[data]).join(' ');
+  const modifierClasses = theme?.map(data => ModifierClassNames[data]).join(' ');
   return (
     <p 
       onClick={onClick}

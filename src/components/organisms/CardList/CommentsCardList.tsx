@@ -248,7 +248,7 @@ const CommentsCardList: React.FC<CommentsCardListProps> = ({ sqlQuery }) => {
             style={isShopPage ? propStyle.isShopPage : isCurrentUser ? propStyle.isUserPage : { padding: '162px 0 1px', backgroundColor: CommonStyle.BgGray,}}
           >
             {
-              (state === 'all' ? allReputations : goodReputations).map((comment: any) => {
+              (state === 'all' ? allReputations : goodReputations)?.map((comment: any) => {
                 const icon = comment.reputation === 1 ? 'smile' : '';
                 return (
                   isShopPage ?

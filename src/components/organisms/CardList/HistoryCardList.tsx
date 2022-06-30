@@ -64,13 +64,13 @@ const HistoryCardList: React.FC<HistoryCardListProps> = ({ maxRow, type }) => {
     if (arr && arr_date && shopData.length !== 0) {
       if (shopData.length) {
         const history_elements: any = [];
-        arr.map((shop_id: number, index: number) => {
+        arr?.map((shop_id: number, index: number) => {
           if (!shopData.filter((shop: Shop) => shop.id === Number(shop_id)).length) {
             arr.splice(index, 1);
             arr_date.splice(index, 1);
           }
         })
-        shopData.map((shop: Shop, i: number) => {
+        shopData?.map((shop: Shop, i: number) => {
           if (maxRow && i >= maxRow) {
             return
           }
